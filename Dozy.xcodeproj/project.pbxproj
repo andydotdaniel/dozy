@@ -14,6 +14,10 @@
 		101581672495F8CA00AA0B37 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 101581662495F8CA00AA0B37 /* Preview Assets.xcassets */; };
 		1015816A2495F8CA00AA0B37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 101581682495F8CA00AA0B37 /* LaunchScreen.storyboard */; };
 		101581752495F8CA00AA0B37 /* DozyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101581742495F8CA00AA0B37 /* DozyTests.swift */; };
+		1035D0732495FF00006B22FC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D0722495FF00006B22FC /* LoginView.swift */; };
+		1035D075249604CE006B22FC /* LoginHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D074249604CE006B22FC /* LoginHeaderView.swift */; };
+		1035D078249605D7006B22FC /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D077249605D7006B22FC /* Color.swift */; };
+		1035D07D24963F1F006B22FC /* AlternativeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D07C24963F1F006B22FC /* AlternativeButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +42,10 @@
 		101581702495F8CA00AA0B37 /* DozyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DozyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		101581742495F8CA00AA0B37 /* DozyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DozyTests.swift; sourceTree = "<group>"; };
 		101581762495F8CA00AA0B37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1035D0722495FF00006B22FC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		1035D074249604CE006B22FC /* LoginHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeaderView.swift; sourceTree = "<group>"; };
+		1035D077249605D7006B22FC /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		1035D07C24963F1F006B22FC /* AlternativeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +87,9 @@
 		1015815C2495F8C600AA0B37 /* Dozy */ = {
 			isa = PBXGroup;
 			children = (
+				10381138249667EB00DC5CEC /* SharedComponents */,
+				1035D076249605CF006B22FC /* Extensions */,
+				1038113A2496680900DC5CEC /* Scenes */,
 				1015815D2495F8C600AA0B37 /* AppDelegate.swift */,
 				1015815F2495F8C600AA0B37 /* SceneDelegate.swift */,
 				101581612495F8C600AA0B37 /* ContentView.swift */,
@@ -105,6 +116,47 @@
 				101581762495F8CA00AA0B37 /* Info.plist */,
 			);
 			path = DozyTests;
+			sourceTree = "<group>";
+		};
+		1035D076249605CF006B22FC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1035D077249605D7006B22FC /* Color.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1035D07B24963ED7006B22FC /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				1035D07C24963F1F006B22FC /* AlternativeButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		10381137249667D200DC5CEC /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1035D0722495FF00006B22FC /* LoginView.swift */,
+				1035D074249604CE006B22FC /* LoginHeaderView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		10381138249667EB00DC5CEC /* SharedComponents */ = {
+			isa = PBXGroup;
+			children = (
+				1035D07B24963ED7006B22FC /* Buttons */,
+			);
+			path = SharedComponents;
+			sourceTree = "<group>";
+		};
+		1038113A2496680900DC5CEC /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				10381137249667D200DC5CEC /* Login */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,8 +261,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				1015815E2495F8C600AA0B37 /* AppDelegate.swift in Sources */,
+				1035D075249604CE006B22FC /* LoginHeaderView.swift in Sources */,
 				101581602495F8C600AA0B37 /* SceneDelegate.swift in Sources */,
+				1035D0732495FF00006B22FC /* LoginView.swift in Sources */,
 				101581622495F8C600AA0B37 /* ContentView.swift in Sources */,
+				1035D07D24963F1F006B22FC /* AlternativeButton.swift in Sources */,
+				1035D078249605D7006B22FC /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
