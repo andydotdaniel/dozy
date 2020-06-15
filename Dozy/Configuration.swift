@@ -7,3 +7,29 @@
 //
 
 import Foundation
+
+struct Configuration: Codable {
+    
+    let clientId: String
+    let clientSecret: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case clientId = "SLACK_CLIENT_ID"
+        case clientSecret = "SLACK_CLIENT_SECRET"
+    }
+    
+    static func create() -> Configuration {
+        guard let url = Bundle.main.url(forResource: "Configuration", withExtension: "plist") else {
+            preconditionFailure("Failed to load configuration file")
+        }
+            
+        do {
+            let data = try Data(contentsOf: url)
+            return try PropertyListDecoder().decode(Configuration.self, from: data)
+        } catch {
+            preconditionFailure("Failed to create app configuration")
+        }
+    }
+    
+}
+
