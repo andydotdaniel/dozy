@@ -16,10 +16,10 @@ protocol LoginViewPresenter: class {
 final class LoginPresenter: LoginViewPresenter {
     
     private let authUrl: URL = {
-        var urlComponents = URLComponents(string: "https://slack.com/oauth/authorize")!
+        var urlComponents = URLComponents(string: "https://slack.com/oauth/v2/authorize")!
         urlComponents.queryItems = [
             URLQueryItem(name: "client_id", value: Current.configuration.clientId),
-            URLQueryItem(name: "scope", value: "chat:write:user,channels:read,groups:read"),
+            URLQueryItem(name: "user_scope", value: "chat:write,channels:read,groups:read"),
             URLQueryItem(name: "redirect_url", value: "dozyapp://slack/authorize/success"),
         ]
         return urlComponents.url!
