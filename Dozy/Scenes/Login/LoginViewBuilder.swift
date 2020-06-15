@@ -11,7 +11,7 @@ import Foundation
 struct LoginViewBuilder: ViewBuilder {
     
     func build() -> LoginView {
-        let presenter: LoginViewPresenter = LoginPresenter()
+        let presenter: LoginViewPresenter = LoginPresenter(networkService: NetworkService())
         var view = LoginView()
         view.presenter = presenter
         

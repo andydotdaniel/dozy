@@ -25,20 +25,24 @@ final class LoginPresenter: LoginViewPresenter {
         return urlComponents.url!
     }()
     
-    private let session: ASWebAuthenticationSession
-    
     private var authenticationPresentationContext: ASWebAuthenticationPresentationContextProviding?
+    private let networkService: NetworkRequesting
     
-    init() {
-        session = ASWebAuthenticationSession(url: authUrl, callbackURLScheme: "dozyapp") { callbackURL, error in
-            guard error == nil, let callbackURL = callbackURL else { return }
-            
-            let queryItems = URLComponents(string: callbackURL.absoluteString)?.queryItems
-            let requestCode = queryItems?.first { $0.name == "code" }
-        }
+    init(networkService: NetworkRequesting) {
+        self.networkService = networkService
     }
     
     func didTapLoginButton() {
+        let session = ASWebAuthenticationSession(url: authUrl, callbackURLScheme: "dozyapp") { [weak self] callbackURL, error in
+            guard error == nil, let callbackURL = callbackURL else { return }
+            
+            let queryItems = URLComponents(string: callbackURL.absoluteString)?.queryItems
+            queryItems?.first { $0.name == "code" }.map { codeQueryItem in
+                guard let requestCode = codeQueryItem.value, let self = self else { return }
+                self.requestAccessToken(with: requestCode)
+            }
+        }
+        
         let authenticationSessionViewController = AuthenticationSessionViewController()
         
         session.presentationContextProvider = authenticationSessionViewController
@@ -47,4 +51,43 @@ final class LoginPresenter: LoginViewPresenter {
         session.start()
     }
     
+    private func requestAccessToken(with requestCode: String) {
+        let url = "https://slack.com/api/oauth.v2.access"
+        let parameters = [
+            "code": requestCode,
+            "client_id": Current.configuration.clientId,
+            "client_secret": Current.configuration.clientSecret,
+        ]
+    
+        guard let networkRequest = NetworkRequest(url: url, httpMethod: .post, parameters: parameters, contentType: .urlEncodedForm) else { return }
+        networkService.peformNetworkRequest(networkRequest, completion: { (result: Result<AccessTokenResponse, NetworkService.RequestError>) -> Void  in
+            switch result {
+            case .success(let object):
+                // TODO: Use access token from object
+                break
+            case .failure:
+                break
+            }
+        })
+    }
+    
+}
+
+private struct AccessTokenResponse: Decodable {
+    let accessToken: String
+    
+    enum AuthedUserCodingKeys: String, CodingKey {
+        case accessToken = "access_token"
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case authedUser = "authed_user"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let authedUserContainer = try container.nestedContainer(keyedBy: AuthedUserCodingKeys.self, forKey: .authedUser)
+        
+        accessToken = try authedUserContainer.decode(String.self, forKey: .accessToken)
+    }
 }
