@@ -19,6 +19,12 @@
 		1035D078249605D7006B22FC /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D077249605D7006B22FC /* Color.swift */; };
 		1035D07D24963F1F006B22FC /* AlternativeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D07C24963F1F006B22FC /* AlternativeButton.swift */; };
 		1038113C24966CA000DC5CEC /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1038113B24966CA000DC5CEC /* SafariView.swift */; };
+		109704C0249675E90012EA76 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109704BF249675E90012EA76 /* Configuration.swift */; };
+		109704C3249692D60012EA76 /* AuthenticationSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109704C2249692D60012EA76 /* AuthenticationSessionView.swift */; };
+		10E57E5E24969C79001B71A4 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E57E5D24969C79001B71A4 /* World.swift */; };
+		10E57E6024969F03001B71A4 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E57E5F24969F03001B71A4 /* LoginPresenter.swift */; };
+		10E57E622496A062001B71A4 /* LoginViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E57E612496A062001B71A4 /* LoginViewBuilder.swift */; };
+		10E57E642496A086001B71A4 /* ViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E57E632496A086001B71A4 /* ViewBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +54,12 @@
 		1035D077249605D7006B22FC /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		1035D07C24963F1F006B22FC /* AlternativeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeButton.swift; sourceTree = "<group>"; };
 		1038113B24966CA000DC5CEC /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
+		109704BF249675E90012EA76 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		109704C2249692D60012EA76 /* AuthenticationSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSessionView.swift; sourceTree = "<group>"; };
+		10E57E5D24969C79001B71A4 /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
+		10E57E5F24969F03001B71A4 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		10E57E612496A062001B71A4 /* LoginViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewBuilder.swift; sourceTree = "<group>"; };
+		10E57E632496A086001B71A4 /* ViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,10 +107,13 @@
 				1015815D2495F8C600AA0B37 /* AppDelegate.swift */,
 				1015815F2495F8C600AA0B37 /* SceneDelegate.swift */,
 				101581612495F8C600AA0B37 /* ContentView.swift */,
+				109704BF249675E90012EA76 /* Configuration.swift */,
+				10E57E5D24969C79001B71A4 /* World.swift */,
 				101581632495F8CA00AA0B37 /* Assets.xcassets */,
 				101581682495F8CA00AA0B37 /* LaunchScreen.storyboard */,
 				1015816B2495F8CA00AA0B37 /* Info.plist */,
 				101581652495F8CA00AA0B37 /* Preview Content */,
+				10E57E632496A086001B71A4 /* ViewBuilder.swift */,
 			);
 			path = Dozy;
 			sourceTree = "<group>";
@@ -139,8 +154,9 @@
 		10381137249667D200DC5CEC /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				1035D0722495FF00006B22FC /* LoginView.swift */,
-				1035D074249604CE006B22FC /* LoginHeaderView.swift */,
+				10F4221E2497B7310078AC3C /* View */,
+				10E57E5F24969F03001B71A4 /* LoginPresenter.swift */,
+				10E57E612496A062001B71A4 /* LoginViewBuilder.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -162,6 +178,16 @@
 			path = Scenes;
 			sourceTree = "<group>";
 		};
+		10F4221E2497B7310078AC3C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1035D0722495FF00006B22FC /* LoginView.swift */,
+				1035D074249604CE006B22FC /* LoginHeaderView.swift */,
+				109704C2249692D60012EA76 /* AuthenticationSessionView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -172,6 +198,7 @@
 				101581562495F8C600AA0B37 /* Sources */,
 				101581572495F8C600AA0B37 /* Frameworks */,
 				101581582495F8C600AA0B37 /* Resources */,
+				109704C1249679460012EA76 /* Copy Configuration */,
 			);
 			buildRules = (
 			);
@@ -258,6 +285,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		109704C1249679460012EA76 /* Copy Configuration */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Configuration";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "BUILD_DIR=\"${BUILT_PRODUCTS_DIR}/${FULL_PRODUCT_NAME}\"\ncp -R \"${SRCROOT}/Dozy/Configuration.plist\" ${BUILD_DIR}\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		101581562495F8C600AA0B37 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -266,7 +314,13 @@
 				1015815E2495F8C600AA0B37 /* AppDelegate.swift in Sources */,
 				1035D075249604CE006B22FC /* LoginHeaderView.swift in Sources */,
 				101581602495F8C600AA0B37 /* SceneDelegate.swift in Sources */,
+				109704C0249675E90012EA76 /* Configuration.swift in Sources */,
 				1035D0732495FF00006B22FC /* LoginView.swift in Sources */,
+				109704C3249692D60012EA76 /* AuthenticationSessionView.swift in Sources */,
+				10E57E5E24969C79001B71A4 /* World.swift in Sources */,
+				10E57E642496A086001B71A4 /* ViewBuilder.swift in Sources */,
+				10E57E622496A062001B71A4 /* LoginViewBuilder.swift in Sources */,
+				10E57E6024969F03001B71A4 /* LoginPresenter.swift in Sources */,
 				1038113C24966CA000DC5CEC /* SafariView.swift in Sources */,
 				101581622495F8C600AA0B37 /* ContentView.swift in Sources */,
 				1035D07D24963F1F006B22FC /* AlternativeButton.swift in Sources */,
