@@ -25,6 +25,8 @@
 		10E57E6024969F03001B71A4 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E57E5F24969F03001B71A4 /* LoginPresenter.swift */; };
 		10E57E622496A062001B71A4 /* LoginViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E57E612496A062001B71A4 /* LoginViewBuilder.swift */; };
 		10E57E642496A086001B71A4 /* ViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E57E632496A086001B71A4 /* ViewBuilder.swift */; };
+		10F422202497BCB60078AC3C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F4221F2497BCB60078AC3C /* NetworkService.swift */; };
+		10F422222497C2050078AC3C /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F422212497C2050078AC3C /* NetworkRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,8 @@
 		10E57E5F24969F03001B71A4 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		10E57E612496A062001B71A4 /* LoginViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewBuilder.swift; sourceTree = "<group>"; };
 		10E57E632496A086001B71A4 /* ViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBuilder.swift; sourceTree = "<group>"; };
+		10F4221F2497BCB60078AC3C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		10F422212497C2050078AC3C /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +118,8 @@
 				1015816B2495F8CA00AA0B37 /* Info.plist */,
 				101581652495F8CA00AA0B37 /* Preview Content */,
 				10E57E632496A086001B71A4 /* ViewBuilder.swift */,
+				10F4221F2497BCB60078AC3C /* NetworkService.swift */,
+				10F422212497C2050078AC3C /* NetworkRequest.swift */,
 			);
 			path = Dozy;
 			sourceTree = "<group>";
@@ -313,6 +319,7 @@
 			files = (
 				1015815E2495F8C600AA0B37 /* AppDelegate.swift in Sources */,
 				1035D075249604CE006B22FC /* LoginHeaderView.swift in Sources */,
+				10F422222497C2050078AC3C /* NetworkRequest.swift in Sources */,
 				101581602495F8C600AA0B37 /* SceneDelegate.swift in Sources */,
 				109704C0249675E90012EA76 /* Configuration.swift in Sources */,
 				1035D0732495FF00006B22FC /* LoginView.swift in Sources */,
@@ -321,6 +328,7 @@
 				10E57E642496A086001B71A4 /* ViewBuilder.swift in Sources */,
 				10E57E622496A062001B71A4 /* LoginViewBuilder.swift in Sources */,
 				10E57E6024969F03001B71A4 /* LoginPresenter.swift in Sources */,
+				10F422202497BCB60078AC3C /* NetworkService.swift in Sources */,
 				1038113C24966CA000DC5CEC /* SafariView.swift in Sources */,
 				101581622495F8C600AA0B37 /* ContentView.swift in Sources */,
 				1035D07D24963F1F006B22FC /* AlternativeButton.swift in Sources */,
