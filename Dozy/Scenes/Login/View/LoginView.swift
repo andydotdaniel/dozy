@@ -6,9 +6,13 @@
 //  Copyright © 2020 Andrew Daniel. All rights reserved.
 //
 
+import Foundation
 import SwiftUI
 
 struct LoginView: View {
+    @State private var showingLogin = false
+    var presenter: LoginViewPresenter?
+    
     var body: some View {
         VStack(alignment: .center, spacing: 24) {
             VStack {
@@ -23,10 +27,12 @@ struct LoginView: View {
             }
             AlternativeButton(
                 titleText: "Sign in with Slack",
-                tapAction: {},
+                tapAction: {
+                    self.presenter?.didTapLoginButton()
+                },
                 icon: Image("SlackLogo")
             )
-        }.offset(y: -48) 
+        }.offset(y: -48)
     }
 }
 
