@@ -10,8 +10,8 @@ import Foundation
 import SwiftUI
 
 struct LoginView: View {
-    @State private var showingLogin = false
-    var presenter: LoginViewPresenter?
+    @ObservedObject var viewModel: LoginViewModel
+    var presenter: LoginViewPresenter
     
     var body: some View {
         VStack(alignment: .center, spacing: 24) {
@@ -28,26 +28,27 @@ struct LoginView: View {
             AlternativeButton(
                 titleText: "Sign in with Slack",
                 tapAction: {
-                    self.presenter?.didTapLoginButton()
+                    self.presenter.didTapLoginButton()
                 },
-                icon: Image("SlackLogo")
+                icon: Image("SlackLogo"),
+                isLoading: $viewModel.isFetchingAccessToken
             )
         }.offset(y: -48)
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
+    
+    class LoginViewPreviewPresenter: LoginViewPresenter {
+        func didTapLoginButton() {}
+    }
+    
     static var previews: some View {
         Group {
-            LoginView()
-                .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
-                .previewDisplayName("iPhone 11")
-            LoginView()
-                .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))
-                .previewDisplayName("iPhone SE (2nd generation)")
-            LoginView()
-                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro Max"))
-                .previewDisplayName("iPhone 11 Pro Max")
+            LoginView(
+                viewModel: LoginViewModel(),
+                presenter: LoginViewPreviewPresenter()
+            )
         }
     }
 }

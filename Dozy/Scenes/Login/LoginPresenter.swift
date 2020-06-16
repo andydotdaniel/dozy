@@ -21,8 +21,11 @@ final class LoginPresenter: LoginViewPresenter {
     private var authenticationPresentationContext: ASWebAuthenticationPresentationContextProviding?
     private let networkService: NetworkRequesting
     
-    init(networkService: NetworkRequesting) {
+    private var viewModel: LoginViewModel
+    
+    init(networkService: NetworkRequesting, viewModel: LoginViewModel) {
         self.networkService = networkService
+        self.viewModel = viewModel
                 
         self.authRequestIdentifier = UUID().uuidString
         var urlComponents = URLComponents(string: "https://slack.com/oauth/v2/authorize")!
@@ -46,6 +49,7 @@ final class LoginPresenter: LoginViewPresenter {
             
             queryItems?.first { $0.name == "code" }.map { codeQueryItem in
                 guard let requestCode = codeQueryItem.value else { return }
+                self.viewModel.isFetchingAccessToken = true
                 self.requestAccessToken(with: requestCode)
             }
         }
@@ -73,7 +77,8 @@ final class LoginPresenter: LoginViewPresenter {
                 // TODO: Use access token from object
                 break
             case .failure:
-                break
+                self.viewModel.isFetchingAccessToken = false
+                // TODO: Add error handling
             }
         })
     }
