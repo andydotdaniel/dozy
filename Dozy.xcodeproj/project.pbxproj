@@ -28,6 +28,7 @@
 		10F422202497BCB60078AC3C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F4221F2497BCB60078AC3C /* NetworkService.swift */; };
 		10F422222497C2050078AC3C /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F422212497C2050078AC3C /* NetworkRequest.swift */; };
 		10F422242497E9B20078AC3C /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F422232497E9B20078AC3C /* Spinner.swift */; };
+		10F42226249930CC0078AC3C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F42225249930CC0078AC3C /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		10F4221F2497BCB60078AC3C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		10F422212497C2050078AC3C /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		10F422232497E9B20078AC3C /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
+		10F42225249930CC0078AC3C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				10F4221E2497B7310078AC3C /* View */,
+				10F42225249930CC0078AC3C /* LoginViewModel.swift */,
 				10E57E5F24969F03001B71A4 /* LoginPresenter.swift */,
 				10E57E612496A062001B71A4 /* LoginViewBuilder.swift */,
 			);
@@ -328,6 +331,7 @@
 				1035D0732495FF00006B22FC /* LoginView.swift in Sources */,
 				109704C3249692D60012EA76 /* AuthenticationSessionView.swift in Sources */,
 				10E57E5E24969C79001B71A4 /* World.swift in Sources */,
+				10F42226249930CC0078AC3C /* LoginViewModel.swift in Sources */,
 				10E57E642496A086001B71A4 /* ViewBuilder.swift in Sources */,
 				10E57E622496A062001B71A4 /* LoginViewBuilder.swift in Sources */,
 				10E57E6024969F03001B71A4 /* LoginPresenter.swift in Sources */,
