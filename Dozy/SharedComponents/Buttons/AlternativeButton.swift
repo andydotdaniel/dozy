@@ -13,20 +13,26 @@ struct AlternativeButton: View {
     let tapAction: () -> Void
     let icon: Image?
     
+    @Binding var isLoading: Bool
+    
     var body: some View {
         Button(action: tapAction) {
-            icon?
-                .renderingMode(.original)
-                .frame(width: 30, height: 30)
-                .scaledToFit()
-            Spacer()
-                .frame(width: 12)
-            Text(titleText)
-                .font(.system(size: 21))
-                .bold()
-                .foregroundColor(Color.black)
+            if !self.isLoading {
+                icon?
+                    .renderingMode(.original)
+                    .frame(width: 30, height: 30)
+                    .scaledToFit()
+                Spacer()
+                    .frame(width: 12)
+                Text(titleText)
+                    .font(.system(size: 21))
+                    .bold()
+                    .foregroundColor(Color.black)
+            } else {
+                Spinner(strokeColor: Color.primaryBlue)
+            }
         }
-        .padding(.horizontal, 54)
+        .padding(.horizontal, self.isLoading ? 24 : 54)
         .padding(.vertical, 12)
         .overlay(
             RoundedRectangle(cornerRadius: 30, style: .continuous)
@@ -36,7 +42,9 @@ struct AlternativeButton: View {
 }
 
 struct AlternativeButton_Previews: PreviewProvider {
+    
     static var previews: some View {
-        AlternativeButton(titleText: "Some Text", tapAction: { }, icon: Image("SlackLogo"))
+        AlternativeButton(titleText: "Some Text", tapAction: { }, icon: Image("SlackLogo"), isLoading: .constant(false))
     }
+    
 }
