@@ -14,26 +14,29 @@ struct LoginView: View {
     var presenter: LoginViewPresenter
     
     var body: some View {
-        VStack(alignment: .center, spacing: 24) {
-            VStack {
-                LoginHeaderView()
-                    .zIndex(9)
-                Ellipse()
-                    .frame(height: 90)
-                    .offset(y: -10)
-                    .foregroundColor(Color.primaryBlue)
-                    .scaleEffect(1.3, anchor: .bottom)
-                    .zIndex(1)
-            }
-            AlternativeButton(
-                titleText: "Sign in with Slack",
-                tapAction: {
-                    self.presenter.didTapLoginButton()
-                },
-                icon: Image("SlackLogo"),
-                isLoading: $viewModel.isFetchingAccessToken
-            )
-        }.offset(y: -48)
+        ZStack(alignment: .bottom) {
+            VStack(alignment: .center, spacing: 24) {
+                VStack {
+                    LoginHeaderView()
+                        .zIndex(9)
+                    Ellipse()
+                        .frame(height: 90)
+                        .offset(y: -10)
+                        .foregroundColor(Color.primaryBlue)
+                        .scaleEffect(1.3, anchor: .bottom)
+                        .zIndex(1)
+                }
+                AlternativeButton(
+                    titleText: "Sign in with Slack",
+                    tapAction: {
+                        self.presenter.didTapLoginButton()
+                    },
+                    icon: Image("SlackLogo"),
+                    isLoading: $viewModel.isFetchingAccessToken
+                )
+            }.offset(y: -48)
+            Toast.createErrorToast(isShowing: $viewModel.isShowingError)
+        }
     }
 }
 

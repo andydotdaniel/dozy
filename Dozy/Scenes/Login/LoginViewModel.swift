@@ -12,5 +12,10 @@ import SwiftUI
 class LoginViewModel: ObservableObject {
     
     @Published var isFetchingAccessToken: Bool = false
+    @Published var isShowingError: Bool = false {
+        didSet {
+            print(isShowingError)
+        }
+    }
     
 }

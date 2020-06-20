@@ -45,10 +45,17 @@ final class LoginPresenter: LoginViewPresenter {
             let queryItems = URLComponents(string: callbackURL.absoluteString)?.queryItems
             
             guard let state = queryItems?.first(where: { $0.name == "state" })?.value,
-                state == self.authRequestIdentifier else { return }
+                state == self.authRequestIdentifier else {
+                    self.viewModel.isShowingError = true
+                    return
+            }
             
             queryItems?.first { $0.name == "code" }.map { codeQueryItem in
-                guard let requestCode = codeQueryItem.value else { return }
+                guard let requestCode = codeQueryItem.value else {
+                    self.viewModel.isShowingError = true
+                    return
+                }
+                
                 self.viewModel.isFetchingAccessToken = true
                 self.requestAccessToken(with: requestCode)
             }
@@ -78,7 +85,7 @@ final class LoginPresenter: LoginViewPresenter {
                 break
             case .failure:
                 self.viewModel.isFetchingAccessToken = false
-                // TODO: Add error handling
+                self.viewModel.isShowingError = true
             }
         })
     }
