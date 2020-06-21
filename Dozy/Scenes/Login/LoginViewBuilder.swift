@@ -12,7 +12,12 @@ struct LoginViewBuilder: ViewBuilder {
     
     func build() -> LoginView {
         let viewModel = LoginViewModel()
-        let presenter: LoginViewPresenter = LoginPresenter(networkService: NetworkService(), viewModel: viewModel)
+        let authenticationSession = WebAuthenticationSession(requestIdentifier: UUID().uuidString)
+        let presenter: LoginViewPresenter = LoginPresenter(
+            authenticationSession: authenticationSession,
+            networkService: NetworkService(),
+            viewModel: viewModel
+        )
         let view = LoginView(viewModel: viewModel, presenter: presenter)
         
         return view

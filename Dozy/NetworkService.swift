@@ -19,6 +19,12 @@ struct NetworkService: NetworkRequesting {
         case decodableParsingFailed
     }
     
+    private let urlSession: URLSessionable
+    
+    init(urlSession: URLSessionable = URLSession.shared) {
+        self.urlSession = urlSession
+    }
+    
     func peformNetworkRequest<T: Decodable>(_ request: NetworkRequest, completion: @escaping (Result<T, NetworkService.RequestError>) -> Void) {
         switch request.httpMethod {
         case .post:
@@ -44,7 +50,7 @@ struct NetworkService: NetworkRequesting {
         }()
         urlRequest.httpBody = httpBody
         
-        URLSession.shared.dataTask(with: urlRequest, completionHandler: { data, _, error in
+        urlSession.createDataTask(with: urlRequest, completionHandler: { data, _, error in
             if let error = error {
                 completion(.failure(.unknown(message: error.localizedDescription)))
                 return

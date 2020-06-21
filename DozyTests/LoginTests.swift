@@ -1,0 +1,64 @@
+//
+//  LoginTests.swift
+//  DozyTests
+//
+//  Created by Andrew Daniel on 6/14/20.
+//  Copyright © 2020 Andrew Daniel. All rights reserved.
+//
+
+import XCTest
+@testable import Dozy
+
+class LoginTests: XCTestCase {
+
+    var presenter: LoginPresenter!
+    var viewModel: LoginViewModel!
+    var urlSessionMock: URLSessionMock!
+    var authenticationSessionMock: WebAuthenticationSessionMock!
+    var authRequestIdentifier: String!
+    
+    override func setUpWithError() throws {
+        authRequestIdentifier = UUID().uuidString
+        authenticationSessionMock = WebAuthenticationSessionMock(requestIdentifier: authRequestIdentifier)
+        urlSessionMock = URLSessionMock()
+        viewModel = LoginViewModel()
+        let networkService = NetworkService(urlSession: urlSessionMock)
+        presenter = LoginPresenter(
+            authenticationSession: authenticationSessionMock,
+            networkService: networkService,
+            viewModel: viewModel
+        )
+    }
+
+    override func tearDownWithError() throws {
+        presenter = nil
+        viewModel = nil
+        urlSessionMock = nil
+    }
+
+    func testDidTapLoginButton() throws {
+        presenter.didTapLoginButton()
+        
+        XCTAssertEqual(authenticationSessionMock.callbackURLScheme, "dozyapp")
+        XCTAssertNotNil(authenticationSessionMock.completionHandler)
+        
+        let jsonDictionary: [String: Any] = [
+            "authed_user": [
+                "access_token": "SOME_SLACK_TOKEN"
+            ]
+        ]
+        let data = try JSONSerialization.data(withJSONObject: jsonDictionary, options: .prettyPrinted)
+        urlSessionMock.result = URLSessionMockResult(data: data, urlResponse: nil, error: nil)
+        
+        var callbackURLComponents: URLComponents = URLComponents(string: "http://slack.com/some-callback-url")!
+        callbackURLComponents.queryItems = [
+            URLQueryItem(name: "state", value: authRequestIdentifier),
+            URLQueryItem(name: "code", value: "SOME_AUTHORIZATION_CODE")
+        ]
+        authenticationSessionMock.completionHandler!(callbackURLComponents.url, nil)
+        
+        XCTAssertTrue(viewModel.isFetchingAccessToken)
+        XCTAssertFalse(viewModel.isShowingError)
+    }
+
+}
