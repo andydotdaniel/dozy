@@ -148,10 +148,9 @@
 		101581732495F8CA00AA0B37 /* DozyTests */ = {
 			isa = PBXGroup;
 			children = (
-				101581742495F8CA00AA0B37 /* LoginTests.swift */,
+				1081AE2B249F4CF000AD6655 /* Mocks */,
+				1081AE2A249F4CD000AD6655 /* Tests */,
 				101581762495F8CA00AA0B37 /* Info.plist */,
-				102102A8249F2EF700084C91 /* URLSessionMock.swift */,
-				1081AE27249F44CB00AD6655 /* WebAuthenticationSessionMock.swift */,
 			);
 			path = DozyTests;
 			sourceTree = "<group>";
@@ -211,6 +210,23 @@
 				1081AE25249F387900AD6655 /* WebAuthenticationSession.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		1081AE2A249F4CD000AD6655 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				101581742495F8CA00AA0B37 /* LoginTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		1081AE2B249F4CF000AD6655 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				102102A8249F2EF700084C91 /* URLSessionMock.swift */,
+				1081AE27249F44CB00AD6655 /* WebAuthenticationSessionMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		10F4221E2497B7310078AC3C /* View */ = {
