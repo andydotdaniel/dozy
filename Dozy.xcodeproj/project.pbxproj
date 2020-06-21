@@ -119,6 +119,7 @@
 		1015815C2495F8C600AA0B37 /* Dozy */ = {
 			isa = PBXGroup;
 			children = (
+				1081AE29249F4C8B00AD6655 /* Utilities */,
 				10381138249667EB00DC5CEC /* SharedComponents */,
 				1035D076249605CF006B22FC /* Extensions */,
 				1038113A2496680900DC5CEC /* Scenes */,
@@ -132,8 +133,6 @@
 				1015816B2495F8CA00AA0B37 /* Info.plist */,
 				101581652495F8CA00AA0B37 /* Preview Content */,
 				10E57E632496A086001B71A4 /* ViewBuilder.swift */,
-				10F4221F2497BCB60078AC3C /* NetworkService.swift */,
-				10F422212497C2050078AC3C /* NetworkRequest.swift */,
 			);
 			path = Dozy;
 			sourceTree = "<group>";
@@ -162,7 +161,6 @@
 			children = (
 				1035D077249605D7006B22FC /* Color.swift */,
 				102102AA249F2F0F00084C91 /* URLSession.swift */,
-				1081AE25249F387900AD6655 /* WebAuthenticationSession.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -203,6 +201,16 @@
 				10381137249667D200DC5CEC /* Login */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		1081AE29249F4C8B00AD6655 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				10F4221F2497BCB60078AC3C /* NetworkService.swift */,
+				10F422212497C2050078AC3C /* NetworkRequest.swift */,
+				1081AE25249F387900AD6655 /* WebAuthenticationSession.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		10F4221E2497B7310078AC3C /* View */ = {
