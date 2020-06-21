@@ -20,13 +20,20 @@ final class LoginPresenter: LoginViewPresenter {
     private var authenticationPresentationContext: ASWebAuthenticationPresentationContextProviding?
     private let authenticationSession: WebAuthenticationSessionable
     private let networkService: NetworkRequesting
+    private let keychain: SecureStorable
     
     private var viewModel: LoginViewModel
     
-    init(authenticationSession: WebAuthenticationSessionable, networkService: NetworkRequesting, viewModel: LoginViewModel) {
+    init(
+        authenticationSession: WebAuthenticationSessionable,
+        networkService: NetworkRequesting,
+        viewModel: LoginViewModel,
+        keychain: SecureStorable = Keychain()
+    ) {
         self.authenticationSession = authenticationSession
         self.networkService = networkService
         self.viewModel = viewModel
+        self.keychain = keychain
                 
         var urlComponents = URLComponents(string: "https://slack.com/oauth/v2/authorize")!
         urlComponents.queryItems = [
@@ -81,11 +88,16 @@ final class LoginPresenter: LoginViewPresenter {
         ]
     
         guard let networkRequest = NetworkRequest(url: url, httpMethod: .post, parameters: parameters, contentType: .urlEncodedForm) else { return }
-        networkService.peformNetworkRequest(networkRequest, completion: { (result: Result<AccessTokenResponse, NetworkService.RequestError>) -> Void  in
+        networkService.peformNetworkRequest(networkRequest, completion: { [weak self] (result: Result<AccessTokenResponse, NetworkService.RequestError>) -> Void  in
+            guard let self = self else { return }
+            
             switch result {
             case .success(let object):
-                // TODO: Use access token from object
-                break
+                guard let data = object.accessToken.data(using: .utf8) else {
+                    self.viewModel.isShowingError = true
+                    return
+                }
+                _ = self.keychain.save(key: "slack_access_token", data: data)
             case .failure:
                 self.viewModel.isFetchingAccessToken = false
                 self.viewModel.isShowingError = true

@@ -23,6 +23,8 @@
 		1038113C24966CA000DC5CEC /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1038113B24966CA000DC5CEC /* SafariView.swift */; };
 		1081AE26249F387900AD6655 /* WebAuthenticationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE25249F387900AD6655 /* WebAuthenticationSession.swift */; };
 		1081AE28249F44CB00AD6655 /* WebAuthenticationSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE27249F44CB00AD6655 /* WebAuthenticationSessionMock.swift */; };
+		1081AE2D249F4E0C00AD6655 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE2C249F4E0C00AD6655 /* Keychain.swift */; };
+		1081AE2F249F585F00AD6655 /* KeychainMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE2E249F585F00AD6655 /* KeychainMock.swift */; };
 		109704C0249675E90012EA76 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109704BF249675E90012EA76 /* Configuration.swift */; };
 		109704C3249692D60012EA76 /* AuthenticationSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109704C2249692D60012EA76 /* AuthenticationSessionView.swift */; };
 		10E57E5E24969C79001B71A4 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E57E5D24969C79001B71A4 /* World.swift */; };
@@ -67,6 +69,8 @@
 		1038113B24966CA000DC5CEC /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		1081AE25249F387900AD6655 /* WebAuthenticationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAuthenticationSession.swift; sourceTree = "<group>"; };
 		1081AE27249F44CB00AD6655 /* WebAuthenticationSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAuthenticationSessionMock.swift; sourceTree = "<group>"; };
+		1081AE2C249F4E0C00AD6655 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		1081AE2E249F585F00AD6655 /* KeychainMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainMock.swift; sourceTree = "<group>"; };
 		109704BF249675E90012EA76 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		109704C2249692D60012EA76 /* AuthenticationSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSessionView.swift; sourceTree = "<group>"; };
 		10E57E5D24969C79001B71A4 /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
@@ -208,6 +212,7 @@
 				10F4221F2497BCB60078AC3C /* NetworkService.swift */,
 				10F422212497C2050078AC3C /* NetworkRequest.swift */,
 				1081AE25249F387900AD6655 /* WebAuthenticationSession.swift */,
+				1081AE2C249F4E0C00AD6655 /* Keychain.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -225,6 +230,7 @@
 			children = (
 				102102A8249F2EF700084C91 /* URLSessionMock.swift */,
 				1081AE27249F44CB00AD6655 /* WebAuthenticationSessionMock.swift */,
+				1081AE2E249F585F00AD6655 /* KeychainMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -367,6 +373,7 @@
 				102102AB249F2F0F00084C91 /* URLSession.swift in Sources */,
 				10F422222497C2050078AC3C /* NetworkRequest.swift in Sources */,
 				10F4222A249946970078AC3C /* Toast.swift in Sources */,
+				1081AE2D249F4E0C00AD6655 /* Keychain.swift in Sources */,
 				101581602495F8C600AA0B37 /* SceneDelegate.swift in Sources */,
 				109704C0249675E90012EA76 /* Configuration.swift in Sources */,
 				1035D0732495FF00006B22FC /* LoginView.swift in Sources */,
@@ -393,6 +400,7 @@
 				102102A9249F2EF700084C91 /* URLSessionMock.swift in Sources */,
 				1081AE28249F44CB00AD6655 /* WebAuthenticationSessionMock.swift in Sources */,
 				101581752495F8CA00AA0B37 /* LoginTests.swift in Sources */,
+				1081AE2F249F585F00AD6655 /* KeychainMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

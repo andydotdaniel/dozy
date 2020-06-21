@@ -16,6 +16,7 @@ class LoginTests: XCTestCase {
     var urlSessionMock: URLSessionMock!
     var authenticationSessionMock: WebAuthenticationSessionMock!
     var authRequestIdentifier: String!
+    var keychainMock: KeychainMock!
     
     override func setUpWithError() throws {
         authRequestIdentifier = UUID().uuidString
@@ -23,10 +24,13 @@ class LoginTests: XCTestCase {
         urlSessionMock = URLSessionMock()
         viewModel = LoginViewModel()
         let networkService = NetworkService(urlSession: urlSessionMock)
+        keychainMock = KeychainMock()
+        
         presenter = LoginPresenter(
             authenticationSession: authenticationSessionMock,
             networkService: networkService,
-            viewModel: viewModel
+            viewModel: viewModel,
+            keychain: keychainMock
         )
     }
 
@@ -59,6 +63,8 @@ class LoginTests: XCTestCase {
         
         XCTAssertTrue(viewModel.isFetchingAccessToken)
         XCTAssertFalse(viewModel.isShowingError)
+        XCTAssertEqual(keychainMock.saveKey, "slack_access_token")
+        XCTAssertEqual(keychainMock.saveData, "SOME_SLACK_TOKEN".data(using: .utf8))
     }
 
 }
