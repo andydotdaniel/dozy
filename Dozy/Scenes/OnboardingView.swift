@@ -33,6 +33,8 @@ struct OnboardingView: View {
             Spacer()
         }
         .padding(.top, 24)
+        .navigationBarTitle("")
+        .navigationBarHidden(true)
     }
     
 }

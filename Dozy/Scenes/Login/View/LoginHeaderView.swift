@@ -28,7 +28,6 @@ struct LoginHeaderView: View {
             .foregroundColor(Color.white)
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-        .padding(.top, 160)
         .edgesIgnoringSafeArea(.all)
         .background(Color.primaryBlue)
     }
@@ -36,6 +35,6 @@ struct LoginHeaderView: View {
 
 struct LoginHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginHeaderView().frame(height: 700).offset(y: -115)
+        LoginHeaderView()
     }
 }

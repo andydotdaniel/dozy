@@ -14,28 +14,35 @@ struct LoginView: View {
     var presenter: LoginViewPresenter
     
     var body: some View {
-        ZStack(alignment: .bottom) {
-            VStack(alignment: .center, spacing: 24) {
-                VStack {
-                    LoginHeaderView()
-                        .zIndex(9)
-                    Ellipse()
-                        .frame(height: 90)
-                        .offset(y: -10)
-                        .foregroundColor(Color.primaryBlue)
-                        .scaleEffect(1.3, anchor: .bottom)
-                        .zIndex(1)
+        GeometryReader { _ in
+            NavigationView {
+                ZStack(alignment: .bottom) {
+                    NavigationLink(destination: OnboardingView(), tag: .onboarding, selection: self.$viewModel.navigationSelection) { EmptyView() }
+                    VStack(alignment: .center, spacing: 24) {
+                        VStack {
+                            LoginHeaderView()
+                                .zIndex(9)
+                                .offset(y: 120)
+                            Ellipse()
+                                .foregroundColor(Color.primaryBlue)
+                                .scaleEffect(3, anchor: .bottom)
+                                .zIndex(1)
+                                .offset(y: -40)
+                        }
+                        AlternativeButton(
+                            titleText: "Sign in with Slack",
+                            tapAction: {
+                                self.presenter.didTapLoginButton()
+                            },
+                            icon: Image("SlackLogo"),
+                            isLoading: self.$viewModel.isFetchingAccessToken
+                        ).offset(y: -24)
+                    }
+                    Toast.createErrorToast(isShowing: self.$viewModel.isShowingError)
                 }
-                AlternativeButton(
-                    titleText: "Sign in with Slack",
-                    tapAction: {
-                        self.presenter.didTapLoginButton()
-                    },
-                    icon: Image("SlackLogo"),
-                    isLoading: $viewModel.isFetchingAccessToken
-                )
-            }.offset(y: -48)
-            Toast.createErrorToast(isShowing: $viewModel.isShowingError)
+                .navigationBarTitle("")
+                .navigationBarHidden(true)
+            }
         }
     }
 }
@@ -52,6 +59,20 @@ struct LoginView_Previews: PreviewProvider {
                 viewModel: LoginViewModel(),
                 presenter: LoginViewPreviewPresenter()
             )
+            .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro Max"))
+            .previewDisplayName("iPhone 11 Pro Max")
+            LoginView(
+                viewModel: LoginViewModel(),
+                presenter: LoginViewPreviewPresenter()
+            )
+            .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
+            .previewDisplayName("iPhone 11")
+            LoginView(
+                viewModel: LoginViewModel(),
+                presenter: LoginViewPreviewPresenter()
+            )
+            .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))
+            .previewDisplayName("iPhone SE (2nd generation)")
         }
     }
 }
