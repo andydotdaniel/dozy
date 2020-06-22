@@ -21,10 +21,12 @@
 		1035D078249605D7006B22FC /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D077249605D7006B22FC /* Color.swift */; };
 		1035D07D24963F1F006B22FC /* AlternativeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D07C24963F1F006B22FC /* AlternativeButton.swift */; };
 		1038113C24966CA000DC5CEC /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1038113B24966CA000DC5CEC /* SafariView.swift */; };
+		104856D724A0EC520072D00F /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104856D624A0EC520072D00F /* PrimaryButton.swift */; };
 		1081AE26249F387900AD6655 /* WebAuthenticationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE25249F387900AD6655 /* WebAuthenticationSession.swift */; };
 		1081AE28249F44CB00AD6655 /* WebAuthenticationSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE27249F44CB00AD6655 /* WebAuthenticationSessionMock.swift */; };
 		1081AE2D249F4E0C00AD6655 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE2C249F4E0C00AD6655 /* Keychain.swift */; };
 		1081AE2F249F585F00AD6655 /* KeychainMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE2E249F585F00AD6655 /* KeychainMock.swift */; };
+		1081AE3124A0E84C00AD6655 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE3024A0E84C00AD6655 /* OnboardingView.swift */; };
 		109704C0249675E90012EA76 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109704BF249675E90012EA76 /* Configuration.swift */; };
 		109704C3249692D60012EA76 /* AuthenticationSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109704C2249692D60012EA76 /* AuthenticationSessionView.swift */; };
 		10E57E5E24969C79001B71A4 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E57E5D24969C79001B71A4 /* World.swift */; };
@@ -67,10 +69,12 @@
 		1035D077249605D7006B22FC /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		1035D07C24963F1F006B22FC /* AlternativeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeButton.swift; sourceTree = "<group>"; };
 		1038113B24966CA000DC5CEC /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
+		104856D624A0EC520072D00F /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		1081AE25249F387900AD6655 /* WebAuthenticationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAuthenticationSession.swift; sourceTree = "<group>"; };
 		1081AE27249F44CB00AD6655 /* WebAuthenticationSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAuthenticationSessionMock.swift; sourceTree = "<group>"; };
 		1081AE2C249F4E0C00AD6655 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		1081AE2E249F585F00AD6655 /* KeychainMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainMock.swift; sourceTree = "<group>"; };
+		1081AE3024A0E84C00AD6655 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		109704BF249675E90012EA76 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		109704C2249692D60012EA76 /* AuthenticationSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSessionView.swift; sourceTree = "<group>"; };
 		10E57E5D24969C79001B71A4 /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
@@ -172,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				1035D07C24963F1F006B22FC /* AlternativeButton.swift */,
+				104856D624A0EC520072D00F /* PrimaryButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -202,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				10381137249667D200DC5CEC /* Login */,
+				1081AE3024A0E84C00AD6655 /* OnboardingView.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -374,6 +380,7 @@
 				10F422222497C2050078AC3C /* NetworkRequest.swift in Sources */,
 				10F4222A249946970078AC3C /* Toast.swift in Sources */,
 				1081AE2D249F4E0C00AD6655 /* Keychain.swift in Sources */,
+				104856D724A0EC520072D00F /* PrimaryButton.swift in Sources */,
 				101581602495F8C600AA0B37 /* SceneDelegate.swift in Sources */,
 				109704C0249675E90012EA76 /* Configuration.swift in Sources */,
 				1035D0732495FF00006B22FC /* LoginView.swift in Sources */,
@@ -387,6 +394,7 @@
 				10F422202497BCB60078AC3C /* NetworkService.swift in Sources */,
 				1038113C24966CA000DC5CEC /* SafariView.swift in Sources */,
 				101581622495F8C600AA0B37 /* ContentView.swift in Sources */,
+				1081AE3124A0E84C00AD6655 /* OnboardingView.swift in Sources */,
 				1035D07D24963F1F006B22FC /* AlternativeButton.swift in Sources */,
 				1035D078249605D7006B22FC /* Color.swift in Sources */,
 				10F422242497E9B20078AC3C /* Spinner.swift in Sources */,
