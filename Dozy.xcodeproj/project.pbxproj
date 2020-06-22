@@ -22,6 +22,7 @@
 		1035D07D24963F1F006B22FC /* AlternativeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D07C24963F1F006B22FC /* AlternativeButton.swift */; };
 		1038113C24966CA000DC5CEC /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1038113B24966CA000DC5CEC /* SafariView.swift */; };
 		104856D724A0EC520072D00F /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104856D624A0EC520072D00F /* PrimaryButton.swift */; };
+		104856D924A142F80072D00F /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104856D824A142F80072D00F /* UIDevice.swift */; };
 		1081AE26249F387900AD6655 /* WebAuthenticationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE25249F387900AD6655 /* WebAuthenticationSession.swift */; };
 		1081AE28249F44CB00AD6655 /* WebAuthenticationSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE27249F44CB00AD6655 /* WebAuthenticationSessionMock.swift */; };
 		1081AE2D249F4E0C00AD6655 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE2C249F4E0C00AD6655 /* Keychain.swift */; };
@@ -70,6 +71,7 @@
 		1035D07C24963F1F006B22FC /* AlternativeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeButton.swift; sourceTree = "<group>"; };
 		1038113B24966CA000DC5CEC /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		104856D624A0EC520072D00F /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		104856D824A142F80072D00F /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		1081AE25249F387900AD6655 /* WebAuthenticationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAuthenticationSession.swift; sourceTree = "<group>"; };
 		1081AE27249F44CB00AD6655 /* WebAuthenticationSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAuthenticationSessionMock.swift; sourceTree = "<group>"; };
 		1081AE2C249F4E0C00AD6655 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 			children = (
 				1035D077249605D7006B22FC /* Color.swift */,
 				102102AA249F2F0F00084C91 /* URLSession.swift */,
+				104856D824A142F80072D00F /* UIDevice.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				104856D924A142F80072D00F /* UIDevice.swift in Sources */,
 				1015815E2495F8C600AA0B37 /* AppDelegate.swift in Sources */,
 				1035D075249604CE006B22FC /* LoginHeaderView.swift in Sources */,
 				102102AB249F2F0F00084C91 /* URLSession.swift in Sources */,
