@@ -17,7 +17,7 @@ protocol SecureStorable {
 final class Keychain: SecureStorable {
     
     func save(key: String, data: Data) -> OSStatus {
-        let query: [CFString : Any] = [
+        let query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: key,
             kSecValueData: data
@@ -29,9 +29,10 @@ final class Keychain: SecureStorable {
     }
     
     func load(key: String) -> Data? {
-        let query: [CFString : Any] = [
+        let query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: key,
+            kSecReturnData: kCFBooleanTrue!,
             kSecMatchLimit: kSecMatchLimitOne
         ]
 
