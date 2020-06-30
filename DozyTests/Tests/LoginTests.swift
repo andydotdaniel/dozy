@@ -19,6 +19,8 @@ class LoginTests: XCTestCase {
     var keychainMock: KeychainMock!
     
     override func setUpWithError() throws {
+        Current = .mock
+        
         authRequestIdentifier = UUID().uuidString
         authenticationSessionMock = WebAuthenticationSessionMock(requestIdentifier: authRequestIdentifier)
         urlSessionMock = URLSessionMock()
@@ -38,6 +40,8 @@ class LoginTests: XCTestCase {
         presenter = nil
         viewModel = nil
         urlSessionMock = nil
+        
+        Current = World()
     }
 
     func testDidTapLoginButton() throws {

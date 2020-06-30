@@ -22,6 +22,9 @@
 		1038113C24966CA000DC5CEC /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1038113B24966CA000DC5CEC /* SafariView.swift */; };
 		104856D724A0EC520072D00F /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104856D624A0EC520072D00F /* PrimaryButton.swift */; };
 		104856D924A142F80072D00F /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104856D824A142F80072D00F /* UIDevice.swift */; };
+		104BCC2024AB991200C35BDC /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BCC1F24AB991200C35BDC /* DispatchQueue.swift */; };
+		104BCC2424AB9BD500C35BDC /* WorldMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BCC2324AB9BD500C35BDC /* WorldMock.swift */; };
+		104BCC2624AB9C0600C35BDC /* DispatchQueueMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BCC2524AB9C0600C35BDC /* DispatchQueueMock.swift */; };
 		1081AE26249F387900AD6655 /* WebAuthenticationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE25249F387900AD6655 /* WebAuthenticationSession.swift */; };
 		1081AE28249F44CB00AD6655 /* WebAuthenticationSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE27249F44CB00AD6655 /* WebAuthenticationSessionMock.swift */; };
 		1081AE2D249F4E0C00AD6655 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE2C249F4E0C00AD6655 /* Keychain.swift */; };
@@ -70,6 +73,9 @@
 		1038113B24966CA000DC5CEC /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		104856D624A0EC520072D00F /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		104856D824A142F80072D00F /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
+		104BCC1F24AB991200C35BDC /* DispatchQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
+		104BCC2324AB9BD500C35BDC /* WorldMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMock.swift; sourceTree = "<group>"; };
+		104BCC2524AB9C0600C35BDC /* DispatchQueueMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueMock.swift; sourceTree = "<group>"; };
 		1081AE25249F387900AD6655 /* WebAuthenticationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAuthenticationSession.swift; sourceTree = "<group>"; };
 		1081AE27249F44CB00AD6655 /* WebAuthenticationSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAuthenticationSessionMock.swift; sourceTree = "<group>"; };
 		1081AE2C249F4E0C00AD6655 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
@@ -168,6 +174,7 @@
 				1035D077249605D7006B22FC /* Color.swift */,
 				102102AA249F2F0F00084C91 /* URLSession.swift */,
 				104856D824A142F80072D00F /* UIDevice.swift */,
+				104BCC1F24AB991200C35BDC /* DispatchQueue.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -237,6 +244,8 @@
 				102102A8249F2EF700084C91 /* URLSessionMock.swift */,
 				1081AE27249F44CB00AD6655 /* WebAuthenticationSessionMock.swift */,
 				1081AE2E249F585F00AD6655 /* KeychainMock.swift */,
+				104BCC2324AB9BD500C35BDC /* WorldMock.swift */,
+				104BCC2524AB9C0600C35BDC /* DispatchQueueMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -397,6 +406,7 @@
 				1081AE3124A0E84C00AD6655 /* OnboardingView.swift in Sources */,
 				1035D07D24963F1F006B22FC /* AlternativeButton.swift in Sources */,
 				1035D078249605D7006B22FC /* Color.swift in Sources */,
+				104BCC2024AB991200C35BDC /* DispatchQueue.swift in Sources */,
 				10F422242497E9B20078AC3C /* Spinner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,7 +418,9 @@
 				102102A9249F2EF700084C91 /* URLSessionMock.swift in Sources */,
 				1081AE28249F44CB00AD6655 /* WebAuthenticationSessionMock.swift in Sources */,
 				101581752495F8CA00AA0B37 /* LoginTests.swift in Sources */,
+				104BCC2624AB9C0600C35BDC /* DispatchQueueMock.swift in Sources */,
 				1081AE2F249F585F00AD6655 /* KeychainMock.swift in Sources */,
+				104BCC2424AB9BD500C35BDC /* WorldMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

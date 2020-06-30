@@ -91,17 +91,19 @@ final class LoginPresenter: LoginViewPresenter {
         networkService.peformNetworkRequest(networkRequest, completion: { [weak self] (result: Result<AccessTokenResponse, NetworkService.RequestError>) -> Void  in
             guard let self = self else { return }
             
-            switch result {
-            case .success(let object):
-                guard let data = object.accessToken.data(using: .utf8) else {
+            Current.dispatchQueue.async {
+                switch result {
+                case .success(let object):
+                    guard let data = object.accessToken.data(using: .utf8) else {
+                        self.viewModel.isShowingError = true
+                        return
+                    }
+                    _ = self.keychain.save(key: "slack_access_token", data: data)
+                    self.viewModel.navigationSelection = .onboarding
+                case .failure:
+                    self.viewModel.isFetchingAccessToken = false
                     self.viewModel.isShowingError = true
-                    return
                 }
-                _ = self.keychain.save(key: "slack_access_token", data: data)
-                self.viewModel.navigationSelection = .onboarding
-            case .failure:
-                self.viewModel.isFetchingAccessToken = false
-                self.viewModel.isShowingError = true
             }
         })
     }

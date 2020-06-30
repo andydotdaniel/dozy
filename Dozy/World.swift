@@ -10,7 +10,8 @@ import Foundation
 import UIKit
 
 struct World {
-    let configuration: Configuration = Configuration.create()
+    var dispatchQueue: DispatchQueueable = DispatchQueue.main
+    var configuration: Configuration = Configuration.create()
     weak var window: UIWindow?
 }
 
