@@ -19,6 +19,9 @@ struct OnboardingView: View {
             Spacer()
             VStack(alignment: .center, spacing: 40) {
                 Image("IllustrationMessage")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: UIDevice.current.screenType == .large ? 280 : 200)
                 VStack(alignment: .center, spacing: 24) {
                     Text("A message that keeps you awake.")
                         .bold()
@@ -42,7 +45,17 @@ struct OnboardingView: View {
 struct OnboardingView_Previews: PreviewProvider {
     
     static var previews: some View {
-        OnboardingView()
+        Group {
+            OnboardingView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro Max"))
+            .previewDisplayName("iPhone 11 Pro Max")
+            OnboardingView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
+            .previewDisplayName("iPhone 11")
+            OnboardingView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))
+            .previewDisplayName("iPhone SE (2nd generation)")
+        }
     }
 }
 
