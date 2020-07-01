@@ -25,6 +25,7 @@
 		104BCC2024AB991200C35BDC /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BCC1F24AB991200C35BDC /* DispatchQueue.swift */; };
 		104BCC2424AB9BD500C35BDC /* WorldMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BCC2324AB9BD500C35BDC /* WorldMock.swift */; };
 		104BCC2624AB9C0600C35BDC /* DispatchQueueMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BCC2524AB9C0600C35BDC /* DispatchQueueMock.swift */; };
+		104BCC2824ABA05300C35BDC /* MessageFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BCC2724ABA05300C35BDC /* MessageFormView.swift */; };
 		1081AE26249F387900AD6655 /* WebAuthenticationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE25249F387900AD6655 /* WebAuthenticationSession.swift */; };
 		1081AE28249F44CB00AD6655 /* WebAuthenticationSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE27249F44CB00AD6655 /* WebAuthenticationSessionMock.swift */; };
 		1081AE2D249F4E0C00AD6655 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE2C249F4E0C00AD6655 /* Keychain.swift */; };
@@ -32,6 +33,8 @@
 		1081AE3124A0E84C00AD6655 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE3024A0E84C00AD6655 /* OnboardingView.swift */; };
 		109704C0249675E90012EA76 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109704BF249675E90012EA76 /* Configuration.swift */; };
 		109704C3249692D60012EA76 /* AuthenticationSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109704C2249692D60012EA76 /* AuthenticationSessionView.swift */; };
+		10AC9D9C24ACF40C00A3791C /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC9D9B24ACF40C00A3791C /* MultilineTextField.swift */; };
+		10AC9D9E24ACF96800A3791C /* AlternativeImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC9D9D24ACF96800A3791C /* AlternativeImageButton.swift */; };
 		10E57E5E24969C79001B71A4 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E57E5D24969C79001B71A4 /* World.swift */; };
 		10E57E6024969F03001B71A4 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E57E5F24969F03001B71A4 /* LoginPresenter.swift */; };
 		10E57E622496A062001B71A4 /* LoginViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E57E612496A062001B71A4 /* LoginViewBuilder.swift */; };
@@ -76,6 +79,7 @@
 		104BCC1F24AB991200C35BDC /* DispatchQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
 		104BCC2324AB9BD500C35BDC /* WorldMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMock.swift; sourceTree = "<group>"; };
 		104BCC2524AB9C0600C35BDC /* DispatchQueueMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueMock.swift; sourceTree = "<group>"; };
+		104BCC2724ABA05300C35BDC /* MessageFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormView.swift; sourceTree = "<group>"; };
 		1081AE25249F387900AD6655 /* WebAuthenticationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAuthenticationSession.swift; sourceTree = "<group>"; };
 		1081AE27249F44CB00AD6655 /* WebAuthenticationSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAuthenticationSessionMock.swift; sourceTree = "<group>"; };
 		1081AE2C249F4E0C00AD6655 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
@@ -83,6 +87,8 @@
 		1081AE3024A0E84C00AD6655 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		109704BF249675E90012EA76 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		109704C2249692D60012EA76 /* AuthenticationSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSessionView.swift; sourceTree = "<group>"; };
+		10AC9D9B24ACF40C00A3791C /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
+		10AC9D9D24ACF96800A3791C /* AlternativeImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeImageButton.swift; sourceTree = "<group>"; };
 		10E57E5D24969C79001B71A4 /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
 		10E57E5F24969F03001B71A4 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		10E57E612496A062001B71A4 /* LoginViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewBuilder.swift; sourceTree = "<group>"; };
@@ -184,6 +190,7 @@
 			children = (
 				1035D07C24963F1F006B22FC /* AlternativeButton.swift */,
 				104856D624A0EC520072D00F /* PrimaryButton.swift */,
+				10AC9D9D24ACF96800A3791C /* AlternativeImageButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -206,6 +213,7 @@
 				1038113B24966CA000DC5CEC /* SafariView.swift */,
 				10F422232497E9B20078AC3C /* Spinner.swift */,
 				10F42229249946960078AC3C /* Toast.swift */,
+				10AC9D9B24ACF40C00A3791C /* MultilineTextField.swift */,
 			);
 			path = SharedComponents;
 			sourceTree = "<group>";
@@ -215,6 +223,7 @@
 			children = (
 				10381137249667D200DC5CEC /* Login */,
 				1081AE3024A0E84C00AD6655 /* OnboardingView.swift */,
+				104BCC2724ABA05300C35BDC /* MessageFormView.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -389,16 +398,19 @@
 				102102AB249F2F0F00084C91 /* URLSession.swift in Sources */,
 				10F422222497C2050078AC3C /* NetworkRequest.swift in Sources */,
 				10F4222A249946970078AC3C /* Toast.swift in Sources */,
+				10AC9D9C24ACF40C00A3791C /* MultilineTextField.swift in Sources */,
 				1081AE2D249F4E0C00AD6655 /* Keychain.swift in Sources */,
 				104856D724A0EC520072D00F /* PrimaryButton.swift in Sources */,
 				101581602495F8C600AA0B37 /* SceneDelegate.swift in Sources */,
 				109704C0249675E90012EA76 /* Configuration.swift in Sources */,
 				1035D0732495FF00006B22FC /* LoginView.swift in Sources */,
 				109704C3249692D60012EA76 /* AuthenticationSessionView.swift in Sources */,
+				10AC9D9E24ACF96800A3791C /* AlternativeImageButton.swift in Sources */,
 				10E57E5E24969C79001B71A4 /* World.swift in Sources */,
 				1081AE26249F387900AD6655 /* WebAuthenticationSession.swift in Sources */,
 				10F42226249930CC0078AC3C /* LoginViewModel.swift in Sources */,
 				10E57E642496A086001B71A4 /* ViewBuilder.swift in Sources */,
+				104BCC2824ABA05300C35BDC /* MessageFormView.swift in Sources */,
 				10E57E622496A062001B71A4 /* LoginViewBuilder.swift in Sources */,
 				10E57E6024969F03001B71A4 /* LoginPresenter.swift in Sources */,
 				10F422202497BCB60078AC3C /* NetworkService.swift in Sources */,
