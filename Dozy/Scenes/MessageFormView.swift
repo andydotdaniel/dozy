@@ -6,6 +6,7 @@
 //  Copyright © 2020 Andrew Daniel. All rights reserved.
 //
 
+import Combine
 import SwiftUI
 
 class MesssageFormViewModel: ObservableObject {
@@ -21,10 +22,19 @@ class MesssageFormViewModel: ObservableObject {
     }
     @Published var channelNameTextFieldColor: Color
     
+    @Published var keyboardHeight: CGFloat
+    private var keyboardListener: KeyboardListener
+    private var keyboardListenerSink: AnyCancellable?
+    
     init(navigationBarTitle: String, channelName: String = "") {
         self.navigationBarTitle = navigationBarTitle
         self.channelName = channelName
         self.channelNameTextFieldColor = Color.placeholderGray
+        self.keyboardHeight = 0
+        
+        let keyboardListener = KeyboardListener()
+        self.keyboardListener = keyboardListener
+        self.keyboardListenerSink = keyboardListener.$keyboardHeight.sink { self.keyboardHeight = $0 }
     }
 }
 
@@ -50,6 +60,8 @@ struct MessageFormView: View {
                 VStack(alignment: .leading, spacing: 16) {
                     MultilineTextField(placeholderText: "Compose message")
                     AlternativeImageButton(imageName: "IconImagePlaceholder", titleText: "Add image")
+                        .padding(.bottom, self.viewModel.keyboardHeight)
+                        .animation(.easeOut)
                 }
                 .padding(.horizontal, 24)
                 .offset(y: -12)
@@ -64,6 +76,7 @@ struct MessageFormView: View {
 }
 
 struct MessageFormView_Previews: PreviewProvider {
+    
     static var previews: some View {
         let viewModel = MesssageFormViewModel(navigationBarTitle: "Add Message")
         return MessageFormView(viewModel: viewModel)

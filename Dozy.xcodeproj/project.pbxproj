@@ -26,6 +26,7 @@
 		104BCC2424AB9BD500C35BDC /* WorldMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BCC2324AB9BD500C35BDC /* WorldMock.swift */; };
 		104BCC2624AB9C0600C35BDC /* DispatchQueueMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BCC2524AB9C0600C35BDC /* DispatchQueueMock.swift */; };
 		104BCC2824ABA05300C35BDC /* MessageFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BCC2724ABA05300C35BDC /* MessageFormView.swift */; };
+		104BE36F24B0834B00E02AAD /* KeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BE36E24B0834B00E02AAD /* KeyboardListener.swift */; };
 		1081AE26249F387900AD6655 /* WebAuthenticationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE25249F387900AD6655 /* WebAuthenticationSession.swift */; };
 		1081AE28249F44CB00AD6655 /* WebAuthenticationSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE27249F44CB00AD6655 /* WebAuthenticationSessionMock.swift */; };
 		1081AE2D249F4E0C00AD6655 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE2C249F4E0C00AD6655 /* Keychain.swift */; };
@@ -80,6 +81,7 @@
 		104BCC2324AB9BD500C35BDC /* WorldMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMock.swift; sourceTree = "<group>"; };
 		104BCC2524AB9C0600C35BDC /* DispatchQueueMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueMock.swift; sourceTree = "<group>"; };
 		104BCC2724ABA05300C35BDC /* MessageFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormView.swift; sourceTree = "<group>"; };
+		104BE36E24B0834B00E02AAD /* KeyboardListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardListener.swift; sourceTree = "<group>"; };
 		1081AE25249F387900AD6655 /* WebAuthenticationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAuthenticationSession.swift; sourceTree = "<group>"; };
 		1081AE27249F44CB00AD6655 /* WebAuthenticationSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAuthenticationSessionMock.swift; sourceTree = "<group>"; };
 		1081AE2C249F4E0C00AD6655 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
@@ -222,8 +224,8 @@
 			isa = PBXGroup;
 			children = (
 				10381137249667D200DC5CEC /* Login */,
-				1081AE3024A0E84C00AD6655 /* OnboardingView.swift */,
 				104BCC2724ABA05300C35BDC /* MessageFormView.swift */,
+				1081AE3024A0E84C00AD6655 /* OnboardingView.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -235,6 +237,7 @@
 				10F422212497C2050078AC3C /* NetworkRequest.swift */,
 				1081AE25249F387900AD6655 /* WebAuthenticationSession.swift */,
 				1081AE2C249F4E0C00AD6655 /* Keychain.swift */,
+				104BE36E24B0834B00E02AAD /* KeyboardListener.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 				104BCC2824ABA05300C35BDC /* MessageFormView.swift in Sources */,
 				10E57E622496A062001B71A4 /* LoginViewBuilder.swift in Sources */,
 				10E57E6024969F03001B71A4 /* LoginPresenter.swift in Sources */,
+				104BE36F24B0834B00E02AAD /* KeyboardListener.swift in Sources */,
 				10F422202497BCB60078AC3C /* NetworkService.swift in Sources */,
 				1038113C24966CA000DC5CEC /* SafariView.swift in Sources */,
 				1081AE3124A0E84C00AD6655 /* OnboardingView.swift in Sources */,
