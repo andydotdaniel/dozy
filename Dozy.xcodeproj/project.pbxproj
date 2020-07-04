@@ -36,6 +36,8 @@
 		1081AE3124A0E84C00AD6655 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE3024A0E84C00AD6655 /* OnboardingView.swift */; };
 		109704C0249675E90012EA76 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109704BF249675E90012EA76 /* Configuration.swift */; };
 		109704C3249692D60012EA76 /* AuthenticationSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109704C2249692D60012EA76 /* AuthenticationSessionView.swift */; };
+		10A55EC024B110370099EDAD /* MessageFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A55EBF24B110370099EDAD /* MessageFormViewModel.swift */; };
+		10A55EC224B110480099EDAD /* MessageFormViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A55EC124B110480099EDAD /* MessageFormViewBuilder.swift */; };
 		10AC9D9C24ACF40C00A3791C /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC9D9B24ACF40C00A3791C /* MultilineTextField.swift */; };
 		10AC9D9E24ACF96800A3791C /* AlternativeImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC9D9D24ACF96800A3791C /* AlternativeImageButton.swift */; };
 		10E57E5E24969C79001B71A4 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E57E5D24969C79001B71A4 /* World.swift */; };
@@ -93,6 +95,8 @@
 		1081AE3024A0E84C00AD6655 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		109704BF249675E90012EA76 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		109704C2249692D60012EA76 /* AuthenticationSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSessionView.swift; sourceTree = "<group>"; };
+		10A55EBF24B110370099EDAD /* MessageFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormViewModel.swift; sourceTree = "<group>"; };
+		10A55EC124B110480099EDAD /* MessageFormViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormViewBuilder.swift; sourceTree = "<group>"; };
 		10AC9D9B24ACF40C00A3791C /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 		10AC9D9D24ACF96800A3791C /* AlternativeImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeImageButton.swift; sourceTree = "<group>"; };
 		10E57E5D24969C79001B71A4 /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
@@ -238,7 +242,9 @@
 			isa = PBXGroup;
 			children = (
 				104BE37324B0F23200E02AAD /* View */,
+				10A55EBF24B110370099EDAD /* MessageFormViewModel.swift */,
 				104BE37124B0F04400E02AAD /* MessageFormPresenter.swift */,
+				10A55EC124B110480099EDAD /* MessageFormViewBuilder.swift */,
 			);
 			path = MessageForm;
 			sourceTree = "<group>";
@@ -438,11 +444,13 @@
 				10E57E642496A086001B71A4 /* ViewBuilder.swift in Sources */,
 				104BCC2824ABA05300C35BDC /* MessageFormView.swift in Sources */,
 				10E57E622496A062001B71A4 /* LoginViewBuilder.swift in Sources */,
+				10A55EC224B110480099EDAD /* MessageFormViewBuilder.swift in Sources */,
 				10E57E6024969F03001B71A4 /* LoginPresenter.swift in Sources */,
 				104BE36F24B0834B00E02AAD /* KeyboardListener.swift in Sources */,
 				10F422202497BCB60078AC3C /* NetworkService.swift in Sources */,
 				1038113C24966CA000DC5CEC /* SafariView.swift in Sources */,
 				1081AE3124A0E84C00AD6655 /* OnboardingView.swift in Sources */,
+				10A55EC024B110370099EDAD /* MessageFormViewModel.swift in Sources */,
 				1035D07D24963F1F006B22FC /* AlternativeButton.swift in Sources */,
 				1035D078249605D7006B22FC /* Color.swift in Sources */,
 				104BCC2024AB991200C35BDC /* DispatchQueue.swift in Sources */,
