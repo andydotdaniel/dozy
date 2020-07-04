@@ -21,6 +21,8 @@ class MesssageFormViewModel: ObservableObject {
         }
     }
     @Published var channelNameTextFieldColor: Color
+    @Published var isShowingChannelDropdown: Bool
+    @Published var channelItems: [ChannelItem]
     
     @Published var keyboardHeight: CGFloat
     private var keyboardListener: KeyboardListener
@@ -32,6 +34,12 @@ class MesssageFormViewModel: ObservableObject {
         self.channelNameTextFieldColor = Color.placeholderGray
         self.keyboardHeight = 0
         
+        self.isShowingChannelDropdown = false
+        self.channelItems = [
+            ChannelItem(isPublic: true, text: "Channel 2"),
+            ChannelItem(isPublic: true, text: "Channel 3")
+        ]
+        
         let keyboardListener = KeyboardListener()
         self.keyboardListener = keyboardListener
         self.keyboardListenerSink = keyboardListener.$keyboardHeight.sink { self.keyboardHeight = $0 }
@@ -41,6 +49,7 @@ class MesssageFormViewModel: ObservableObject {
 struct MessageFormView: View {
     
     @ObservedObject var viewModel: MesssageFormViewModel
+    var presenter: MessageFormViewPresenter
     
     var body: some View {
         NavigationView {
@@ -53,18 +62,28 @@ struct MessageFormView: View {
                     .padding(.vertical, 12)
                     .background(Color.secondaryGray)
                     .cornerRadius(24)
+                    .onTapGesture {
+                        self.presenter.didTapChannelDropdown()
+                    }
                 }
                 .padding(.horizontal, 24)
                 Divider()
                     .foregroundColor(Color.borderGray)
-                VStack(alignment: .leading, spacing: 16) {
-                    MultilineTextField(placeholderText: "Compose message")
-                    AlternativeImageButton(imageName: "IconImagePlaceholder", titleText: "Add image")
-                        .padding(.bottom, self.viewModel.keyboardHeight)
-                        .animation(.easeOut)
+                if viewModel.isShowingChannelDropdown {
+                    List(viewModel.channelItems) { channelItem in
+                        ChannelItemView(content: channelItem)
+                            .padding(.vertical, 16)
+                    }
+                } else {
+                    VStack(alignment: .leading, spacing: 16) {
+                        MultilineTextField(placeholderText: "Compose message")
+                        AlternativeImageButton(imageName: "IconImagePlaceholder", titleText: "Add image")
+                            .padding(.bottom, self.viewModel.keyboardHeight)
+                            .animation(.easeOut)
+                    }
+                    .padding(.horizontal, 24)
+                    .offset(y: -12)
                 }
-                .padding(.horizontal, 24)
-                .offset(y: -12)
             }
             .padding(.top, 30)
             .navigationBarTitle(Text(viewModel.navigationBarTitle), displayMode: .inline)
@@ -79,6 +98,7 @@ struct MessageFormView_Previews: PreviewProvider {
     
     static var previews: some View {
         let viewModel = MesssageFormViewModel(navigationBarTitle: "Add Message")
-        return MessageFormView(viewModel: viewModel)
+        let presenter = MessageFormPresenter(viewModel: viewModel)
+        return MessageFormView(viewModel: viewModel, presenter: presenter)
     }
 }

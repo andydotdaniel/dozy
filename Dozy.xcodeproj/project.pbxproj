@@ -27,6 +27,8 @@
 		104BCC2624AB9C0600C35BDC /* DispatchQueueMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BCC2524AB9C0600C35BDC /* DispatchQueueMock.swift */; };
 		104BCC2824ABA05300C35BDC /* MessageFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BCC2724ABA05300C35BDC /* MessageFormView.swift */; };
 		104BE36F24B0834B00E02AAD /* KeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BE36E24B0834B00E02AAD /* KeyboardListener.swift */; };
+		104BE37224B0F04400E02AAD /* MessageFormPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BE37124B0F04400E02AAD /* MessageFormPresenter.swift */; };
+		104BE37524B0F26A00E02AAD /* ChannelItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BE37424B0F26A00E02AAD /* ChannelItemView.swift */; };
 		1081AE26249F387900AD6655 /* WebAuthenticationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE25249F387900AD6655 /* WebAuthenticationSession.swift */; };
 		1081AE28249F44CB00AD6655 /* WebAuthenticationSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE27249F44CB00AD6655 /* WebAuthenticationSessionMock.swift */; };
 		1081AE2D249F4E0C00AD6655 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE2C249F4E0C00AD6655 /* Keychain.swift */; };
@@ -82,6 +84,8 @@
 		104BCC2524AB9C0600C35BDC /* DispatchQueueMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueMock.swift; sourceTree = "<group>"; };
 		104BCC2724ABA05300C35BDC /* MessageFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormView.swift; sourceTree = "<group>"; };
 		104BE36E24B0834B00E02AAD /* KeyboardListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardListener.swift; sourceTree = "<group>"; };
+		104BE37124B0F04400E02AAD /* MessageFormPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormPresenter.swift; sourceTree = "<group>"; };
+		104BE37424B0F26A00E02AAD /* ChannelItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelItemView.swift; sourceTree = "<group>"; };
 		1081AE25249F387900AD6655 /* WebAuthenticationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAuthenticationSession.swift; sourceTree = "<group>"; };
 		1081AE27249F44CB00AD6655 /* WebAuthenticationSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAuthenticationSessionMock.swift; sourceTree = "<group>"; };
 		1081AE2C249F4E0C00AD6655 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
@@ -223,11 +227,29 @@
 		1038113A2496680900DC5CEC /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				104BE37024B0F03200E02AAD /* MessageForm */,
 				10381137249667D200DC5CEC /* Login */,
-				104BCC2724ABA05300C35BDC /* MessageFormView.swift */,
 				1081AE3024A0E84C00AD6655 /* OnboardingView.swift */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		104BE37024B0F03200E02AAD /* MessageForm */ = {
+			isa = PBXGroup;
+			children = (
+				104BE37324B0F23200E02AAD /* View */,
+				104BE37124B0F04400E02AAD /* MessageFormPresenter.swift */,
+			);
+			path = MessageForm;
+			sourceTree = "<group>";
+		};
+		104BE37324B0F23200E02AAD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				104BCC2724ABA05300C35BDC /* MessageFormView.swift */,
+				104BE37424B0F26A00E02AAD /* ChannelItemView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		1081AE29249F4C8B00AD6655 /* Utilities */ = {
@@ -397,6 +419,7 @@
 			files = (
 				104856D924A142F80072D00F /* UIDevice.swift in Sources */,
 				1015815E2495F8C600AA0B37 /* AppDelegate.swift in Sources */,
+				104BE37524B0F26A00E02AAD /* ChannelItemView.swift in Sources */,
 				1035D075249604CE006B22FC /* LoginHeaderView.swift in Sources */,
 				102102AB249F2F0F00084C91 /* URLSession.swift in Sources */,
 				10F422222497C2050078AC3C /* NetworkRequest.swift in Sources */,
@@ -423,6 +446,7 @@
 				1035D07D24963F1F006B22FC /* AlternativeButton.swift in Sources */,
 				1035D078249605D7006B22FC /* Color.swift in Sources */,
 				104BCC2024AB991200C35BDC /* DispatchQueue.swift in Sources */,
+				104BE37224B0F04400E02AAD /* MessageFormPresenter.swift in Sources */,
 				10F422242497E9B20078AC3C /* Spinner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
