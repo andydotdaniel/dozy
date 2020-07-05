@@ -34,6 +34,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func getRootView() -> AnyView {
+        return AnyView(MessageFormViewBuilder(hasMessage: false).build())
+        
         let keychain = Keychain()
         if keychain.load(key: "slack_access_token") == nil {
             let builder = LoginViewBuilder()

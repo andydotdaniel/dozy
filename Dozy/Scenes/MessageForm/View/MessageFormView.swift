@@ -17,7 +17,7 @@ struct MessageFormView: View {
         NavigationView {
             VStack(alignment: .center, spacing: 30) {
                 VStack {
-                    TextField("Slack channel or conversation", text: $viewModel.channelName)
+                    TextField("Slack channel or conversation", text: $viewModel.selectedChannelName)
                     .font(.system(size: 16, weight: .semibold, design: .default))
                     .foregroundColor(viewModel.channelNameTextFieldColor)
                     .padding(.horizontal, 24)
@@ -35,6 +35,9 @@ struct MessageFormView: View {
                     List(viewModel.channelItems) { channelItem in
                         ChannelItemView(content: channelItem)
                             .padding(.vertical, 16)
+                            .onTapGesture {
+                                self.presenter.didTapChannelItem(id: channelItem.id)
+                            }
                     }
                 } else {
                     VStack(alignment: .leading, spacing: 16) {

@@ -10,6 +10,7 @@ import Foundation
 
 protocol MessageFormViewPresenter {
     func didTapChannelDropdown()
+    func didTapChannelItem(id: UUID)
 }
 
 class MessageFormPresenter: MessageFormViewPresenter {
@@ -22,6 +23,13 @@ class MessageFormPresenter: MessageFormViewPresenter {
     
     func didTapChannelDropdown() {
         viewModel.isShowingChannelDropdown = true
+    }
+    
+    func didTapChannelItem(id: UUID) {
+        viewModel.isShowingChannelDropdown = false
+        if let channelName = viewModel.channelItems.first(where: { $0.id == id })?.text {
+            viewModel.selectedChannelName = channelName
+        }
     }
     
 }
