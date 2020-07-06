@@ -29,6 +29,8 @@ struct NetworkService: NetworkRequesting {
         switch request.httpMethod {
         case .post:
             postRequest(request, completion: completion)
+        case .get:
+            getRequest(request, completion: completion)
         }
     }
     
@@ -63,7 +65,41 @@ struct NetworkService: NetworkRequesting {
             
             completion(.success(decodedObject))
         }).resume()
+    }
+    
+    private func getRequest<T: Decodable>(_ request: NetworkRequest, completion: @escaping (Result<T, NetworkService.RequestError>) -> Void) {
+        var urlComponents = URLComponents(url: request.url, resolvingAgainstBaseURL: false)
+        urlComponents?.queryItems = request.parameters.map {
+            URLQueryItem(name: $0.key, value: String(describing: $0.value))
+        }
         
+        let formattedPercentEncodedQuery = urlComponents?.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
+        urlComponents?.percentEncodedQuery = formattedPercentEncodedQuery
+        
+        guard let url = urlComponents?.url else {
+            completion(.failure(.unknown(message: "URL could not be generated for request")))
+            return
+        }
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "GET"
+        urlRequest.allHTTPHeaderFields = [
+            "Content-Type": request.contentType.rawValue
+        ]
+        
+        urlSession.createDataTask(with: urlRequest, completionHandler: { data, _, error in
+            if let error = error {
+                completion(.failure(.unknown(message: error.localizedDescription)))
+                return
+            }
+            
+            guard let data = data, let decodedObject = try? JSONDecoder().decode(T.self, from: data) else {
+                completion(.failure(.decodableParsingFailed))
+                return
+            }
+            
+            completion(.success(decodedObject))
+        }).resume()
     }
     
 }

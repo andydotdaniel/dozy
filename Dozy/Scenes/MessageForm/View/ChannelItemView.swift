@@ -9,17 +9,9 @@
 import SwiftUI
 
 struct ChannelItem: Identifiable {
-    
-    var id: UUID
+    var id: String
     let isPublic: Bool
     let text: String
-    
-    init(isPublic: Bool, text: String) {
-        self.id = UUID()
-        self.isPublic = isPublic
-        self.text = text
-    }
-    
 }
 
 struct ChannelItemView: View {
@@ -42,7 +34,7 @@ struct ChannelItemView: View {
 
 struct ChannelItemView_Previews: PreviewProvider {
     static var previews: some View {
-        let content = ChannelItem(isPublic: true, text: "general")
+        let content = ChannelItem(id: "C061EG9T2", isPublic: true, text: "general")
         return ChannelItemView(content: content)
     }
 }

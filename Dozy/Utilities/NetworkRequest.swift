@@ -17,6 +17,7 @@ struct NetworkRequest {
     
     enum HTTPMethod {
         case post
+        case get
     }
     
     let url: URL
