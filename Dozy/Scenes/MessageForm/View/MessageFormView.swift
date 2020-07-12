@@ -39,6 +39,7 @@ struct MessageFormView: View {
                                 self.presenter.didTapChannelItem(id: channelItem.id)
                             }
                     }
+                    .offset(y: -24)
                 } else {
                     VStack(alignment: .leading, spacing: 16) {
                         MultilineTextField(placeholderText: "Compose message")
