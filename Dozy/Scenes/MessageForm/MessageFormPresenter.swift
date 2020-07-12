@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Combine
+import SwiftUI
 
 protocol MessageFormViewPresenter {
     func didTapChannelDropdown()
@@ -15,9 +17,12 @@ protocol MessageFormViewPresenter {
 
 class MessageFormPresenter: MessageFormViewPresenter {
     
-    private var viewModel: MesssageFormViewModel
+    @ObservedObject private var viewModel: MesssageFormViewModel
     private let networkService: NetworkRequesting
     private let keychain: SecureStorable
+    
+    private var channelItems: [ChannelItem] = []
+    private var channelNameTextFieldSubscriber: AnyCancellable?
     
     init(viewModel: MesssageFormViewModel,
          networkService: NetworkRequesting,
@@ -30,6 +35,10 @@ class MessageFormPresenter: MessageFormViewPresenter {
         guard let accessTokenData = keychain.load(key: "slack_access_token") else { return }
         let accessToken = String(decoding: accessTokenData, as: UTF8.self)
         fetchChannels(accessToken: accessToken)
+        
+        self.channelNameTextFieldSubscriber = self.viewModel.$channelNameTextFieldText
+            .debounce(for: .seconds(0.150), scheduler: DispatchQueue.main)
+            .sink { text in self.filterChannelItems(with: text) }
     }
     
     private func fetchChannels(accessToken: String, cursor: String? = nil) {
@@ -52,7 +61,7 @@ class MessageFormPresenter: MessageFormViewPresenter {
             Current.dispatchQueue.async {
                 switch result {
                 case .success(let response):
-                    self.viewModel.channelItems = response.channels.map { channel in
+                    self.channelItems = response.channels.map { channel in
                         let isPublic = channel.isChannel && !channel.isGroup
                         return ChannelItem(id: channel.id, isPublic: isPublic, text: channel.name)
                     }
@@ -65,12 +74,25 @@ class MessageFormPresenter: MessageFormViewPresenter {
     
     func didTapChannelDropdown() {
         viewModel.isShowingChannelDropdown = true
+        viewModel.filteredChannelItems = channelItems
     }
     
     func didTapChannelItem(id: String) {
         viewModel.isShowingChannelDropdown = false
-        if let channelName = viewModel.channelItems.first(where: { $0.id == id })?.text {
-            viewModel.selectedChannelName = channelName
+        if let channelName = viewModel.filteredChannelItems.first(where: { $0.id == id })?.text {
+            viewModel.channelNameTextFieldText = channelName
+        }
+    }
+    
+    private func filterChannelItems(with text: String) {
+        if text.isEmpty {
+            viewModel.filteredChannelItems = channelItems
+            return
+        }
+        
+        let lowercasedText = text.lowercased()
+        viewModel.filteredChannelItems = channelItems.filter { channelItem in
+            channelItem.text.lowercased().contains(lowercasedText)
         }
     }
     

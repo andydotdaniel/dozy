@@ -11,9 +11,9 @@ import SwiftUI
 
 class MesssageFormViewModel: ObservableObject {
     let navigationBarTitle: String
-    @Published var selectedChannelName: String {
+    @Published var channelNameTextFieldText: String {
         didSet {
-            if selectedChannelName.isEmpty {
+            if channelNameTextFieldText.isEmpty {
                 channelNameTextFieldColor = Color.placeholderGray
             } else {
                 channelNameTextFieldColor = Color.black
@@ -23,20 +23,20 @@ class MesssageFormViewModel: ObservableObject {
     
     @Published var channelNameTextFieldColor: Color
     @Published var isShowingChannelDropdown: Bool
-    @Published var channelItems: [ChannelItem]
+    @Published var filteredChannelItems: [ChannelItem]
     
     @Published var keyboardHeight: CGFloat
     private var keyboardListener: KeyboardListener
     private var keyboardListenerSink: AnyCancellable?
     
-    init(navigationBarTitle: String, selectedChannelName: String = "") {
+    init(navigationBarTitle: String, channelNameTextFieldText: String = "") {
         self.navigationBarTitle = navigationBarTitle
-        self.selectedChannelName = selectedChannelName
+        self.channelNameTextFieldText = channelNameTextFieldText
         self.channelNameTextFieldColor = Color.placeholderGray
         self.keyboardHeight = 0
         
         self.isShowingChannelDropdown = false
-        self.channelItems = []
+        self.filteredChannelItems = []
         
         let keyboardListener = KeyboardListener()
         self.keyboardListener = keyboardListener
