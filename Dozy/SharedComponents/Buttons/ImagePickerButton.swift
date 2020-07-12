@@ -6,17 +6,21 @@
 //  Copyright © 2020 Andrew Daniel. All rights reserved.
 //
 
+import Combine
 import SwiftUI
 
 struct ImagePickerButton: View {
     
     @Binding var selectedImage: UIImage?
-    @Binding var titleText: String
+    
+    init(selectedImage: Binding<UIImage?>) {
+        _selectedImage = selectedImage
+    }
     
     var body: some View {
         HStack(alignment: .center, spacing: 12) {
             createImage()
-            Text(titleText)
+            Text(selectedImage == nil ? "Add image" : "Change image")
                 .font(.subheadline)
                 .fontWeight(.semibold)
                 .foregroundColor(Color.placeholderGray)
@@ -50,6 +54,6 @@ struct ImagePickerButton: View {
 
 struct ImagePickerButton_Previews: PreviewProvider {
     static var previews: some View {
-        ImagePickerButton(selectedImage: .constant(nil), titleText: .constant("Add Image"))
+        ImagePickerButton(selectedImage: .constant(nil))
     }
 }

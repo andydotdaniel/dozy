@@ -26,16 +26,7 @@ class MesssageFormViewModel: ObservableObject {
     @Published var filteredChannelItems: [ChannelItem]
     
     @Published var isShowingImagePicker: Bool
-    @Published var selectedImage: UIImage? {
-        didSet {
-            if selectedImage != nil {
-                imagePickerButtonText = "Change Image"
-            } else {
-                imagePickerButtonText = "Add Image"
-            }
-        }
-    }
-    @Published var imagePickerButtonText: String
+    @Published var selectedImage: UIImage?
     
     @Published var keyboardHeight: CGFloat
     private var keyboardListener: KeyboardListener
@@ -51,12 +42,7 @@ class MesssageFormViewModel: ObservableObject {
         self.filteredChannelItems = []
         
         self.isShowingImagePicker = false
-        if let selectedImage = selectedImage {
-            self.selectedImage = selectedImage
-            self.imagePickerButtonText = "Change Image"
-        } else {
-            self.imagePickerButtonText = "Add Image"
-        }
+        self.selectedImage = selectedImage
         
         let keyboardListener = KeyboardListener()
         self.keyboardListener = keyboardListener

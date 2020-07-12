@@ -43,7 +43,7 @@ struct MessageFormView: View {
                 } else {
                     VStack(alignment: .leading, spacing: 16) {
                         MultilineTextField(placeholderText: "Compose message")
-                        ImagePickerButton(selectedImage: $viewModel.selectedImage, titleText: $viewModel.imagePickerButtonText)
+                        ImagePickerButton(selectedImage: $viewModel.selectedImage)
                             .offset(y: -self.viewModel.keyboardHeight)
                             .animation(.easeOut)
                             .onTapGesture {
