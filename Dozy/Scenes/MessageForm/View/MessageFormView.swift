@@ -43,12 +43,20 @@ struct MessageFormView: View {
                 } else {
                     VStack(alignment: .leading, spacing: 16) {
                         MultilineTextField(placeholderText: "Compose message")
-                        AlternativeImageButton(imageName: "IconImagePlaceholder", titleText: "Add image")
-                            .padding(.bottom, self.viewModel.keyboardHeight)
+                        ImagePickerButton(selectedImage: $viewModel.selectedImage, titleText: $viewModel.imagePickerButtonText)
+                            .offset(y: -self.viewModel.keyboardHeight)
                             .animation(.easeOut)
+                            .onTapGesture {
+                               self.viewModel.isShowingImagePicker.toggle()
+                            }
                     }
                     .padding(.horizontal, 24)
                     .offset(y: -12)
+                }
+            }
+            .sheet(isPresented: $viewModel.isShowingImagePicker) {
+                if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                    ImagePickerView(selectedImage: self.$viewModel.selectedImage)
                 }
             }
             .padding(.top, 30)

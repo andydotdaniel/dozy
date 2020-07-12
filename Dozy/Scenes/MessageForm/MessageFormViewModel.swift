@@ -25,11 +25,23 @@ class MesssageFormViewModel: ObservableObject {
     @Published var isShowingChannelDropdown: Bool
     @Published var filteredChannelItems: [ChannelItem]
     
+    @Published var isShowingImagePicker: Bool
+    @Published var selectedImage: UIImage? {
+        didSet {
+            if selectedImage != nil {
+                imagePickerButtonText = "Change Image"
+            } else {
+                imagePickerButtonText = "Add Image"
+            }
+        }
+    }
+    @Published var imagePickerButtonText: String
+    
     @Published var keyboardHeight: CGFloat
     private var keyboardListener: KeyboardListener
     private var keyboardListenerSink: AnyCancellable?
     
-    init(navigationBarTitle: String, channelNameTextFieldText: String = "") {
+    init(navigationBarTitle: String, channelNameTextFieldText: String = "", selectedImage: UIImage? = nil) {
         self.navigationBarTitle = navigationBarTitle
         self.channelNameTextFieldText = channelNameTextFieldText
         self.channelNameTextFieldColor = Color.placeholderGray
@@ -37,6 +49,14 @@ class MesssageFormViewModel: ObservableObject {
         
         self.isShowingChannelDropdown = false
         self.filteredChannelItems = []
+        
+        self.isShowingImagePicker = false
+        if let selectedImage = selectedImage {
+            self.selectedImage = selectedImage
+            self.imagePickerButtonText = "Change Image"
+        } else {
+            self.imagePickerButtonText = "Add Image"
+        }
         
         let keyboardListener = KeyboardListener()
         self.keyboardListener = keyboardListener
