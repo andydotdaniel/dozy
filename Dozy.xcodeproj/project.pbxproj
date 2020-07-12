@@ -19,7 +19,6 @@
 		1035D075249604CE006B22FC /* LoginHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D074249604CE006B22FC /* LoginHeaderView.swift */; };
 		1035D078249605D7006B22FC /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D077249605D7006B22FC /* Color.swift */; };
 		1035D07D24963F1F006B22FC /* AlternativeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D07C24963F1F006B22FC /* AlternativeButton.swift */; };
-		1038113C24966CA000DC5CEC /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1038113B24966CA000DC5CEC /* SafariView.swift */; };
 		104856D724A0EC520072D00F /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104856D624A0EC520072D00F /* PrimaryButton.swift */; };
 		104856D924A142F80072D00F /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104856D824A142F80072D00F /* UIDevice.swift */; };
 		104BCC2024AB991200C35BDC /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BCC1F24AB991200C35BDC /* DispatchQueue.swift */; };
@@ -85,7 +84,6 @@
 		1035D074249604CE006B22FC /* LoginHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeaderView.swift; sourceTree = "<group>"; };
 		1035D077249605D7006B22FC /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		1035D07C24963F1F006B22FC /* AlternativeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeButton.swift; sourceTree = "<group>"; };
-		1038113B24966CA000DC5CEC /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		104856D624A0EC520072D00F /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		104856D824A142F80072D00F /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		104BCC1F24AB991200C35BDC /* DispatchQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
@@ -237,7 +235,6 @@
 			isa = PBXGroup;
 			children = (
 				1035D07B24963ED7006B22FC /* Buttons */,
-				1038113B24966CA000DC5CEC /* SafariView.swift */,
 				10F422232497E9B20078AC3C /* Spinner.swift */,
 				10F42229249946960078AC3C /* Toast.swift */,
 				10AC9D9B24ACF40C00A3791C /* MultilineTextField.swift */,
@@ -495,7 +492,6 @@
 				10E57E6024969F03001B71A4 /* LoginPresenter.swift in Sources */,
 				104BE36F24B0834B00E02AAD /* KeyboardListener.swift in Sources */,
 				10F422202497BCB60078AC3C /* NetworkService.swift in Sources */,
-				1038113C24966CA000DC5CEC /* SafariView.swift in Sources */,
 				1081AE3124A0E84C00AD6655 /* OnboardingView.swift in Sources */,
 				10A55EC024B110370099EDAD /* MessageFormViewModel.swift in Sources */,
 				1035D07D24963F1F006B22FC /* AlternativeButton.swift in Sources */,
