@@ -31,6 +31,10 @@
 		104BE37524B0F26A00E02AAD /* ChannelItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BE37424B0F26A00E02AAD /* ChannelItemView.swift */; };
 		1051E4A824BAF9B300566C5B /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1051E4A724BAF9B300566C5B /* ImagePickerView.swift */; };
 		1051E4AA24BB184B00566C5B /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1051E4A924BB184B00566C5B /* ImageButton.swift */; };
+		105A182724BB575D003177AA /* MessageFormTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105A182624BB575D003177AA /* MessageFormTests.swift */; };
+		105A182B24BB5A25003177AA /* Channels.json in Resources */ = {isa = PBXBuildFile; fileRef = 105A182A24BB5A25003177AA /* Channels.json */; };
+		105A182E24BB5C25003177AA /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105A182D24BB5C25003177AA /* JSONLoader.swift */; };
+		10774A1D24BB5FFF00D3CD9F /* TestBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10774A1C24BB5FFF00D3CD9F /* TestBundle.swift */; };
 		1081AE26249F387900AD6655 /* WebAuthenticationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE25249F387900AD6655 /* WebAuthenticationSession.swift */; };
 		1081AE28249F44CB00AD6655 /* WebAuthenticationSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE27249F44CB00AD6655 /* WebAuthenticationSessionMock.swift */; };
 		1081AE2D249F4E0C00AD6655 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE2C249F4E0C00AD6655 /* Keychain.swift */; };
@@ -92,6 +96,10 @@
 		104BE37424B0F26A00E02AAD /* ChannelItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelItemView.swift; sourceTree = "<group>"; };
 		1051E4A724BAF9B300566C5B /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		1051E4A924BB184B00566C5B /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
+		105A182624BB575D003177AA /* MessageFormTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormTests.swift; sourceTree = "<group>"; };
+		105A182A24BB5A25003177AA /* Channels.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Channels.json; sourceTree = "<group>"; };
+		105A182D24BB5C25003177AA /* JSONLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLoader.swift; sourceTree = "<group>"; };
+		10774A1C24BB5FFF00D3CD9F /* TestBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestBundle.swift; sourceTree = "<group>"; };
 		1081AE25249F387900AD6655 /* WebAuthenticationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAuthenticationSession.swift; sourceTree = "<group>"; };
 		1081AE27249F44CB00AD6655 /* WebAuthenticationSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAuthenticationSessionMock.swift; sourceTree = "<group>"; };
 		1081AE2C249F4E0C00AD6655 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
@@ -181,6 +189,8 @@
 		101581732495F8CA00AA0B37 /* DozyTests */ = {
 			isa = PBXGroup;
 			children = (
+				105A182C24BB5C18003177AA /* Utilities */,
+				105A182924BB5A02003177AA /* NetworkResponses */,
 				1081AE2B249F4CF000AD6655 /* Mocks */,
 				1081AE2A249F4CD000AD6655 /* Tests */,
 				101581762495F8CA00AA0B37 /* Info.plist */,
@@ -264,6 +274,23 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		105A182924BB5A02003177AA /* NetworkResponses */ = {
+			isa = PBXGroup;
+			children = (
+				105A182A24BB5A25003177AA /* Channels.json */,
+			);
+			path = NetworkResponses;
+			sourceTree = "<group>";
+		};
+		105A182C24BB5C18003177AA /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				105A182D24BB5C25003177AA /* JSONLoader.swift */,
+				10774A1C24BB5FFF00D3CD9F /* TestBundle.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		1081AE29249F4C8B00AD6655 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -279,6 +306,7 @@
 		1081AE2A249F4CD000AD6655 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				105A182624BB575D003177AA /* MessageFormTests.swift */,
 				101581742495F8CA00AA0B37 /* LoginTests.swift */,
 			);
 			path = Tests;
@@ -398,6 +426,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				105A182B24BB5A25003177AA /* Channels.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,8 +501,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				102102A9249F2EF700084C91 /* URLSessionMock.swift in Sources */,
+				10774A1D24BB5FFF00D3CD9F /* TestBundle.swift in Sources */,
 				1081AE28249F44CB00AD6655 /* WebAuthenticationSessionMock.swift in Sources */,
+				105A182724BB575D003177AA /* MessageFormTests.swift in Sources */,
 				101581752495F8CA00AA0B37 /* LoginTests.swift in Sources */,
+				105A182E24BB5C25003177AA /* JSONLoader.swift in Sources */,
 				104BCC2624AB9C0600C35BDC /* DispatchQueueMock.swift in Sources */,
 				1081AE2F249F585F00AD6655 /* KeychainMock.swift in Sources */,
 				104BCC2424AB9BD500C35BDC /* WorldMock.swift in Sources */,

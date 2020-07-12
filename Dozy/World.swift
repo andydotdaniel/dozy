@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 struct World {
     var dispatchQueue: DispatchQueueable = DispatchQueue.main
