@@ -11,6 +11,7 @@ import SwiftUI
 extension Color {
     
     static let primaryBlue = Color(red: 47/255, green: 155/255, blue: 255/255)
+    static let darkBlue = Color(red: 33/255, green: 134/255, blue: 227/255)
     
     static let borderGray = Color(red: 225/255, green: 225/255, blue: 225/255)
     static let secondaryGray = Color(red: 232/255, green: 232/255, blue: 232/255)

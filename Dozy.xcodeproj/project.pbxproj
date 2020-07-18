@@ -39,6 +39,8 @@
 		1081AE2D249F4E0C00AD6655 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE2C249F4E0C00AD6655 /* Keychain.swift */; };
 		1081AE2F249F585F00AD6655 /* KeychainMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE2E249F585F00AD6655 /* KeychainMock.swift */; };
 		1081AE3124A0E84C00AD6655 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE3024A0E84C00AD6655 /* OnboardingView.swift */; };
+		108B4E0924C2C7FF000F1C4B /* ContentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B4E0824C2C7FF000F1C4B /* ContentCard.swift */; };
+		108B4E0B24C2C925000F1C4B /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B4E0A24C2C925000F1C4B /* SecondaryButton.swift */; };
 		109704C0249675E90012EA76 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109704BF249675E90012EA76 /* Configuration.swift */; };
 		109704C3249692D60012EA76 /* AuthenticationSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109704C2249692D60012EA76 /* AuthenticationSessionView.swift */; };
 		10A55EC024B110370099EDAD /* MessageFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A55EBF24B110370099EDAD /* MessageFormViewModel.swift */; };
@@ -104,6 +106,8 @@
 		1081AE2C249F4E0C00AD6655 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		1081AE2E249F585F00AD6655 /* KeychainMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainMock.swift; sourceTree = "<group>"; };
 		1081AE3024A0E84C00AD6655 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		108B4E0824C2C7FF000F1C4B /* ContentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCard.swift; sourceTree = "<group>"; };
+		108B4E0A24C2C925000F1C4B /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
 		109704BF249675E90012EA76 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		109704C2249692D60012EA76 /* AuthenticationSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSessionView.swift; sourceTree = "<group>"; };
 		10A55EBF24B110370099EDAD /* MessageFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormViewModel.swift; sourceTree = "<group>"; };
@@ -216,6 +220,7 @@
 				104856D624A0EC520072D00F /* PrimaryButton.swift */,
 				10AC9D9D24ACF96800A3791C /* ImagePickerButton.swift */,
 				1051E4A924BB184B00566C5B /* ImageButton.swift */,
+				108B4E0A24C2C925000F1C4B /* SecondaryButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -234,6 +239,7 @@
 		10381138249667EB00DC5CEC /* SharedComponents */ = {
 			isa = PBXGroup;
 			children = (
+				108B4E0724C2C7EE000F1C4B /* Cards */,
 				1035D07B24963ED7006B22FC /* Buttons */,
 				10F422232497E9B20078AC3C /* Spinner.swift */,
 				10F42229249946960078AC3C /* Toast.swift */,
@@ -321,6 +327,14 @@
 				104BCC2524AB9C0600C35BDC /* DispatchQueueMock.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		108B4E0724C2C7EE000F1C4B /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				108B4E0824C2C7FF000F1C4B /* ContentCard.swift */,
+			);
+			path = Cards;
 			sourceTree = "<group>";
 		};
 		10BB85ED24BB6F4C005D9829 /* MessageForm */ = {
@@ -490,10 +504,12 @@
 				10E57E622496A062001B71A4 /* LoginViewBuilder.swift in Sources */,
 				10A55EC224B110480099EDAD /* MessageFormViewBuilder.swift in Sources */,
 				10E57E6024969F03001B71A4 /* LoginPresenter.swift in Sources */,
+				108B4E0B24C2C925000F1C4B /* SecondaryButton.swift in Sources */,
 				104BE36F24B0834B00E02AAD /* KeyboardListener.swift in Sources */,
 				10F422202497BCB60078AC3C /* NetworkService.swift in Sources */,
 				1081AE3124A0E84C00AD6655 /* OnboardingView.swift in Sources */,
 				10A55EC024B110370099EDAD /* MessageFormViewModel.swift in Sources */,
+				108B4E0924C2C7FF000F1C4B /* ContentCard.swift in Sources */,
 				1035D07D24963F1F006B22FC /* AlternativeButton.swift in Sources */,
 				1035D078249605D7006B22FC /* Color.swift in Sources */,
 				104BCC2024AB991200C35BDC /* DispatchQueue.swift in Sources */,
