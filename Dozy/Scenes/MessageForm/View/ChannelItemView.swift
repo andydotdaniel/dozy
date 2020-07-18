@@ -16,15 +16,16 @@ struct ChannelItem: Identifiable {
 
 struct ChannelItemView: View {
     
-    var content: ChannelItem
+    var isPublic: Bool
+    var text: String
     
     var body: some View {
         HStack(alignment: .center, spacing: 16) {
-            Image(content.isPublic ? "IconHashtag" : "IconLock")
+            Image(isPublic ? "IconHashtag" : "IconLock")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 16, height: 16)
-            Text(content.text)
+            Text(text)
                 .font(.system(size: 18))
                 .bold()
         }
@@ -35,6 +36,6 @@ struct ChannelItemView: View {
 struct ChannelItemView_Previews: PreviewProvider {
     static var previews: some View {
         let content = ChannelItem(id: "C061EG9T2", isPublic: true, text: "general")
-        return ChannelItemView(content: content)
+        return ChannelItemView(isPublic: content.isPublic, text: content.text)
     }
 }

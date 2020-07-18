@@ -41,6 +41,7 @@
 		1081AE3124A0E84C00AD6655 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1081AE3024A0E84C00AD6655 /* OnboardingView.swift */; };
 		108B4E0924C2C7FF000F1C4B /* ContentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B4E0824C2C7FF000F1C4B /* ContentCard.swift */; };
 		108B4E0B24C2C925000F1C4B /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B4E0A24C2C925000F1C4B /* SecondaryButton.swift */; };
+		108B4E0F24C2ECA4000F1C4B /* MessageContentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B4E0E24C2ECA4000F1C4B /* MessageContentCard.swift */; };
 		109704C0249675E90012EA76 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109704BF249675E90012EA76 /* Configuration.swift */; };
 		109704C3249692D60012EA76 /* AuthenticationSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109704C2249692D60012EA76 /* AuthenticationSessionView.swift */; };
 		10A55EC024B110370099EDAD /* MessageFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A55EBF24B110370099EDAD /* MessageFormViewModel.swift */; };
@@ -108,6 +109,7 @@
 		1081AE3024A0E84C00AD6655 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		108B4E0824C2C7FF000F1C4B /* ContentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCard.swift; sourceTree = "<group>"; };
 		108B4E0A24C2C925000F1C4B /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
+		108B4E0E24C2ECA4000F1C4B /* MessageContentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentCard.swift; sourceTree = "<group>"; };
 		109704BF249675E90012EA76 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		109704C2249692D60012EA76 /* AuthenticationSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSessionView.swift; sourceTree = "<group>"; };
 		10A55EBF24B110370099EDAD /* MessageFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormViewModel.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 			isa = PBXGroup;
 			children = (
 				108B4E0824C2C7FF000F1C4B /* ContentCard.swift */,
+				108B4E0E24C2ECA4000F1C4B /* MessageContentCard.swift */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				1051E4AA24BB184B00566C5B /* ImageButton.swift in Sources */,
 				104BE37224B0F04400E02AAD /* MessageFormPresenter.swift in Sources */,
 				10F422242497E9B20078AC3C /* Spinner.swift in Sources */,
+				108B4E0F24C2ECA4000F1C4B /* MessageContentCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
