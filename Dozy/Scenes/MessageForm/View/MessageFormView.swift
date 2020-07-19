@@ -33,7 +33,7 @@ struct MessageFormView: View {
                     .foregroundColor(Color.borderGray)
                 if viewModel.isShowingChannelDropdown {
                     List(viewModel.filteredChannelItems) { channelItem in
-                        ChannelItemView(isPublic: channelItem.isPublic, text: channelItem.text)
+                        ChannelView(isPublic: channelItem.isPublic, text: channelItem.text)
                             .padding(.vertical, 16)
                             .onTapGesture {
                                 self.presenter.didTapChannelItem(id: channelItem.id)

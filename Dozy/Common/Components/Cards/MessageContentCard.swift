@@ -30,7 +30,7 @@ struct MessageContentCard: View {
             Divider()
                 .foregroundColor(Color.borderGray)
             HStack {
-                ChannelItemView(isPublic: channel.isPublic, text: channel.text)
+                ChannelView(isPublic: channel.isPublic, text: channel.text)
                 Spacer()
                 Button(action: actionButton.tapAction) {
                     Text(actionButton.titleText)

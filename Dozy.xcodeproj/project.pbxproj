@@ -32,7 +32,7 @@
 		104BCC2824ABA05300C35BDC /* MessageFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BCC2724ABA05300C35BDC /* MessageFormView.swift */; };
 		104BE36F24B0834B00E02AAD /* KeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BE36E24B0834B00E02AAD /* KeyboardListener.swift */; };
 		104BE37224B0F04400E02AAD /* MessageFormPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BE37124B0F04400E02AAD /* MessageFormPresenter.swift */; };
-		104BE37524B0F26A00E02AAD /* ChannelItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BE37424B0F26A00E02AAD /* ChannelItemView.swift */; };
+		104BE37524B0F26A00E02AAD /* ChannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BE37424B0F26A00E02AAD /* ChannelView.swift */; };
 		1051E4A824BAF9B300566C5B /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1051E4A724BAF9B300566C5B /* ImagePickerView.swift */; };
 		1051E4AA24BB184B00566C5B /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1051E4A924BB184B00566C5B /* ImageButton.swift */; };
 		105A182724BB575D003177AA /* MessageFormTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105A182624BB575D003177AA /* MessageFormTests.swift */; };
@@ -106,7 +106,7 @@
 		104BCC2724ABA05300C35BDC /* MessageFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormView.swift; sourceTree = "<group>"; };
 		104BE36E24B0834B00E02AAD /* KeyboardListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardListener.swift; sourceTree = "<group>"; };
 		104BE37124B0F04400E02AAD /* MessageFormPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormPresenter.swift; sourceTree = "<group>"; };
-		104BE37424B0F26A00E02AAD /* ChannelItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelItemView.swift; sourceTree = "<group>"; };
+		104BE37424B0F26A00E02AAD /* ChannelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelView.swift; sourceTree = "<group>"; };
 		1051E4A724BAF9B300566C5B /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		1051E4A924BB184B00566C5B /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
 		105A182624BB575D003177AA /* MessageFormTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormTests.swift; sourceTree = "<group>"; };
@@ -309,7 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				104BCC2724ABA05300C35BDC /* MessageFormView.swift */,
-				104BE37424B0F26A00E02AAD /* ChannelItemView.swift */,
+				104BE37424B0F26A00E02AAD /* ChannelView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -535,7 +535,7 @@
 			files = (
 				104856D924A142F80072D00F /* UIDevice.swift in Sources */,
 				1015815E2495F8C600AA0B37 /* AppDelegate.swift in Sources */,
-				104BE37524B0F26A00E02AAD /* ChannelItemView.swift in Sources */,
+				104BE37524B0F26A00E02AAD /* ChannelView.swift in Sources */,
 				103264A124C4488C00863603 /* ScheduleViewModel.swift in Sources */,
 				1051E4A824BAF9B300566C5B /* ImagePickerView.swift in Sources */,
 				1035D075249604CE006B22FC /* LoginHeaderView.swift in Sources */,
