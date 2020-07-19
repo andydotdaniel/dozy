@@ -8,29 +8,6 @@
 
 import SwiftUI
 
-class ScheduleViewModel: ObservableObject {
-    
-    enum State {
-        case active
-        case inactive
-    }
-    
-    @Published var state: State {
-        didSet {
-            self.contentCardState = (state == .active) ? .enabled : .disabled
-            self.switchState = (state == .active) ? .on : .off
-        }
-    }
-    @Published var contentCardState: ContentCard.State
-    @Published var switchState: Switch.State
-    
-    init(state: State) {
-        self.state = state
-        self.contentCardState = (state == .active) ? .enabled : .disabled
-        self.switchState = (state == .active) ? .on : .off
-    }
-}
-
 struct ScheduleView: View {
     
     @State var viewModel: ScheduleViewModel
