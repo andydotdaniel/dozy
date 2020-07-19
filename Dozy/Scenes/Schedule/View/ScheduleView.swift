@@ -11,6 +11,7 @@ import SwiftUI
 struct ScheduleView: View {
     
     @State var viewModel: ScheduleViewModel
+    var presenter: ScheduleViewPresenter
     
     private var contentCardBodyText: Text {
         let bodyText: Text = Text("Open the app in ")
@@ -49,6 +50,7 @@ struct ScheduleView: View {
 struct ScheduleView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ScheduleViewModel(state: .active)
-        return ScheduleView(viewModel: viewModel)
+        let presenter = SchedulePresenter()
+        return ScheduleView(viewModel: viewModel, presenter: presenter)
     }
 }

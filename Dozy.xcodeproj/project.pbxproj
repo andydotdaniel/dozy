@@ -18,6 +18,8 @@
 		1032649C24C32A9900863603 /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1032649B24C32A9900863603 /* Switch.swift */; };
 		1032649E24C41F8000863603 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1032649D24C41F8000863603 /* ScheduleView.swift */; };
 		103264A124C4488C00863603 /* ScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103264A024C4488C00863603 /* ScheduleViewModel.swift */; };
+		103264A324C448EB00863603 /* ScheduleViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103264A224C448EB00863603 /* ScheduleViewPresenter.swift */; };
+		103264A524C448FE00863603 /* ScheduleViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103264A424C448FE00863603 /* ScheduleViewBuilder.swift */; };
 		1035D0732495FF00006B22FC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D0722495FF00006B22FC /* LoginView.swift */; };
 		1035D075249604CE006B22FC /* LoginHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D074249604CE006B22FC /* LoginHeaderView.swift */; };
 		1035D078249605D7006B22FC /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D077249605D7006B22FC /* Color.swift */; };
@@ -89,6 +91,8 @@
 		1032649B24C32A9900863603 /* Switch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switch.swift; sourceTree = "<group>"; };
 		1032649D24C41F8000863603 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		103264A024C4488C00863603 /* ScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewModel.swift; sourceTree = "<group>"; };
+		103264A224C448EB00863603 /* ScheduleViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewPresenter.swift; sourceTree = "<group>"; };
+		103264A424C448FE00863603 /* ScheduleViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewBuilder.swift; sourceTree = "<group>"; };
 		1035D0722495FF00006B22FC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		1035D074249604CE006B22FC /* LoginHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeaderView.swift; sourceTree = "<group>"; };
 		1035D077249605D7006B22FC /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -213,10 +217,20 @@
 		1032649F24C4487C00863603 /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
+				103264A624C4490200863603 /* View */,
+				103264A224C448EB00863603 /* ScheduleViewPresenter.swift */,
+				103264A424C448FE00863603 /* ScheduleViewBuilder.swift */,
+			);
+			path = Schedule;
+			sourceTree = "<group>";
+		};
+		103264A624C4490200863603 /* View */ = {
+			isa = PBXGroup;
+			children = (
 				1032649D24C41F8000863603 /* ScheduleView.swift */,
 				103264A024C4488C00863603 /* ScheduleViewModel.swift */,
 			);
-			path = Schedule;
+			path = View;
 			sourceTree = "<group>";
 		};
 		1035D076249605CF006B22FC /* Extensions */ = {
@@ -511,10 +525,12 @@
 				10F4222A249946970078AC3C /* Toast.swift in Sources */,
 				10AC9D9C24ACF40C00A3791C /* MultilineTextField.swift in Sources */,
 				1081AE2D249F4E0C00AD6655 /* Keychain.swift in Sources */,
+				103264A524C448FE00863603 /* ScheduleViewBuilder.swift in Sources */,
 				104856D724A0EC520072D00F /* PrimaryButton.swift in Sources */,
 				1032649E24C41F8000863603 /* ScheduleView.swift in Sources */,
 				101581602495F8C600AA0B37 /* SceneDelegate.swift in Sources */,
 				109704C0249675E90012EA76 /* Configuration.swift in Sources */,
+				103264A324C448EB00863603 /* ScheduleViewPresenter.swift in Sources */,
 				1035D0732495FF00006B22FC /* LoginView.swift in Sources */,
 				109704C3249692D60012EA76 /* AuthenticationSessionView.swift in Sources */,
 				10AC9D9E24ACF96800A3791C /* ImagePickerButton.swift in Sources */,
