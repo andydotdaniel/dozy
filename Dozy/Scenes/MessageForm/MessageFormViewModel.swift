@@ -23,7 +23,7 @@ class MesssageFormViewModel: ObservableObject {
     
     @Published var channelNameTextFieldColor: Color
     @Published var isShowingChannelDropdown: Bool
-    @Published var filteredChannelItems: [ChannelItem]
+    @Published var filteredChannelItems: [Channel]
     
     @Published var isShowingImagePicker: Bool
     @Published var selectedImage: UIImage?

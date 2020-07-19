@@ -8,12 +8,6 @@
 
 import SwiftUI
 
-struct ChannelItem: Identifiable {
-    var id: String
-    let isPublic: Bool
-    let text: String
-}
-
 struct ChannelItemView: View {
     
     var isPublic: Bool
@@ -35,7 +29,7 @@ struct ChannelItemView: View {
 
 struct ChannelItemView_Previews: PreviewProvider {
     static var previews: some View {
-        let content = ChannelItem(id: "C061EG9T2", isPublic: true, text: "general")
+        let content = Channel(id: "C061EG9T2", isPublic: true, text: "general")
         return ChannelItemView(isPublic: content.isPublic, text: content.text)
     }
 }

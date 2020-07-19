@@ -21,7 +21,7 @@ class MessageFormPresenter: MessageFormViewPresenter {
     private let networkService: NetworkRequesting
     private let keychain: SecureStorable
     
-    private var channelItems: [ChannelItem] = []
+    private var channelItems: [Channel] = []
     private var channelNameTextFieldSubscriber: AnyCancellable?
     
     init(viewModel: MesssageFormViewModel,
@@ -63,7 +63,7 @@ class MessageFormPresenter: MessageFormViewPresenter {
                 case .success(let response):
                     self.channelItems = response.channels.map { channel in
                         let isPublic = channel.isChannel && !channel.isGroup
-                        return ChannelItem(id: channel.id, isPublic: isPublic, text: channel.name)
+                        return Channel(id: channel.id, isPublic: isPublic, text: channel.name)
                     }
                 case .failure:
                     break
