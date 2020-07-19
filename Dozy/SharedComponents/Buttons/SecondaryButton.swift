@@ -17,11 +17,13 @@ struct SecondaryButton: View {
     var body: some View {
         Button(action: tapAction) {
             Text(titleText)
+                .font(.system(size: 16))
                 .fontWeight(.semibold)
                 .foregroundColor(Color.black)
                 .opacity(0.35)
+                .truncationMode(.tail)
         }
-        .padding(.horizontal, 30)
+        .padding(.horizontal, 24)
         .padding(.vertical, 12)
         .frame(maxWidth: .infinity)
         .background(color)

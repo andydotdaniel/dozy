@@ -16,7 +16,7 @@ struct MessageContentCard: View {
     let channel: (isPublic: Bool, text: String)
     
     var body: some View {
-        VStack(spacing: 24) {
+        VStack(alignment: .leading, spacing: 24) {
             image.map {
                 Image(uiImage: $0)
                     .resizable()
@@ -25,6 +25,7 @@ struct MessageContentCard: View {
             bodyText.map {
                 Text($0)
                     .padding(.horizontal, 16)
+                    .padding(.top, (image == nil) ? 24 : 0)
             }
             Divider()
                 .foregroundColor(Color.borderGray)

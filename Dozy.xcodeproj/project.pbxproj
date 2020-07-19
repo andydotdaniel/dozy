@@ -16,6 +16,7 @@
 		102102A9249F2EF700084C91 /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102102A8249F2EF700084C91 /* URLSessionMock.swift */; };
 		102102AB249F2F0F00084C91 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102102AA249F2F0F00084C91 /* URLSession.swift */; };
 		1032649C24C32A9900863603 /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1032649B24C32A9900863603 /* Switch.swift */; };
+		1032649E24C41F8000863603 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1032649D24C41F8000863603 /* ScheduleView.swift */; };
 		1035D0732495FF00006B22FC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D0722495FF00006B22FC /* LoginView.swift */; };
 		1035D075249604CE006B22FC /* LoginHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D074249604CE006B22FC /* LoginHeaderView.swift */; };
 		1035D078249605D7006B22FC /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D077249605D7006B22FC /* Color.swift */; };
@@ -85,6 +86,7 @@
 		102102A8249F2EF700084C91 /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
 		102102AA249F2F0F00084C91 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
 		1032649B24C32A9900863603 /* Switch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switch.swift; sourceTree = "<group>"; };
+		1032649D24C41F8000863603 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		1035D0722495FF00006B22FC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		1035D074249604CE006B22FC /* LoginHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeaderView.swift; sourceTree = "<group>"; };
 		1035D077249605D7006B22FC /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				104BE37024B0F03200E02AAD /* MessageForm */,
 				10381137249667D200DC5CEC /* Login */,
 				1081AE3024A0E84C00AD6655 /* OnboardingView.swift */,
+				1032649D24C41F8000863603 /* ScheduleView.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 				10AC9D9C24ACF40C00A3791C /* MultilineTextField.swift in Sources */,
 				1081AE2D249F4E0C00AD6655 /* Keychain.swift in Sources */,
 				104856D724A0EC520072D00F /* PrimaryButton.swift in Sources */,
+				1032649E24C41F8000863603 /* ScheduleView.swift in Sources */,
 				101581602495F8C600AA0B37 /* SceneDelegate.swift in Sources */,
 				109704C0249675E90012EA76 /* Configuration.swift in Sources */,
 				1035D0732495FF00006B22FC /* LoginView.swift in Sources */,
