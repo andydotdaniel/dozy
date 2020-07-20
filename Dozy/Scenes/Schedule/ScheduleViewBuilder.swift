@@ -12,8 +12,8 @@ struct ScheduleViewBuilder: ViewBuilder {
     
     func build() -> ScheduleView {
         let viewModel = ScheduleViewModel(state: .active)
-        let presenter = SchedulePresenter()
-        let view = ScheduleView(viewModel: viewModel, presenter: presenter)
+        let presenter = SchedulePresenter(viewModel: viewModel)
+        let view = ScheduleView(presenter: presenter)
         
         return view
     }

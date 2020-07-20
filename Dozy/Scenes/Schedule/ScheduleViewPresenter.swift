@@ -6,12 +6,18 @@
 //  Copyright © 2020 Andrew Daniel. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
 
 protocol ScheduleViewPresenter {
-    
+    var viewModel: ScheduleViewModel { get set }
 }
 
-class SchedulePresenter: ScheduleViewPresenter {
+class SchedulePresenter: ScheduleViewPresenter, ObservableObject {
+    
+    @Published var viewModel: ScheduleViewModel
+    
+    init(viewModel: ScheduleViewModel) {
+        self.viewModel = viewModel
+    }
     
 }

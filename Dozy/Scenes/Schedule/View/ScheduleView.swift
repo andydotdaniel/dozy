@@ -10,8 +10,7 @@ import SwiftUI
 
 struct ScheduleView: View {
     
-    @State var viewModel: ScheduleViewModel
-    var presenter: ScheduleViewPresenter
+    @State var presenter: ScheduleViewPresenter
     
     private var contentCardBodyText: Text {
         let bodyText: Text = Text("Open the app in ")
@@ -36,13 +35,13 @@ struct ScheduleView: View {
             VStack(spacing: 24) {
                 Image("LogoGray")
                     .frame(width: 58)
-                ContentCard(state: self.$viewModel.contentCardState, titleText: "8:50am", subtitleText: "May 17", bodyText: contentCardBodyText, buttonText: "Change awake confirmation time")
+                ContentCard(state: self.$presenter.viewModel.contentCardState, titleText: "8:50am", subtitleText: "May 17", bodyText: contentCardBodyText, buttonText: "Change awake confirmation time")
                 MessageContentCard(image: nil, bodyText: "Some message here", actionButton: (titleText: "Edit", tapAction: {}), channel: (isPublic: true, text: "general"))
                 Spacer()
             }
             .padding(.top, 12)
             .padding(.horizontal, 24)
-            Switch(state: self.$viewModel.switchState)
+            Switch(state: self.$presenter.viewModel.switchState)
         }
     }
 }
@@ -50,7 +49,7 @@ struct ScheduleView: View {
 struct ScheduleView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ScheduleViewModel(state: .active)
-        let presenter = SchedulePresenter()
-        return ScheduleView(viewModel: viewModel, presenter: presenter)
+        let presenter = SchedulePresenter(viewModel: viewModel)
+        return ScheduleView(presenter: presenter)
     }
 }
