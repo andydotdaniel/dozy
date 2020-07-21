@@ -8,25 +8,6 @@
 
 import SwiftUI
 
-var attributedText: NSAttributedString {
-    let fontSize: CGFloat = 18
-    
-    let firstText = "Open the app in "
-    let boldText = "07:18:36"
-    let lastText = " or your sleepyhead message gets sent."
-
-    let attributedString = NSMutableAttributedString(string: "")
-    let firstString = NSMutableAttributedString(string: firstText, attributes: [.font : UIFont.systemFont(ofSize: fontSize)])
-    let boldString = NSMutableAttributedString(string: boldText, attributes: [.font : UIFont.boldSystemFont(ofSize: fontSize)])
-    let lastString = NSMutableAttributedString(string: lastText, attributes: [.font : UIFont.systemFont(ofSize: fontSize)])
-    
-    attributedString.append(firstString)
-    attributedString.append(boldString)
-    attributedString.append(lastString)
-    
-    return attributedString
-}
-
 struct ContentCard: View {
     
     enum State {
