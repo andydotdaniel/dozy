@@ -8,16 +8,18 @@
 
 import SwiftUI
 
-protocol ScheduleViewPresenter {
-    var viewModel: ScheduleViewModel { get set }
-}
+protocol ScheduleViewPresenter: SwitchViewDelegate {}
 
-class SchedulePresenter: ScheduleViewPresenter, ObservableObject {
+class SchedulePresenter: ScheduleViewPresenter {
     
-    @Published var viewModel: ScheduleViewModel
+    private var viewModel: ScheduleViewModel
     
     init(viewModel: ScheduleViewModel) {
         self.viewModel = viewModel
+    }
+    
+    func onSwitchPositionChanged(position: Switch.Position) {
+        self.viewModel.state = position == .on ? .active : .inactive
     }
     
 }

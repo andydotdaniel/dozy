@@ -10,10 +10,18 @@ import Foundation
 
 struct ScheduleViewBuilder: ViewBuilder {
     
+    private let message: Message
+    private let state: ScheduleViewModel.State
+    
+    init(message: Message, state: ScheduleViewModel.State) {
+        self.message = message
+        self.state = state
+    }
+    
     func build() -> ScheduleView {
-        let viewModel = ScheduleViewModel(state: .active)
+        let viewModel = ScheduleViewModel(state: state, message: message)
         let presenter = SchedulePresenter(viewModel: viewModel)
-        let view = ScheduleView(presenter: presenter)
+        let view = ScheduleView(viewModel: viewModel, presenter: presenter)
         
         return view
     }

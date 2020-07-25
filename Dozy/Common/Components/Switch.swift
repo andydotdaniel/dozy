@@ -8,34 +8,46 @@
 
 import SwiftUI
 
+protocol SwitchViewDelegate: class {
+    func onSwitchPositionChanged(position: Switch.Position)
+}
+
 struct Switch: View {
     
-    enum State {
+    enum Position {
         case on
         case off
     }
+
+    @State var position: Position = .off
+    private weak var delegate: SwitchViewDelegate?
     
-    @Binding var state: State
+    init(position: Position, delegate: SwitchViewDelegate?) {
+        self.position = position
+        self.delegate = delegate
+    }
     
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 22)
-                .foregroundColor(Color.primaryBlue)
+                .foregroundColor(position == .on ? Color.primaryBlue : Color.alertRed)
                 .frame(width: 75, height: 44)
-                .offset(x: state == .on ? -38 : 36)
+                .offset(x: position == .on ? -38 : 36)
                 .animation(.easeOut(duration: 0.25))
             HStack(alignment: .center, spacing: 44) {
                 Text("On".uppercased())
                     .bold()
-                    .foregroundColor(.secondaryGray)
+                    .foregroundColor(position == .on ? .white : .secondaryGray)
                     .onTapGesture {
-                        self.state = .on
+                        self.position = .on
+                        self.delegate?.onSwitchPositionChanged(position: self.position)
                     }
                 Text("Off".uppercased())
                     .bold()
-                    .foregroundColor(.secondaryGray)
+                    .foregroundColor(position == .off ? .white : .secondaryGray)
                     .onTapGesture {
-                        self.state = .off
+                        self.position = .off
+                        self.delegate?.onSwitchPositionChanged(position: self.position)
                     }
             }
             .font(.system(size: 18))
@@ -50,6 +62,6 @@ struct Switch: View {
 
 struct Switch_Previews: PreviewProvider {
     static var previews: some View {
-        Switch(state: .constant(.on))
+        Switch(position: .on, delegate: nil)
     }
 }

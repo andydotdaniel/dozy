@@ -10,19 +10,8 @@ import SwiftUI
 
 struct ScheduleView: View {
     
-    @State var presenter: ScheduleViewPresenter
-    
-    private var contentCardBodyText: Text {
-        let bodyText: Text = Text("Open the app in ")
-            .foregroundColor(Color.white) +
-        Text("07:18:36")
-            .foregroundColor(Color.white)
-            .bold() +
-        Text(" or your sleepyhead message gets sent.")
-            .foregroundColor(Color.white)
-        
-        return bodyText
-    }
+    @ObservedObject var viewModel: ScheduleViewModel
+    var presenter: ScheduleViewPresenter
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -35,21 +24,23 @@ struct ScheduleView: View {
             VStack(spacing: 24) {
                 Image("LogoGray")
                     .frame(width: 58)
-                ContentCard(state: self.$presenter.viewModel.contentCardState, titleText: "8:50am", subtitleText: "May 17", bodyText: contentCardBodyText, buttonText: "Change awake confirmation time")
+                ContentCard(viewModel: $viewModel.contentCard)
                 MessageContentCard(image: nil, bodyText: "Some message here", actionButton: (titleText: "Edit", tapAction: {}), channel: (isPublic: true, text: "general"))
                 Spacer()
             }
             .padding(.top, 12)
             .padding(.horizontal, 24)
-            Switch(state: self.$presenter.viewModel.switchState)
+            Switch(position: viewModel.state == .active ? .on : .off, delegate: self.presenter)
         }
     }
 }
 
 struct ScheduleView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = ScheduleViewModel(state: .active)
+        let channel = Channel(id: "SOME_ID", isPublic: true, text: "general")
+        let message = Message(image: nil, bodyText: "Some body text", channel: channel, awakeConfirmationTime: Date())
+        let viewModel = ScheduleViewModel(state: .active, message: message)
         let presenter = SchedulePresenter(viewModel: viewModel)
-        return ScheduleView(presenter: presenter)
+        return ScheduleView(viewModel: viewModel, presenter: presenter)
     }
 }

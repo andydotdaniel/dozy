@@ -19,6 +19,7 @@ extension Color {
     
     static let charcoal = Color(red: 55/255, green: 55/255, blue: 55/255)
     static let alertRed = Color(red: 239/255, green: 93/255, blue: 93/255)
+    static let darkRed = Color(red: 214/255, green: 86/255, blue: 86/255)
     
 }
 

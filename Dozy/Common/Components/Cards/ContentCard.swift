@@ -10,35 +10,51 @@ import SwiftUI
 
 struct ContentCard: View {
     
-    enum State {
-        case disabled
-        case enabled
+    class ViewModel: ObservableObject {
+        
+        enum State {
+            case disabled
+            case enabled
+        }
+        
+        var state: State
+        let titleText: String
+        let subtitleText: String
+        var bodyText: Text
+        let buttonText: String
+        
+        init(state: State, titleText: String, subtitleText: String, bodyText: Text, buttonText: String) {
+            self.state = state
+            self.titleText = titleText
+            self.subtitleText = subtitleText
+            self.bodyText = bodyText
+            self.buttonText = buttonText
+        }
+        
     }
     
-    @Binding var state: State
-    
-    let titleText: String
-    let subtitleText: String
-    let bodyText: Text
-    let buttonText: String
+    @Binding var viewModel: ViewModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
             HStack(alignment: .center) {
-                Text(titleText)
+                Text(viewModel.titleText)
                     .fontWeight(.bold)
                     .font(.system(size: 21))
                     .foregroundColor(Color.white)
                 Spacer()
-                Text(subtitleText)
+                Text(viewModel.subtitleText)
                     .foregroundColor(Color.white)
             }
-            bodyText
-            SecondaryButton(titleText: buttonText, tapAction: {}, color: Color.darkBlue)
+            viewModel.bodyText
+            SecondaryButton(
+                titleText: viewModel.buttonText, tapAction: {},
+                color: viewModel.state == .enabled ? Color.darkBlue : Color.darkRed
+            )
         }
         .padding(.horizontal, 24)
         .padding(.vertical, 28)
-        .background(state == .enabled ? Color.primaryBlue: Color.red)
+        .background(viewModel.state == .enabled ? Color.primaryBlue: Color.alertRed)
         .cornerRadius(18)
     }
 }
@@ -53,12 +69,14 @@ struct ContentCard_Previews: PreviewProvider {
         Text(" or your sleepyhead message gets sent.")
             .foregroundColor(Color.white)
         
-        return ContentCard(
-            state: .constant(.enabled),
+        let viewModel = ContentCard.ViewModel(
+            state: .enabled,
             titleText: "8:10am",
             subtitleText: "May 17",
             bodyText: bodyText,
             buttonText: "Change awake confirmation time"
         )
+        
+        return ContentCard(viewModel: .constant(viewModel))
     }
 }
