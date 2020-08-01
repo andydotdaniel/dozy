@@ -12,6 +12,8 @@ import SwiftUI
 
 struct OnboardingView: View {
     
+    @State private var isShowingMessageForm: Bool = false
+    
     var body: some View {
         VStack {
             Image("LogoGray")
@@ -31,7 +33,11 @@ struct OnboardingView: View {
                 }
                 .padding(.horizontal, 16)
                 .multilineTextAlignment(.center)
-                PrimaryButton(titleText: "Create message", tapAction: {})
+                PrimaryButton(titleText: "Create message", tapAction: {
+                    self.isShowingMessageForm = true
+                }).sheet(isPresented: self.$isShowingMessageForm, content: {
+                    MessageFormViewBuilder(hasMessage: false).build()
+                })
             }
             Spacer()
         }
