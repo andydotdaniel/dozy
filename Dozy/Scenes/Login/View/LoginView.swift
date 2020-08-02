@@ -16,7 +16,7 @@ struct LoginView: View {
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottom) {
-                NavigationLink(destination: OnboardingView(), tag: .onboarding, selection: self.$viewModel.navigationSelection) { EmptyView() }
+                NavigationLink(destination: OnboardingViewBuilder().build(), tag: .onboarding, selection: self.$viewModel.navigationSelection) { EmptyView() }
                 VStack(alignment: .center, spacing: 24) {
                     VStack {
                         LoginHeaderView()

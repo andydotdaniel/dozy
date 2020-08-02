@@ -40,7 +40,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return AnyView(builder.build())
         }
         
-        return AnyView(OnboardingView())
+        return AnyView(OnboardingViewBuilder().build())
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

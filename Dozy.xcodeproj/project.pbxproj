@@ -39,6 +39,9 @@
 		105A182B24BB5A25003177AA /* Channels.json in Resources */ = {isa = PBXBuildFile; fileRef = 105A182A24BB5A25003177AA /* Channels.json */; };
 		105A182E24BB5C25003177AA /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105A182D24BB5C25003177AA /* JSONLoader.swift */; };
 		105BDB0124D68B72005C9CD7 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105BDB0024D68B72005C9CD7 /* Schedule.swift */; };
+		105BDB0424D692F0005C9CD7 /* OnboardingViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105BDB0324D692F0005C9CD7 /* OnboardingViewBuilder.swift */; };
+		105BDB0624D692FD005C9CD7 /* OnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105BDB0524D692FD005C9CD7 /* OnboardingPresenter.swift */; };
+		105BDB0824D6DF8B005C9CD7 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105BDB0724D6DF8B005C9CD7 /* OnboardingViewModel.swift */; };
 		106C5A7724C4528E00B8BA9C /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106C5A7624C4528E00B8BA9C /* Channel.swift */; };
 		106C5A7924C453F600B8BA9C /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106C5A7824C453F600B8BA9C /* Message.swift */; };
 		10774A1D24BB5FFF00D3CD9F /* TestBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10774A1C24BB5FFF00D3CD9F /* TestBundle.swift */; };
@@ -116,6 +119,9 @@
 		105A182A24BB5A25003177AA /* Channels.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Channels.json; sourceTree = "<group>"; };
 		105A182D24BB5C25003177AA /* JSONLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLoader.swift; sourceTree = "<group>"; };
 		105BDB0024D68B72005C9CD7 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		105BDB0324D692F0005C9CD7 /* OnboardingViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewBuilder.swift; sourceTree = "<group>"; };
+		105BDB0524D692FD005C9CD7 /* OnboardingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenter.swift; sourceTree = "<group>"; };
+		105BDB0724D6DF8B005C9CD7 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		106C5A7624C4528E00B8BA9C /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		106C5A7824C453F600B8BA9C /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		10774A1C24BB5FFF00D3CD9F /* TestBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestBundle.swift; sourceTree = "<group>"; };
@@ -296,7 +302,7 @@
 				1032649F24C4487C00863603 /* Schedule */,
 				104BE37024B0F03200E02AAD /* MessageForm */,
 				10381137249667D200DC5CEC /* Login */,
-				1081AE3024A0E84C00AD6655 /* OnboardingView.swift */,
+				105BDB0224D692D7005C9CD7 /* Onboarding */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -336,6 +342,17 @@
 				10774A1C24BB5FFF00D3CD9F /* TestBundle.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		105BDB0224D692D7005C9CD7 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				1081AE3024A0E84C00AD6655 /* OnboardingView.swift */,
+				105BDB0324D692F0005C9CD7 /* OnboardingViewBuilder.swift */,
+				105BDB0524D692FD005C9CD7 /* OnboardingPresenter.swift */,
+				105BDB0724D6DF8B005C9CD7 /* OnboardingViewModel.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		106C5A7424C4524500B8BA9C /* Common */ = {
@@ -547,6 +564,7 @@
 				104BE37524B0F26A00E02AAD /* ChannelView.swift in Sources */,
 				103264A124C4488C00863603 /* ScheduleViewModel.swift in Sources */,
 				1051E4A824BAF9B300566C5B /* ImagePickerView.swift in Sources */,
+				105BDB0824D6DF8B005C9CD7 /* OnboardingViewModel.swift in Sources */,
 				1035D075249604CE006B22FC /* LoginHeaderView.swift in Sources */,
 				102102AB249F2F0F00084C91 /* URLSession.swift in Sources */,
 				10F422222497C2050078AC3C /* NetworkRequest.swift in Sources */,
@@ -557,6 +575,7 @@
 				104856D724A0EC520072D00F /* PrimaryButton.swift in Sources */,
 				1032649E24C41F8000863603 /* ScheduleView.swift in Sources */,
 				101581602495F8C600AA0B37 /* SceneDelegate.swift in Sources */,
+				105BDB0624D692FD005C9CD7 /* OnboardingPresenter.swift in Sources */,
 				109704C0249675E90012EA76 /* Configuration.swift in Sources */,
 				103264A324C448EB00863603 /* ScheduleViewPresenter.swift in Sources */,
 				106C5A7924C453F600B8BA9C /* Message.swift in Sources */,
@@ -581,6 +600,7 @@
 				1035D07D24963F1F006B22FC /* AlternativeButton.swift in Sources */,
 				1035D078249605D7006B22FC /* Color.swift in Sources */,
 				104BCC2024AB991200C35BDC /* DispatchQueue.swift in Sources */,
+				105BDB0424D692F0005C9CD7 /* OnboardingViewBuilder.swift in Sources */,
 				1051E4AA24BB184B00566C5B /* ImageButton.swift in Sources */,
 				104BE37224B0F04400E02AAD /* MessageFormPresenter.swift in Sources */,
 				10C4D43324D544E200CC1123 /* UserDefaults.swift in Sources */,

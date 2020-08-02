@@ -21,7 +21,7 @@ class MessageFormPresenter: MessageFormViewPresenter {
     @ObservedObject private var viewModel: MesssageFormViewModel
     private let networkService: NetworkRequesting
     private let keychain: SecureStorable
-    private let userDefaults: MessageUserDefaultable
+    private weak var delegate: MessageFormDelegate?
     
     private var channelItems: [Channel] = []
     private var channelNameTextFieldSubscriber: AnyCancellable?
@@ -32,13 +32,13 @@ class MessageFormPresenter: MessageFormViewPresenter {
     init(viewModel: MesssageFormViewModel,
          networkService: NetworkRequesting,
          keychain: SecureStorable = Keychain(),
-         userDefaults: MessageUserDefaultable = UserDefaults.standard,
+         delegate: MessageFormDelegate?,
          hasMessage: Bool
     ) {
         self.viewModel = viewModel
         self.networkService = networkService
         self.keychain = keychain
-        self.userDefaults = userDefaults
+        self.delegate = delegate
         self.hasMessage = hasMessage
         
         guard let accessTokenData = keychain.load(key: "slack_access_token") else { return }
@@ -122,8 +122,8 @@ class MessageFormPresenter: MessageFormViewPresenter {
             bodyText: self.viewModel.bodyText,
             channel: channel
         )
-
-        userDefaults.saveMessage(message)
+        
+        delegate?.onMessageSaved(message)
     }
     
     private func editMessage() {

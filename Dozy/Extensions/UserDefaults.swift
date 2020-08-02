@@ -8,31 +8,23 @@
 
 import Foundation
 
-private let messageUserDefaultsKey = "message_user_defaults"
+private let scheduleUserDefaultsKey = "schedule_user_defaults"
 
-private struct CodableMessage: Codable {
+protocol ScheduleUserDefaultable {
+    func saveSchedule(_ schedule: Schedule)
+    func loadSchedule() -> Schedule?
+}
+
+extension UserDefaults: ScheduleUserDefaultable {
     
-    let image: Data?
-    let bodyText: String?
-    let channel: Channel
-    
-    init(from message: Message) {
-        self.image = message.image?.pngData()
-        self.bodyText = message.bodyText
-        self.channel = message.channel
+    func saveSchedule(_ schedule: Schedule) {
+        self.set(try? PropertyListEncoder().encode(schedule), forKey: scheduleUserDefaultsKey)
     }
     
-}
-
-protocol MessageUserDefaultable {
-    func saveMessage(_ message: Message)
-}
-
-extension UserDefaults: MessageUserDefaultable {
-    
-    func saveMessage(_ message: Message) {
-        let codableMessage = CodableMessage(from: message)
-        self.set(try? PropertyListEncoder().encode(codableMessage), forKey: messageUserDefaultsKey)
+    func loadSchedule() -> Schedule? {
+        guard let scheduleData = self.object(forKey: scheduleUserDefaultsKey) as? Data else { return nil }
+        
+        return try? PropertyListDecoder().decode(Schedule.self, from: scheduleData)
     }
     
 }
