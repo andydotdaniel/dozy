@@ -116,13 +116,11 @@ class MessageFormPresenter: MessageFormViewPresenter {
     
     private func createNewMessage() {
         guard let channel = self.selectedChannel else { return }
-        let now = Date()
         
         let message = Message(
             image: self.viewModel.selectedImage,
             bodyText: self.viewModel.bodyText,
-            channel: channel,
-            awakeConfirmationTime: now
+            channel: channel
         )
 
         userDefaults.saveMessage(message)

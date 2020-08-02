@@ -38,6 +38,7 @@
 		105A182724BB575D003177AA /* MessageFormTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105A182624BB575D003177AA /* MessageFormTests.swift */; };
 		105A182B24BB5A25003177AA /* Channels.json in Resources */ = {isa = PBXBuildFile; fileRef = 105A182A24BB5A25003177AA /* Channels.json */; };
 		105A182E24BB5C25003177AA /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105A182D24BB5C25003177AA /* JSONLoader.swift */; };
+		105BDB0124D68B72005C9CD7 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105BDB0024D68B72005C9CD7 /* Schedule.swift */; };
 		106C5A7724C4528E00B8BA9C /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106C5A7624C4528E00B8BA9C /* Channel.swift */; };
 		106C5A7924C453F600B8BA9C /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106C5A7824C453F600B8BA9C /* Message.swift */; };
 		10774A1D24BB5FFF00D3CD9F /* TestBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10774A1C24BB5FFF00D3CD9F /* TestBundle.swift */; };
@@ -114,6 +115,7 @@
 		105A182624BB575D003177AA /* MessageFormTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormTests.swift; sourceTree = "<group>"; };
 		105A182A24BB5A25003177AA /* Channels.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Channels.json; sourceTree = "<group>"; };
 		105A182D24BB5C25003177AA /* JSONLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLoader.swift; sourceTree = "<group>"; };
+		105BDB0024D68B72005C9CD7 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		106C5A7624C4528E00B8BA9C /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		106C5A7824C453F600B8BA9C /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		10774A1C24BB5FFF00D3CD9F /* TestBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestBundle.swift; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 			children = (
 				106C5A7624C4528E00B8BA9C /* Channel.swift */,
 				106C5A7824C453F600B8BA9C /* Message.swift */,
+				105BDB0024D68B72005C9CD7 /* Schedule.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -583,6 +586,7 @@
 				10C4D43324D544E200CC1123 /* UserDefaults.swift in Sources */,
 				10F422242497E9B20078AC3C /* Spinner.swift in Sources */,
 				108B4E0F24C2ECA4000F1C4B /* MessageContentCard.swift in Sources */,
+				105BDB0124D68B72005C9CD7 /* Schedule.swift in Sources */,
 				1032649C24C32A9900863603 /* Switch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

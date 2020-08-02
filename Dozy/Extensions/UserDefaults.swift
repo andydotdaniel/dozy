@@ -15,13 +15,11 @@ private struct CodableMessage: Codable {
     let image: Data?
     let bodyText: String?
     let channel: Channel
-    let awakeConfirmationTime: Date
     
     init(from message: Message) {
         self.image = message.image?.pngData()
         self.bodyText = message.bodyText
         self.channel = message.channel
-        self.awakeConfirmationTime = message.awakeConfirmationTime
     }
     
 }

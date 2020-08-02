@@ -38,8 +38,9 @@ struct ScheduleView: View {
 struct ScheduleView_Previews: PreviewProvider {
     static var previews: some View {
         let channel = Channel(id: "SOME_ID", isPublic: true, text: "general")
-        let message = Message(image: nil, bodyText: "Some body text", channel: channel, awakeConfirmationTime: Date())
-        let viewModel = ScheduleViewModel(state: .active, message: message)
+        let message = Message(image: nil, bodyText: "Some body text", channel: channel)
+        let schedule = Schedule(message: message, awakeConfirmationTime: Date())
+        let viewModel = ScheduleViewModel(state: .active, schedule: schedule)
         let presenter = SchedulePresenter(viewModel: viewModel)
         return ScheduleView(viewModel: viewModel, presenter: presenter)
     }
