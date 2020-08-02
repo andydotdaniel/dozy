@@ -118,7 +118,7 @@ class MessageFormPresenter: MessageFormViewPresenter {
         guard let channel = self.selectedChannel else { return }
         
         let message = Message(
-            image: self.viewModel.selectedImage,
+            image: self.viewModel.selectedImage?.pngData(),
             bodyText: self.viewModel.bodyText,
             channel: channel
         )

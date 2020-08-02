@@ -8,8 +8,8 @@
 
 import UIKit
 
-struct Message {
-    let image: UIImage?
+struct Message: Codable {
+    let image: Data?
     let bodyText: String?
     let channel: Channel
 }

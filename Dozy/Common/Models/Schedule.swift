@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Schedule {
+struct Schedule: Codable {
     let message: Message
     let awakeConfirmationTime: Date
 }
