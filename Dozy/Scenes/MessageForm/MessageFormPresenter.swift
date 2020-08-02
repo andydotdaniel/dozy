@@ -13,6 +13,7 @@ import SwiftUI
 protocol MessageFormViewPresenter {
     func didTapChannelDropdown()
     func didTapChannelItem(id: String)
+    func didTapSave()
 }
 
 class MessageFormPresenter: MessageFormViewPresenter {
@@ -20,17 +21,25 @@ class MessageFormPresenter: MessageFormViewPresenter {
     @ObservedObject private var viewModel: MesssageFormViewModel
     private let networkService: NetworkRequesting
     private let keychain: SecureStorable
+    private let userDefaults: MessageUserDefaultable
     
     private var channelItems: [Channel] = []
     private var channelNameTextFieldSubscriber: AnyCancellable?
+    private var selectedChannel: Channel?
+    
+    private let hasMessage: Bool
     
     init(viewModel: MesssageFormViewModel,
          networkService: NetworkRequesting,
-         keychain: SecureStorable = Keychain()
+         keychain: SecureStorable = Keychain(),
+         userDefaults: MessageUserDefaultable = UserDefaults.standard,
+         hasMessage: Bool
     ) {
         self.viewModel = viewModel
         self.networkService = networkService
         self.keychain = keychain
+        self.userDefaults = userDefaults
+        self.hasMessage = hasMessage
         
         guard let accessTokenData = keychain.load(key: "slack_access_token") else { return }
         let accessToken = String(decoding: accessTokenData, as: UTF8.self)
@@ -79,8 +88,9 @@ class MessageFormPresenter: MessageFormViewPresenter {
     
     func didTapChannelItem(id: String) {
         viewModel.isShowingChannelDropdown = false
-        if let channelName = viewModel.filteredChannelItems.first(where: { $0.id == id })?.text {
-            viewModel.channelNameTextFieldText = channelName
+        if let channel = viewModel.filteredChannelItems.first(where: { $0.id == id }) {
+            viewModel.channelNameTextFieldText = channel.text
+            selectedChannel = channel
         }
     }
     
@@ -94,6 +104,32 @@ class MessageFormPresenter: MessageFormViewPresenter {
         viewModel.filteredChannelItems = channelItems.filter { channelItem in
             channelItem.text.lowercased().contains(lowercasedText)
         }
+    }
+    
+    func didTapSave() {
+        if !hasMessage {
+            createNewMessage()
+        } else {
+            editMessage()
+        }
+    }
+    
+    private func createNewMessage() {
+        guard let channel = self.selectedChannel else { return }
+        let now = Date()
+        
+        let message = Message(
+            image: self.viewModel.selectedImage,
+            bodyText: self.viewModel.bodyText,
+            channel: channel,
+            awakeConfirmationTime: now
+        )
+
+        userDefaults.saveMessage(message)
+    }
+    
+    private func editMessage() {
+        
     }
     
 }

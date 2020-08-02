@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Channel: Identifiable {
+struct Channel: Identifiable, Codable {
     var id: String
     let isPublic: Bool
     let text: String

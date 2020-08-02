@@ -19,7 +19,7 @@ struct MessageFormViewBuilder: ViewBuilder {
     func build() -> MessageFormView {
         let navigationBarTitle = hasMessage ? "Edit message" : "Add message"
         let viewModel = MesssageFormViewModel(navigationBarTitle: navigationBarTitle)
-        let presenter = MessageFormPresenter(viewModel: viewModel, networkService: NetworkService())
+        let presenter = MessageFormPresenter(viewModel: viewModel, networkService: NetworkService(), hasMessage: hasMessage)
         let view = MessageFormView(viewModel: viewModel, presenter: presenter)
         
         return view

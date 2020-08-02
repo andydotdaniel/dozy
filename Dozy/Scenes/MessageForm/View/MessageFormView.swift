@@ -42,7 +42,7 @@ struct MessageFormView: View {
                     .offset(y: -24)
                 } else {
                     VStack(alignment: .leading, spacing: 16) {
-                        MultilineTextField(placeholderText: "Compose message")
+                        MultilineTextField(placeholderText: "Compose message", text: $viewModel.bodyText)
                         ImagePickerButton(selectedImage: $viewModel.selectedImage)
                             .offset(y: -self.viewModel.keyboardHeight)
                             .animation(.easeOut)
@@ -62,7 +62,9 @@ struct MessageFormView: View {
             .padding(.top, 30)
             .navigationBarTitle(Text(viewModel.navigationBarTitle), displayMode: .inline)
             .navigationBarItems(
-                trailing: Button("Save") {}
+                trailing: Button("Save") {
+                    self.presenter.didTapSave()
+                }
             )
         }
     }
@@ -72,7 +74,7 @@ struct MessageFormView_Previews: PreviewProvider {
     
     static var previews: some View {
         let viewModel = MesssageFormViewModel(navigationBarTitle: "Add Message")
-        let presenter = MessageFormPresenter(viewModel: viewModel, networkService: NetworkService())
+        let presenter = MessageFormPresenter(viewModel: viewModel, networkService: NetworkService(), hasMessage: true)
         return MessageFormView(viewModel: viewModel, presenter: presenter)
     }
 }

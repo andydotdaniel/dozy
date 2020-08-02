@@ -25,6 +25,8 @@ class MesssageFormViewModel: ObservableObject {
     @Published var isShowingChannelDropdown: Bool
     @Published var filteredChannelItems: [Channel]
     
+    @Published var bodyText: String?
+    
     @Published var isShowingImagePicker: Bool
     @Published var selectedImage: UIImage?
     

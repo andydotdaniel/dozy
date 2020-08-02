@@ -11,17 +11,25 @@ import SwiftUI
 
 final class MultilineTextField: NSObject, UIViewRepresentable {
 
-    let placeholderText: String?
+    private let placeholderText: String?
+    @Binding var text: String?
     
-    init(placeholderText: String? = nil) {
+    init(placeholderText: String? = nil, text: Binding<String?>) {
         self.placeholderText = placeholderText
+        self._text = text
+        
+        super.init()
+        
+        if text.wrappedValue == nil && placeholderText != nil {
+            self.text = placeholderText
+        }
     }
     
     func makeUIView(context: Context) -> UITextView {
         let textView = UITextView(frame: .zero)
         textView.font = UIFont.systemFont(ofSize: 16)
         
-        textView.text = placeholderText
+        textView.text = self.text
         textView.textColor = UIColor.placeholderGray
         textView.delegate = self
         textView.contentInset = .zero
@@ -29,7 +37,9 @@ final class MultilineTextField: NSObject, UIViewRepresentable {
         return textView
     }
     
-    func updateUIView(_ uiView: UITextView, context: Context) {}
+    func updateUIView(_ uiView: UITextView, context: Context) {
+        uiView.delegate = self
+    }
     
 }
 
@@ -47,6 +57,10 @@ extension MultilineTextField: UITextViewDelegate {
             textView.text = placeholderText
             textView.textColor = UIColor.placeholderGray
         }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        self.text = textView.text
     }
     
 }
