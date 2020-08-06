@@ -22,10 +22,10 @@ class OnboardingPresenter: OnboardingViewPresenter {
     }
     
     func onMessageSaved(_ message: Message) {
-        let schedule = Schedule(message: message, awakeConfirmationTime: Date())
+        let schedule = Schedule(message: message, awakeConfirmationTime: Date(), isActive: false)
         userDefaults.saveSchedule(schedule)
         
-        self.viewModel.messageCreatedNavigationDestination = ScheduleViewBuilder(schedule: schedule, state: .inactive).build()
+        self.viewModel.messageCreatedNavigationDestination = ScheduleViewBuilder(schedule: schedule).build()
         self.viewModel.shouldNavigateToSchedule = true
         self.viewModel.isShowingMessageForm = false
     }

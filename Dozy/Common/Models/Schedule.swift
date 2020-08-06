@@ -11,6 +11,7 @@ import Foundation
 struct Schedule: Codable {
     let message: Message
     let awakeConfirmationTime: Date
+    let isActive: Bool
 }
 
 extension Schedule {

@@ -11,15 +11,13 @@ import Foundation
 struct ScheduleViewBuilder: ViewBuilder {
     
     private let schedule: Schedule
-    private let state: ScheduleViewModel.State
     
-    init(schedule: Schedule, state: ScheduleViewModel.State) {
+    init(schedule: Schedule) {
         self.schedule = schedule
-        self.state = state
     }
     
     func build() -> ScheduleView {
-        let viewModel = ScheduleViewModel(state: state, schedule: schedule)
+        let viewModel = ScheduleViewModel(schedule: schedule)
         let presenter = SchedulePresenter(viewModel: viewModel)
         let view = ScheduleView(viewModel: viewModel, presenter: presenter)
         

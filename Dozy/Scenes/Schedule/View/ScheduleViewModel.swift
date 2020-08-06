@@ -22,12 +22,12 @@ class ScheduleViewModel: ObservableObject {
     }
     @Published var contentCard: ContentCard.ViewModel
     
-    init(state: State, schedule: Schedule) {
-        self.state = state
-        self.contentCard = ScheduleViewModel.createContentCardViewModel(from: schedule, with: state)
+    init(schedule: Schedule) {
+        self.state = schedule.isActive ? .active : .inactive
+        self.contentCard = ScheduleViewModel.createContentCardViewModel(from: schedule)
     }
     
-    private static func createContentCardViewModel(from schedule: Schedule, with state: State) -> ContentCard.ViewModel {
+    private static func createContentCardViewModel(from schedule: Schedule) -> ContentCard.ViewModel {
         let bodyText: Text = Text("Open the app in ")
             .foregroundColor(Color.white) +
         Text("07:18:36")
@@ -37,7 +37,7 @@ class ScheduleViewModel: ObservableObject {
             .foregroundColor(Color.white)
         
         return ContentCard.ViewModel(
-            state: state == .active ? .enabled : .disabled,
+            state: schedule.isActive ? .enabled : .disabled,
             titleText: schedule.awakeConfirmationDateText,
             subtitleText: schedule.awakeConfirmationTimeText,
             bodyText: bodyText,
