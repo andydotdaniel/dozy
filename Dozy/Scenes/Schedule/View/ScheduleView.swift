@@ -16,7 +16,7 @@ struct ScheduleView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             Ellipse()
-                .foregroundColor(Color.primaryBlue)
+                .foregroundColor(viewModel.state == .active ? Color.primaryBlue : Color.alertRed)
                 .frame(height: UIScreen.main.bounds.height / 2)
                 .scaleEffect(1.1)
                 .scaleEffect(2, anchor: .top)
