@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Create the SwiftUI view that provides the window contents.
-        let rootView = getRootView()
+        let rootView = RootViewBuilder().build()
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
@@ -31,16 +31,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             Current.window = self.window
         }
-    }
-    
-    private func getRootView() -> AnyView {
-        let keychain = Keychain()
-        if keychain.load(key: "slack_access_token") == nil {
-            let builder = LoginViewBuilder()
-            return AnyView(builder.build())
-        }
-        
-        return AnyView(OnboardingViewBuilder().build())
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
