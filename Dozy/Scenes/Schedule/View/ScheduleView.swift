@@ -24,8 +24,8 @@ struct ScheduleView: View {
             VStack(spacing: 24) {
                 Image("LogoGray")
                     .frame(width: 58)
-                ContentCard(viewModel: $viewModel.contentCard)
-                MessageContentCard(image: nil, bodyText: "Some message here", actionButton: (titleText: "Edit", tapAction: {}), channel: (isPublic: true, text: "general"))
+                ContentCard(viewModel: $viewModel.awakeConfirmationCard)
+                MessageContentCard(viewModel: $viewModel.messageCard)
                 Spacer()
             }
             .padding(.top, 12)

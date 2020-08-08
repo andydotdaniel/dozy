@@ -17,17 +17,15 @@ class ScheduleViewModel: ObservableObject {
     
     @Published var state: State {
         didSet {
-            self.contentCard.state = (state == .active) ? .enabled : .disabled
+            self.awakeConfirmationCard.state = (state == .active) ? .enabled : .disabled
         }
     }
-    @Published var contentCard: ContentCard.ViewModel
+    @Published var awakeConfirmationCard: ContentCard.ViewModel
+    @Published var messageCard: MessageContentCard.ViewModel
     
     init(schedule: Schedule) {
         self.state = schedule.isActive ? .active : .inactive
-        self.contentCard = ScheduleViewModel.createContentCardViewModel(from: schedule)
-    }
-    
-    private static func createContentCardViewModel(from schedule: Schedule) -> ContentCard.ViewModel {
+         
         let bodyText: Text = Text("Open the app in ")
             .foregroundColor(Color.white) +
         Text("07:18:36")
@@ -36,12 +34,21 @@ class ScheduleViewModel: ObservableObject {
         Text(" or your sleepyhead message gets sent.")
             .foregroundColor(Color.white)
         
-        return ContentCard.ViewModel(
+        self.awakeConfirmationCard = ContentCard.ViewModel(
             state: schedule.isActive ? .enabled : .disabled,
             titleText: schedule.awakeConfirmationDateText,
             subtitleText: schedule.awakeConfirmationTimeText,
             bodyText: bodyText,
             buttonText: "Change awake confirmation time"
+        )
+        
+        let messageImage = schedule.message.image.map { UIImage(data: $0) } ?? nil
+        let channel = schedule.message.channel
+        self.messageCard = MessageContentCard.ViewModel(
+            image: messageImage,
+            bodyText: schedule.message.bodyText,
+            actionButton: (titleText: "Edit", tapAction: {}),
+            channel: (isPublic: channel.isPublic, text: channel.text)
         )
     }
     
