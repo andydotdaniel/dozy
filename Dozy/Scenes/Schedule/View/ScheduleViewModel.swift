@@ -21,7 +21,16 @@ class ScheduleViewModel: ObservableObject {
         }
     }
     @Published var awakeConfirmationCard: ContentCard.ViewModel
-    @Published var messageCard: MessageContentCard.ViewModel
+    
+    struct MessageCardViewModel {
+        let image: UIImage?
+        let bodyText: String?
+        let channel: (isPublic: Bool, text: String)
+        let actionButtonTitle: String
+    }
+    @Published var messageCard: MessageCardViewModel
+    
+    @Published var isShowingMessageForm: Bool = false
     
     init(schedule: Schedule) {
         self.state = schedule.isActive ? .active : .inactive
@@ -44,11 +53,11 @@ class ScheduleViewModel: ObservableObject {
         
         let messageImage = schedule.message.image.map { UIImage(data: $0) } ?? nil
         let channel = schedule.message.channel
-        self.messageCard = MessageContentCard.ViewModel(
+        self.messageCard = MessageCardViewModel(
             image: messageImage,
             bodyText: schedule.message.bodyText,
-            actionButton: (titleText: "Edit", tapAction: {}),
-            channel: (isPublic: channel.isPublic, text: channel.text)
+            channel: (isPublic: channel.isPublic, text: channel.text),
+            actionButtonTitle: "Edit"
         )
     }
     

@@ -10,34 +10,31 @@ import SwiftUI
 
 struct MessageContentCard: View {
     
-    struct ViewModel {
-        let image: UIImage?
-        let bodyText: String?
-        let actionButton: (titleText: String, tapAction: () -> Void)
-        let channel: (isPublic: Bool, text: String)
-    }
-    
-    @Binding var viewModel: ViewModel
+    let image: UIImage?
+    let bodyText: String?
+    let channel: (isPublic: Bool, text: String)
+    let actionButtonTitle: String
+    let actionButtonTap: () -> Void
     
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
-            viewModel.image.map {
+            image.map {
                 Image(uiImage: $0)
                     .resizable()
                     .scaledToFit()
             }
-            viewModel.bodyText.map {
+            bodyText.map {
                 Text($0)
                     .padding(.horizontal, 16)
-                    .padding(.top, (viewModel.image == nil) ? 24 : 0)
+                    .padding(.top, (image == nil) ? 24 : 0)
             }
             Divider()
                 .foregroundColor(Color.borderGray)
             HStack {
-                ChannelView(isPublic: viewModel.channel.isPublic, text: viewModel.channel.text)
+                ChannelView(isPublic: channel.isPublic, text: channel.text)
                 Spacer()
-                Button(action: viewModel.actionButton.tapAction) {
-                    Text(viewModel.actionButton.titleText)
+                Button(action: actionButtonTap) {
+                    Text(actionButtonTitle)
                     .font(.system(size: 18))
                     .bold()
                     .foregroundColor(Color.primaryBlue)
@@ -54,12 +51,12 @@ struct MessageContentCard: View {
 
 struct MessageContentCard_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = MessageContentCard.ViewModel(
+        return MessageContentCard(
             image: UIImage(named: "FunnyPhoto"),
             bodyText: "Lorem ipsum dolor sit amet, consecte adipiscing elit.",
-            actionButton: (titleText: "Edit", tapAction: {}),
-            channel: (isPublic: true, text: "general")
+            channel: (isPublic: true, text: "general"),
+            actionButtonTitle: "Edit",
+            actionButtonTap: {}
         )
-        return MessageContentCard(viewModel: .constant(viewModel))
     }
 }

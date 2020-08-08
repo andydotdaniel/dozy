@@ -107,14 +107,6 @@ class MessageFormPresenter: MessageFormViewPresenter {
     }
     
     func didTapSave() {
-        if !hasMessage {
-            createNewMessage()
-        } else {
-            editMessage()
-        }
-    }
-    
-    private func createNewMessage() {
         guard let channel = self.selectedChannel else { return }
         
         let message = Message(
@@ -124,10 +116,6 @@ class MessageFormPresenter: MessageFormViewPresenter {
         )
         
         delegate?.onMessageSaved(message)
-    }
-    
-    private func editMessage() {
-        
     }
     
 }

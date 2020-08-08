@@ -25,13 +25,21 @@ struct ScheduleView: View {
                 Image("LogoGray")
                     .frame(width: 58)
                 ContentCard(viewModel: $viewModel.awakeConfirmationCard)
-                MessageContentCard(viewModel: $viewModel.messageCard)
+                MessageContentCard(
+                    image: viewModel.messageCard.image,
+                    bodyText: viewModel.messageCard.bodyText,
+                    channel: (isPublic: viewModel.messageCard.channel.isPublic, text: viewModel.messageCard.channel.text),
+                    actionButtonTitle: viewModel.messageCard.actionButtonTitle,
+                    actionButtonTap: { self.presenter.onMessageActionButtonTapped() }
+                )
                 Spacer()
             }
             .padding(.top, 12)
             .padding(.horizontal, 24)
             Switch(position: viewModel.state == .active ? .on : .off, delegate: self.presenter)
-        }
+        }.sheet(isPresented: self.$viewModel.isShowingMessageForm, content: {
+            MessageFormViewBuilder(hasMessage: true, delegate: self.presenter).build()
+        })
     }
 }
 
@@ -41,7 +49,7 @@ struct ScheduleView_Previews: PreviewProvider {
         let message = Message(image: nil, bodyText: "Some body text", channel: channel)
         let schedule = Schedule(message: message, awakeConfirmationTime: Date(), isActive: true)
         let viewModel = ScheduleViewModel(schedule: schedule)
-        let presenter = SchedulePresenter(viewModel: viewModel)
+        let presenter = SchedulePresenter(schedule: schedule, viewModel: viewModel)
         return ScheduleView(viewModel: viewModel, presenter: presenter)
     }
 }
