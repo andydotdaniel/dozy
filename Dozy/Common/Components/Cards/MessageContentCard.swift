@@ -21,7 +21,7 @@ struct MessageContentCard: View {
             image.map {
                 Image(uiImage: $0)
                     .resizable()
-                    .scaledToFit()
+                    .scaledToFill()
             }
             bodyText.map {
                 Text($0)

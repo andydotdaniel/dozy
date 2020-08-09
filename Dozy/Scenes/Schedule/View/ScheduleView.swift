@@ -21,21 +21,27 @@ struct ScheduleView: View {
                 .scaleEffect(1.1)
                 .scaleEffect(2, anchor: .top)
                 .offset(y: 40)
-            VStack(spacing: 24) {
+            VStack {
                 Image("LogoGray")
                     .frame(width: 58)
-                ContentCard(viewModel: $viewModel.awakeConfirmationCard)
-                MessageContentCard(
-                    image: viewModel.messageCard.image,
-                    bodyText: viewModel.messageCard.bodyText,
-                    channel: (isPublic: viewModel.messageCard.channel.isPublic, text: viewModel.messageCard.channel.text),
-                    actionButtonTitle: viewModel.messageCard.actionButtonTitle,
-                    actionButtonTap: { self.presenter.onMessageActionButtonTapped() }
-                )
-                Spacer()
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(spacing: 24) {
+                        ContentCard(viewModel: $viewModel.awakeConfirmationCard)
+                        MessageContentCard(
+                            image: viewModel.messageCard.image,
+                            bodyText: viewModel.messageCard.bodyText,
+                            channel: (isPublic: viewModel.messageCard.channel.isPublic, text: viewModel.messageCard.channel.text),
+                            actionButtonTitle: viewModel.messageCard.actionButtonTitle,
+                            actionButtonTap: { self.presenter.onMessageActionButtonTapped() }
+                        )
+                        Spacer()
+                    }
+                    .padding(.horizontal, 24)
+                    .padding(.top, 12)
+                    .padding(.bottom, 48)
+                }
             }
             .padding(.top, 12)
-            .padding(.horizontal, 24)
             Switch(position: viewModel.state == .active ? .on : .off, delegate: self.presenter)
         }.sheet(isPresented: self.$viewModel.isShowingMessageForm, content: {
             MessageFormViewBuilder(hasMessage: true, delegate: self.presenter).build()
