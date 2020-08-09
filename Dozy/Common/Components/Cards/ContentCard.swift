@@ -56,6 +56,7 @@ struct ContentCard: View {
         .padding(.vertical, 28)
         .background(viewModel.state == .enabled ? Color.primaryBlue: Color.alertRed)
         .cornerRadius(18)
+        .shadow(radius: 5)
     }
 }
 
