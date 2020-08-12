@@ -1,5 +1,5 @@
 //
-//  MessageFormTests.swift
+//  MessageFormPresenterTests.swift
 //  DozyTests
 //
 //  Created by Andrew Daniel on 7/12/20.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import Dozy
 
-class MessageFormTests: XCTestCase {
+class MessageFormPresenterTests: XCTestCase {
 
     var presenter: MessageFormPresenter!
     var viewModel: MesssageFormViewModel!

@@ -1,5 +1,5 @@
 //
-//  LoginTests.swift
+//  LoginPresenterTests.swift
 //  DozyTests
 //
 //  Created by Andrew Daniel on 6/14/20.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import Dozy
 
-class LoginTests: XCTestCase {
+class LoginPresenterTests: XCTestCase {
 
     var presenter: LoginPresenter!
     var viewModel: LoginViewModel!
