@@ -34,17 +34,18 @@ class MesssageFormViewModel: ObservableObject {
     private var keyboardListener: KeyboardListener
     private var keyboardListenerSink: AnyCancellable?
     
-    init(navigationBarTitle: String, channelNameTextFieldText: String = "", selectedImage: UIImage? = nil) {
+    init(navigationBarTitle: String, message: Message?) {
         self.navigationBarTitle = navigationBarTitle
-        self.channelNameTextFieldText = channelNameTextFieldText
-        self.channelNameTextFieldColor = Color.placeholderGray
+        self.channelNameTextFieldText = message?.channel.text ?? ""
+        self.channelNameTextFieldColor = message?.channel.text == nil ? Color.placeholderGray : Color.black
+        self.bodyText = message?.bodyText
         self.keyboardHeight = 0
         
         self.isShowingChannelDropdown = false
         self.filteredChannelItems = []
         
         self.isShowingImagePicker = false
-        self.selectedImage = selectedImage
+        self.selectedImage = message?.image.map { UIImage(data: $0) } ?? nil
         
         let keyboardListener = KeyboardListener()
         self.keyboardListener = keyboardListener

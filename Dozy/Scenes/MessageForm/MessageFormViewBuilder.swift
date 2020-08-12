@@ -14,18 +14,18 @@ protocol MessageFormDelegate: class {
 
 struct MessageFormViewBuilder: ViewBuilder {
     
-    private let hasMessage: Bool
+    private let message: Message?
     private weak var delegate: MessageFormDelegate?
     
-    init(hasMessage: Bool, delegate: MessageFormDelegate) {
-        self.hasMessage = hasMessage
+    init(message: Message?, delegate: MessageFormDelegate) {
+        self.message = message
         self.delegate = delegate
     }
     
     func build() -> MessageFormView {
-        let navigationBarTitle = hasMessage ? "Edit message" : "Add message"
-        let viewModel = MesssageFormViewModel(navigationBarTitle: navigationBarTitle)
-        let presenter = MessageFormPresenter(viewModel: viewModel, networkService: NetworkService(), delegate: delegate)
+        let navigationBarTitle = message != nil ? "Edit message" : "Add message"
+        let viewModel = MesssageFormViewModel(navigationBarTitle: navigationBarTitle, message: message)
+        let presenter = MessageFormPresenter(viewModel: viewModel, networkService: NetworkService(), delegate: delegate, channel: message?.channel)
         let view = MessageFormView(viewModel: viewModel, presenter: presenter)
         
         return view

@@ -44,7 +44,7 @@ struct ScheduleView: View {
             .padding(.top, 12)
             Switch(position: viewModel.state == .active ? .on : .off, delegate: self.presenter)
         }.sheet(isPresented: self.$viewModel.isShowingMessageForm, content: {
-            MessageFormViewBuilder(hasMessage: true, delegate: self.presenter).build()
+            self.presenter.navigateToMessageForm()
         })
     }
 }

@@ -46,7 +46,7 @@ struct OnboardingView: View {
                     PrimaryButton(titleText: "Create message", tapAction: {
                         self.viewModel.isShowingMessageForm = true
                     }).sheet(isPresented: self.$viewModel.isShowingMessageForm, content: {
-                        MessageFormViewBuilder(hasMessage: false, delegate: self.presenter).build()
+                        MessageFormViewBuilder(message: nil, delegate: self.presenter).build()
                     })
                 }
                 Spacer()

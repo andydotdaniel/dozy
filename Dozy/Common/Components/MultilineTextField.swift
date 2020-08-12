@@ -30,7 +30,9 @@ final class MultilineTextField: NSObject, UIViewRepresentable {
         textView.font = UIFont.systemFont(ofSize: 16)
         
         textView.text = self.text
-        textView.textColor = UIColor.placeholderGray
+        
+        let isTextEmpty = self.text?.isEmpty ?? true
+        textView.textColor = isTextEmpty ? UIColor.placeholderGray : UIColor.label
         textView.delegate = self
         textView.contentInset = .zero
         

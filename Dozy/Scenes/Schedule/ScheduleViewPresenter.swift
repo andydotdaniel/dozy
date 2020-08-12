@@ -10,6 +10,7 @@ import SwiftUI
 
 protocol ScheduleViewPresenter: SwitchViewDelegate, MessageFormDelegate {
     func onMessageActionButtonTapped()
+    func navigateToMessageForm() -> MessageFormView
 }
 
 class SchedulePresenter: ScheduleViewPresenter {
@@ -54,6 +55,10 @@ class SchedulePresenter: ScheduleViewPresenter {
             channel: (isPublic: message.channel.isPublic, text: message.channel.text),
             actionButtonTitle: self.viewModel.messageCard.actionButtonTitle
         )
+    }
+    
+    func navigateToMessageForm() -> MessageFormView {
+        MessageFormViewBuilder(message: self.schedule.message, delegate: self).build()
     }
     
 }

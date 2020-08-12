@@ -31,12 +31,14 @@ class MessageFormPresenter: MessageFormViewPresenter {
         viewModel: MesssageFormViewModel,
         networkService: NetworkRequesting,
         keychain: SecureStorable = Keychain(),
-        delegate: MessageFormDelegate?
+        delegate: MessageFormDelegate?,
+        channel: Channel?
     ) {
         self.viewModel = viewModel
         self.networkService = networkService
         self.keychain = keychain
         self.delegate = delegate
+        self.selectedChannel = channel
         
         guard let accessTokenData = keychain.load(key: "slack_access_token") else { return }
         let accessToken = String(decoding: accessTokenData, as: UTF8.self)
