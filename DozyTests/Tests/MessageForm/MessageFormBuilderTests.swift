@@ -10,15 +10,17 @@ import XCTest
 @testable import Dozy
 
 class MessageFormBuilderTests: XCTestCase {
-
+    
+    let delegateMock = MessageFormDelegateMock()
+    
     func testAddMessageBuilder() throws {
-        let builder = MessageFormViewBuilder(hasMessage: false)
+        let builder = MessageFormViewBuilder(hasMessage: false, delegate: delegateMock)
         let view = builder.build()
         XCTAssertEqual(view.viewModel.navigationBarTitle, "Add message")
     }
     
     func testEditMessageBuilder() throws {
-        let builder = MessageFormViewBuilder(hasMessage: true)
+        let builder = MessageFormViewBuilder(hasMessage: true, delegate: delegateMock)
         let view = builder.build()
         XCTAssertEqual(view.viewModel.navigationBarTitle, "Edit message")
     }

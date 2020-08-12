@@ -15,6 +15,9 @@
 		101581752495F8CA00AA0B37 /* LoginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101581742495F8CA00AA0B37 /* LoginTests.swift */; };
 		102102A9249F2EF700084C91 /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102102A8249F2EF700084C91 /* URLSessionMock.swift */; };
 		102102AB249F2F0F00084C91 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102102AA249F2F0F00084C91 /* URLSession.swift */; };
+		1025D7B824E448B100118CD4 /* MessageFormDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1025D7B724E448B100118CD4 /* MessageFormDelegateMock.swift */; };
+		1025D7BB24E44A2700118CD4 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1025D7BA24E44A2700118CD4 /* Message.swift */; };
+		1025D7BD24E44A8A00118CD4 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1025D7BC24E44A8A00118CD4 /* Channel.swift */; };
 		1032649C24C32A9900863603 /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1032649B24C32A9900863603 /* Switch.swift */; };
 		1032649E24C41F8000863603 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1032649D24C41F8000863603 /* ScheduleView.swift */; };
 		103264A124C4488C00863603 /* ScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103264A024C4488C00863603 /* ScheduleViewModel.swift */; };
@@ -96,6 +99,9 @@
 		101581762495F8CA00AA0B37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		102102A8249F2EF700084C91 /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
 		102102AA249F2F0F00084C91 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
+		1025D7B724E448B100118CD4 /* MessageFormDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormDelegateMock.swift; sourceTree = "<group>"; };
+		1025D7BA24E44A2700118CD4 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		1025D7BC24E44A8A00118CD4 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		1032649B24C32A9900863603 /* Switch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switch.swift; sourceTree = "<group>"; };
 		1032649D24C41F8000863603 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		103264A024C4488C00863603 /* ScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewModel.swift; sourceTree = "<group>"; };
@@ -222,6 +228,7 @@
 		101581732495F8CA00AA0B37 /* DozyTests */ = {
 			isa = PBXGroup;
 			children = (
+				1025D7B924E44A1F00118CD4 /* Extensions */,
 				105A182C24BB5C18003177AA /* Utilities */,
 				105A182924BB5A02003177AA /* NetworkResponses */,
 				1081AE2B249F4CF000AD6655 /* Mocks */,
@@ -229,6 +236,15 @@
 				101581762495F8CA00AA0B37 /* Info.plist */,
 			);
 			path = DozyTests;
+			sourceTree = "<group>";
+		};
+		1025D7B924E44A1F00118CD4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1025D7BA24E44A2700118CD4 /* Message.swift */,
+				1025D7BC24E44A8A00118CD4 /* Channel.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		1032649F24C4487C00863603 /* Schedule */ = {
@@ -424,6 +440,7 @@
 			children = (
 				105A182624BB575D003177AA /* MessageFormTests.swift */,
 				10BB85EB24BB6F48005D9829 /* MessageFormBuilderTests.swift */,
+				1025D7B724E448B100118CD4 /* MessageFormDelegateMock.swift */,
 			);
 			path = MessageForm;
 			sourceTree = "<group>";
@@ -620,13 +637,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				102102A9249F2EF700084C91 /* URLSessionMock.swift in Sources */,
+				1025D7B824E448B100118CD4 /* MessageFormDelegateMock.swift in Sources */,
 				10774A1D24BB5FFF00D3CD9F /* TestBundle.swift in Sources */,
+				1025D7BD24E44A8A00118CD4 /* Channel.swift in Sources */,
 				1081AE28249F44CB00AD6655 /* WebAuthenticationSessionMock.swift in Sources */,
 				105A182724BB575D003177AA /* MessageFormTests.swift in Sources */,
 				101581752495F8CA00AA0B37 /* LoginTests.swift in Sources */,
 				105A182E24BB5C25003177AA /* JSONLoader.swift in Sources */,
 				104BCC2624AB9C0600C35BDC /* DispatchQueueMock.swift in Sources */,
 				10BB85EC24BB6F48005D9829 /* MessageFormBuilderTests.swift in Sources */,
+				1025D7BB24E44A2700118CD4 /* Message.swift in Sources */,
 				1081AE2F249F585F00AD6655 /* KeychainMock.swift in Sources */,
 				104BCC2424AB9BD500C35BDC /* WorldMock.swift in Sources */,
 			);
