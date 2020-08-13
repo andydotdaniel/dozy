@@ -21,7 +21,7 @@ class MessageFormPresenterTests: XCTestCase {
     override func setUpWithError() throws {
         Current = .mock
         
-        viewModel = MesssageFormViewModel(navigationBarTitle: "Some navigation title")
+        viewModel = MesssageFormViewModel(navigationBarTitle: "Some navigation title", message: nil)
         delegateMock = MessageFormDelegateMock()
         
         urlSessionMock = URLSessionMock()
@@ -36,7 +36,8 @@ class MessageFormPresenterTests: XCTestCase {
             viewModel: viewModel,
             networkService: networkService,
             keychain: keychainMock,
-            delegate: delegateMock
+            delegate: delegateMock,
+            channel: nil
         )
         presenter.didTapChannelDropdown()
     }

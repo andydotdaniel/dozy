@@ -14,13 +14,16 @@ class MessageFormBuilderTests: XCTestCase {
     let delegateMock = MessageFormDelegateMock()
     
     func testAddMessageBuilder() throws {
-        let builder = MessageFormViewBuilder(hasMessage: false, delegate: delegateMock)
+        let builder = MessageFormViewBuilder(message: nil, delegate: delegateMock)
         let view = builder.build()
         XCTAssertEqual(view.viewModel.navigationBarTitle, "Add message")
     }
     
     func testEditMessageBuilder() throws {
-        let builder = MessageFormViewBuilder(hasMessage: true, delegate: delegateMock)
+        let channel = Channel(id: "SOME_CHANNEL_ID", isPublic: true, text: "NAME_OF_CHANNEL")
+        let message = Message(image: nil, bodyText: "SOME_BODY_TEXT", channel: channel)
+        
+        let builder = MessageFormViewBuilder(message: message, delegate: delegateMock)
         let view = builder.build()
         XCTAssertEqual(view.viewModel.navigationBarTitle, "Edit message")
     }
