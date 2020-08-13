@@ -19,7 +19,7 @@ class SchedulePresenter: ScheduleViewPresenter {
     private let userDefaults: ScheduleUserDefaultable
     private var schedule: Schedule
     
-    init(schedule: Schedule, viewModel: ScheduleViewModel, userDefaults: ScheduleUserDefaultable = UserDefaults.standard) {
+    init(schedule: Schedule, viewModel: ScheduleViewModel, userDefaults: ScheduleUserDefaultable) {
         self.viewModel = viewModel
         self.userDefaults = userDefaults
         self.schedule = schedule

@@ -15,13 +15,17 @@ class SchedulePresenterTests: XCTestCase {
     var viewModel: ScheduleViewModel!
     var schedule: Schedule!
     
+    var userDefaultsMock: ScheduleUserDefaultsMock!
+    
     override func setUpWithError() throws {
         let channel = Channel(id: "SOME_CHANNEL_ID", isPublic: true, text: "SOME_CHANNEL_NAME")
         let message = Message(image: nil, bodyText: "SOME_BODY_TEXT", channel: channel)
         schedule = Schedule(message: message, awakeConfirmationTime: Date(), isActive: true)
         viewModel = ScheduleViewModel(schedule: schedule)
         
-        presenter = SchedulePresenter(schedule: schedule, viewModel: viewModel)
+        userDefaultsMock = ScheduleUserDefaultsMock()
+        
+        presenter = SchedulePresenter(schedule: schedule, viewModel: viewModel, userDefaults: userDefaultsMock)
     }
 
     override func tearDownWithError() throws {
@@ -55,6 +59,10 @@ class SchedulePresenterTests: XCTestCase {
         XCTAssertEqual(self.viewModel.messageCard.channel.text, channel.text)
         
         XCTAssertEqual(self.viewModel.messageCard.actionButtonTitle, "Edit")
+        
+        
+        let expectedSchedule = Schedule(message: message, awakeConfirmationTime: schedule.awakeConfirmationTime, isActive: schedule.isActive)
+        XCTAssertEqual(userDefaultsMock.scheduleSaved, expectedSchedule)
     }
 
 }

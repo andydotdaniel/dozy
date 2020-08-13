@@ -13,6 +13,8 @@
 		101581672495F8CA00AA0B37 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 101581662495F8CA00AA0B37 /* Preview Assets.xcassets */; };
 		1015816A2495F8CA00AA0B37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 101581682495F8CA00AA0B37 /* LaunchScreen.storyboard */; };
 		101581752495F8CA00AA0B37 /* LoginPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101581742495F8CA00AA0B37 /* LoginPresenterTests.swift */; };
+		101C332B24E5A65C009BD331 /* UserDefaultsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101C332A24E5A65C009BD331 /* UserDefaultsMock.swift */; };
+		101C332D24E5A726009BD331 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101C332C24E5A726009BD331 /* Schedule.swift */; };
 		102102A9249F2EF700084C91 /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102102A8249F2EF700084C91 /* URLSessionMock.swift */; };
 		102102AB249F2F0F00084C91 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102102AA249F2F0F00084C91 /* URLSession.swift */; };
 		1025D7B824E448B100118CD4 /* MessageFormDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1025D7B724E448B100118CD4 /* MessageFormDelegateMock.swift */; };
@@ -98,6 +100,8 @@
 		101581702495F8CA00AA0B37 /* DozyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DozyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		101581742495F8CA00AA0B37 /* LoginPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenterTests.swift; sourceTree = "<group>"; };
 		101581762495F8CA00AA0B37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		101C332A24E5A65C009BD331 /* UserDefaultsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsMock.swift; sourceTree = "<group>"; };
+		101C332C24E5A726009BD331 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		102102A8249F2EF700084C91 /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
 		102102AA249F2F0F00084C91 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
 		1025D7B724E448B100118CD4 /* MessageFormDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormDelegateMock.swift; sourceTree = "<group>"; };
@@ -245,6 +249,7 @@
 			children = (
 				1025D7BA24E44A2700118CD4 /* Message.swift */,
 				1025D7BC24E44A8A00118CD4 /* Channel.swift */,
+				101C332C24E5A726009BD331 /* Schedule.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -425,6 +430,7 @@
 				1081AE2E249F585F00AD6655 /* KeychainMock.swift */,
 				104BCC2324AB9BD500C35BDC /* WorldMock.swift */,
 				104BCC2524AB9C0600C35BDC /* DispatchQueueMock.swift */,
+				101C332A24E5A65C009BD331 /* UserDefaultsMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -639,11 +645,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				101C332B24E5A65C009BD331 /* UserDefaultsMock.swift in Sources */,
 				102102A9249F2EF700084C91 /* URLSessionMock.swift in Sources */,
 				1025D7B824E448B100118CD4 /* MessageFormDelegateMock.swift in Sources */,
 				10774A1D24BB5FFF00D3CD9F /* TestBundle.swift in Sources */,
 				1025D7BD24E44A8A00118CD4 /* Channel.swift in Sources */,
 				1081AE28249F44CB00AD6655 /* WebAuthenticationSessionMock.swift in Sources */,
+				101C332D24E5A726009BD331 /* Schedule.swift in Sources */,
 				105A182724BB575D003177AA /* MessageFormPresenterTests.swift in Sources */,
 				101581752495F8CA00AA0B37 /* LoginPresenterTests.swift in Sources */,
 				105A182E24BB5C25003177AA /* JSONLoader.swift in Sources */,

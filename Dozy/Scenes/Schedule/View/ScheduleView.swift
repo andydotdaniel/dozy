@@ -55,7 +55,7 @@ struct ScheduleView_Previews: PreviewProvider {
         let message = Message(image: nil, bodyText: "Some body text", channel: channel)
         let schedule = Schedule(message: message, awakeConfirmationTime: Date(), isActive: true)
         let viewModel = ScheduleViewModel(schedule: schedule)
-        let presenter = SchedulePresenter(schedule: schedule, viewModel: viewModel)
+        let presenter = SchedulePresenter(schedule: schedule, viewModel: viewModel, userDefaults: UserDefaults.standard)
         return ScheduleView(viewModel: viewModel, presenter: presenter)
     }
 }
