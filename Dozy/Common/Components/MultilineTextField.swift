@@ -19,10 +19,6 @@ final class MultilineTextField: NSObject, UIViewRepresentable {
         self._text = text
         
         super.init()
-        
-        if text.wrappedValue == nil && placeholderText != nil {
-            self.text = placeholderText
-        }
     }
     
     func makeUIView(context: Context) -> UITextView {
@@ -35,6 +31,10 @@ final class MultilineTextField: NSObject, UIViewRepresentable {
         textView.textColor = isTextEmpty ? UIColor.placeholderGray : UIColor.label
         textView.delegate = self
         textView.contentInset = .zero
+        
+        if _text.wrappedValue == nil && placeholderText != nil {
+            textView.text = placeholderText
+        }
         
         return textView
     }
