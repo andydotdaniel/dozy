@@ -19,13 +19,8 @@ struct Switch: View {
         case off
     }
 
-    @State var position: Position = .off
-    private weak var delegate: SwitchViewDelegate?
-    
-    init(position: Position, delegate: SwitchViewDelegate?) {
-        self.position = position
-        self.delegate = delegate
-    }
+    @State var position: Position
+    weak var delegate: SwitchViewDelegate?
     
     var body: some View {
         ZStack {
