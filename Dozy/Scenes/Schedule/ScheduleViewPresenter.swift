@@ -29,13 +29,16 @@ class SchedulePresenter: ScheduleViewPresenter {
         
         let now = Date()
         self.secondsUntilAwakeConfirmationTime = Int(schedule.awakeConfirmationTime.timeIntervalSince(now))
-        self.awakeConfirmationTimer = Timer.scheduledTimer(
-            timeInterval: 1,
-            target: self,
-            selector: #selector(updateAwakeConfirmationTimer),
-            userInfo: nil,
-            repeats: true
-        )
+        
+        if schedule.isActive {
+            self.awakeConfirmationTimer = Timer.scheduledTimer(
+                timeInterval: 1,
+                target: self,
+                selector: #selector(updateAwakeConfirmationTimer),
+                userInfo: nil,
+                repeats: true
+            )
+        }
     }
     
     @objc private func updateAwakeConfirmationTimer() {
