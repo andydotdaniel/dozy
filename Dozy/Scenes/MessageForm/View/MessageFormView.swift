@@ -64,7 +64,7 @@ struct MessageFormView: View {
             .navigationBarItems(
                 trailing: Button("Save") {
                     self.presenter.didTapSave()
-                }
+                }.disabled(!viewModel.isSaveButtonEnabled)
             )
         }
     }

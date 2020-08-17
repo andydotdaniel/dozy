@@ -30,6 +30,34 @@ class MesssageFormViewModel: ObservableObject {
     @Published var isShowingImagePicker: Bool
     @Published var selectedImage: UIImage?
     
+    @Published var isSaveButtonEnabled: Bool
+    private var saveButtonEnabledPublisher: AnyPublisher<Bool, Never> {
+        Publishers.CombineLatest(isChannelNameEmptyPublisher, isMessageContentValidPublisher)
+            .map { channelNameEmpty, messageContentValid in
+                return !channelNameEmpty && messageContentValid
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    private var isChannelNameEmptyPublisher: AnyPublisher<Bool, Never> {
+        $channelNameTextFieldText
+            .removeDuplicates()
+            .map { channelName in
+                channelName.isEmpty
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    private var isMessageContentValidPublisher: AnyPublisher<Bool, Never> {
+        Publishers.CombineLatest($bodyText, $selectedImage)
+            .map { bodyText, selectedImage in
+                bodyText?.isEmpty == false || selectedImage != nil
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    private var cancellableSet = Set<AnyCancellable>()
+    
     @Published var keyboardHeight: CGFloat
     private var keyboardListener: KeyboardListener
     private var keyboardListenerSink: AnyCancellable?
@@ -37,7 +65,12 @@ class MesssageFormViewModel: ObservableObject {
     init(navigationBarTitle: String, message: Message?) {
         self.navigationBarTitle = navigationBarTitle
         self.channelNameTextFieldText = message?.channel.text ?? ""
-        self.channelNameTextFieldColor = message?.channel.text == nil ? Color.placeholderGray : Color.black
+        self.channelNameTextFieldColor = {
+            if let message = message, !message.channel.text.isEmpty {
+                return Color.black
+            }
+            return Color.placeholderGray
+        }()
         self.bodyText = message?.bodyText
         self.keyboardHeight = 0
         
@@ -47,8 +80,15 @@ class MesssageFormViewModel: ObservableObject {
         self.isShowingImagePicker = false
         self.selectedImage = message?.image.map { UIImage(data: $0) } ?? nil
         
+        self.isSaveButtonEnabled = false
+        
         let keyboardListener = KeyboardListener()
         self.keyboardListener = keyboardListener
         self.keyboardListenerSink = keyboardListener.$keyboardHeight.sink { self.keyboardHeight = $0 }
+        
+        self.saveButtonEnabledPublisher
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.isSaveButtonEnabled, on: self)
+        .store(in: &cancellableSet)
     }
 }
