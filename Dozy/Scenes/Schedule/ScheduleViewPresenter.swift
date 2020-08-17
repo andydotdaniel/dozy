@@ -26,7 +26,10 @@ class SchedulePresenter: ScheduleViewPresenter {
     }
     
     func onSwitchPositionChanged(position: Switch.Position) {
-        self.viewModel.state = position == .on ? .active : .inactive
+        viewModel.state = position == .on ? .active : .inactive
+        
+        schedule.isActive = position == .on ? true : false
+        userDefaults.saveSchedule(schedule)
     }
     
     func onMessageActionButtonTapped() {

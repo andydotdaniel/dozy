@@ -35,9 +35,11 @@ class SchedulePresenterTests: XCTestCase {
     func testOnSwitchPositionChanged() throws {
         presenter.onSwitchPositionChanged(position: .on)
         XCTAssertEqual(viewModel.state, .active)
+        XCTAssertTrue(userDefaultsMock.scheduleSaved!.isActive)
         
         presenter.onSwitchPositionChanged(position: .off)
         XCTAssertEqual(viewModel.state, .inactive)
+        XCTAssertFalse(userDefaultsMock.scheduleSaved!.isActive)
     }
     
     func testOnMessageActionButtonTapped() throws {
