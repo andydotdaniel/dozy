@@ -19,10 +19,43 @@ class SchedulePresenter: ScheduleViewPresenter {
     private let userDefaults: ScheduleUserDefaultable
     private var schedule: Schedule
     
+    private var secondsUntilAwakeConfirmationTime: Int
+    private var awakeConfirmationTimer: Timer?
+    
     init(schedule: Schedule, viewModel: ScheduleViewModel, userDefaults: ScheduleUserDefaultable) {
         self.viewModel = viewModel
         self.userDefaults = userDefaults
         self.schedule = schedule
+        
+        let now = Date()
+        self.secondsUntilAwakeConfirmationTime = Int(schedule.awakeConfirmationTime.timeIntervalSince(now))
+        self.awakeConfirmationTimer = Timer.scheduledTimer(
+            timeInterval: 1,
+            target: self,
+            selector: #selector(updateAwakeConfirmationTimer),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+    
+    @objc private func updateAwakeConfirmationTimer() {
+        func secondsToHoursMinutesSeconds (seconds : Int) -> (hours: Int, minutes: Int, seconds: Int) {
+            return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
+        }
+        
+        if secondsUntilAwakeConfirmationTime > 0 {
+            let time = secondsToHoursMinutesSeconds(seconds: self.secondsUntilAwakeConfirmationTime)
+            
+            let hoursString = time.hours < 10 ? "0\(time.hours)" : "\(time.hours)"
+            let minutesString = time.minutes < 10 ? "0\(time.minutes)" : "\(time.minutes)"
+            let secondsString = time.seconds < 10 ? "0\(time.seconds)" : "\(time.seconds)"
+            
+            self.viewModel.awakeConfirmationCard.mutableText = "\(hoursString):\(minutesString):\(secondsString)"
+            
+            self.secondsUntilAwakeConfirmationTime -= 1
+        } else {
+            self.awakeConfirmationTimer?.invalidate()
+        }
     }
     
     func onSwitchPositionChanged(position: Switch.Position) {

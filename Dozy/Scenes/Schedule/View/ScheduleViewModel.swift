@@ -34,20 +34,14 @@ class ScheduleViewModel: ObservableObject {
     
     init(schedule: Schedule) {
         self.state = schedule.isActive ? .active : .inactive
-         
-        let bodyText: Text = Text("Open the app in ")
-            .foregroundColor(Color.white) +
-        Text("07:18:36")
-            .foregroundColor(Color.white)
-            .bold() +
-        Text(" or your sleepyhead message gets sent.")
-            .foregroundColor(Color.white)
         
         self.awakeConfirmationCard = ContentCard.ViewModel(
             state: schedule.isActive ? .enabled : .disabled,
             titleText: schedule.awakeConfirmationDateText,
             subtitleText: schedule.awakeConfirmationTimeText,
-            bodyText: bodyText,
+            preMutableText: "Open the app in ",
+            mutableText: "",
+            postMutableText: " or your sleepyhead message gets sent.",
             buttonText: "Change awake confirmation time"
         )
         

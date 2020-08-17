@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentCard: View {
     
-    class ViewModel: ObservableObject {
+    struct ViewModel {
         
         enum State {
             case disabled
@@ -20,14 +20,28 @@ struct ContentCard: View {
         var state: State
         let titleText: String
         let subtitleText: String
-        var bodyText: Text
+        
+        let preMutableText: String
+        var mutableText: String
+        let postMutableText: String
+        
         let buttonText: String
         
-        init(state: State, titleText: String, subtitleText: String, bodyText: Text, buttonText: String) {
+        init(
+            state: State,
+            titleText: String,
+            subtitleText: String,
+            preMutableText: String,
+            mutableText: String,
+            postMutableText: String,
+            buttonText: String
+        ) {
             self.state = state
             self.titleText = titleText
             self.subtitleText = subtitleText
-            self.bodyText = bodyText
+            self.preMutableText = preMutableText
+            self.mutableText = mutableText
+            self.postMutableText = postMutableText
             self.buttonText = buttonText
         }
         
@@ -46,7 +60,7 @@ struct ContentCard: View {
                 Text(viewModel.subtitleText)
                     .foregroundColor(Color.white)
             }
-            viewModel.bodyText
+            createBodyText()
             SecondaryButton(
                 titleText: viewModel.buttonText, tapAction: {},
                 color: viewModel.state == .enabled ? Color.darkBlue : Color.darkRed
@@ -58,23 +72,27 @@ struct ContentCard: View {
         .cornerRadius(18)
         .shadow(radius: 5)
     }
+    
+    private func createBodyText() -> Text {
+        return Text("\(self.viewModel.preMutableText)")
+            .foregroundColor(Color.white) +
+            Text("\(self.viewModel.mutableText)")
+            .foregroundColor(Color.white)
+            .bold() +
+        Text("\(self.viewModel.postMutableText)")
+            .foregroundColor(Color.white)
+    }
 }
 
 struct ContentCard_Previews: PreviewProvider {
     static var previews: some View {
-        let bodyText: Text = Text("Open the app in ")
-            .foregroundColor(Color.white) +
-        Text("07:18:36")
-            .foregroundColor(Color.white)
-            .bold() +
-        Text(" or your sleepyhead message gets sent.")
-            .foregroundColor(Color.white)
-        
         let viewModel = ContentCard.ViewModel(
             state: .enabled,
             titleText: "8:10am",
             subtitleText: "May 17",
-            bodyText: bodyText,
+            preMutableText: "Open the app in ",
+            mutableText: "07:18:36",
+            postMutableText: " or your sleepyhead message gets sent.",
             buttonText: "Change awake confirmation time"
         )
         
