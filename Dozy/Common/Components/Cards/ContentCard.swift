@@ -18,8 +18,8 @@ struct ContentCard: View {
         }
         
         var state: State
-        let titleText: String
-        let subtitleText: String
+        var titleText: String
+        var subtitleText: String
         
         let preMutableText: String
         var mutableText: String

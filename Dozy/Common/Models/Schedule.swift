@@ -10,7 +10,7 @@ import Foundation
 
 struct Schedule: Codable {
     let message: Message
-    let awakeConfirmationTime: Date
+    var awakeConfirmationTime: Date
     var isActive: Bool
 }
 

@@ -29,6 +29,7 @@ class SchedulePresenter: ScheduleViewPresenter {
         
         let now = Date()
         self.secondsUntilAwakeConfirmationTime = Int(schedule.awakeConfirmationTime.timeIntervalSince(now))
+        updateAwakeConfirmationTimeToNextDayIfNeeded(from: now)
         
         if schedule.isActive {
             self.awakeConfirmationTimer = Timer.scheduledTimer(
@@ -59,6 +60,21 @@ class SchedulePresenter: ScheduleViewPresenter {
         } else {
             self.awakeConfirmationTimer?.invalidate()
         }
+    }
+    
+    private func updateAwakeConfirmationTimeToNextDayIfNeeded(from date: Date) {
+        guard secondsUntilAwakeConfirmationTime < 0 else { return }
+        
+        let oneDayInSeconds: TimeInterval = 60 * 60 * 24
+        let nextDay = schedule.awakeConfirmationTime.addingTimeInterval(oneDayInSeconds)
+        
+        schedule.awakeConfirmationTime = nextDay
+        userDefaults.saveSchedule(schedule)
+        
+        secondsUntilAwakeConfirmationTime = Int(nextDay.timeIntervalSince(date))
+        
+        viewModel.awakeConfirmationCard.titleText = schedule.awakeConfirmationDateText
+        viewModel.awakeConfirmationCard.subtitleText = schedule.awakeConfirmationTimeText
     }
     
     func onSwitchPositionChanged(position: Switch.Position) {
