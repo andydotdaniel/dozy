@@ -21,9 +21,9 @@ struct ContentCard: View {
         var titleText: String
         var subtitleText: String
         
-        let preMutableText: String
+        var preMutableText: String
         var mutableText: String
-        let postMutableText: String
+        var postMutableText: String
         
         let buttonText: String
         
@@ -61,6 +61,8 @@ struct ContentCard: View {
                     .foregroundColor(Color.white)
             }
             createBodyText()
+                .fixedSize(horizontal: false, vertical: true)
+                .foregroundColor(Color.white)
             SecondaryButton(
                 titleText: viewModel.buttonText, tapAction: {},
                 color: viewModel.state == .enabled ? Color.darkBlue : Color.darkRed
@@ -74,13 +76,10 @@ struct ContentCard: View {
     }
     
     private func createBodyText() -> Text {
-        return Text("\(self.viewModel.preMutableText)")
-            .foregroundColor(Color.white) +
+        return Text("\(self.viewModel.preMutableText)") +
             Text("\(self.viewModel.mutableText)")
-            .foregroundColor(Color.white)
-            .bold() +
-        Text("\(self.viewModel.postMutableText)")
-            .foregroundColor(Color.white)
+                .bold() +
+            Text("\(self.viewModel.postMutableText)")
     }
 }
 
