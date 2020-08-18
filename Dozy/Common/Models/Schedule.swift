@@ -24,7 +24,7 @@ extension Schedule {
     
     var awakeConfirmationTimeText: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "h:mma"
+        dateFormatter.dateFormat = "h:mm a"
         return dateFormatter.string(from: awakeConfirmationTime)
     }
     
