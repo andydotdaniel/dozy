@@ -32,34 +32,56 @@ class SchedulePresenter: ScheduleViewPresenter {
         updateAwakeConfirmationTimeToNextDayIfNeeded(from: now)
         
         if schedule.isActive {
-            self.awakeConfirmationTimer = Timer.scheduledTimer(
-                timeInterval: 1,
-                target: self,
-                selector: #selector(updateAwakeConfirmationTimer),
-                userInfo: nil,
-                repeats: true
-            )
+            enableAwakeConfirmation()
+        } else {
+            disableAwakeConfirmation()
         }
     }
     
+    private func enableAwakeConfirmation() {
+        setAwakeConfirmationCountdown(from: secondsUntilAwakeConfirmationTime)
+        
+        awakeConfirmationTimer = Timer.scheduledTimer(
+            timeInterval: 1,
+            target: self,
+            selector: #selector(updateAwakeConfirmationTimer),
+            userInfo: nil,
+            repeats: true
+        )
+        
+        viewModel.awakeConfirmationCard.preMutableText = "Open the app in "
+        viewModel.awakeConfirmationCard.postMutableText = " or your sleepyhead message gets sent."
+    }
+    
+    private func disableAwakeConfirmation() {
+        awakeConfirmationTimer?.invalidate()
+        
+        viewModel.awakeConfirmationCard.preMutableText = "Awake confirmation timer is currently disabled."
+        viewModel.awakeConfirmationCard.mutableText = ""
+        viewModel.awakeConfirmationCard.postMutableText = ""
+    }
+    
     @objc private func updateAwakeConfirmationTimer() {
+        if secondsUntilAwakeConfirmationTime > 0 {
+            setAwakeConfirmationCountdown(from: secondsUntilAwakeConfirmationTime)
+            secondsUntilAwakeConfirmationTime -= 1
+        } else {
+            awakeConfirmationTimer?.invalidate()
+        }
+    }
+    
+    private func setAwakeConfirmationCountdown(from seconds: Int) {
         func secondsToHoursMinutesSeconds (seconds : Int) -> (hours: Int, minutes: Int, seconds: Int) {
             return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
         }
         
-        if secondsUntilAwakeConfirmationTime > 0 {
-            let time = secondsToHoursMinutesSeconds(seconds: self.secondsUntilAwakeConfirmationTime)
-            
-            let hoursString = time.hours < 10 ? "0\(time.hours)" : "\(time.hours)"
-            let minutesString = time.minutes < 10 ? "0\(time.minutes)" : "\(time.minutes)"
-            let secondsString = time.seconds < 10 ? "0\(time.seconds)" : "\(time.seconds)"
-            
-            self.viewModel.awakeConfirmationCard.mutableText = "\(hoursString):\(minutesString):\(secondsString)"
-            
-            self.secondsUntilAwakeConfirmationTime -= 1
-        } else {
-            self.awakeConfirmationTimer?.invalidate()
-        }
+        let time = secondsToHoursMinutesSeconds(seconds: self.secondsUntilAwakeConfirmationTime)
+        
+        let hoursString = time.hours < 10 ? "0\(time.hours)" : "\(time.hours)"
+        let minutesString = time.minutes < 10 ? "0\(time.minutes)" : "\(time.minutes)"
+        let secondsString = time.seconds < 10 ? "0\(time.seconds)" : "\(time.seconds)"
+        
+        viewModel.awakeConfirmationCard.mutableText = "\(hoursString):\(minutesString):\(secondsString)"
     }
     
     private func updateAwakeConfirmationTimeToNextDayIfNeeded(from date: Date) {
@@ -79,6 +101,12 @@ class SchedulePresenter: ScheduleViewPresenter {
     
     func onSwitchPositionChanged(position: Switch.Position) {
         viewModel.state = position == .on ? .active : .inactive
+        
+        if position == .on {
+            enableAwakeConfirmation()
+        } else {
+            disableAwakeConfirmation()
+        }
         
         schedule.isActive = position == .on ? true : false
         userDefaults.saveSchedule(schedule)

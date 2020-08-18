@@ -39,9 +39,9 @@ class ScheduleViewModel: ObservableObject {
             state: schedule.isActive ? .enabled : .disabled,
             titleText: schedule.awakeConfirmationDateText,
             subtitleText: schedule.awakeConfirmationTimeText,
-            preMutableText: "Open the app in ",
+            preMutableText: "",
             mutableText: "",
-            postMutableText: " or your sleepyhead message gets sent.",
+            postMutableText: "",
             buttonText: "Change awake confirmation time"
         )
         
