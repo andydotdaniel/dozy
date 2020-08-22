@@ -17,6 +17,7 @@
 		101C332D24E5A726009BD331 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101C332C24E5A726009BD331 /* Schedule.swift */; };
 		102102A9249F2EF700084C91 /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102102A8249F2EF700084C91 /* URLSessionMock.swift */; };
 		102102AB249F2F0F00084C91 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102102AA249F2F0F00084C91 /* URLSession.swift */; };
+		1023190F24F1603B0005F6A6 /* SchedulePresenterTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1023190E24F1603B0005F6A6 /* SchedulePresenterTimerTests.swift */; };
 		1025D7B824E448B100118CD4 /* MessageFormDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1025D7B724E448B100118CD4 /* MessageFormDelegateMock.swift */; };
 		1025D7BB24E44A2700118CD4 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1025D7BA24E44A2700118CD4 /* Message.swift */; };
 		1025D7BD24E44A8A00118CD4 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1025D7BC24E44A8A00118CD4 /* Channel.swift */; };
@@ -104,6 +105,7 @@
 		101C332C24E5A726009BD331 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		102102A8249F2EF700084C91 /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
 		102102AA249F2F0F00084C91 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
+		1023190E24F1603B0005F6A6 /* SchedulePresenterTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePresenterTimerTests.swift; sourceTree = "<group>"; };
 		1025D7B724E448B100118CD4 /* MessageFormDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormDelegateMock.swift; sourceTree = "<group>"; };
 		1025D7BA24E44A2700118CD4 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		1025D7BC24E44A8A00118CD4 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
@@ -242,6 +244,15 @@
 				101581762495F8CA00AA0B37 /* Info.plist */,
 			);
 			path = DozyTests;
+			sourceTree = "<group>";
+		};
+		1023190D24F160250005F6A6 /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				1025D7C024E44BD900118CD4 /* SchedulePresenterTests.swift */,
+				1023190E24F1603B0005F6A6 /* SchedulePresenterTimerTests.swift */,
+			);
+			path = Schedule;
 			sourceTree = "<group>";
 		};
 		1025D7B924E44A1F00118CD4 /* Extensions */ = {
@@ -415,9 +426,9 @@
 		1081AE2A249F4CD000AD6655 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				1023190D24F160250005F6A6 /* Schedule */,
 				10BB85ED24BB6F4C005D9829 /* MessageForm */,
 				101581742495F8CA00AA0B37 /* LoginPresenterTests.swift */,
-				1025D7C024E44BD900118CD4 /* SchedulePresenterTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -653,6 +664,7 @@
 				1081AE28249F44CB00AD6655 /* WebAuthenticationSessionMock.swift in Sources */,
 				101C332D24E5A726009BD331 /* Schedule.swift in Sources */,
 				105A182724BB575D003177AA /* MessageFormPresenterTests.swift in Sources */,
+				1023190F24F1603B0005F6A6 /* SchedulePresenterTimerTests.swift in Sources */,
 				101581752495F8CA00AA0B37 /* LoginPresenterTests.swift in Sources */,
 				105A182E24BB5C25003177AA /* JSONLoader.swift in Sources */,
 				104BCC2624AB9C0600C35BDC /* DispatchQueueMock.swift in Sources */,
