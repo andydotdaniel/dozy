@@ -18,6 +18,8 @@
 		102102A9249F2EF700084C91 /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102102A8249F2EF700084C91 /* URLSessionMock.swift */; };
 		102102AB249F2F0F00084C91 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102102AA249F2F0F00084C91 /* URLSession.swift */; };
 		1023190F24F1603B0005F6A6 /* SchedulePresenterTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1023190E24F1603B0005F6A6 /* SchedulePresenterTimerTests.swift */; };
+		1023191224F21C380005F6A6 /* AwakeConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1023191124F21C380005F6A6 /* AwakeConfirmationView.swift */; };
+		1023191424F2238D0005F6A6 /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1023191324F2238D0005F6A6 /* Slider.swift */; };
 		1025D7B824E448B100118CD4 /* MessageFormDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1025D7B724E448B100118CD4 /* MessageFormDelegateMock.swift */; };
 		1025D7BB24E44A2700118CD4 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1025D7BA24E44A2700118CD4 /* Message.swift */; };
 		1025D7BD24E44A8A00118CD4 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1025D7BC24E44A8A00118CD4 /* Channel.swift */; };
@@ -106,6 +108,8 @@
 		102102A8249F2EF700084C91 /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
 		102102AA249F2F0F00084C91 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
 		1023190E24F1603B0005F6A6 /* SchedulePresenterTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePresenterTimerTests.swift; sourceTree = "<group>"; };
+		1023191124F21C380005F6A6 /* AwakeConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwakeConfirmationView.swift; sourceTree = "<group>"; };
+		1023191324F2238D0005F6A6 /* Slider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slider.swift; sourceTree = "<group>"; };
 		1025D7B724E448B100118CD4 /* MessageFormDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormDelegateMock.swift; sourceTree = "<group>"; };
 		1025D7BA24E44A2700118CD4 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		1025D7BC24E44A8A00118CD4 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
@@ -255,6 +259,14 @@
 			path = Schedule;
 			sourceTree = "<group>";
 		};
+		1023191024F21C240005F6A6 /* AwakeConfirmation */ = {
+			isa = PBXGroup;
+			children = (
+				1023191124F21C380005F6A6 /* AwakeConfirmationView.swift */,
+			);
+			path = AwakeConfirmation;
+			sourceTree = "<group>";
+		};
 		1025D7B924E44A1F00118CD4 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -329,6 +341,7 @@
 				10AC9D9B24ACF40C00A3791C /* MultilineTextField.swift */,
 				1051E4A724BAF9B300566C5B /* ImagePickerView.swift */,
 				1032649B24C32A9900863603 /* Switch.swift */,
+				1023191324F2238D0005F6A6 /* Slider.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -336,6 +349,7 @@
 		1038113A2496680900DC5CEC /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				1023191024F21C240005F6A6 /* AwakeConfirmation */,
 				1032649F24C4487C00863603 /* Schedule */,
 				104BE37024B0F03200E02AAD /* MessageForm */,
 				10381137249667D200DC5CEC /* Login */,
@@ -633,9 +647,11 @@
 				10A55EC224B110480099EDAD /* MessageFormViewBuilder.swift in Sources */,
 				10E57E6024969F03001B71A4 /* LoginPresenter.swift in Sources */,
 				108B4E0B24C2C925000F1C4B /* SecondaryButton.swift in Sources */,
+				1023191224F21C380005F6A6 /* AwakeConfirmationView.swift in Sources */,
 				104BE36F24B0834B00E02AAD /* KeyboardListener.swift in Sources */,
 				10F422202497BCB60078AC3C /* NetworkService.swift in Sources */,
 				1081AE3124A0E84C00AD6655 /* OnboardingView.swift in Sources */,
+				1023191424F2238D0005F6A6 /* Slider.swift in Sources */,
 				10A55EC024B110370099EDAD /* MessageFormViewModel.swift in Sources */,
 				108B4E0924C2C7FF000F1C4B /* ContentCard.swift in Sources */,
 				1035D07D24963F1F006B22FC /* AlternativeButton.swift in Sources */,
