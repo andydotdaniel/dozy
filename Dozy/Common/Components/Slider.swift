@@ -11,6 +11,7 @@ import SwiftUI
 struct Slider: View {
     
     @State private var controlWidthOffset: CGFloat = .zero
+    @State private var hasReachedEnd: Bool = false
     let titleText: String
     
     private let horizontalPadding: CGFloat = 16
@@ -38,9 +39,7 @@ struct Slider: View {
                     .overlay(
                         HStack {
                             Spacer()
-                            Image("RightChevronLight")
-                                .frame(height: 16)
-                                .offset(x: -8)
+                            self.getControlIndicator()
                         }
                     )
                     .gesture(
@@ -53,7 +52,8 @@ struct Slider: View {
                                 let controlWidthOffset: CGFloat = {
                                     if translationWidth < 0 {
                                         return .zero
-                                    } else if translationWidth > controlWidthOffsetLimit {
+                                    } else if translationWidth >= controlWidthOffsetLimit {
+                                        self.hasReachedEnd = true
                                         return controlWidthOffsetLimit
                                     } else {
                                         return translationWidth
@@ -64,7 +64,9 @@ struct Slider: View {
                             }
                             .onEnded { _ in
                                 withAnimation {
-                                    self.controlWidthOffset = .zero
+                                    if !self.hasReachedEnd {
+                                        self.controlWidthOffset = .zero
+                                    }
                                 }
                             }
                     )
@@ -72,6 +74,21 @@ struct Slider: View {
             alignment: .leading
             )
         }.frame(maxHeight: 44)
+    }
+    
+    private func getControlIndicator() -> AnyView? {
+        if hasReachedEnd {
+            return AnyView(
+                Spinner(strokeColor: Color.white)
+                .offset(x: -8)
+            )
+        } else {
+            return AnyView(
+                Image("RightChevronLight")
+                    .frame(height: 16)
+                    .offset(x: -8)
+            )
+        }
     }
     
 }
