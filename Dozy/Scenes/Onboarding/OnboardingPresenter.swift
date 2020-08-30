@@ -22,7 +22,7 @@ class OnboardingPresenter: OnboardingViewPresenter {
     }
     
     func onMessageSaved(_ message: Message) {
-        let schedule = Schedule(message: message, awakeConfirmationTime: Date(), isActive: false)
+        let schedule = Schedule(message: message, awakeConfirmationTime: Date(), scheduledMessageId: nil)
         userDefaults.saveSchedule(schedule)
         
         self.viewModel.messageCreatedNavigationDestination = ScheduleViewBuilder(schedule: schedule).build()

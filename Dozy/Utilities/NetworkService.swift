@@ -37,9 +37,7 @@ struct NetworkService: NetworkRequesting {
     private func postRequest<T: Decodable>(_ request: NetworkRequest, completion: @escaping (Result<T, NetworkService.RequestError>) -> Void) {
         var urlRequest = URLRequest(url: request.url)
         urlRequest.httpMethod = "POST"
-        urlRequest.allHTTPHeaderFields = [
-            "Content-Type": request.contentType.rawValue
-        ]
+        urlRequest.allHTTPHeaderFields = getHeaders(with: request)
         
         let httpBody: Data? = {
             switch request.contentType {
@@ -83,9 +81,10 @@ struct NetworkService: NetworkRequesting {
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "GET"
-        urlRequest.allHTTPHeaderFields = [
-            "Content-Type": request.contentType.rawValue
-        ]
+        urlRequest.allHTTPHeaderFields = getHeaders(with: request)
+        request.headers.forEach { header in
+            urlRequest.allHTTPHeaderFields?[header.key] = header.value
+        }
         
         urlSession.createDataTask(with: urlRequest, completionHandler: { data, _, error in
             if let error = error {
@@ -100,6 +99,18 @@ struct NetworkService: NetworkRequesting {
             
             completion(.success(decodedObject))
         }).resume()
+    }
+    
+    private func getHeaders(with request: NetworkRequest) -> [String: String] {
+        var headers: [String: String] = [
+            "Content-Type": request.contentType.rawValue
+        ]
+        
+        request.headers.forEach { header in
+            headers[header.key] = header.value
+        }
+        
+        return headers
     }
     
 }

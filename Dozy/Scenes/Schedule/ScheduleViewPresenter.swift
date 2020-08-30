@@ -22,10 +22,21 @@ class SchedulePresenter: ScheduleViewPresenter {
     private var secondsUntilAwakeConfirmationTime: Int
     private var awakeConfirmationTimer: Timer?
     
-    init(schedule: Schedule, viewModel: ScheduleViewModel, userDefaults: ScheduleUserDefaultable) {
+    private let networkService: NetworkRequesting
+    private let keychain: SecureStorable
+    
+    init(
+        schedule: Schedule,
+        viewModel: ScheduleViewModel,
+        userDefaults: ScheduleUserDefaultable,
+        networkService: NetworkRequesting,
+        keychain: SecureStorable
+    ) {
         self.viewModel = viewModel
         self.userDefaults = userDefaults
         self.schedule = schedule
+        self.networkService = networkService
+        self.keychain = keychain
         
         let now = Date()
         self.secondsUntilAwakeConfirmationTime = Int(schedule.awakeConfirmationTime.timeIntervalSince(now))
@@ -99,17 +110,73 @@ class SchedulePresenter: ScheduleViewPresenter {
         viewModel.awakeConfirmationCard.subtitleText = schedule.awakeConfirmationTimeText
     }
     
-    func onSwitchPositionChanged(position: Switch.Position) {
-        viewModel.state = position == .on ? .active : .inactive
+    func onSwitchPositionChangedTriggered() {
+        viewModel.switchPosition = .loading
         
-        if position == .on {
-            enableAwakeConfirmation()
+        if viewModel.state == .inactive {
+            sendScheduleMessageRequest()
         } else {
             disableAwakeConfirmation()
         }
+    }
+    
+    private func sendScheduleMessageRequest() {
+        guard let accessTokenData = keychain.load(key: "slack_access_token") else { return }
+        let accessToken = String(decoding: accessTokenData, as: UTF8.self)
+        let headers = ["Authorization": "Bearer \(accessToken)"]
         
-        schedule.isActive = position == .on ? true : false
-        userDefaults.saveSchedule(schedule)
+        let requestBody = generateMessageRequestBody()
+        
+        guard let request = NetworkRequest(url: "https://slack.com/api/chat.scheduleMessage", httpMethod: .post, parameters: requestBody, headers: headers, contentType: .json) else { preconditionFailure("Invalid url") }
+        self.networkService.peformNetworkRequest(request, completion: { [weak self] (result: Result<ScheduledMessageResponse, NetworkService.RequestError>) -> Void in
+            guard let self = self else { return }
+            
+            Current.dispatchQueue.async {
+                switch result {
+                case .success(let response):
+                    self.schedule.scheduledMessageId = response.scheduledMessageId
+                    self.userDefaults.saveSchedule(self.schedule)
+                    
+                    self.enableAwakeConfirmation()
+                    self.viewModel.state = .active
+                    self.viewModel.switchPosition = .on
+                case .failure:
+                    // TODO: Handle failure
+                    break
+                }
+            }
+        })
+    }
+    
+    private func generateMessageRequestBody() -> [String: Any] {
+        let message = schedule.message
+        
+        let blocks: [[String: Any]] = {
+            let textBlock: [String: Any]? = message.bodyText.map { bodyText in
+                return [
+                    "type": "section",
+                    "fields": [
+                        [
+                            "type": "plain_text",
+                            "emoji": true,
+                            "text": bodyText
+                        ]
+                    ]
+                ]
+            }
+            
+            return [textBlock].compactMap { return $0 }
+        }()
+        
+        // Add an additional 30 seconds to awake confirmation time because of the 30 second timer we show
+        // in AwakeConfirmationView while the user confirms they are awake.
+        let postAtTime = schedule.awakeConfirmationTime.addingTimeInterval(30)
+        return [
+            "channel": message.channel.id,
+            "text": "I overslept!",
+            "post_at": postAtTime.timeIntervalSince1970,
+            "blocks": blocks
+        ]
     }
     
     func onMessageActionButtonTapped() {
@@ -120,7 +187,7 @@ class SchedulePresenter: ScheduleViewPresenter {
         let schedule = Schedule(
             message: message,
             awakeConfirmationTime: self.schedule.awakeConfirmationTime,
-            isActive: self.schedule.isActive
+            scheduledMessageId: self.schedule.scheduledMessageId
         )
         userDefaults.saveSchedule(schedule)
         
@@ -144,4 +211,12 @@ class SchedulePresenter: ScheduleViewPresenter {
         MessageFormViewBuilder(message: self.schedule.message, delegate: self).build()
     }
     
+}
+
+private struct ScheduledMessageResponse: Decodable {
+    let scheduledMessageId: String
+    
+    enum CodingKeys: String, CodingKey {
+        case scheduledMessageId = "scheduled_message_id"
+    }
 }

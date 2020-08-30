@@ -9,7 +9,7 @@
 import SwiftUI
 
 protocol SwitchViewDelegate: class {
-    func onSwitchPositionChanged(position: Switch.Position)
+    func onSwitchPositionChangedTriggered()
 }
 
 struct Switch: View {
@@ -20,7 +20,7 @@ struct Switch: View {
         case off
     }
 
-    @State var position: Position
+    @Binding var position: Position
     weak var delegate: SwitchViewDelegate?
     
     var body: some View {
@@ -38,15 +38,13 @@ struct Switch: View {
                         .bold()
                         .foregroundColor(position == .on ? .white : .secondaryGray)
                         .onTapGesture {
-                            self.position = .on
-                            self.delegate?.onSwitchPositionChanged(position: self.position)
+                            self.delegate?.onSwitchPositionChangedTriggered()
                         }
                     Text("Off".uppercased())
                         .bold()
                         .foregroundColor(position == .off ? .white : .secondaryGray)
                         .onTapGesture {
-                            self.position = .off
-                            self.delegate?.onSwitchPositionChanged(position: self.position)
+                            self.delegate?.onSwitchPositionChangedTriggered()
                         }
                 }
                 .font(.system(size: 18))
@@ -62,6 +60,6 @@ struct Switch: View {
 
 struct Switch_Previews: PreviewProvider {
     static var previews: some View {
-        Switch(position: .on, delegate: nil)
+        Switch(position: .constant(.on), delegate: nil)
     }
 }

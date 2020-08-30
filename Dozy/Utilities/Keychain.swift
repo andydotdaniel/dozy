@@ -16,6 +16,10 @@ protocol SecureStorable {
 
 final class Keychain: SecureStorable {
     
+    struct Keys {
+        static let slackAccessToken = "slack_access_token"
+    }
+    
     func save(key: String, data: Data) -> OSStatus {
         let query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,

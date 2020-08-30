@@ -98,7 +98,7 @@ final class LoginPresenter: LoginViewPresenter {
                         self.viewModel.isShowingError = true
                         return
                     }
-                    _ = self.keychain.save(key: "slack_access_token", data: data)
+                    _ = self.keychain.save(key: Keychain.Keys.slackAccessToken, data: data)
                     self.viewModel.navigationSelection = .onboarding
                 case .failure:
                     self.viewModel.isFetchingAccessToken = false

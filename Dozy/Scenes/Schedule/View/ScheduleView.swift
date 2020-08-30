@@ -42,7 +42,7 @@ struct ScheduleView: View {
                 }
             }
             .padding(.top, 12)
-            Switch(position: viewModel.state == .active ? .on : .off, delegate: self.presenter)
+            Switch(position: $viewModel.switchPosition, delegate: self.presenter)
         }.sheet(isPresented: self.$viewModel.isShowingMessageForm, content: {
             self.presenter.navigateToMessageForm()
         })
@@ -53,9 +53,9 @@ struct ScheduleView_Previews: PreviewProvider {
     static var previews: some View {
         let channel = Channel(id: "SOME_ID", isPublic: true, text: "general")
         let message = Message(image: nil, bodyText: "Some body text", channel: channel)
-        let schedule = Schedule(message: message, awakeConfirmationTime: Date(), isActive: true)
+        let schedule = Schedule(message: message, awakeConfirmationTime: Date(), scheduledMessageId: nil)
         let viewModel = ScheduleViewModel(schedule: schedule)
-        let presenter = SchedulePresenter(schedule: schedule, viewModel: viewModel, userDefaults: UserDefaults.standard)
+        let presenter = SchedulePresenter(schedule: schedule, viewModel: viewModel, userDefaults: UserDefaults.standard, networkService: NetworkService(), keychain: Keychain())
         return ScheduleView(viewModel: viewModel, presenter: presenter)
     }
 }

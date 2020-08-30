@@ -11,10 +11,14 @@ import Foundation
 struct Schedule: Codable {
     let message: Message
     var awakeConfirmationTime: Date
-    var isActive: Bool
+    var scheduledMessageId: String?
 }
 
 extension Schedule {
+    
+    var isActive: Bool {
+        scheduledMessageId != nil
+    }
     
     var awakeConfirmationDateText: String {
         let dateFormatter = DateFormatter()

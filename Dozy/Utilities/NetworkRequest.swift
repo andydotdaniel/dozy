@@ -23,15 +23,17 @@ struct NetworkRequest {
     let url: URL
     let httpMethod: HTTPMethod
     let parameters: [String: Any]
+    let headers: [String: String]
     let contentType: ContentType
     
-    init?(url urlString: String, httpMethod: HTTPMethod, parameters: [String: Any] = [:], contentType: ContentType = .json) {
+    init?(url urlString: String, httpMethod: HTTPMethod, parameters: [String: Any] = [:], headers: [String: String] = [:], contentType: ContentType = .json) {
         guard let url = URL(string: urlString) else { return nil }
         
         self.url = url
         self.httpMethod = httpMethod
         self.parameters = parameters
         self.contentType = contentType
+        self.headers = headers
     }
     
 }

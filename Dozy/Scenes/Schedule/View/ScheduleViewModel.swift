@@ -32,8 +32,11 @@ class ScheduleViewModel: ObservableObject {
     
     @Published var isShowingMessageForm: Bool = false
     
+    @Published var switchPosition: Switch.Position
+    
     init(schedule: Schedule) {
         self.state = schedule.isActive ? .active : .inactive
+        self.switchPosition = schedule.isActive ? .on : .off
         
         self.awakeConfirmationCard = ContentCard.ViewModel(
             state: schedule.isActive ? .enabled : .disabled,
