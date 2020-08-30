@@ -10,6 +10,7 @@ import Foundation
 
 protocol NetworkRequesting {
     func peformNetworkRequest<T: Decodable>(_ request: NetworkRequest, completion: @escaping (Result<T, NetworkService.RequestError>) -> Void)
+    func peformNetworkRequest(_ request: NetworkRequest, completion: @escaping (Result<Void, NetworkService.RequestError>) -> Void)
 }
 
 struct NetworkService: NetworkRequesting {
@@ -17,6 +18,7 @@ struct NetworkService: NetworkRequesting {
     enum RequestError: Error {
         case unknown(message: String)
         case decodableParsingFailed
+        case invalidNetworkResponse
     }
     
     private let urlSession: URLSessionable
@@ -28,13 +30,57 @@ struct NetworkService: NetworkRequesting {
     func peformNetworkRequest<T: Decodable>(_ request: NetworkRequest, completion: @escaping (Result<T, NetworkService.RequestError>) -> Void) {
         switch request.httpMethod {
         case .post:
-            postRequest(request, completion: completion)
+            postRequest(request) { self.decodeResult(result: $0, completion: completion) }
         case .get:
-            getRequest(request, completion: completion)
+            getRequest(request) { self.decodeResult(result: $0, completion: completion) }
         }
     }
     
-    private func postRequest<T: Decodable>(_ request: NetworkRequest, completion: @escaping (Result<T, NetworkService.RequestError>) -> Void) {
+    func peformNetworkRequest(_ request: NetworkRequest, completion: @escaping (Result<Void, NetworkService.RequestError>) -> Void) {
+        switch request.httpMethod {
+        case .post:
+            postRequest(request) { self.decodeResult(result: $0, completion: completion) }
+        case .get:
+            getRequest(request) { self.decodeResult(result: $0, completion: completion) }
+        }
+    }
+    
+    private func decodeResult<T: Decodable>(result: Result<Data, NetworkService.RequestError>, completion: (Result<T, NetworkService.RequestError>) -> Void) {
+        switch result {
+        case .success(let data):
+            guard let decodedObject = try? JSONDecoder().decode(T.self, from: data) else {
+                completion(.failure(.decodableParsingFailed))
+                return
+            }
+            
+            completion(.success(decodedObject))
+        case .failure(let error):
+            return completion(.failure(error))
+        }
+    }
+    
+    private func decodeResult(result: Result<Data, NetworkService.RequestError>, completion: (Result<Void, NetworkService.RequestError>) -> Void) {
+        switch result {
+        case .success:
+            return completion(.success(()))
+        case .failure(let error):
+            return completion(.failure(error))
+        }
+    }
+    
+    private func getHeaders(with request: NetworkRequest) -> [String: String] {
+        var headers: [String: String] = [
+            "Content-Type": request.contentType.rawValue
+        ]
+        
+        request.headers.forEach { header in
+            headers[header.key] = header.value
+        }
+        
+        return headers
+    }
+    
+    private func postRequest(_ request: NetworkRequest, completion: @escaping (Result<Data, NetworkService.RequestError>) -> Void) {
         var urlRequest = URLRequest(url: request.url)
         urlRequest.httpMethod = "POST"
         urlRequest.allHTTPHeaderFields = getHeaders(with: request)
@@ -56,16 +102,16 @@ struct NetworkService: NetworkRequesting {
                 return
             }
             
-            guard let data = data, let decodedObject = try? JSONDecoder().decode(T.self, from: data) else {
-                completion(.failure(.decodableParsingFailed))
+            guard let data = data else {
+                completion(.failure(.invalidNetworkResponse))
                 return
             }
             
-            completion(.success(decodedObject))
+            completion(.success(data))
         }).resume()
     }
     
-    private func getRequest<T: Decodable>(_ request: NetworkRequest, completion: @escaping (Result<T, NetworkService.RequestError>) -> Void) {
+    private func getRequest(_ request: NetworkRequest, completion: @escaping (Result<Data, NetworkService.RequestError>) -> Void) {
         var urlComponents = URLComponents(url: request.url, resolvingAgainstBaseURL: false)
         urlComponents?.queryItems = request.parameters.map {
             URLQueryItem(name: $0.key, value: String(describing: $0.value))
@@ -92,25 +138,13 @@ struct NetworkService: NetworkRequesting {
                 return
             }
             
-            guard let data = data, let decodedObject = try? JSONDecoder().decode(T.self, from: data) else {
-                completion(.failure(.decodableParsingFailed))
+            guard let data = data else {
+                completion(.failure(.invalidNetworkResponse))
                 return
             }
             
-            completion(.success(decodedObject))
+            completion(.success(data))
         }).resume()
-    }
-    
-    private func getHeaders(with request: NetworkRequest) -> [String: String] {
-        var headers: [String: String] = [
-            "Content-Type": request.contentType.rawValue
-        ]
-        
-        request.headers.forEach { header in
-            headers[header.key] = header.value
-        }
-        
-        return headers
     }
     
 }
