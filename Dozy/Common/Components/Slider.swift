@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct Slider: View {
     
@@ -53,12 +54,16 @@ struct Slider: View {
                                     if translationWidth < 0 {
                                         return .zero
                                     } else if translationWidth >= controlWidthOffsetLimit {
-                                        self.hasReachedEnd = true
                                         return controlWidthOffsetLimit
                                     } else {
                                         return translationWidth
                                     }
                                 }()
+                                
+                                if controlWidthOffset == controlWidthOffsetLimit {
+                                    self.hasReachedEnd = true
+                                    self.generateSuccessFeedback()
+                                }
                                 
                                 self.controlWidthOffset = controlWidthOffset
                             }
@@ -89,6 +94,11 @@ struct Slider: View {
                     .offset(x: -8)
             )
         }
+    }
+    
+    private func generateSuccessFeedback() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
     }
     
 }
