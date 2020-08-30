@@ -17,12 +17,17 @@ class SchedulePresenterTimerTests: XCTestCase {
     private func setupPresenter(timerActive: Bool) {
         let channel = Channel(id: "SOME_CHANNEL_ID", isPublic: true, text: "SOME_CHANNEL_NAME")
         let message = Message(image: nil, bodyText: "SOME_BODY_TEXT", channel: channel)
-        let schedule = Schedule(message: message, awakeConfirmationTime: Date(), isActive: timerActive)
+        let scheduledMessageId = timerActive ? "SOME_MESSAGE_ID" : nil
+        let schedule = Schedule(message: message, awakeConfirmationTime: Date(), scheduledMessageId: scheduledMessageId)
         viewModel = ScheduleViewModel(schedule: schedule)
         
         let userDefaultsMock = ScheduleUserDefaultsMock()
         
-        presenter = SchedulePresenter(schedule: schedule, viewModel: viewModel, userDefaults: userDefaultsMock)
+        let urlSessionMock = URLSessionMock()
+        let networkService = NetworkService(urlSession: urlSessionMock)
+        let keychainMock = KeychainMock()
+        
+        presenter = SchedulePresenter(schedule: schedule, viewModel: viewModel, userDefaults: userDefaultsMock, networkService: networkService, keychain: keychainMock)
     }
     
     func testAwakeConfirmationCardTextWhenTimerEnabled() throws {

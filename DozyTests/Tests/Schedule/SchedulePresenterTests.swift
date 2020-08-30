@@ -16,30 +16,26 @@ class SchedulePresenterTests: XCTestCase {
     var schedule: Schedule!
     
     var userDefaultsMock: ScheduleUserDefaultsMock!
+    var urlSessionMock: URLSessionMock!
+    var keychainMock: KeychainMock!
     
     override func setUpWithError() throws {
         let channel = Channel(id: "SOME_CHANNEL_ID", isPublic: true, text: "SOME_CHANNEL_NAME")
         let message = Message(image: nil, bodyText: "SOME_BODY_TEXT", channel: channel)
-        schedule = Schedule(message: message, awakeConfirmationTime: Date(), isActive: true)
+        schedule = Schedule(message: message, awakeConfirmationTime: Date(), scheduledMessageId: nil)
         viewModel = ScheduleViewModel(schedule: schedule)
         
         userDefaultsMock = ScheduleUserDefaultsMock()
         
-        presenter = SchedulePresenter(schedule: schedule, viewModel: viewModel, userDefaults: userDefaultsMock)
+        urlSessionMock = URLSessionMock()
+        let networkService = NetworkService(urlSession: urlSessionMock)
+        keychainMock = KeychainMock()
+        
+        presenter = SchedulePresenter(schedule: schedule, viewModel: viewModel, userDefaults: userDefaultsMock, networkService: networkService, keychain: keychainMock)
     }
 
     override func tearDownWithError() throws {
         presenter = nil
-    }
-
-    func testOnSwitchPositionChanged() throws {
-        presenter.onSwitchPositionChanged(position: .on)
-        XCTAssertEqual(viewModel.state, .active)
-        XCTAssertTrue(userDefaultsMock.scheduleSaved!.isActive)
-        
-        presenter.onSwitchPositionChanged(position: .off)
-        XCTAssertEqual(viewModel.state, .inactive)
-        XCTAssertFalse(userDefaultsMock.scheduleSaved!.isActive)
     }
     
     func testOnMessageActionButtonTapped() throws {
@@ -62,8 +58,7 @@ class SchedulePresenterTests: XCTestCase {
         
         XCTAssertEqual(self.viewModel.messageCard.actionButtonTitle, "Edit")
         
-        
-        let expectedSchedule = Schedule(message: message, awakeConfirmationTime: schedule.awakeConfirmationTime, isActive: schedule.isActive)
+        let expectedSchedule = Schedule(message: message, awakeConfirmationTime: schedule.awakeConfirmationTime, scheduledMessageId: nil)
         XCTAssertEqual(userDefaultsMock.scheduleSaved, expectedSchedule)
     }
 
