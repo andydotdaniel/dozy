@@ -16,6 +16,7 @@ struct Switch: View {
     
     enum Position {
         case on
+        case loading
         case off
     }
 
@@ -24,28 +25,32 @@ struct Switch: View {
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 22)
-                .foregroundColor(position == .on ? Color.primaryBlue : Color.alertRed)
-                .frame(width: 75, height: 44)
-                .offset(x: position == .on ? -38 : 36)
-                .animation(.easeOut(duration: 0.25))
-            HStack(alignment: .center, spacing: 44) {
-                Text("On".uppercased())
-                    .bold()
-                    .foregroundColor(position == .on ? .white : .secondaryGray)
-                    .onTapGesture {
-                        self.position = .on
-                        self.delegate?.onSwitchPositionChanged(position: self.position)
-                    }
-                Text("Off".uppercased())
-                    .bold()
-                    .foregroundColor(position == .off ? .white : .secondaryGray)
-                    .onTapGesture {
-                        self.position = .off
-                        self.delegate?.onSwitchPositionChanged(position: self.position)
-                    }
+            if position == .loading {
+                Spinner(strokeColor: Color.primaryBlue)
+            } else {
+                RoundedRectangle(cornerRadius: 22)
+                    .foregroundColor(position == .on ? Color.primaryBlue : Color.alertRed)
+                    .frame(width: 75, height: 44)
+                    .offset(x: position == .on ? -38 : 36)
+                    .animation(.easeOut(duration: 0.25))
+                HStack(alignment: .center, spacing: 44) {
+                    Text("On".uppercased())
+                        .bold()
+                        .foregroundColor(position == .on ? .white : .secondaryGray)
+                        .onTapGesture {
+                            self.position = .on
+                            self.delegate?.onSwitchPositionChanged(position: self.position)
+                        }
+                    Text("Off".uppercased())
+                        .bold()
+                        .foregroundColor(position == .off ? .white : .secondaryGray)
+                        .onTapGesture {
+                            self.position = .off
+                            self.delegate?.onSwitchPositionChanged(position: self.position)
+                        }
+                }
+                .font(.system(size: 18))
             }
-            .font(.system(size: 18))
         }
         .padding(.horizontal, 30)
         .frame(height: 60)
