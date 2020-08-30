@@ -111,11 +111,17 @@ class SchedulePresenter: ScheduleViewPresenter {
     }
     
     func onSwitchPositionChangedTriggered() {
-        viewModel.switchPosition = .loading
-        
         if viewModel.state == .inactive {
+            viewModel.state = .active
+            viewModel.switchPosition = (.on, true)
+            enableAwakeConfirmation()
+            
             sendScheduleMessageRequest()
         } else {
+            viewModel.state = .inactive
+            viewModel.switchPosition = (.off, true)
+            disableAwakeConfirmation()
+            
             sendDeleteScheduledMessageRequest()
         }
     }
@@ -137,9 +143,7 @@ class SchedulePresenter: ScheduleViewPresenter {
                     self.schedule.scheduledMessageId = response.scheduledMessageId
                     self.userDefaults.saveSchedule(self.schedule)
                     
-                    self.enableAwakeConfirmation()
-                    self.viewModel.state = .active
-                    self.viewModel.switchPosition = .on
+                    self.viewModel.switchPosition = (.on, false)
                 case .failure:
                     // TODO: Handle failure
                     break
@@ -200,9 +204,7 @@ class SchedulePresenter: ScheduleViewPresenter {
                     self.schedule.scheduledMessageId = nil
                     self.userDefaults.saveSchedule(self.schedule)
                     
-                    self.disableAwakeConfirmation()
-                    self.viewModel.state = .inactive
-                    self.viewModel.switchPosition = .off
+                    self.viewModel.switchPosition = (.off, false)
                 case .failure:
                     // TODO: Handle failure
                     break

@@ -42,7 +42,7 @@ struct ScheduleView: View {
                 }
             }
             .padding(.top, 12)
-            Switch(position: $viewModel.switchPosition, delegate: self.presenter)
+            Switch(switchState: $viewModel.switchPosition, delegate: self.presenter)
         }.sheet(isPresented: self.$viewModel.isShowingMessageForm, content: {
             self.presenter.navigateToMessageForm()
         })
