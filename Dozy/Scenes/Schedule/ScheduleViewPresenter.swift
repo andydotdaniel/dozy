@@ -116,7 +116,7 @@ class SchedulePresenter: ScheduleViewPresenter {
         if viewModel.state == .inactive {
             sendScheduleMessageRequest()
         } else {
-            disableAwakeConfirmation()
+            sendDeleteScheduledMessageRequest()
         }
     }
     
@@ -177,6 +177,38 @@ class SchedulePresenter: ScheduleViewPresenter {
             "post_at": postAtTime.timeIntervalSince1970,
             "blocks": blocks
         ]
+    }
+    
+    private func sendDeleteScheduledMessageRequest() {
+        guard let scheduledMessageId = schedule.scheduledMessageId,
+            let accessTokenData = keychain.load(key: "slack_access_token") else { return }
+        let accessToken = String(decoding: accessTokenData, as: UTF8.self)
+        let headers = ["Authorization": "Bearer \(accessToken)"]
+        
+        let parameters = [
+            "channel": schedule.message.channel.id,
+            "scheduled_message_id": scheduledMessageId
+        ]
+        
+        guard let request = NetworkRequest(url: "https://slack.com/api/chat.deleteScheduledMessage", httpMethod: .post, parameters: parameters, headers: headers, contentType: .json) else { preconditionFailure("Invalid url") }
+        self.networkService.peformNetworkRequest(request, completion: { [weak self] result in
+            guard let self = self else { return }
+            
+            Current.dispatchQueue.async {
+                switch result {
+                case .success:
+                    self.schedule.scheduledMessageId = nil
+                    self.userDefaults.saveSchedule(self.schedule)
+                    
+                    self.disableAwakeConfirmation()
+                    self.viewModel.state = .inactive
+                    self.viewModel.switchPosition = .off
+                case .failure:
+                    // TODO: Handle failure
+                    break
+                }
+            }
+        })
     }
     
     func onMessageActionButtonTapped() {
