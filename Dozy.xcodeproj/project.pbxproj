@@ -30,6 +30,7 @@
 		103264A324C448EB00863603 /* ScheduleViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103264A224C448EB00863603 /* ScheduleViewPresenter.swift */; };
 		103264A524C448FE00863603 /* ScheduleViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103264A424C448FE00863603 /* ScheduleViewBuilder.swift */; };
 		1033ABDB252821000045BD64 /* OnboardingPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1033ABDA252821000045BD64 /* OnboardingPresenterTests.swift */; };
+		1033ABDD25282A500045BD64 /* TimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1033ABDC25282A500045BD64 /* TimePicker.swift */; };
 		1035D0732495FF00006B22FC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D0722495FF00006B22FC /* LoginView.swift */; };
 		1035D075249604CE006B22FC /* LoginHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D074249604CE006B22FC /* LoginHeaderView.swift */; };
 		1035D078249605D7006B22FC /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D077249605D7006B22FC /* Color.swift */; };
@@ -121,6 +122,7 @@
 		103264A224C448EB00863603 /* ScheduleViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewPresenter.swift; sourceTree = "<group>"; };
 		103264A424C448FE00863603 /* ScheduleViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewBuilder.swift; sourceTree = "<group>"; };
 		1033ABDA252821000045BD64 /* OnboardingPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenterTests.swift; sourceTree = "<group>"; };
+		1033ABDC25282A500045BD64 /* TimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePicker.swift; sourceTree = "<group>"; };
 		1035D0722495FF00006B22FC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		1035D074249604CE006B22FC /* LoginHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeaderView.swift; sourceTree = "<group>"; };
 		1035D077249605D7006B22FC /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 				1051E4A724BAF9B300566C5B /* ImagePickerView.swift */,
 				1032649B24C32A9900863603 /* Switch.swift */,
 				1023191324F2238D0005F6A6 /* Slider.swift */,
+				1033ABDC25282A500045BD64 /* TimePicker.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -668,6 +671,7 @@
 				108B4E0F24C2ECA4000F1C4B /* MessageContentCard.swift in Sources */,
 				105BDB0124D68B72005C9CD7 /* Schedule.swift in Sources */,
 				1032649C24C32A9900863603 /* Switch.swift in Sources */,
+				1033ABDD25282A500045BD64 /* TimePicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
