@@ -82,6 +82,10 @@ struct ContentCard: View {
                     withAnimation {
                         self.viewModel.isShowingTimePicker = false
                     }
+                }, cancelButtonAction: {
+                    withAnimation {
+                        self.viewModel.isShowingTimePicker = false
+                    }
                 })
             }
         }

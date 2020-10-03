@@ -12,10 +12,14 @@ struct TimePicker: View {
     
     @Binding var dateSelection: Date
     let doneButtonAction: () -> Void
+    let cancelButtonAction: () -> Void
     
     var body: some View {
         VStack {
             HStack {
+                Button(action: cancelButtonAction, label: {
+                    Text("Cancel")
+                })
                 Spacer()
                 Button(action: doneButtonAction, label: {
                     Text("Done")
@@ -32,12 +36,12 @@ struct TimePicker: View {
         .padding(.top, 16)
         .frame(minWidth: 0, maxWidth: .infinity)
         .background(Color.fadedWhite)
-        .cornerRadius(16)
+        .cornerRadius(10)
     }
 }
 
 struct TimePicker_Previews: PreviewProvider {
     static var previews: some View {
-        TimePicker(dateSelection: .constant(Date()), doneButtonAction: {})
+        TimePicker(dateSelection: .constant(Date()), doneButtonAction: {}, cancelButtonAction: {})
     }
 }
