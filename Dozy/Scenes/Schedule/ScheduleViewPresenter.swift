@@ -11,6 +11,9 @@ import SwiftUI
 protocol ScheduleViewPresenter: SwitchViewDelegate, MessageFormDelegate {
     func onMessageActionButtonTapped()
     func navigateToMessageForm() -> MessageFormView
+    
+    func onEditAwakeConfirmationTimeButtonTapped()
+    func onTimePickerDoneButtonTapped()
 }
 
 class SchedulePresenter: ScheduleViewPresenter {
@@ -243,6 +246,14 @@ class SchedulePresenter: ScheduleViewPresenter {
     
     func navigateToMessageForm() -> MessageFormView {
         MessageFormViewBuilder(message: self.schedule.message, delegate: self).build()
+    }
+    
+    func onEditAwakeConfirmationTimeButtonTapped() {
+        self.viewModel.awakeConfirmationCard.isShowingTimePicker = true
+    }
+    
+    func onTimePickerDoneButtonTapped() {
+        self.viewModel.awakeConfirmationCard.isShowingTimePicker = false
     }
     
 }

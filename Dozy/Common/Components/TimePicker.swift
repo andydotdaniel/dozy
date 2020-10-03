@@ -22,11 +22,12 @@ struct TimePicker: View {
                 })
             }
             .padding(.horizontal, 20)
-            DatePicker("", selection: $dateSelection, displayedComponents: [.date, .hourAndMinute])
-            .labelsHidden()
-            .padding(.bottom, 16)
-            .frame(minWidth: 0, maxWidth: .infinity)
-            .background(Color.secondaryGray)
+            
+            DatePicker("Select awake confirmation time", selection: $dateSelection, displayedComponents: .hourAndMinute)
+                .labelsHidden()
+                .padding(.bottom, 16)
+                .frame(minWidth: 0, maxWidth: .infinity)
+                .background(Color.secondaryGray)
         }
         .padding(.top, 16)
         .frame(minWidth: 0, maxWidth: .infinity)

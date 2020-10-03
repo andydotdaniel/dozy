@@ -26,7 +26,11 @@ struct ScheduleView: View {
                     .frame(width: 58)
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 24) {
-                        ContentCard(viewModel: $viewModel.awakeConfirmationCard)
+                        ContentCard(viewModel: $viewModel.awakeConfirmationCard, buttonAction: {
+                            withAnimation {
+                                self.viewModel.awakeConfirmationCard.isShowingTimePicker = true
+                            }
+                        })
                         MessageContentCard(
                             image: viewModel.messageCard.image,
                             bodyText: viewModel.messageCard.bodyText,

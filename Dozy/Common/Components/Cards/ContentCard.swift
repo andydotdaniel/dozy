@@ -27,6 +27,9 @@ struct ContentCard: View {
         
         let buttonText: String
         
+        var isShowingTimePicker: Bool = false
+        var timePickerDate: Date
+        
         init(
             state: State,
             titleText: String,
@@ -34,7 +37,8 @@ struct ContentCard: View {
             preMutableText: String,
             mutableText: String,
             postMutableText: String,
-            buttonText: String
+            buttonText: String,
+            timePickerDate: Date
         ) {
             self.state = state
             self.titleText = titleText
@@ -43,11 +47,13 @@ struct ContentCard: View {
             self.mutableText = mutableText
             self.postMutableText = postMutableText
             self.buttonText = buttonText
+            self.timePickerDate = timePickerDate
         }
         
     }
     
     @Binding var viewModel: ViewModel
+    let buttonAction: () -> Void
     
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
@@ -63,10 +69,21 @@ struct ContentCard: View {
             createBodyText()
                 .fixedSize(horizontal: false, vertical: true)
                 .foregroundColor(Color.white)
-            SecondaryButton(
-                titleText: viewModel.buttonText, tapAction: {},
-                color: viewModel.state == .enabled ? Color.darkBlue : Color.darkRed
-            )
+            
+            if !viewModel.isShowingTimePicker {
+                SecondaryButton(
+                    titleText: viewModel.buttonText, tapAction: buttonAction,
+                    color: viewModel.state == .enabled ? Color.darkBlue : Color.darkRed
+                )
+            }
+            
+            if viewModel.isShowingTimePicker {
+                TimePicker(dateSelection: $viewModel.timePickerDate, doneButtonAction: {
+                    withAnimation {
+                        self.viewModel.isShowingTimePicker = false
+                    }
+                })
+            }
         }
         .padding(.horizontal, 24)
         .padding(.vertical, 28)
@@ -92,9 +109,10 @@ struct ContentCard_Previews: PreviewProvider {
             preMutableText: "Open the app in ",
             mutableText: "07:18:36",
             postMutableText: " or your sleepyhead message gets sent.",
-            buttonText: "Change awake confirmation time"
+            buttonText: "Change awake confirmation time",
+            timePickerDate: Date()
         )
         
-        return ContentCard(viewModel: .constant(viewModel))
+        return ContentCard(viewModel: .constant(viewModel), buttonAction: {})
     }
 }

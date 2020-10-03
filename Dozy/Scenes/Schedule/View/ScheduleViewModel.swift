@@ -45,7 +45,8 @@ class ScheduleViewModel: ObservableObject {
             preMutableText: "",
             mutableText: "",
             postMutableText: "",
-            buttonText: "Change awake confirmation time"
+            buttonText: "Change awake confirmation time",
+            timePickerDate: Calendar.current.date(byAdding: .minute, value: 30, to: Date())!
         )
         
         let messageImage = schedule.message.image.map { UIImage(data: $0) } ?? nil
