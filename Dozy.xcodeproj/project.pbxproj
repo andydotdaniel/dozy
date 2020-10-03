@@ -29,6 +29,7 @@
 		103264A124C4488C00863603 /* ScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103264A024C4488C00863603 /* ScheduleViewModel.swift */; };
 		103264A324C448EB00863603 /* ScheduleViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103264A224C448EB00863603 /* ScheduleViewPresenter.swift */; };
 		103264A524C448FE00863603 /* ScheduleViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103264A424C448FE00863603 /* ScheduleViewBuilder.swift */; };
+		1033ABDB252821000045BD64 /* OnboardingPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1033ABDA252821000045BD64 /* OnboardingPresenterTests.swift */; };
 		1035D0732495FF00006B22FC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D0722495FF00006B22FC /* LoginView.swift */; };
 		1035D075249604CE006B22FC /* LoginHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D074249604CE006B22FC /* LoginHeaderView.swift */; };
 		1035D078249605D7006B22FC /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D077249605D7006B22FC /* Color.swift */; };
@@ -119,6 +120,7 @@
 		103264A024C4488C00863603 /* ScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewModel.swift; sourceTree = "<group>"; };
 		103264A224C448EB00863603 /* ScheduleViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewPresenter.swift; sourceTree = "<group>"; };
 		103264A424C448FE00863603 /* ScheduleViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewBuilder.swift; sourceTree = "<group>"; };
+		1033ABDA252821000045BD64 /* OnboardingPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenterTests.swift; sourceTree = "<group>"; };
 		1035D0722495FF00006B22FC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		1035D074249604CE006B22FC /* LoginHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeaderView.swift; sourceTree = "<group>"; };
 		1035D077249605D7006B22FC /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -443,6 +445,7 @@
 				1023190D24F160250005F6A6 /* Schedule */,
 				10BB85ED24BB6F4C005D9829 /* MessageForm */,
 				101581742495F8CA00AA0B37 /* LoginPresenterTests.swift */,
+				1033ABDA252821000045BD64 /* OnboardingPresenterTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -683,6 +686,7 @@
 				1023190F24F1603B0005F6A6 /* SchedulePresenterTimerTests.swift in Sources */,
 				101581752495F8CA00AA0B37 /* LoginPresenterTests.swift in Sources */,
 				105A182E24BB5C25003177AA /* JSONLoader.swift in Sources */,
+				1033ABDB252821000045BD64 /* OnboardingPresenterTests.swift in Sources */,
 				104BCC2624AB9C0600C35BDC /* DispatchQueueMock.swift in Sources */,
 				10BB85EC24BB6F48005D9829 /* MessageFormBuilderTests.swift in Sources */,
 				1025D7BB24E44A2700118CD4 /* Message.swift in Sources */,
