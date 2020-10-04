@@ -20,6 +20,8 @@ class SchedulePresenterTests: XCTestCase {
     var keychainMock: KeychainMock!
     
     override func setUpWithError() throws {
+        Current = .mock
+        
         let channel = Channel(id: "SOME_CHANNEL_ID", isPublic: true, text: "SOME_CHANNEL_NAME")
         let message = Message(image: nil, bodyText: "SOME_BODY_TEXT", channel: channel)
         schedule = Schedule(message: message, awakeConfirmationTime: Date(), scheduledMessageId: nil)
@@ -36,6 +38,7 @@ class SchedulePresenterTests: XCTestCase {
 
     override func tearDownWithError() throws {
         presenter = nil
+        Current = World()
     }
     
     func testOnMessageActionButtonTapped() throws {
@@ -60,6 +63,34 @@ class SchedulePresenterTests: XCTestCase {
         
         let expectedSchedule = Schedule(message: message, awakeConfirmationTime: schedule.awakeConfirmationTime, scheduledMessageId: nil)
         XCTAssertEqual(userDefaultsMock.scheduleSaved, expectedSchedule)
+    }
+    
+    func testOnTimePickerDoneButtonTapped() {
+        let dateAdded = Current.now().addingTimeInterval(2700)
+        self.viewModel.awakeConfirmationCard.timePickerDate = dateAdded
+        
+        self.presenter.onTimePickerDoneButtonTapped()
+        
+        XCTAssertEqual(self.userDefaultsMock.scheduleSaved!.awakeConfirmationTime.timeIntervalSinceReferenceDate, dateAdded.timeIntervalSinceReferenceDate, accuracy: 0.001)
+        
+        XCTAssertEqual(self.userDefaultsMock.scheduleSaved?.awakeConfirmationDateText, viewModel.awakeConfirmationCard.titleText)
+        XCTAssertEqual(self.userDefaultsMock.scheduleSaved?.awakeConfirmationTimeText, viewModel.awakeConfirmationCard.subtitleText)
+    }
+    
+    func testOnTimePickerDoneButtonTappedForNextDay() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-mm-dd HH:mm:ss"
+        Current.now = { dateFormatter.date(from: "2020-10-01 10:30:00")! }
+        
+        let updatedTime = dateFormatter.date(from: "2020-10-02 06:30:00")!
+        self.viewModel.awakeConfirmationCard.timePickerDate = updatedTime
+        
+        self.presenter.onTimePickerDoneButtonTapped()
+        
+        XCTAssertEqual(self.userDefaultsMock.scheduleSaved!.awakeConfirmationTime.timeIntervalSinceReferenceDate, updatedTime.timeIntervalSinceReferenceDate, accuracy: 0.001)
+        
+        XCTAssertEqual(self.userDefaultsMock.scheduleSaved?.awakeConfirmationDateText, viewModel.awakeConfirmationCard.titleText)
+        XCTAssertEqual(self.userDefaultsMock.scheduleSaved?.awakeConfirmationTimeText, viewModel.awakeConfirmationCard.subtitleText)
     }
 
 }

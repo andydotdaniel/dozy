@@ -270,7 +270,7 @@ class SchedulePresenter: ScheduleViewPresenter {
         }
         
         let updatedTimePickerDate = Time(from: self.viewModel.awakeConfirmationCard.timePickerDate)
-        let now = Date()
+        let now = Current.now()
         let nowTime = Time(from: now)
         
         let updatedTimePickerDateAndNowMinutesDifference = calculateMinutesDifference(updatedTimePickerDate, with: nowTime)

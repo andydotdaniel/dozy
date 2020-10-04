@@ -13,6 +13,9 @@ import Combine
 struct World {
     var dispatchQueue: DispatchQueueable = DispatchQueue.main
     var configuration: Configuration = Configuration.create()
+    
+    var now = { Date() }
+    
     weak var window: UIWindow?
 }
 
