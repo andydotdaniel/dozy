@@ -30,7 +30,7 @@ struct ScheduleView: View {
                             withAnimation {
                                 self.viewModel.awakeConfirmationCard.isShowingTimePicker = true
                             }
-                        })
+                        }, timePickerActions: (cancelButton: self.presenter.onTimePickerCancelButtonTapped, doneButton: self.presenter.onTimePickerDoneButtonTapped))
                         MessageContentCard(
                             image: viewModel.messageCard.image,
                             bodyText: viewModel.messageCard.bodyText,

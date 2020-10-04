@@ -14,6 +14,7 @@ protocol ScheduleViewPresenter: SwitchViewDelegate, MessageFormDelegate {
     
     func onEditAwakeConfirmationTimeButtonTapped()
     func onTimePickerDoneButtonTapped()
+    func onTimePickerCancelButtonTapped()
 }
 
 class SchedulePresenter: ScheduleViewPresenter {
@@ -104,11 +105,19 @@ class SchedulePresenter: ScheduleViewPresenter {
         let oneDayInSeconds: TimeInterval = 60 * 60 * 24
         let nextDay = schedule.awakeConfirmationTime.addingTimeInterval(oneDayInSeconds)
         
-        schedule.awakeConfirmationTime = nextDay
-        userDefaults.saveSchedule(schedule)
+        updateUserDefaultsSchedule(with: nextDay)
         
         secondsUntilAwakeConfirmationTime = Int(nextDay.timeIntervalSince(date))
         
+        updateAwakeConfirmationText(with: schedule)
+    }
+    
+    private func updateUserDefaultsSchedule(with time: Date) {
+        schedule.awakeConfirmationTime = time
+        userDefaults.saveSchedule(schedule)
+    }
+    
+    private func updateAwakeConfirmationText(with schedule: Schedule) {
         viewModel.awakeConfirmationCard.titleText = schedule.awakeConfirmationDateText
         viewModel.awakeConfirmationCard.subtitleText = schedule.awakeConfirmationTimeText
     }
@@ -253,6 +262,39 @@ class SchedulePresenter: ScheduleViewPresenter {
     }
     
     func onTimePickerDoneButtonTapped() {
+        func calculateMinutesDifference(_ timeA: Time, with timeB: Time) -> Int {
+            let timeAMinutes = (timeA.hour * 60) + timeA.minute
+            let timeBMinutes = (timeB.hour * 60) + timeB.minute
+            
+            return timeAMinutes - timeBMinutes
+        }
+        
+        let updatedTimePickerDate = Time(from: self.viewModel.awakeConfirmationCard.timePickerDate)
+        let now = Date()
+        let nowTime = Time(from: now)
+        
+        let updatedTimePickerDateAndNowMinutesDifference = calculateMinutesDifference(updatedTimePickerDate, with: nowTime)
+        
+        let secondsToAdd: TimeInterval = {
+            if updatedTimePickerDateAndNowMinutesDifference < 0 {
+                let midnight = Time(hour: 24, minute: 00)
+                let nowAndMidnightDifference = calculateMinutesDifference(midnight, with: nowTime)
+                
+                let secondsToAdd = (nowAndMidnightDifference * 60) + (((updatedTimePickerDate.hour * 60) + updatedTimePickerDate.minute) * 60)
+                return TimeInterval(secondsToAdd)
+            } else {
+                return TimeInterval(updatedTimePickerDateAndNowMinutesDifference * 60)
+            }
+        }()
+        
+        let updatedAwakeConfirmationTime = now.addingTimeInterval(secondsToAdd)
+        self.updateUserDefaultsSchedule(with: updatedAwakeConfirmationTime)
+        self.updateAwakeConfirmationText(with: self.schedule)
+        
+        self.viewModel.awakeConfirmationCard.isShowingTimePicker = false
+    }
+    
+    func onTimePickerCancelButtonTapped() {
         self.viewModel.awakeConfirmationCard.isShowingTimePicker = false
     }
     

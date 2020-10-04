@@ -54,6 +54,7 @@ struct ContentCard: View {
     
     @Binding var viewModel: ViewModel
     let buttonAction: () -> Void
+    let timePickerActions: (cancelButton: () -> Void, doneButton: () -> Void)
     
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
@@ -80,11 +81,11 @@ struct ContentCard: View {
             if viewModel.isShowingTimePicker {
                 TimePicker(dateSelection: $viewModel.timePickerDate, doneButtonAction: {
                     withAnimation {
-                        self.viewModel.isShowingTimePicker = false
+                        self.timePickerActions.doneButton()
                     }
                 }, cancelButtonAction: {
                     withAnimation {
-                        self.viewModel.isShowingTimePicker = false
+                        self.timePickerActions.cancelButton()
                     }
                 })
             }
@@ -117,6 +118,6 @@ struct ContentCard_Previews: PreviewProvider {
             timePickerDate: Date()
         )
         
-        return ContentCard(viewModel: .constant(viewModel), buttonAction: {})
+        return ContentCard(viewModel: .constant(viewModel), buttonAction: {}, timePickerActions: ({}, {}))
     }
 }
