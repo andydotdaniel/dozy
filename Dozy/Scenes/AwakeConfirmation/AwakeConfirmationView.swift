@@ -22,7 +22,13 @@ class AwakeConfirmationViewModel: ObservableObject {
 
 struct AwakeConfirmationView: View {
     
-    @ObservedObject var viewModel: AwakeConfirmationViewModel
+    @ObservedObject private var viewModel: AwakeConfirmationViewModel
+    private let presenter: AwakeConfirmationViewPresenter
+    
+    init(viewModel: AwakeConfirmationViewModel, presenter: AwakeConfirmationViewPresenter) {
+        self.viewModel = viewModel
+        self.presenter = presenter
+    }
     
     var body: some View {
         VStack() {
@@ -35,7 +41,7 @@ struct AwakeConfirmationView: View {
                     .bold()
             }.foregroundColor(self.viewModel.countdownActive ? Color.primaryBlue : Color.borderGray)
             Spacer()
-            Slider(titleText: "Slide for awake confirmation")
+            Slider(titleText: "Slide for awake confirmation", delegate: presenter)
         }
         .padding(.bottom, 16)
         .padding(.horizontal, 16)
@@ -46,12 +52,13 @@ struct AwakeConfirmationView: View {
 struct AwakeConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = AwakeConfirmationViewModel(countdownActive: true, secondsLeft: 30)
+        let presenter = AwakeConfirmationPresenter(networkService: NetworkService(), keychain: Keychain(), userDefaults: UserDefaults.standard)
         
         return Group {
-            AwakeConfirmationView(viewModel: viewModel)
+            AwakeConfirmationView(viewModel: viewModel, presenter: presenter)
                 .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
                 .previewDisplayName("iPhone 11")
-            AwakeConfirmationView(viewModel: viewModel)
+            AwakeConfirmationView(viewModel: viewModel, presenter: presenter)
                 .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))
                 .previewDisplayName("iPhone SE (2nd generation)")
         }

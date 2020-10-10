@@ -9,11 +9,17 @@
 import SwiftUI
 import UIKit
 
+protocol SliderDelegate: class {
+    func onSliderReachedEnd()
+}
+
 struct Slider: View {
     
     @State private var controlWidthOffset: CGFloat = .zero
     @State private var hasReachedEnd: Bool = false
     let titleText: String
+    
+    weak var delegate: SliderDelegate?
     
     private let horizontalPadding: CGFloat = 16
     
@@ -63,6 +69,7 @@ struct Slider: View {
                                 if controlWidthOffset == controlWidthOffsetLimit {
                                     self.hasReachedEnd = true
                                     self.generateSuccessFeedback()
+                                    self.delegate?.onSliderReachedEnd()
                                 }
                                 
                                 self.controlWidthOffset = controlWidthOffset
@@ -105,6 +112,6 @@ struct Slider: View {
 
 struct Slider_Previews: PreviewProvider {
     static var previews: some View {
-        Slider(titleText: "Slide for awake confirmation.")
+        Slider(titleText: "Slide for awake confirmation.", delegate: nil)
     }
 }
