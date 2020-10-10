@@ -8,6 +8,8 @@
 
 import SwiftUI
 
+private let pushNotificationIdentifier = "dozy_awake_confirmation_alert"
+
 protocol ScheduleViewPresenter: SwitchViewDelegate, MessageFormDelegate {
     func onMessageActionButtonTapped()
     func navigateToMessageForm() -> MessageFormView
@@ -129,12 +131,14 @@ class SchedulePresenter: ScheduleViewPresenter {
             enableAwakeConfirmation()
             
             sendScheduleMessageRequest()
+            createPushNotification()
         } else {
             viewModel.state = .inactive
             viewModel.switchPosition = (.off, true)
             disableAwakeConfirmation()
             
             sendDeleteScheduledMessageRequest()
+            deletePushNotification()
         }
     }
     
@@ -223,6 +227,29 @@ class SchedulePresenter: ScheduleViewPresenter {
                 }
             }
         })
+    }
+    
+    private func createPushNotification() {
+        let content = UNMutableNotificationContent()
+        content.title = "Hope you're awake sleepyhead!"
+        content.body = "Confirm that you're awake before the timer runs out"
+        
+        let dateComponents = Calendar.current.dateComponents(
+            [.year, .month, .day, .hour, .minute, .second],
+            from: self.schedule.awakeConfirmationTime
+        )
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        let request = UNNotificationRequest(identifier: pushNotificationIdentifier, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
+            if error != nil {
+                // TODO: Handle errors
+            }
+        })
+    }
+    
+    private func deletePushNotification() {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [pushNotificationIdentifier])
     }
     
     func onMessageActionButtonTapped() {
