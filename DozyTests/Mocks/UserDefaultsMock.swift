@@ -12,12 +12,13 @@ import Foundation
 class ScheduleUserDefaultsMock: ScheduleUserDefaultable {
     
     var scheduleSaved: Schedule?
+    
     func saveSchedule(_ schedule: Schedule) {
         self.scheduleSaved = schedule
     }
     
     func loadSchedule() -> Schedule? {
-        return nil
+        return scheduleSaved
     }
     
 }
