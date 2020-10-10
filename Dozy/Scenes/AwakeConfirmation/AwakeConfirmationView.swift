@@ -51,8 +51,12 @@ struct AwakeConfirmationView: View {
 
 struct AwakeConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
+        let channel = Channel(id: "SOME_CHANNEL_ID", isPublic: false, text: "SOME_TEXT")
+        let message = Message(image: nil, bodyText: "SOME_TEXT", channel: channel)
+        let schedule = Schedule(message: message, awakeConfirmationTime: Date().addingTimeInterval(30), scheduledMessageId: nil)
+        
         let viewModel = AwakeConfirmationViewModel(countdownActive: true, secondsLeft: 30)
-        let presenter = AwakeConfirmationPresenter(networkService: NetworkService(), keychain: Keychain(), userDefaults: UserDefaults.standard)
+        let presenter = AwakeConfirmationPresenter(viewModel: viewModel, networkService: NetworkService(), keychain: Keychain(), userDefaults: UserDefaults.standard, savedSchedule: schedule)
         
         return Group {
             AwakeConfirmationView(viewModel: viewModel, presenter: presenter)

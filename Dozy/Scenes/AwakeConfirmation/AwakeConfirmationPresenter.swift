@@ -12,14 +12,48 @@ protocol AwakeConfirmationViewPresenter: SliderDelegate {}
 
 class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
     
+    private var viewModel: AwakeConfirmationViewModel
+    
     private let networkService: NetworkRequesting
     private let keychain: SecureStorable
     private let userDefaults: ScheduleUserDefaultable
     
-    init(networkService: NetworkRequesting, keychain: SecureStorable, userDefaults: ScheduleUserDefaultable) {
+    private var secondsLeftTimer: Timer?
+    
+    private let savedSchedule: Schedule
+    
+    init(
+        viewModel: AwakeConfirmationViewModel,
+        networkService: NetworkRequesting,
+        keychain: SecureStorable,
+        userDefaults: ScheduleUserDefaultable,
+        savedSchedule: Schedule
+    ) {
+        self.viewModel = viewModel
         self.networkService = networkService
         self.keychain = keychain
         self.userDefaults = userDefaults
+        self.savedSchedule = savedSchedule
+        
+        setSecondsLeftTimer()
+    }
+    
+    private func setSecondsLeftTimer() {
+        secondsLeftTimer = Timer.scheduledTimer(
+            timeInterval: 1,
+            target: self,
+            selector: #selector(updateSecondsLeftTimer),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+    
+    @objc private func updateSecondsLeftTimer() {
+        if viewModel.secondsLeft >= 1 {
+            viewModel.secondsLeft -= 1
+        } else {
+            secondsLeftTimer?.invalidate()
+        }
     }
     
     func onSliderReachedEnd() {
@@ -27,14 +61,14 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
     }
     
     private func cancelScheduledMessage() {
-        guard let schedule = userDefaults.loadSchedule(), let scheduledMessageId = schedule.scheduledMessageId else { return }
+        guard let scheduledMessageId = savedSchedule.scheduledMessageId else { return }
         guard let accessTokenData = keychain.load(key: "slack_access_token") else { return }
         let accessToken = String(decoding: accessTokenData, as: UTF8.self)
         
         guard let request = NetworkRequest(
             url: "/slack.com/api/chat.deleteScheduledMessage",
             httpMethod: .post,
-            parameters: ["channel": schedule.message.channel.id, "scheduled_message_id": scheduledMessageId],
+            parameters: ["channel": savedSchedule.message.channel.id, "scheduled_message_id": scheduledMessageId],
             headers: ["Authorization": "Bearer \(accessToken)"],
             contentType: .json
         ) else { preconditionFailure("Invalid url") }
@@ -44,7 +78,7 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
             Current.dispatchQueue.async {
                 switch result {
                 case .success:
-                    var updatedSchedule = schedule
+                    var updatedSchedule = self.savedSchedule
                     updatedSchedule.scheduledMessageId = nil
                     
                     self.userDefaults.saveSchedule(updatedSchedule)
