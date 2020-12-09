@@ -30,7 +30,7 @@ struct HeaderMain: View {
                 Image("ProfileIcon")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 24, height: 24)
+                    .frame(width: 32, height: 32)
                     .onTapGesture {
                         self.delegate?.onSettingsIconTapped()
                     }

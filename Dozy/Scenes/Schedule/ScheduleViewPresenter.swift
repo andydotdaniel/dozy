@@ -31,18 +31,22 @@ class SchedulePresenter: ScheduleViewPresenter {
     private let networkService: NetworkRequesting
     private let keychain: SecureStorable
     
+    private weak var navigationControllable: NavigationControllable?
+    
     init(
         schedule: Schedule,
         viewModel: ScheduleViewModel,
         userDefaults: ScheduleUserDefaultable,
         networkService: NetworkRequesting,
-        keychain: SecureStorable
+        keychain: SecureStorable,
+        navigationControllable: NavigationControllable?
     ) {
         self.viewModel = viewModel
         self.userDefaults = userDefaults
         self.schedule = schedule
         self.networkService = networkService
         self.keychain = keychain
+        self.navigationControllable = navigationControllable
         
         let now = Date()
         self.secondsUntilAwakeConfirmationTime = Int(schedule.awakeConfirmationTime.timeIntervalSince(now))
@@ -348,7 +352,8 @@ class SchedulePresenter: ScheduleViewPresenter {
     }
     
     func onSettingsIconTapped() {
-        
+        let profileViewController = ProfileViewBuilder().buildViewController()
+        navigationControllable?.pushViewController(profileViewController, animated: true)
     }
     
 }

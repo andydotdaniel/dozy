@@ -29,7 +29,7 @@ class RootViewBuilder: ViewControllerBuilder {
         }
         
         if let schedule = self.userDefaults.loadSchedule() {
-            return ScheduleViewBuilder(schedule: schedule).buildViewController()
+            return ScheduleViewBuilder(schedule: schedule, navigationControllable: navigationControllable).buildViewController()
         }
         
         return OnboardingViewBuilder(navigationControllable: navigationControllable).buildViewController()

@@ -22,14 +22,23 @@ class ScheduleViewController: UIHostingController<ScheduleView> {
 struct ScheduleViewBuilder: ViewControllerBuilder {
     
     private let schedule: Schedule
+    private weak var navigationControllable: NavigationControllable?
     
-    init(schedule: Schedule) {
+    init(schedule: Schedule, navigationControllable: NavigationControllable?) {
         self.schedule = schedule
+        self.navigationControllable = navigationControllable
     }
     
     func buildViewController() -> UIViewController {
         let viewModel = ScheduleViewModel(schedule: schedule)
-        let presenter = SchedulePresenter(schedule: schedule, viewModel: viewModel, userDefaults: UserDefaults.standard, networkService: NetworkService(), keychain: Keychain())
+        let presenter = SchedulePresenter(
+            schedule: schedule,
+            viewModel: viewModel,
+            userDefaults: UserDefaults.standard,
+            networkService: NetworkService(),
+            keychain: Keychain(),
+            navigationControllable: navigationControllable
+        )
         let view = ScheduleView(viewModel: viewModel, presenter: presenter)
         
         return ScheduleViewController(rootView: view)
