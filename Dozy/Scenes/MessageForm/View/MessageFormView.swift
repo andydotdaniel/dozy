@@ -44,7 +44,6 @@ struct MessageFormView: View {
                     VStack(alignment: .leading, spacing: 16) {
                         MultilineTextField(placeholderText: "Compose message", text: $viewModel.bodyText)
                         ImagePickerButton(selectedImage: $viewModel.selectedImage)
-                            .offset(y: -self.viewModel.keyboardHeight)
                             .animation(.easeOut)
                             .onTapGesture {
                                self.viewModel.isShowingImagePicker.toggle()

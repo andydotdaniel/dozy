@@ -58,9 +58,7 @@ class MesssageFormViewModel: ObservableObject {
     
     private var cancellableSet = Set<AnyCancellable>()
     
-    @Published var keyboardHeight: CGFloat
     private var keyboardListener: KeyboardListener
-    private var keyboardListenerSink: AnyCancellable?
     
     init(navigationBarTitle: String, message: Message?) {
         self.navigationBarTitle = navigationBarTitle
@@ -72,7 +70,6 @@ class MesssageFormViewModel: ObservableObject {
             return Color.placeholderGray
         }()
         self.bodyText = message?.bodyText
-        self.keyboardHeight = 0
         
         self.isShowingChannelDropdown = false
         self.filteredChannelItems = []
@@ -84,7 +81,6 @@ class MesssageFormViewModel: ObservableObject {
         
         let keyboardListener = KeyboardListener()
         self.keyboardListener = keyboardListener
-        self.keyboardListenerSink = keyboardListener.$keyboardHeight.sink { self.keyboardHeight = $0 }
         
         self.saveButtonEnabledPublisher
             .receive(on: DispatchQueue.main)
