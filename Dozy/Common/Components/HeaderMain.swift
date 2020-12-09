@@ -27,7 +27,9 @@ struct HeaderMain: View {
             Image("LogoGray")
             HStack {
                 Spacer()
-                Image("SettingsIcon")
+                Image("ProfileIcon")
+                    .resizable()
+                    .scaledToFit()
                     .frame(width: 24, height: 24)
                     .onTapGesture {
                         self.delegate?.onSettingsIconTapped()

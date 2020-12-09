@@ -42,7 +42,7 @@ final class LoginPresenter: LoginViewPresenter {
         var urlComponents = URLComponents(string: "https://slack.com/oauth/v2/authorize")!
         urlComponents.queryItems = [
             URLQueryItem(name: "client_id", value: Current.configuration.clientId),
-            URLQueryItem(name: "user_scope", value: "chat:write,channels:read,groups:read"),
+            URLQueryItem(name: "user_scope", value: "chat:write,channels:read,groups:read,users:read"),
             URLQueryItem(name: "redirect_url", value: "dozyapp://slack/authorize/success"),
             URLQueryItem(name: "state", value: self.authenticationSession.requestIdentifier)
         ]
