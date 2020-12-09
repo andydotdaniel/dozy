@@ -12,7 +12,5 @@ import SwiftUI
 class OnboardingViewModel: ObservableObject {
     
     @Published var isShowingMessageForm: Bool = false
-    @Published var messageCreatedNavigationDestination: ScheduleView?
-    @Published var shouldNavigateToSchedule: Bool = false
     
 }

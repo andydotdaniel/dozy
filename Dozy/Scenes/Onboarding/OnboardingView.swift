@@ -23,9 +23,6 @@ struct OnboardingView: View {
     var body: some View {
         NavigationView {
             VStack {
-                viewModel.messageCreatedNavigationDestination.map {
-                    NavigationLink(destination: $0, isActive: self.$viewModel.shouldNavigateToSchedule) { EmptyView() }
-                }
                 Image("LogoGray")
                     .frame(width: 58)
                 Spacer()

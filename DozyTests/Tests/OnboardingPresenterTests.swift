@@ -15,10 +15,14 @@ class OnboardingPresenterTests: XCTestCase {
     private var userDefaultsMock: ScheduleUserDefaultsMock!
     private var viewModel: OnboardingViewModel!
     
+    private var navigationControllableMock: NavigationControllableMock!
+    
     override func setUpWithError() throws {
         viewModel = OnboardingViewModel()
         userDefaultsMock = ScheduleUserDefaultsMock()
-        presenter = OnboardingPresenter(viewModel: viewModel, userDefaults: userDefaultsMock)
+        navigationControllableMock = NavigationControllableMock()
+        
+        presenter = OnboardingPresenter(viewModel: viewModel, userDefaults: userDefaultsMock, navigationControllable: navigationControllableMock)
     }
 
     override func tearDownWithError() throws {
@@ -34,7 +38,8 @@ class OnboardingPresenterTests: XCTestCase {
         XCTAssertEqual(userDefaultsMock.scheduleSaved?.message, message)
         XCTAssertNil(userDefaultsMock.scheduleSaved?.scheduledMessageId)
         
-        XCTAssertTrue(viewModel.shouldNavigateToSchedule)
+        XCTAssertTrue(navigationControllableMock.pushViewControllerCalledWithArgs?.viewController is ScheduleViewController)
+        XCTAssertEqual(navigationControllableMock.pushViewControllerCalledWithArgs?.animated, false)
         XCTAssertFalse(viewModel.isShowingMessageForm)
     }
 

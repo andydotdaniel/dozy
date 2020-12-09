@@ -73,6 +73,7 @@
 		10AC9D9E24ACF96800A3791C /* ImagePickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC9D9D24ACF96800A3791C /* ImagePickerButton.swift */; };
 		10BB85EC24BB6F48005D9829 /* MessageFormBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB85EB24BB6F48005D9829 /* MessageFormBuilderTests.swift */; };
 		10C4D43324D544E200CC1123 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C4D43224D544E200CC1123 /* UserDefaults.swift */; };
+		10CE42C5258095DF00BB00CF /* NavigationControllableMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE42C4258095DF00BB00CF /* NavigationControllableMock.swift */; };
 		10D5E09B25297AA400E0C34A /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D5E09A25297AA400E0C34A /* Time.swift */; };
 		10D5E09D2531756C00E0C34A /* AwakeConfirmationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D5E09C2531756C00E0C34A /* AwakeConfirmationPresenter.swift */; };
 		10D5E09F25317AA700E0C34A /* AwakeConfirmationPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D5E09E25317AA700E0C34A /* AwakeConfirmationPresenterTests.swift */; };
@@ -169,6 +170,7 @@
 		10AC9D9D24ACF96800A3791C /* ImagePickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerButton.swift; sourceTree = "<group>"; };
 		10BB85EB24BB6F48005D9829 /* MessageFormBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormBuilderTests.swift; sourceTree = "<group>"; };
 		10C4D43224D544E200CC1123 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		10CE42C4258095DF00BB00CF /* NavigationControllableMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllableMock.swift; sourceTree = "<group>"; };
 		10D5E09A25297AA400E0C34A /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		10D5E09C2531756C00E0C34A /* AwakeConfirmationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwakeConfirmationPresenter.swift; sourceTree = "<group>"; };
 		10D5E09E25317AA700E0C34A /* AwakeConfirmationPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwakeConfirmationPresenterTests.swift; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 				104BCC2324AB9BD500C35BDC /* WorldMock.swift */,
 				104BCC2524AB9C0600C35BDC /* DispatchQueueMock.swift */,
 				101C332A24E5A65C009BD331 /* UserDefaultsMock.swift */,
+				10CE42C4258095DF00BB00CF /* NavigationControllableMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -698,6 +701,7 @@
 				102102A9249F2EF700084C91 /* URLSessionMock.swift in Sources */,
 				1025D7B824E448B100118CD4 /* MessageFormDelegateMock.swift in Sources */,
 				10774A1D24BB5FFF00D3CD9F /* TestBundle.swift in Sources */,
+				10CE42C5258095DF00BB00CF /* NavigationControllableMock.swift in Sources */,
 				1025D7BD24E44A8A00118CD4 /* Channel.swift in Sources */,
 				1081AE28249F44CB00AD6655 /* WebAuthenticationSessionMock.swift in Sources */,
 				101C332D24E5A726009BD331 /* Schedule.swift in Sources */,

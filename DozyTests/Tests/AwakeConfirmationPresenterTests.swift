@@ -28,10 +28,16 @@ class AwakeConfirmationPresenterTests: XCTestCase {
         urlSessionMock = URLSessionMock()
         let networkService = NetworkService(urlSession: urlSessionMock)
         
+        let awakeConfirmationViewModel = AwakeConfirmationViewModel(countdownActive: true, secondsLeft: 30)
+        let message = Message(image: nil, bodyText: "SOME_BODY_TEXT", channel: Channel(id: "SOME_ID", isPublic: false, text: "SOME_TEXT"))
+        let schedule = Schedule(message: message, awakeConfirmationTime: Date().addingTimeInterval(30), scheduledMessageId: "SOME_ID")
+        
         presenter = AwakeConfirmationPresenter(
+            viewModel: awakeConfirmationViewModel,
             networkService: networkService,
             keychain: keychainMock,
-            userDefaults: userDefaultsMock
+            userDefaults: userDefaultsMock,
+            savedSchedule: schedule
         )
     }
 

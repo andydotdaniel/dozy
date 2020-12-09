@@ -14,6 +14,7 @@ class LoginPresenterTests: XCTestCase {
     var presenter: LoginPresenter!
     var viewModel: LoginViewModel!
     var urlSessionMock: URLSessionMock!
+    var navigationControllableMock: NavigationControllableMock!
     var authenticationSessionMock: WebAuthenticationSessionMock!
     var authRequestIdentifier: String!
     var keychainMock: KeychainMock!
@@ -28,11 +29,14 @@ class LoginPresenterTests: XCTestCase {
         let networkService = NetworkService(urlSession: urlSessionMock)
         keychainMock = KeychainMock()
         
+        navigationControllableMock = NavigationControllableMock()
+        
         presenter = LoginPresenter(
             authenticationSession: authenticationSessionMock,
             networkService: networkService,
             viewModel: viewModel,
-            keychain: keychainMock
+            keychain: keychainMock,
+            navigationControllable: navigationControllableMock
         )
     }
 
