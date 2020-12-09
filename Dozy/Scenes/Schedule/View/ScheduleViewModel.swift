@@ -34,6 +34,9 @@ class ScheduleViewModel: ObservableObject {
     
     @Published var switchPosition: (position: Switch.Position, isLoading: Bool)
     
+    @Published var errorToastText: String?
+    @Published var errorToastIsShowing: Bool = false
+    
     init(schedule: Schedule) {
         self.state = schedule.isActive ? .active : .inactive
         self.switchPosition = schedule.isActive ? (.on, false) : (.off, false)

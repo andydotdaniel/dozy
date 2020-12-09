@@ -125,21 +125,36 @@ class SchedulePresenter: ScheduleViewPresenter {
     }
     
     func onSwitchPositionChangedTriggered() {
-        if viewModel.state == .inactive {
-            viewModel.state = .active
-            viewModel.switchPosition = (.on, true)
-            enableAwakeConfirmation()
-            
-            sendScheduleMessageRequest()
-            createPushNotification()
-        } else {
-            viewModel.state = .inactive
-            viewModel.switchPosition = (.off, true)
-            disableAwakeConfirmation()
-            
-            sendDeleteScheduledMessageRequest()
-            deletePushNotification()
+        switch viewModel.state {
+        case .inactive:
+            let now = Date()
+            if schedule.awakeConfirmationTime.compare(now) == .orderedAscending {
+                viewModel.errorToastText = "Passed date selected. Please change date."
+                viewModel.errorToastIsShowing = true
+            } else {
+                setActiveSchedule()
+            }
+        case .active:
+            setInactiveSchedule()
         }
+    }
+    
+    private func setActiveSchedule() {
+        viewModel.state = .active
+        viewModel.switchPosition = (.on, true)
+        enableAwakeConfirmation()
+        
+        sendScheduleMessageRequest()
+        createPushNotification()
+    }
+    
+    private func setInactiveSchedule() {
+        viewModel.state = .inactive
+        viewModel.switchPosition = (.off, true)
+        disableAwakeConfirmation()
+        
+        sendDeleteScheduledMessageRequest()
+        deletePushNotification()
     }
     
     private func sendScheduleMessageRequest() {

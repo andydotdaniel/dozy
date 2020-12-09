@@ -19,6 +19,15 @@ struct Toast: View {
     
     @Binding var isShowing: Bool
     
+    private var isShowingYOffset: CGFloat {
+        switch UIDevice.current.screenType {
+        case .large:
+            return 0
+        case .small:
+            return -24
+        }
+    }
+    
     var body: some View {
         if isShowing {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -42,7 +51,7 @@ struct Toast: View {
         )
         .disabled(self.isShowing)
         .shadow(radius: 8)
-        .offset(y: self.isShowing ? 0 : 60)
+        .offset(y: self.isShowing ? isShowingYOffset : 60)
         .opacity(self.isShowing ? 1.0 : 0.0)
         .animation(.easeOut(duration: 0.15))
     }
@@ -57,6 +66,11 @@ extension Toast {
         ]
         
         return Toast(messageSegments: messageSegments, isShowing: isShowing)
+    }
+    
+    static func createErrorToast(text: String, isShowing: Binding<Bool>) -> Toast {
+        let messageSegment = MessageSegment(text: text, color: Color.white)
+        return Toast(messageSegments: [messageSegment], isShowing: isShowing)
     }
     
 }

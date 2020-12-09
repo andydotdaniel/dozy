@@ -48,6 +48,10 @@ struct ScheduleView: View {
             .padding(.top, 12)
             Switch(switchState: $viewModel.switchPosition, delegate: self.presenter)
                 .offset(y: UIDevice.current.screenType == .small ? -24 : 0)
+            viewModel.errorToastText.map { text in
+                Toast.createErrorToast(text: text, isShowing: $viewModel.errorToastIsShowing)
+                    .transition(.move(edge: .bottom))
+            }
         }.sheet(isPresented: self.$viewModel.isShowingMessageForm, content: {
             self.presenter.navigateToMessageForm()
         })
