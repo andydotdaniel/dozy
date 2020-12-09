@@ -32,6 +32,7 @@ struct AlternativeButton: View {
                 Spinner(strokeColor: Color.primaryBlue)
             }
         }
+        .frame(maxWidth: .infinity)
         .padding(.horizontal, self.isLoading ? 24 : 54)
         .padding(.vertical, 12)
         .overlay(

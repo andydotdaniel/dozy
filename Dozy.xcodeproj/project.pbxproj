@@ -68,6 +68,7 @@
 		109704C0249675E90012EA76 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109704BF249675E90012EA76 /* Configuration.swift */; };
 		109704C3249692D60012EA76 /* AuthenticationSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109704C2249692D60012EA76 /* AuthenticationSessionView.swift */; };
 		10A21F1E2580F2A500E67FE0 /* HeaderMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A21F1D2580F2A500E67FE0 /* HeaderMain.swift */; };
+		10A21F2F2581133200E67FE0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A21F2E2581133200E67FE0 /* ProfileView.swift */; };
 		10A55EC024B110370099EDAD /* MessageFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A55EBF24B110370099EDAD /* MessageFormViewModel.swift */; };
 		10A55EC224B110480099EDAD /* MessageFormViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A55EC124B110480099EDAD /* MessageFormViewBuilder.swift */; };
 		10AC9D9C24ACF40C00A3791C /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC9D9B24ACF40C00A3791C /* MultilineTextField.swift */; };
@@ -166,6 +167,7 @@
 		109704BF249675E90012EA76 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		109704C2249692D60012EA76 /* AuthenticationSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSessionView.swift; sourceTree = "<group>"; };
 		10A21F1D2580F2A500E67FE0 /* HeaderMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMain.swift; sourceTree = "<group>"; };
+		10A21F2E2581133200E67FE0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		10A55EBF24B110370099EDAD /* MessageFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormViewModel.swift; sourceTree = "<group>"; };
 		10A55EC124B110480099EDAD /* MessageFormViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormViewBuilder.swift; sourceTree = "<group>"; };
 		10AC9D9B24ACF40C00A3791C /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 		1038113A2496680900DC5CEC /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				10A21F25258112F400E67FE0 /* Profile */,
 				1023191024F21C240005F6A6 /* AwakeConfirmation */,
 				1032649F24C4487C00863603 /* Schedule */,
 				104BE37024B0F03200E02AAD /* MessageForm */,
@@ -491,6 +494,14 @@
 				108B4E0E24C2ECA4000F1C4B /* MessageContentCard.swift */,
 			);
 			path = Cards;
+			sourceTree = "<group>";
+		};
+		10A21F25258112F400E67FE0 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				10A21F2E2581133200E67FE0 /* ProfileView.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		10BB85ED24BB6F4C005D9829 /* MessageForm */ = {
@@ -665,6 +676,7 @@
 				106C5A7724C4528E00B8BA9C /* Channel.swift in Sources */,
 				10E57E5E24969C79001B71A4 /* World.swift in Sources */,
 				1081AE26249F387900AD6655 /* WebAuthenticationSession.swift in Sources */,
+				10A21F2F2581133200E67FE0 /* ProfileView.swift in Sources */,
 				10F42226249930CC0078AC3C /* LoginViewModel.swift in Sources */,
 				10E57E642496A086001B71A4 /* ViewBuilder.swift in Sources */,
 				104BCC2824ABA05300C35BDC /* MessageFormView.swift in Sources */,
@@ -871,7 +883,7 @@
 				DEVELOPMENT_TEAM = A229E9TMUD;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Dozy/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -892,7 +904,7 @@
 				DEVELOPMENT_TEAM = A229E9TMUD;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Dozy/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

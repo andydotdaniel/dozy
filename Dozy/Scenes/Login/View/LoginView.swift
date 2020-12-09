@@ -33,7 +33,9 @@ struct LoginView: View {
                     },
                     icon: Image("SlackLogo"),
                     isLoading: self.$viewModel.isFetchingAccessToken
-                ).offset(y: -24)
+                )
+                .offset(y: -24)
+                .padding(.horizontal, 24)
             }
             Toast.createErrorToast(isShowing: self.$viewModel.isShowingError)
         }
