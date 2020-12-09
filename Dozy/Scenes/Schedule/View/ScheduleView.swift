@@ -23,8 +23,7 @@ struct ScheduleView: View {
                 .scaleEffect(1.1)
                 .scaleEffect(2, anchor: .top)
                 .offset(y: 40)
-            Image("LogoGray")
-                .frame(width: headerHeight)
+            HeaderMain(height: headerHeight, didTapSettingsAction: {})
                 .position(CGPoint(x: UIScreen.main.bounds.width / 2, y: 24))
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 24) {

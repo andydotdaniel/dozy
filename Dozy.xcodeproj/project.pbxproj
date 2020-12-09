@@ -67,6 +67,7 @@
 		108B4E0F24C2ECA4000F1C4B /* MessageContentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B4E0E24C2ECA4000F1C4B /* MessageContentCard.swift */; };
 		109704C0249675E90012EA76 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109704BF249675E90012EA76 /* Configuration.swift */; };
 		109704C3249692D60012EA76 /* AuthenticationSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109704C2249692D60012EA76 /* AuthenticationSessionView.swift */; };
+		10A21F1E2580F2A500E67FE0 /* HeaderMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A21F1D2580F2A500E67FE0 /* HeaderMain.swift */; };
 		10A55EC024B110370099EDAD /* MessageFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A55EBF24B110370099EDAD /* MessageFormViewModel.swift */; };
 		10A55EC224B110480099EDAD /* MessageFormViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A55EC124B110480099EDAD /* MessageFormViewBuilder.swift */; };
 		10AC9D9C24ACF40C00A3791C /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC9D9B24ACF40C00A3791C /* MultilineTextField.swift */; };
@@ -164,6 +165,7 @@
 		108B4E0E24C2ECA4000F1C4B /* MessageContentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentCard.swift; sourceTree = "<group>"; };
 		109704BF249675E90012EA76 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		109704C2249692D60012EA76 /* AuthenticationSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSessionView.swift; sourceTree = "<group>"; };
+		10A21F1D2580F2A500E67FE0 /* HeaderMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMain.swift; sourceTree = "<group>"; };
 		10A55EBF24B110370099EDAD /* MessageFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormViewModel.swift; sourceTree = "<group>"; };
 		10A55EC124B110480099EDAD /* MessageFormViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormViewBuilder.swift; sourceTree = "<group>"; };
 		10AC9D9B24ACF40C00A3791C /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 				1032649B24C32A9900863603 /* Switch.swift */,
 				1023191324F2238D0005F6A6 /* Slider.swift */,
 				1033ABDC25282A500045BD64 /* TimePicker.swift */,
+				10A21F1D2580F2A500E67FE0 /* HeaderMain.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -652,6 +655,7 @@
 				1032649E24C41F8000863603 /* ScheduleView.swift in Sources */,
 				101581602495F8C600AA0B37 /* SceneDelegate.swift in Sources */,
 				105BDB0624D692FD005C9CD7 /* OnboardingPresenter.swift in Sources */,
+				10A21F1E2580F2A500E67FE0 /* HeaderMain.swift in Sources */,
 				109704C0249675E90012EA76 /* Configuration.swift in Sources */,
 				103264A324C448EB00863603 /* ScheduleViewPresenter.swift in Sources */,
 				106C5A7924C453F600B8BA9C /* Message.swift in Sources */,
