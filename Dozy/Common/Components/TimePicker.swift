@@ -28,6 +28,7 @@ struct TimePicker: View {
             .padding(.horizontal, 20)
             
             DatePicker("Select awake confirmation time", selection: $dateSelection, displayedComponents: .hourAndMinute)
+                .datePickerStyle(WheelDatePickerStyle())
                 .labelsHidden()
                 .padding(.bottom, 16)
                 .frame(minWidth: 0, maxWidth: .infinity)
