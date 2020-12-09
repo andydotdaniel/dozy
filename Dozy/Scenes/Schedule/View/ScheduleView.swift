@@ -47,6 +47,7 @@ struct ScheduleView: View {
             }
             .padding(.top, 12)
             Switch(switchState: $viewModel.switchPosition, delegate: self.presenter)
+                .offset(y: UIDevice.current.screenType == .small ? -24 : 0)
         }.sheet(isPresented: self.$viewModel.isShowingMessageForm, content: {
             self.presenter.navigateToMessageForm()
         })
