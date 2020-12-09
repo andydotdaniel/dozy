@@ -104,8 +104,15 @@ class SchedulePresenter: ScheduleViewPresenter {
     private func updateAwakeConfirmationTimeToNextDayIfNeeded(from date: Date) {
         guard secondsUntilAwakeConfirmationTime < 0 else { return }
         
-        let oneDayInSeconds: TimeInterval = 60 * 60 * 24
-        let nextDay = schedule.awakeConfirmationTime.addingTimeInterval(oneDayInSeconds)
+        let now = Date()
+        let timeDifference = now.timeIntervalSince(schedule.awakeConfirmationTime)
+        let numberOfDays: Int = {
+            let secondsInADay: Int = 86400
+            let days = Int(timeDifference) / secondsInADay
+            return days == 0 ? 1 : days
+        }()
+        let secondsToNextDay: TimeInterval = 60 * 60 * (TimeInterval(numberOfDays) * 24)
+        let nextDay = schedule.awakeConfirmationTime.addingTimeInterval(secondsToNextDay)
         
         updateUserDefaultsSchedule(with: nextDay)
         
