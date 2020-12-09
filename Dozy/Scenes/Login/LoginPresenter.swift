@@ -113,7 +113,7 @@ final class LoginPresenter: LoginViewPresenter {
     }
     
     private func showOnboarding() {
-        let viewController = OnboardingViewBuilder().buildViewController()
+        let viewController = OnboardingViewBuilder(navigationControllable: navigationControllable).buildViewController()
         self.navigationControllable?.pushViewController(viewController, animated: true)
     }
     

@@ -7,8 +7,19 @@
 //
 
 import Foundation
+import UIKit
+import SwiftUI
 
-struct ScheduleViewBuilder: ViewBuilder {
+private class ScheduleViewController: UIHostingController<ScheduleView> {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+}
+
+struct ScheduleViewBuilder: ViewControllerBuilder {
     
     private let schedule: Schedule
     
@@ -16,12 +27,12 @@ struct ScheduleViewBuilder: ViewBuilder {
         self.schedule = schedule
     }
     
-    func build() -> ScheduleView {
+    func buildViewController() -> UIViewController {
         let viewModel = ScheduleViewModel(schedule: schedule)
         let presenter = SchedulePresenter(schedule: schedule, viewModel: viewModel, userDefaults: UserDefaults.standard, networkService: NetworkService(), keychain: Keychain())
         let view = ScheduleView(viewModel: viewModel, presenter: presenter)
         
-        return view
+        return ScheduleViewController(rootView: view)
     }
     
 }

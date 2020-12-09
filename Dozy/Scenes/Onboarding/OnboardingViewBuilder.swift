@@ -20,9 +20,15 @@ private class OnboardingViewController: UIHostingController<OnboardingView> {
 
 struct OnboardingViewBuilder: ViewControllerBuilder, ViewBuilder {
     
+    private weak var navigationControllable: NavigationControllable?
+    
+    init(navigationControllable: NavigationControllable?) {
+        self.navigationControllable = navigationControllable
+    }
+    
     func build() -> OnboardingView {
         let viewModel = OnboardingViewModel()
-        let presenter = OnboardingPresenter(viewModel: viewModel)
+        let presenter = OnboardingPresenter(viewModel: viewModel, navigationControllable: navigationControllable)
         
         return OnboardingView(viewModel: viewModel, presenter: presenter)
     }

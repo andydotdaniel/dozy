@@ -16,18 +16,25 @@ class OnboardingPresenter: OnboardingViewPresenter {
     private var viewModel: OnboardingViewModel
     private let userDefaults: ScheduleUserDefaultable
     
-    init(viewModel: OnboardingViewModel, userDefaults: ScheduleUserDefaultable = UserDefaults.standard) {
+    private weak var navigationControllable: NavigationControllable?
+    
+    init(
+        viewModel: OnboardingViewModel,
+        userDefaults: ScheduleUserDefaultable = UserDefaults.standard,
+        navigationControllable: NavigationControllable?
+    ) {
         self.viewModel = viewModel
         self.userDefaults = userDefaults
+        self.navigationControllable = navigationControllable
     }
     
     func onMessageSaved(_ message: Message) {
         let schedule = Schedule(message: message, awakeConfirmationTime: Date(), scheduledMessageId: nil)
         userDefaults.saveSchedule(schedule)
+        viewModel.isShowingMessageForm = false
         
-        self.viewModel.messageCreatedNavigationDestination = ScheduleViewBuilder(schedule: schedule).build()
-        self.viewModel.shouldNavigateToSchedule = true
-        self.viewModel.isShowingMessageForm = false
+        let scheduleViewController = ScheduleViewBuilder(schedule: schedule).buildViewController()
+        navigationControllable?.pushViewController(scheduleViewController, animated: false)
     }
     
 }

@@ -62,14 +62,16 @@ struct OnboardingView: View {
 struct OnboardingView_Previews: PreviewProvider {
     
     static var previews: some View {
-        Group {
-            OnboardingViewBuilder().build()
+        let navigationController = UINavigationController()
+        
+        return Group {
+            OnboardingViewBuilder(navigationControllable: navigationController).build()
             .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro Max"))
             .previewDisplayName("iPhone 11 Pro Max")
-            OnboardingViewBuilder().build()
+            OnboardingViewBuilder(navigationControllable: navigationController).build()
             .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
             .previewDisplayName("iPhone 11")
-            OnboardingViewBuilder().build()
+            OnboardingViewBuilder(navigationControllable: navigationController).build()
             .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))
             .previewDisplayName("iPhone SE (2nd generation)")
         }

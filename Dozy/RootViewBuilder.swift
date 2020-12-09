@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-class RootViewBuilder: ViewBuilder, ViewControllerBuilder {
+class RootViewBuilder: ViewControllerBuilder {
     
     private let keychain: SecureStorable
     private let userDefaults: ScheduleUserDefaultable
@@ -22,26 +22,17 @@ class RootViewBuilder: ViewBuilder, ViewControllerBuilder {
         self.navigationControllable = navigationControllable
     }
     
-    func build() -> AnyView {
-//        if self.keychain.load(key: "slack_access_token") == nil {
-//            let builder = LoginViewBuilder(navigationControllable: navigationControllable)
-//            return AnyView(builder.build())
-//        }
-        
-        if let schedule = self.userDefaults.loadSchedule() {
-            return AnyView(ScheduleViewBuilder(schedule: schedule).build())
-        }
-        
-        return AnyView(OnboardingViewBuilder().build())
-    }
-    
     func buildViewController() -> UIViewController {
         if self.keychain.load(key: "slack_access_token") == nil {
             let builder = LoginViewBuilder(navigationControllable: navigationControllable)
             return builder.buildViewController()
         }
         
-        return UIViewController()
+        if let schedule = self.userDefaults.loadSchedule() {
+            return ScheduleViewBuilder(schedule: schedule).buildViewController()
+        }
+        
+        return OnboardingViewBuilder(navigationControllable: navigationControllable).buildViewController()
     }
     
 }
