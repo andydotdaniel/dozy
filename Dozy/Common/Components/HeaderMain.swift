@@ -8,14 +8,18 @@
 
 import SwiftUI
 
+protocol HeaderMainDelegate: class {
+    func onSettingsIconTapped()
+}
+
 struct HeaderMain: View {
     
     private let height: CGFloat
-    private var didTapSettingsAction: () -> Void
+    private weak var delegate: HeaderMainDelegate?
     
-    init(height: CGFloat, didTapSettingsAction: @escaping () -> Void) {
+    init(height: CGFloat, delegate: HeaderMainDelegate?) {
         self.height = height
-        self.didTapSettingsAction = didTapSettingsAction
+        self.delegate = delegate
     }
     
     var body: some View {
@@ -26,7 +30,7 @@ struct HeaderMain: View {
                 Image("SettingsIcon")
                     .frame(width: 24, height: 24)
                     .onTapGesture {
-                        self.didTapSettingsAction()
+                        self.delegate?.onSettingsIconTapped()
                     }
             }
             .padding(.horizontal, 16)
@@ -37,6 +41,6 @@ struct HeaderMain: View {
 
 struct HeaderMain_Previews: PreviewProvider {
     static var previews: some View {
-        HeaderMain(height: 60, didTapSettingsAction: {})
+        HeaderMain(height: 60, delegate: nil)
     }
 }

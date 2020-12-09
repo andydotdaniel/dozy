@@ -10,7 +10,7 @@ import SwiftUI
 
 private let pushNotificationIdentifier = "dozy_awake_confirmation_alert"
 
-protocol ScheduleViewPresenter: SwitchViewDelegate, MessageFormDelegate {
+protocol ScheduleViewPresenter: SwitchViewDelegate, MessageFormDelegate, HeaderMainDelegate {
     func onMessageActionButtonTapped()
     func navigateToMessageForm() -> MessageFormView
     
@@ -345,6 +345,10 @@ class SchedulePresenter: ScheduleViewPresenter {
     
     func onTimePickerCancelButtonTapped() {
         self.viewModel.awakeConfirmationCard.isShowingTimePicker = false
+    }
+    
+    func onSettingsIconTapped() {
+        
     }
     
 }
