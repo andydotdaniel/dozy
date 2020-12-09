@@ -7,20 +7,40 @@
 //
 
 import Foundation
+import UIKit
+import SwiftUI
 
-struct LoginViewBuilder: ViewBuilder {
+private class LoginViewController: UIHostingController<LoginView> {
     
-    func build() -> LoginView {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+}
+
+struct LoginViewBuilder: ViewControllerBuilder {
+    
+    private weak var navigationControllable: NavigationControllable?
+    
+    init(navigationControllable: NavigationControllable?) {
+        self.navigationControllable = navigationControllable
+    }
+    
+    func buildViewController() -> UIViewController {
         let viewModel = LoginViewModel()
         let authenticationSession = WebAuthenticationSession(requestIdentifier: UUID().uuidString)
         let presenter: LoginViewPresenter = LoginPresenter(
             authenticationSession: authenticationSession,
             networkService: NetworkService(),
-            viewModel: viewModel
+            viewModel: viewModel,
+            navigationControllable: self.navigationControllable
         )
         let view = LoginView(viewModel: viewModel, presenter: presenter)
         
-        return view
+        return LoginViewController(rootView: view)
     }
     
 }
+
+

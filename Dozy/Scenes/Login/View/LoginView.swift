@@ -14,33 +14,28 @@ struct LoginView: View {
     var presenter: LoginViewPresenter
     
     var body: some View {
-        NavigationView {
-            ZStack(alignment: .bottom) {
-                NavigationLink(destination: OnboardingViewBuilder().build(), tag: .onboarding, selection: self.$viewModel.navigationSelection) { EmptyView() }
-                VStack(alignment: .center, spacing: 24) {
-                    VStack {
-                        LoginHeaderView()
-                            .zIndex(9)
-                            .offset(y: UIDevice.current.screenType == .large ? 150 : 100)
-                        Ellipse()
-                            .foregroundColor(Color.primaryBlue)
-                            .scaleEffect(3, anchor: .bottom)
-                            .zIndex(1)
-                            .offset(y: -40)
-                    }
-                    AlternativeButton(
-                        titleText: "Sign in with Slack",
-                        tapAction: {
-                            self.presenter.didTapLoginButton()
-                        },
-                        icon: Image("SlackLogo"),
-                        isLoading: self.$viewModel.isFetchingAccessToken
-                    ).offset(y: -24)
+        ZStack(alignment: .bottom) {
+            VStack(alignment: .center, spacing: 24) {
+                VStack {
+                    LoginHeaderView()
+                        .zIndex(9)
+                        .offset(y: UIDevice.current.screenType == .large ? 150 : 100)
+                    Ellipse()
+                        .foregroundColor(Color.primaryBlue)
+                        .scaleEffect(3, anchor: .bottom)
+                        .zIndex(1)
+                        .offset(y: -40)
                 }
-                Toast.createErrorToast(isShowing: self.$viewModel.isShowingError)
+                AlternativeButton(
+                    titleText: "Sign in with Slack",
+                    tapAction: {
+                        self.presenter.didTapLoginButton()
+                    },
+                    icon: Image("SlackLogo"),
+                    isLoading: self.$viewModel.isFetchingAccessToken
+                ).offset(y: -24)
             }
-            .navigationBarTitle("")
-            .navigationBarHidden(true)
+            Toast.createErrorToast(isShowing: self.$viewModel.isShowingError)
         }
     }
 }

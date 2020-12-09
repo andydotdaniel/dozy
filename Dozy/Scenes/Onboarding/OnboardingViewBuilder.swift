@@ -7,15 +7,29 @@
 //
 
 import Foundation
+import SwiftUI
 
-struct OnboardingViewBuilder: ViewBuilder {
+private class OnboardingViewController: UIHostingController<OnboardingView> {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+}
+
+struct OnboardingViewBuilder: ViewControllerBuilder, ViewBuilder {
     
     func build() -> OnboardingView {
         let viewModel = OnboardingViewModel()
         let presenter = OnboardingPresenter(viewModel: viewModel)
-        let view = OnboardingView(viewModel: viewModel, presenter: presenter)
         
-        return view
+        return OnboardingView(viewModel: viewModel, presenter: presenter)
+    }
+    
+    func buildViewController() -> UIViewController {
+        let view = build()
+        return OnboardingViewController(rootView: view)
     }
     
 }

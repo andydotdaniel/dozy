@@ -9,15 +9,9 @@
 import Combine
 import SwiftUI
 
-enum PostLoginNavigation: String {
-    case onboarding = "onboarding"
-    case schedule = "schedule"
-}
-
 class LoginViewModel: ObservableObject {
     
     @Published var isFetchingAccessToken: Bool = false
     @Published var isShowingError: Bool = false
-    @Published var navigationSelection: PostLoginNavigation?
     
 }

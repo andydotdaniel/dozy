@@ -7,8 +7,13 @@
 //
 
 import Foundation
+import UIKit
 
 protocol ViewBuilder {
     associatedtype View
     func build() -> View
+}
+
+protocol ViewControllerBuilder {
+    func buildViewController() -> UIViewController
 }

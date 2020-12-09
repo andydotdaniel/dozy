@@ -22,18 +22,22 @@ final class LoginPresenter: LoginViewPresenter {
     private let networkService: NetworkRequesting
     private let keychain: SecureStorable
     
+    private weak var navigationControllable: NavigationControllable?
+    
     private var viewModel: LoginViewModel
     
     init(
         authenticationSession: WebAuthenticationSessionable,
         networkService: NetworkRequesting,
         viewModel: LoginViewModel,
-        keychain: SecureStorable = Keychain()
+        keychain: SecureStorable = Keychain(),
+        navigationControllable: NavigationControllable?
     ) {
         self.authenticationSession = authenticationSession
         self.networkService = networkService
         self.viewModel = viewModel
         self.keychain = keychain
+        self.navigationControllable = navigationControllable
                 
         var urlComponents = URLComponents(string: "https://slack.com/oauth/v2/authorize")!
         urlComponents.queryItems = [
@@ -99,13 +103,18 @@ final class LoginPresenter: LoginViewPresenter {
                         return
                     }
                     _ = self.keychain.save(key: Keychain.Keys.slackAccessToken, data: data)
-                    self.viewModel.navigationSelection = .onboarding
+                    self.showOnboarding()
                 case .failure:
                     self.viewModel.isFetchingAccessToken = false
                     self.viewModel.isShowingError = true
                 }
             }
         })
+    }
+    
+    private func showOnboarding() {
+        let viewController = OnboardingViewBuilder().buildViewController()
+        self.navigationControllable?.pushViewController(viewController, animated: true)
     }
     
 }
