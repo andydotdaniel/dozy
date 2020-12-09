@@ -29,7 +29,8 @@ class OnboardingPresenter: OnboardingViewPresenter {
     }
     
     func onMessageSaved(_ message: Message) {
-        let schedule = Schedule(message: message, awakeConfirmationTime: Date(), scheduledMessageId: nil)
+        let oneDay: TimeInterval = 60 * 60 * 24
+        let schedule = Schedule(message: message, awakeConfirmationTime: Date().addingTimeInterval(oneDay), scheduledMessageId: nil)
         userDefaults.saveSchedule(schedule)
         viewModel.isShowingMessageForm = false
         
