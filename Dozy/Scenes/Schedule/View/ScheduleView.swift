@@ -40,7 +40,7 @@ struct ScheduleView: View {
                         )
                         Spacer()
                     }
-                    .padding(.horizontal, 24)
+                    .padding(.horizontal, 16)
                     .padding(.top, 12)
                     .padding(.bottom, 48)
                 }
@@ -62,5 +62,6 @@ struct ScheduleView_Previews: PreviewProvider {
         let viewModel = ScheduleViewModel(schedule: schedule)
         let presenter = SchedulePresenter(schedule: schedule, viewModel: viewModel, userDefaults: UserDefaults.standard, networkService: NetworkService(), keychain: Keychain())
         return ScheduleView(viewModel: viewModel, presenter: presenter)
+            .previewDevice("iPhone 11")
     }
 }

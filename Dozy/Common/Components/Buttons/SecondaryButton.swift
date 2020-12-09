@@ -23,7 +23,7 @@ struct SecondaryButton: View {
                 .opacity(0.35)
                 .truncationMode(.tail)
         }
-        .padding(.horizontal, 24)
+        .padding(.horizontal, 16)
         .padding(.vertical, 12)
         .frame(maxWidth: .infinity)
         .background(color)
