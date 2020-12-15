@@ -23,27 +23,28 @@ struct ScheduleView: View {
                 .scaleEffect(1.1)
                 .scaleEffect(2, anchor: .top)
                 .offset(y: 40)
-            HeaderMain(height: headerHeight, delegate: presenter)
-                .position(CGPoint(x: UIScreen.main.bounds.width / 2, y: 24))
             ScrollView(.vertical, showsIndicators: false) {
-                VStack(spacing: 24) {
-                    ContentCard(viewModel: $viewModel.awakeConfirmationCard, buttonAction: {
-                        withAnimation {
-                            self.viewModel.awakeConfirmationCard.isShowingTimePicker = true
-                        }
-                    }, timePickerActions: (cancelButton: self.presenter.onTimePickerCancelButtonTapped, doneButton: self.presenter.onTimePickerDoneButtonTapped))
-                    MessageContentCard(
-                        image: viewModel.messageCard.image,
-                        bodyText: viewModel.messageCard.bodyText,
-                        channel: (isPublic: viewModel.messageCard.channel.isPublic, text: viewModel.messageCard.channel.text),
-                        actionButtonTitle: viewModel.messageCard.actionButtonTitle,
-                        actionButtonTap: { self.presenter.onMessageActionButtonTapped() }
-                    )
-                    Spacer()
+                VStack(spacing: 12) {
+                    HeaderMain(height: headerHeight, delegate: presenter)
+                    VStack(spacing: 24) {
+                        ContentCard(viewModel: $viewModel.awakeConfirmationCard, buttonAction: {
+                            withAnimation {
+                                self.viewModel.awakeConfirmationCard.isShowingTimePicker = true
+                            }
+                        }, timePickerActions: (cancelButton: self.presenter.onTimePickerCancelButtonTapped, doneButton: self.presenter.onTimePickerDoneButtonTapped))
+                        MessageContentCard(
+                            image: viewModel.messageCard.image,
+                            bodyText: viewModel.messageCard.bodyText,
+                            channel: (isPublic: viewModel.messageCard.channel.isPublic, text: viewModel.messageCard.channel.text),
+                            actionButtonTitle: viewModel.messageCard.actionButtonTitle,
+                            actionButtonTap: { self.presenter.onMessageActionButtonTapped() }
+                        )
+                        Spacer()
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 48)
                 }
-                .padding(.horizontal, 16)
-                .padding(.top, headerHeight + 12)
-                .padding(.bottom, 48)
+                .padding(.top, 4)
             }
             Switch(switchState: $viewModel.switchPosition, delegate: self.presenter)
                 .offset(y: UIDevice.current.screenType == .small ? -24 : 0)

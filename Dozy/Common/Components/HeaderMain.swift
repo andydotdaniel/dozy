@@ -9,7 +9,7 @@
 import SwiftUI
 
 protocol HeaderMainDelegate: class {
-    func onSettingsIconTapped()
+    func onProfileIconTapped()
 }
 
 struct HeaderMain: View {
@@ -32,7 +32,7 @@ struct HeaderMain: View {
                     .scaledToFit()
                     .frame(width: 32, height: 32)
                     .onTapGesture {
-                        self.delegate?.onSettingsIconTapped()
+                        self.delegate?.onProfileIconTapped()
                     }
             }
             .padding(.horizontal, 16)

@@ -9,11 +9,21 @@
 import SwiftUI
 import UIKit
 
+class ProfileViewController: UIHostingController<ProfileView> {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.barTintColor = .white
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+    }
+    
+}
+
 struct ProfileViewBuilder: ViewControllerBuilder {
     
     func buildViewController() -> UIViewController {
         let view = ProfileView(viewModel: ProfileViewModel())
-        return UIHostingController(rootView: view)
+        return ProfileViewController(rootView: view)
     }
     
 }

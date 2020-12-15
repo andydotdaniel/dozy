@@ -19,6 +19,8 @@ class SchedulePresenterTests: XCTestCase {
     var urlSessionMock: URLSessionMock!
     var keychainMock: KeychainMock!
     
+    var navigationControllable: NavigationControllableMock!
+    
     override func setUpWithError() throws {
         Current = .mock
         
@@ -33,7 +35,9 @@ class SchedulePresenterTests: XCTestCase {
         let networkService = NetworkService(urlSession: urlSessionMock)
         keychainMock = KeychainMock()
         
-        presenter = SchedulePresenter(schedule: schedule, viewModel: viewModel, userDefaults: userDefaultsMock, networkService: networkService, keychain: keychainMock)
+        navigationControllable = NavigationControllableMock()
+        
+        presenter = SchedulePresenter(schedule: schedule, viewModel: viewModel, userDefaults: userDefaultsMock, networkService: networkService, keychain: keychainMock, navigationControllable: navigationControllable)
     }
 
     override func tearDownWithError() throws {
@@ -91,6 +95,13 @@ class SchedulePresenterTests: XCTestCase {
         
         XCTAssertEqual(self.userDefaultsMock.scheduleSaved?.awakeConfirmationDateText, viewModel.awakeConfirmationCard.titleText)
         XCTAssertEqual(self.userDefaultsMock.scheduleSaved?.awakeConfirmationTimeText, viewModel.awakeConfirmationCard.subtitleText)
+    }
+    
+    func testOnProfileButtonTapped() {
+        self.presenter.onProfileIconTapped()
+        
+        XCTAssertEqual(self.navigationControllable.pushViewControllerCalledWithArgs?.animated, true)
+        XCTAssertTrue(self.navigationControllable.pushViewControllerCalledWithArgs?.viewController is ProfileViewController)
     }
 
 }

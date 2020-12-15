@@ -351,7 +351,7 @@ class SchedulePresenter: ScheduleViewPresenter {
         self.viewModel.awakeConfirmationCard.isShowingTimePicker = false
     }
     
-    func onSettingsIconTapped() {
+    func onProfileIconTapped() {
         let profileViewController = ProfileViewBuilder().buildViewController()
         navigationControllable?.pushViewController(profileViewController, animated: true)
     }
