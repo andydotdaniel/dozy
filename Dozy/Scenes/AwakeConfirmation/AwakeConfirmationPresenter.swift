@@ -16,7 +16,7 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
     
     private let networkService: NetworkRequesting
     private let keychain: SecureStorable
-    private let userDefaults: ScheduleUserDefaultable
+    private let userDefaults: ScheduleUserDefaults
     
     private var secondsLeftTimer: Timer?
     
@@ -26,7 +26,7 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
         viewModel: AwakeConfirmationViewModel,
         networkService: NetworkRequesting,
         keychain: SecureStorable,
-        userDefaults: ScheduleUserDefaultable,
+        userDefaults: ScheduleUserDefaults,
         savedSchedule: Schedule
     ) {
         self.viewModel = viewModel
@@ -81,7 +81,7 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
                     var updatedSchedule = self.savedSchedule
                     updatedSchedule.scheduledMessageId = nil
                     
-                    self.userDefaults.saveSchedule(updatedSchedule)
+                    self.userDefaults.save(updatedSchedule)
                 case .failure:
                     // TODO: Handle failure
                     break

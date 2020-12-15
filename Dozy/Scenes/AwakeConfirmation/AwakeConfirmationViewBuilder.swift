@@ -19,7 +19,7 @@ struct AwakeConfirmationViewBuilder: ViewBuilder {
     func build() -> AwakeConfirmationView {
         let secondsLeft = schedule.awakeConfirmationTime.timeIntervalSinceNow
         let viewModel = AwakeConfirmationViewModel(countdownActive: true, secondsLeft: Int(secondsLeft))
-        let presenter = AwakeConfirmationPresenter(viewModel: viewModel, networkService: NetworkService(), keychain: Keychain(), userDefaults: UserDefaults.standard, savedSchedule: schedule)
+        let presenter = AwakeConfirmationPresenter(viewModel: viewModel, networkService: NetworkService(), keychain: Keychain(), userDefaults: ScheduleUserDefaults(), savedSchedule: schedule)
         
         return AwakeConfirmationView(viewModel: viewModel, presenter: presenter)
     }

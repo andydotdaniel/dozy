@@ -22,7 +22,7 @@ protocol ScheduleViewPresenter: SwitchViewDelegate, MessageFormDelegate, HeaderM
 class SchedulePresenter: ScheduleViewPresenter {
     
     private var viewModel: ScheduleViewModel
-    private let userDefaults: ScheduleUserDefaultable
+    private let userDefaults: ScheduleUserDefaults
     private var schedule: Schedule
     
     private var secondsUntilAwakeConfirmationTime: Int
@@ -36,7 +36,7 @@ class SchedulePresenter: ScheduleViewPresenter {
     init(
         schedule: Schedule,
         viewModel: ScheduleViewModel,
-        userDefaults: ScheduleUserDefaultable,
+        userDefaults: ScheduleUserDefaults,
         networkService: NetworkRequesting,
         keychain: SecureStorable,
         navigationControllable: NavigationControllable?
@@ -127,7 +127,7 @@ class SchedulePresenter: ScheduleViewPresenter {
     
     private func updateUserDefaultsSchedule(with time: Date) {
         schedule.awakeConfirmationTime = time
-        userDefaults.saveSchedule(schedule)
+        userDefaults.save(schedule)
     }
     
     private func updateAwakeConfirmationText(with schedule: Schedule) {
@@ -183,7 +183,7 @@ class SchedulePresenter: ScheduleViewPresenter {
                 switch result {
                 case .success(let response):
                     self.schedule.scheduledMessageId = response.scheduledMessageId
-                    self.userDefaults.saveSchedule(self.schedule)
+                    self.userDefaults.save(self.schedule)
                     
                     self.viewModel.switchPosition = (.on, false)
                 case .failure:
@@ -244,7 +244,7 @@ class SchedulePresenter: ScheduleViewPresenter {
                 switch result {
                 case .success:
                     self.schedule.scheduledMessageId = nil
-                    self.userDefaults.saveSchedule(self.schedule)
+                    self.userDefaults.save(self.schedule)
                     
                     self.viewModel.switchPosition = (.off, false)
                 case .failure:
@@ -288,7 +288,7 @@ class SchedulePresenter: ScheduleViewPresenter {
             awakeConfirmationTime: self.schedule.awakeConfirmationTime,
             scheduledMessageId: self.schedule.scheduledMessageId
         )
-        userDefaults.saveSchedule(schedule)
+        userDefaults.save(schedule)
         
         updateMessageCard(with: message)
         

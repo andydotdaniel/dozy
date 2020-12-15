@@ -34,7 +34,7 @@ struct ScheduleViewBuilder: ViewControllerBuilder {
         let presenter = SchedulePresenter(
             schedule: schedule,
             viewModel: viewModel,
-            userDefaults: UserDefaults.standard,
+            userDefaults: ScheduleUserDefaults(),
             networkService: NetworkService(),
             keychain: Keychain(),
             navigationControllable: navigationControllable

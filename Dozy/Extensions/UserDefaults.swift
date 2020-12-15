@@ -8,23 +8,42 @@
 
 import Foundation
 
-private let scheduleUserDefaultsKey = "schedule_user_defaults"
-
-protocol ScheduleUserDefaultable {
-    func saveSchedule(_ schedule: Schedule)
-    func loadSchedule() -> Schedule?
-}
-
-extension UserDefaults: ScheduleUserDefaultable {
+class ObjectUserDefaults<T: Codable> {
     
-    func saveSchedule(_ schedule: Schedule) {
-        self.set(try? PropertyListEncoder().encode(schedule), forKey: scheduleUserDefaultsKey)
+    private let userDefaults: UserDefaults = UserDefaults.standard
+    private let key: String
+    
+    init(key: String) {
+        self.key = key
     }
     
-    func loadSchedule() -> Schedule? {
-        guard let scheduleData = self.object(forKey: scheduleUserDefaultsKey) as? Data else { return nil }
-        
-        return try? PropertyListDecoder().decode(Schedule.self, from: scheduleData)
+    func save(_ object: T) {
+        userDefaults.set(try? PropertyListEncoder().encode(object), forKey: key)
+    }
+    
+    func load() -> T? {
+        guard let data = userDefaults.object(forKey: key) as? Data else { return nil }
+        return try? PropertyListDecoder().decode(T.self, from: data)
+    }
+    
+    func delete() {
+        userDefaults.removeObject(forKey: key)
+    }
+    
+}
+
+class ScheduleUserDefaults: ObjectUserDefaults<Schedule> {
+    
+    init() {
+        super.init(key: "schedule_user_defaults")
+    }
+    
+}
+
+class ProfileUserDefaults: ObjectUserDefaults<Profile> {
+    
+    init() {
+        super.init(key: "profile_user_defaults")
     }
     
 }

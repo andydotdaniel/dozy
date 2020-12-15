@@ -14,13 +14,13 @@ protocol OnboardingViewPresenter: MessageFormDelegate {}
 class OnboardingPresenter: OnboardingViewPresenter {
     
     private var viewModel: OnboardingViewModel
-    private let userDefaults: ScheduleUserDefaultable
+    private let userDefaults: ScheduleUserDefaults
     
     private weak var navigationControllable: NavigationControllable?
     
     init(
         viewModel: OnboardingViewModel,
-        userDefaults: ScheduleUserDefaultable = UserDefaults.standard,
+        userDefaults: ScheduleUserDefaults = ScheduleUserDefaults(),
         navigationControllable: NavigationControllable?
     ) {
         self.viewModel = viewModel
@@ -31,7 +31,7 @@ class OnboardingPresenter: OnboardingViewPresenter {
     func onMessageSaved(_ message: Message) {
         let oneDay: TimeInterval = 60 * 60 * 24
         let schedule = Schedule(message: message, awakeConfirmationTime: Date().addingTimeInterval(oneDay), scheduledMessageId: nil)
-        userDefaults.saveSchedule(schedule)
+        userDefaults.save(schedule)
         viewModel.isShowingMessageForm = false
         
         let scheduleViewController = ScheduleViewBuilder(schedule: schedule, navigationControllable: navigationControllable).buildViewController()

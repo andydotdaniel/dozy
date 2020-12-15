@@ -12,11 +12,11 @@ import SwiftUI
 class RootViewBuilder: ViewControllerBuilder {
     
     private let keychain: SecureStorable
-    private let userDefaults: ScheduleUserDefaultable
+    private let userDefaults: ScheduleUserDefaults
     
     private weak var navigationControllable: NavigationControllable?
     
-    init(keychain: SecureStorable = Keychain(), userDefaults: ScheduleUserDefaultable = UserDefaults.standard, navigationControllable: NavigationControllable) {
+    init(keychain: SecureStorable = Keychain(), userDefaults: ScheduleUserDefaults = ScheduleUserDefaults(), navigationControllable: NavigationControllable) {
         self.keychain = keychain
         self.userDefaults = userDefaults
         self.navigationControllable = navigationControllable
@@ -28,7 +28,7 @@ class RootViewBuilder: ViewControllerBuilder {
             return builder.buildViewController()
         }
         
-        if let schedule = self.userDefaults.loadSchedule() {
+        if let schedule = self.userDefaults.load() {
             return ScheduleViewBuilder(schedule: schedule, navigationControllable: navigationControllable).buildViewController()
         }
         
