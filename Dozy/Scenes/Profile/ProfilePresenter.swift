@@ -58,7 +58,7 @@ class ProfilePresenter: ProfileViewPresenter {
                     self.showProfileText(from: profile)
                     self.saveProfile(profile)
                 case .failure:
-                    break
+                    self.viewModel?.isShowingError = true
                 }
             }
         })

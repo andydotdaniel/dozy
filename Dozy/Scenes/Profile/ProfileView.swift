@@ -14,6 +14,7 @@ class ProfileViewModel: ObservableObject {
     @Published var emailText: String?
     
     @Published var buttonIsLoading: Bool = false
+    @Published var isShowingError: Bool = false
     
 }
 
@@ -31,6 +32,8 @@ struct ProfileView: View {
         VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 90) {
             if let fullNameText = viewModel.fullNameText, let emailText = viewModel.emailText {
                 getProfileDetailsView(title: fullNameText, subtitle: emailText)
+            } else if viewModel.isShowingError {
+                getErrorView()
             } else {
                 getProfileLoadingView()
             }
@@ -63,6 +66,19 @@ struct ProfileView: View {
                 Spinner(strokeColor: Color.primaryBlue)
                 Text("Fetching profile information...")
                     .font(.body)
+            }
+        )
+    }
+    
+    private func getErrorView() -> AnyView {
+        AnyView(
+            VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 8) {
+            Text("Oops.")
+                .foregroundColor(Color.alertRed)
+                .bold()
+                .font(.largeTitle)
+            Text("We failed to fetch your profile information.")
+                .font(.title2)
             }
         )
     }
