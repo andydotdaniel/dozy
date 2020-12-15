@@ -21,6 +21,10 @@ struct URLSessionMockResult {
 
 class URLSessionMock: URLSessionable {
     
+    enum NetworkError: Error {
+        case someError
+    }
+    
     var result: URLSessionMockResult?
     
     func createDataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionalDataTasking {

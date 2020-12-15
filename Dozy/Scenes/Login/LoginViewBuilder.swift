@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftUI
 
-private class LoginViewController: UIHostingController<LoginView> {
+class LoginViewController: UIHostingController<LoginView> {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
