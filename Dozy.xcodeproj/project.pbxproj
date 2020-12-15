@@ -36,6 +36,7 @@
 		1035D078249605D7006B22FC /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D077249605D7006B22FC /* Color.swift */; };
 		1035D07D24963F1F006B22FC /* AlternativeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D07C24963F1F006B22FC /* AlternativeButton.swift */; };
 		103C6DCF258884B300054D0F /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103C6DCE258884B300054D0F /* Profile.swift */; };
+		103C6DDC2588971E00054D0F /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103C6DDB2588971E00054D0F /* ProfilePresenter.swift */; };
 		104856D724A0EC520072D00F /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104856D624A0EC520072D00F /* PrimaryButton.swift */; };
 		104856D924A142F80072D00F /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104856D824A142F80072D00F /* UIDevice.swift */; };
 		104BCC2024AB991200C35BDC /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BCC1F24AB991200C35BDC /* DispatchQueue.swift */; };
@@ -137,6 +138,7 @@
 		1035D077249605D7006B22FC /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		1035D07C24963F1F006B22FC /* AlternativeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeButton.swift; sourceTree = "<group>"; };
 		103C6DCE258884B300054D0F /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		103C6DDB2588971E00054D0F /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		104856D624A0EC520072D00F /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		104856D824A142F80072D00F /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		104BCC1F24AB991200C35BDC /* DispatchQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
@@ -506,6 +508,7 @@
 			children = (
 				10A21F2E2581133200E67FE0 /* ProfileView.swift */,
 				10A21F362581183100E67FE0 /* ProfileViewBuilder.swift */,
+				103C6DDB2588971E00054D0F /* ProfilePresenter.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -668,6 +671,7 @@
 				10F4222A249946970078AC3C /* Toast.swift in Sources */,
 				10AC9D9C24ACF40C00A3791C /* MultilineTextField.swift in Sources */,
 				105BDB0A24DC782B005C9CD7 /* RootViewBuilder.swift in Sources */,
+				103C6DDC2588971E00054D0F /* ProfilePresenter.swift in Sources */,
 				1081AE2D249F4E0C00AD6655 /* Keychain.swift in Sources */,
 				103264A524C448FE00863603 /* ScheduleViewBuilder.swift in Sources */,
 				104856D724A0EC520072D00F /* PrimaryButton.swift in Sources */,

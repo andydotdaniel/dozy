@@ -22,7 +22,15 @@ class ProfileViewController: UIHostingController<ProfileView> {
 struct ProfileViewBuilder: ViewControllerBuilder {
     
     func buildViewController() -> UIViewController {
-        let view = ProfileView(viewModel: ProfileViewModel())
+        let viewModel = ProfileViewModel()
+        let presenter = ProfilePresenter(
+            userDefaults: ProfileUserDefaults(),
+            viewModel: viewModel,
+            networkService: NetworkService(),
+            keychain: Keychain()
+        )
+        let view = ProfileView(viewModel: viewModel, presenter: presenter)
+        
         return ProfileViewController(rootView: view)
     }
     

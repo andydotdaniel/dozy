@@ -20,9 +20,11 @@ class ProfileViewModel: ObservableObject {
 struct ProfileView: View {
     
     @ObservedObject private var viewModel: ProfileViewModel
+    private var presenter: ProfileViewPresenter
     
-    init(viewModel: ProfileViewModel) {
+    init(viewModel: ProfileViewModel, presenter: ProfileViewPresenter) {
         self.viewModel = viewModel
+        self.presenter = presenter
     }
     
     var body: some View {
@@ -68,7 +70,10 @@ struct ProfileView: View {
 }
 
 struct ProfileView_Previews: PreviewProvider {
+    
+    private class PreviewProfileViewPresenter: ProfileViewPresenter {}
+    
     static var previews: some View {
-        ProfileView(viewModel: ProfileViewModel())
+        ProfileView(viewModel: ProfileViewModel(), presenter: PreviewProfileViewPresenter())
     }
 }
