@@ -10,6 +10,7 @@ import UIKit
 import SwiftUI
 
 protocol NavigationControllable: class {
+    var viewControllers: [UIViewController] { get set }
     func pushViewController(_ viewController: UIViewController, animated: Bool)
 }
 

@@ -8,28 +8,40 @@
 
 import Foundation
 
-protocol ProfileViewPresenter {}
+protocol ProfileViewPresenter {
+    func onLogoutButtonTapped()
+    func onLogoutCancelled()
+    func onLogoutConfirmed()
+}
 
 class ProfilePresenter: ProfileViewPresenter {
     
     private weak var viewModel: ProfileViewModel?
     
-    private let userDefaults: ProfileUserDefaults
+    private let profileUserDefaults: ProfileUserDefaults
+    private let scheduleUserDefaults: ScheduleUserDefaults
+    
     private let networkService: NetworkRequesting
     private let keychain: SecureStorable
     
+    private weak var navigationControllable: NavigationControllable?
+    
     init(
-        userDefaults: ProfileUserDefaults,
+        profileUserDefaults: ProfileUserDefaults,
+        scheduleUserDefaults: ScheduleUserDefaults,
         viewModel: ProfileViewModel,
         networkService: NetworkRequesting,
-        keychain: SecureStorable
+        keychain: SecureStorable,
+        navigationControllable: NavigationControllable?
     ) {
-        self.userDefaults = userDefaults
+        self.profileUserDefaults = profileUserDefaults
+        self.scheduleUserDefaults = scheduleUserDefaults
         self.viewModel = viewModel
         self.networkService = networkService
         self.keychain = keychain
+        self.navigationControllable = navigationControllable
         
-        if let profile = userDefaults.load() {
+        if let profile = profileUserDefaults.load() {
             showProfileText(from: profile)
         } else {
             fetchUserProfile()
@@ -65,7 +77,35 @@ class ProfilePresenter: ProfileViewPresenter {
     }
     
     private func saveProfile(_ profile: Profile) {
-        userDefaults.save(profile)
+        profileUserDefaults.save(profile)
+    }
+    
+    func onLogoutButtonTapped() {
+        self.viewModel?.isShowingLogoutAlert = true
+    }
+    
+    func onLogoutCancelled() {
+        self.viewModel?.isShowingLogoutAlert = false
+    }
+    
+    func onLogoutConfirmed() {
+        func clearUserDefaults() {
+            let userDefaults: [UserDefaultsDeletable] = [profileUserDefaults, scheduleUserDefaults]
+            userDefaults.forEach { $0.delete() }
+        }
+        
+        func navigateToLogin() {
+            guard let navigationControllable = self.navigationControllable else { return }
+            
+            let loginViewController = LoginViewBuilder(navigationControllable: navigationControllable).buildViewController()
+            navigationControllable.pushViewController(loginViewController, animated: true)
+            navigationControllable.viewControllers.removeSubrange(0..<navigationControllable.viewControllers.count - 1)
+        }
+        
+        self.viewModel?.isShowingLogoutAlert = false
+        
+        clearUserDefaults()
+        navigateToLogin()
     }
     
 }

@@ -15,6 +15,7 @@ class ProfileViewModel: ObservableObject {
     
     @Published var buttonIsLoading: Bool = false
     @Published var isShowingError: Bool = false
+    @Published var isShowingLogoutAlert: Bool = false
     
 }
 
@@ -38,11 +39,32 @@ struct ProfileView: View {
                 getProfileLoadingView()
             }
             
-            AlternativeButton(titleText: "Logout", tapAction: {}, icon: nil, isLoading: $viewModel.buttonIsLoading)
-                .frame(maxWidth: .infinity)
+            AlternativeButton(
+                titleText: "Logout",
+                tapAction: { self.presenter.onLogoutButtonTapped() },
+                icon: nil,
+                isLoading: $viewModel.buttonIsLoading
+            )
+            .frame(maxWidth: .infinity)
         }
         .multilineTextAlignment(.center)
         .padding(.horizontal, 16)
+        .alert(isPresented: $viewModel.isShowingLogoutAlert, content: {
+            let confirmButton: Alert.Button = .default(Text("Yes"), action: {
+                self.presenter.onLogoutConfirmed()
+            })
+            
+            let cancelButton: Alert.Button = .default(Text("No"), action: {
+                self.presenter.onLogoutCancelled()
+            })
+            
+            return Alert(
+                title: Text("Confirm Logout"),
+                message: Text("Are you sure you want to logout?"),
+                primaryButton: cancelButton,
+                secondaryButton: confirmButton
+            )
+        })
     }
     
     private func getProfileDetailsView(title: String, subtitle: String) -> AnyView {
@@ -87,7 +109,11 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     
-    private class PreviewProfileViewPresenter: ProfileViewPresenter {}
+    private class PreviewProfileViewPresenter: ProfileViewPresenter {
+        func onLogoutCancelled() {}
+        func onLogoutConfirmed() {}
+        func onLogoutButtonTapped() {}
+    }
     
     static var previews: some View {
         ProfileView(viewModel: ProfileViewModel(), presenter: PreviewProfileViewPresenter())

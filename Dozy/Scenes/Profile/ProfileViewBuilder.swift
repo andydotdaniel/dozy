@@ -21,13 +21,21 @@ class ProfileViewController: UIHostingController<ProfileView> {
 
 struct ProfileViewBuilder: ViewControllerBuilder {
     
+    private weak var navigationControllable: NavigationControllable?
+    
+    init(navigationControllable: NavigationControllable?) {
+        self.navigationControllable = navigationControllable
+    }
+    
     func buildViewController() -> UIViewController {
         let viewModel = ProfileViewModel()
         let presenter = ProfilePresenter(
-            userDefaults: ProfileUserDefaults(),
+            profileUserDefaults: ProfileUserDefaults(),
+            scheduleUserDefaults: ScheduleUserDefaults(),
             viewModel: viewModel,
             networkService: NetworkService(),
-            keychain: Keychain()
+            keychain: Keychain(),
+            navigationControllable: navigationControllable
         )
         let view = ProfileView(viewModel: viewModel, presenter: presenter)
         

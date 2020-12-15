@@ -8,7 +8,11 @@
 
 import Foundation
 
-class ObjectUserDefaults<T: Codable> {
+protocol UserDefaultsDeletable {
+    func delete()
+}
+
+class ObjectUserDefaults<T: Codable>: UserDefaultsDeletable {
     
     private let userDefaults: UserDefaults = UserDefaults.standard
     private let key: String

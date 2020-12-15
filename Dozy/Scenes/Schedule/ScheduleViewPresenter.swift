@@ -352,7 +352,7 @@ class SchedulePresenter: ScheduleViewPresenter {
     }
     
     func onProfileIconTapped() {
-        let profileViewController = ProfileViewBuilder().buildViewController()
+        let profileViewController = ProfileViewBuilder(navigationControllable: navigationControllable).buildViewController()
         navigationControllable?.pushViewController(profileViewController, animated: true)
     }
     
