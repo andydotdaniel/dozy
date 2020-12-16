@@ -22,12 +22,14 @@ extension Schedule {
     
     var awakeConfirmationDateText: String {
         let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.dateFormat = "MMM d"
         return dateFormatter.string(from: awakeConfirmationTime)
     }
     
     var awakeConfirmationTimeText: String {
         let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.dateFormat = "h:mm a"
         return dateFormatter.string(from: awakeConfirmationTime)
     }
