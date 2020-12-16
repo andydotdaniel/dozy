@@ -42,6 +42,7 @@ struct AwakeConfirmationView: View {
             }.foregroundColor(self.viewModel.countdownActive ? Color.primaryBlue : Color.borderGray)
             Spacer()
             Slider(titleText: "Slide for awake confirmation", delegate: presenter)
+                .offset(y: -24)
         }
         .padding(.bottom, 16)
         .padding(.horizontal, 16)
