@@ -17,6 +17,8 @@ class AwakeConfirmationPresenterTests: XCTestCase {
     var urlSessionMock: URLSessionMock!
     var keychainMock: KeychainMock!
     
+    var navigationControllable: NavigationControllableMock!
+    
     override func setUpWithError() throws {
         Current = .mock
         
@@ -32,13 +34,15 @@ class AwakeConfirmationPresenterTests: XCTestCase {
         let message = Message(image: nil, bodyText: "SOME_BODY_TEXT", channel: Channel(id: "SOME_ID", isPublic: false, text: "SOME_TEXT"))
         let schedule = Schedule(message: message, awakeConfirmationTime: Date().addingTimeInterval(30), scheduledMessageId: "SOME_ID")
         
+        navigationControllable = NavigationControllableMock()
+        
         presenter = AwakeConfirmationPresenter(
             viewModel: awakeConfirmationViewModel,
             networkService: networkService,
             keychain: keychainMock,
             userDefaults: userDefaultsMock,
             savedSchedule: schedule,
-            navigationControllable: nil
+            navigationControllable: navigationControllable
         )
     }
 
@@ -64,6 +68,9 @@ class AwakeConfirmationPresenterTests: XCTestCase {
         
         XCTAssertNotNil(userDefaultsMock.scheduleSaved)
         XCTAssertNil(userDefaultsMock.scheduleSaved?.scheduledMessageId)
+        XCTAssertTrue(navigationControllable?.pushViewControllerCalledWithArgs?.viewController is ScheduleViewController)
+        XCTAssertEqual(navigationControllable?.pushViewControllerCalledWithArgs?.animated, true)
+        XCTAssertEqual(navigationControllable?.viewControllers.count, 1)
     }
 
 }
