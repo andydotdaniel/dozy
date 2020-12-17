@@ -49,7 +49,7 @@ class SchedulePresenter: ScheduleViewPresenter {
         self.keychain = keychain
         self.navigationControllable = navigationControllable
         
-        let now = Date()
+        let now = Current.now()
         self.secondsUntilAwakeConfirmationTime = Int(schedule.awakeConfirmationTime.timeIntervalSince(now))
         updateAwakeConfirmationTimeToNextDayIfNeeded(from: now)
         
@@ -154,6 +154,8 @@ class SchedulePresenter: ScheduleViewPresenter {
     private func setActiveSchedule() {
         viewModel.state = .active
         viewModel.switchPosition = (.on, true)
+        
+        secondsUntilAwakeConfirmationTime = Int(schedule.awakeConfirmationTime.timeIntervalSince(Current.now()))
         enableAwakeConfirmation()
         
         sendScheduleMessageRequest()
