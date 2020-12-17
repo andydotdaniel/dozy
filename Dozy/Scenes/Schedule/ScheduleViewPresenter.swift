@@ -344,7 +344,8 @@ class SchedulePresenter: ScheduleViewPresenter {
             }
         }()
         
-        let updatedAwakeConfirmationTime = now.addingTimeInterval(secondsToAdd)
+        let nowSecondsComponent = TimeInterval(Calendar.current.dateComponents([.second], from: now).second ?? 0)
+        let updatedAwakeConfirmationTime = now.addingTimeInterval(secondsToAdd - nowSecondsComponent)
         self.updateUserDefaultsSchedule(with: updatedAwakeConfirmationTime)
         self.updateAwakeConfirmationText(with: self.schedule)
         

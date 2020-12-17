@@ -78,7 +78,9 @@ class SchedulePresenterTests: XCTestCase {
         
         self.presenter.onTimePickerDoneButtonTapped()
         
-        XCTAssertEqual(self.userDefaultsMock.scheduleSaved!.awakeConfirmationTime.timeIntervalSinceReferenceDate, dateAdded.timeIntervalSinceReferenceDate, accuracy: 0.001)
+        let nowSecondsComponent = TimeInterval(Calendar.current.dateComponents([.second], from: Current.now()).second ?? 0)
+        let expectedAwakeConfirmationTime = dateAdded.addingTimeInterval(-nowSecondsComponent).timeIntervalSinceReferenceDate
+        XCTAssertEqual(self.userDefaultsMock.scheduleSaved!.awakeConfirmationTime.timeIntervalSinceReferenceDate, expectedAwakeConfirmationTime, accuracy: 0.001)
         
         XCTAssertEqual(self.userDefaultsMock.scheduleSaved?.awakeConfirmationDateText, viewModel.awakeConfirmationCard.titleText)
         XCTAssertEqual(self.userDefaultsMock.scheduleSaved?.awakeConfirmationTimeText, viewModel.awakeConfirmationCard.subtitleText)
