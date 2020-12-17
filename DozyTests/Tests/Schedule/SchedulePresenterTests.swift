@@ -23,10 +23,12 @@ class SchedulePresenterTests: XCTestCase {
     
     override func setUpWithError() throws {
         Current = .mock
+        let now = Date()
+        Current.now = { now }
         
         let channel = Channel(id: "SOME_CHANNEL_ID", isPublic: true, text: "SOME_CHANNEL_NAME")
         let message = Message(image: nil, bodyText: "SOME_BODY_TEXT", channel: channel)
-        schedule = Schedule(message: message, awakeConfirmationTime: Date(), scheduledMessageId: nil)
+        schedule = Schedule(message: message, awakeConfirmationTime: Current.now(), scheduledMessageId: "SOME_PRESCHEDULED_MESSAGE_ID")
         viewModel = ScheduleViewModel(schedule: schedule)
         
         userDefaultsMock = ScheduleUserDefaultsMock()
@@ -34,6 +36,7 @@ class SchedulePresenterTests: XCTestCase {
         urlSessionMock = URLSessionMock()
         let networkService = NetworkService(urlSession: urlSessionMock)
         keychainMock = KeychainMock()
+        keychainMock.dataToLoad = Data("SOME_ACCESS_TOKEN".utf8)
         
         navigationControllable = NavigationControllableMock()
         
@@ -65,7 +68,7 @@ class SchedulePresenterTests: XCTestCase {
         
         XCTAssertEqual(self.viewModel.messageCard.actionButtonTitle, "Edit")
         
-        let expectedSchedule = Schedule(message: message, awakeConfirmationTime: schedule.awakeConfirmationTime, scheduledMessageId: nil)
+        let expectedSchedule = Schedule(message: message, awakeConfirmationTime: schedule.awakeConfirmationTime, scheduledMessageId: schedule.scheduledMessageId)
         XCTAssertEqual(userDefaultsMock.scheduleSaved, expectedSchedule)
     }
     
@@ -102,6 +105,40 @@ class SchedulePresenterTests: XCTestCase {
         
         XCTAssertEqual(self.navigationControllable.pushViewControllerCalledWithArgs?.animated, true)
         XCTAssertTrue(self.navigationControllable.pushViewControllerCalledWithArgs?.viewController is ProfileViewController)
+    }
+    
+    func testOnSwitchPositionChangedTriggeredForInvalidTime() {
+        self.viewModel.state = .inactive
+        Current.now = { self.schedule.awakeConfirmationTime.addingTimeInterval(1) }
+        self.presenter.onSwitchPositionChangedTriggered()
+        
+        XCTAssertTrue(self.viewModel.errorToastIsShowing)
+    }
+    
+    func testOnSwitchPositionChangedTriggeredForActiveSchedule() throws {
+        self.viewModel.state = .inactive
+        self.urlSessionMock.result = try JSONLoader.load(fileName: "ScheduledMessage")
+        
+        Current.now = { self.schedule.awakeConfirmationTime.addingTimeInterval(-1) }
+        self.presenter.onSwitchPositionChangedTriggered()
+        
+        XCTAssertEqual(self.viewModel.state, .active)
+        XCTAssertEqual(self.viewModel.switchPosition.position, .on)
+        XCTAssertEqual(self.viewModel.switchPosition.isLoading, false)
+        XCTAssertEqual(self.userDefaultsMock.scheduleSaved?.scheduledMessageId, "SOME_SCHEDULED_MESSAGE_ID")
+    }
+    
+    func testOnSwitchPositionChangedTriggeredForInactiveSchedule() {
+        self.viewModel.state = .active
+        self.urlSessionMock.result = .init(data: Data(), urlResponse: nil, error: nil)
+        
+        Current.now = { self.schedule.awakeConfirmationTime.addingTimeInterval(-1) }
+        self.presenter.onSwitchPositionChangedTriggered()
+        
+        XCTAssertEqual(self.viewModel.state, .inactive)
+        XCTAssertEqual(self.viewModel.switchPosition.position, .off)
+        XCTAssertEqual(self.viewModel.switchPosition.isLoading, false)
+        XCTAssertNil(self.userDefaultsMock.scheduleSaved?.scheduledMessageId)
     }
 
 }

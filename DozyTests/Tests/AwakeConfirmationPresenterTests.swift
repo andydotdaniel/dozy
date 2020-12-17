@@ -37,7 +37,8 @@ class AwakeConfirmationPresenterTests: XCTestCase {
             networkService: networkService,
             keychain: keychainMock,
             userDefaults: userDefaultsMock,
-            savedSchedule: schedule
+            savedSchedule: schedule,
+            navigationControllable: nil
         )
     }
 

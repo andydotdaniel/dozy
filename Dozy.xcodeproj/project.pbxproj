@@ -79,6 +79,7 @@
 		10A55EC224B110480099EDAD /* MessageFormViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A55EC124B110480099EDAD /* MessageFormViewBuilder.swift */; };
 		10AC9D9C24ACF40C00A3791C /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC9D9B24ACF40C00A3791C /* MultilineTextField.swift */; };
 		10AC9D9E24ACF96800A3791C /* ImagePickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC9D9D24ACF96800A3791C /* ImagePickerButton.swift */; };
+		10B89E62258B598300ED8D0F /* ScheduledMessage.json in Resources */ = {isa = PBXBuildFile; fileRef = 10B89E61258B598300ED8D0F /* ScheduledMessage.json */; };
 		10BB85EC24BB6F48005D9829 /* MessageFormBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB85EB24BB6F48005D9829 /* MessageFormBuilderTests.swift */; };
 		10C4D43324D544E200CC1123 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C4D43224D544E200CC1123 /* UserDefaults.swift */; };
 		10CE42C5258095DF00BB00CF /* NavigationControllableMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE42C4258095DF00BB00CF /* NavigationControllableMock.swift */; };
@@ -185,6 +186,7 @@
 		10A55EC124B110480099EDAD /* MessageFormViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormViewBuilder.swift; sourceTree = "<group>"; };
 		10AC9D9B24ACF40C00A3791C /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 		10AC9D9D24ACF96800A3791C /* ImagePickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerButton.swift; sourceTree = "<group>"; };
+		10B89E61258B598300ED8D0F /* ScheduledMessage.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ScheduledMessage.json; sourceTree = "<group>"; };
 		10BB85EB24BB6F48005D9829 /* MessageFormBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormBuilderTests.swift; sourceTree = "<group>"; };
 		10C4D43224D544E200CC1123 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		10CE42C4258095DF00BB00CF /* NavigationControllableMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllableMock.swift; sourceTree = "<group>"; };
@@ -430,6 +432,7 @@
 			children = (
 				105A182A24BB5A25003177AA /* Channels.json */,
 				103C6DEE2588E0DB00054D0F /* Profile.json */,
+				10B89E61258B598300ED8D0F /* ScheduledMessage.json */,
 			);
 			path = NetworkResponses;
 			sourceTree = "<group>";
@@ -646,6 +649,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				105A182B24BB5A25003177AA /* Channels.json in Resources */,
+				10B89E62258B598300ED8D0F /* ScheduledMessage.json in Resources */,
 				103C6DEF2588E0DB00054D0F /* Profile.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

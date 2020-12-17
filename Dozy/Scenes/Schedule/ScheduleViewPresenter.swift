@@ -139,11 +139,11 @@ class SchedulePresenter: ScheduleViewPresenter {
     func onSwitchPositionChangedTriggered() {
         switch viewModel.state {
         case .inactive:
-            let now = Date()
-            if schedule.awakeConfirmationTime.compare(now) == .orderedAscending {
+            switch schedule.awakeConfirmationTime.compare(Current.now()) {
+            case .orderedSame, .orderedAscending:
                 viewModel.errorToastText = "Passed date selected. Please change date."
                 viewModel.errorToastIsShowing = true
-            } else {
+            case .orderedDescending:
                 setActiveSchedule()
             }
         case .active:
