@@ -35,9 +35,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        guard let rootNavigationController = Current.window?.rootViewController as? UINavigationController else { return }
-        let notificationHandler = AwakeConfirmationNotificationHandler(navigationControllable: rootNavigationController, scheduleUserDefaults: ScheduleUserDefaults())
-        notificationHandler.routeToValidScreen()
+        guard let rootNavigationController = Current.window?.rootViewController as? UINavigationController,
+              let schedule = ScheduleUserDefaults().load() else { return }
+        let targetViewController = PostAwakeConfirmationTimeViewBuilder(navigationControllable: rootNavigationController, schedule: schedule, nowDate: Current.now()).buildViewController()
+        rootNavigationController.pushViewController(targetViewController, animated: false)
     }
     
 }

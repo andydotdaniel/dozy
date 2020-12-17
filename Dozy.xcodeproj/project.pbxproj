@@ -80,7 +80,7 @@
 		10AC9D9C24ACF40C00A3791C /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC9D9B24ACF40C00A3791C /* MultilineTextField.swift */; };
 		10AC9D9E24ACF96800A3791C /* ImagePickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC9D9D24ACF96800A3791C /* ImagePickerButton.swift */; };
 		10B89E62258B598300ED8D0F /* ScheduledMessage.json in Resources */ = {isa = PBXBuildFile; fileRef = 10B89E61258B598300ED8D0F /* ScheduledMessage.json */; };
-		10B89E66258B5E0500ED8D0F /* AwakeConfirmationNotificationHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B89E65258B5E0500ED8D0F /* AwakeConfirmationNotificationHandlerTests.swift */; };
+		10B89E66258B5E0500ED8D0F /* PostAwakeConfirmationTimeViewBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B89E65258B5E0500ED8D0F /* PostAwakeConfirmationTimeViewBuilderTests.swift */; };
 		10BB85EC24BB6F48005D9829 /* MessageFormBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB85EB24BB6F48005D9829 /* MessageFormBuilderTests.swift */; };
 		10C4D43324D544E200CC1123 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C4D43224D544E200CC1123 /* UserDefaults.swift */; };
 		10CE42C5258095DF00BB00CF /* NavigationControllableMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE42C4258095DF00BB00CF /* NavigationControllableMock.swift */; };
@@ -88,7 +88,7 @@
 		10D5E09D2531756C00E0C34A /* AwakeConfirmationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D5E09C2531756C00E0C34A /* AwakeConfirmationPresenter.swift */; };
 		10D5E09F25317AA700E0C34A /* AwakeConfirmationPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D5E09E25317AA700E0C34A /* AwakeConfirmationPresenterTests.swift */; };
 		10D5E0A1253181B800E0C34A /* AwakeConfirmationViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D5E0A0253181B800E0C34A /* AwakeConfirmationViewBuilder.swift */; };
-		10E079E8258A0F990031D40E /* AwakeConfirmationNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E079E7258A0F990031D40E /* AwakeConfirmationNotificationHandler.swift */; };
+		10E079E8258A0F990031D40E /* PostAwakeConfirmationTimeViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E079E7258A0F990031D40E /* PostAwakeConfirmationTimeViewBuilder.swift */; };
 		10E57E5E24969C79001B71A4 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E57E5D24969C79001B71A4 /* World.swift */; };
 		10E57E6024969F03001B71A4 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E57E5F24969F03001B71A4 /* LoginPresenter.swift */; };
 		10E57E622496A062001B71A4 /* LoginViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E57E612496A062001B71A4 /* LoginViewBuilder.swift */; };
@@ -188,7 +188,7 @@
 		10AC9D9B24ACF40C00A3791C /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 		10AC9D9D24ACF96800A3791C /* ImagePickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerButton.swift; sourceTree = "<group>"; };
 		10B89E61258B598300ED8D0F /* ScheduledMessage.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ScheduledMessage.json; sourceTree = "<group>"; };
-		10B89E65258B5E0500ED8D0F /* AwakeConfirmationNotificationHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwakeConfirmationNotificationHandlerTests.swift; sourceTree = "<group>"; };
+		10B89E65258B5E0500ED8D0F /* PostAwakeConfirmationTimeViewBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAwakeConfirmationTimeViewBuilderTests.swift; sourceTree = "<group>"; };
 		10BB85EB24BB6F48005D9829 /* MessageFormBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormBuilderTests.swift; sourceTree = "<group>"; };
 		10C4D43224D544E200CC1123 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		10CE42C4258095DF00BB00CF /* NavigationControllableMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllableMock.swift; sourceTree = "<group>"; };
@@ -196,7 +196,7 @@
 		10D5E09C2531756C00E0C34A /* AwakeConfirmationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwakeConfirmationPresenter.swift; sourceTree = "<group>"; };
 		10D5E09E25317AA700E0C34A /* AwakeConfirmationPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwakeConfirmationPresenterTests.swift; sourceTree = "<group>"; };
 		10D5E0A0253181B800E0C34A /* AwakeConfirmationViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwakeConfirmationViewBuilder.swift; sourceTree = "<group>"; };
-		10E079E7258A0F990031D40E /* AwakeConfirmationNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwakeConfirmationNotificationHandler.swift; sourceTree = "<group>"; };
+		10E079E7258A0F990031D40E /* PostAwakeConfirmationTimeViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAwakeConfirmationTimeViewBuilder.swift; sourceTree = "<group>"; };
 		10E57E5D24969C79001B71A4 /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
 		10E57E5F24969F03001B71A4 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		10E57E612496A062001B71A4 /* LoginViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewBuilder.swift; sourceTree = "<group>"; };
@@ -261,7 +261,7 @@
 				1015816B2495F8CA00AA0B37 /* Info.plist */,
 				101581652495F8CA00AA0B37 /* Preview Content */,
 				10E57E632496A086001B71A4 /* ViewBuilder.swift */,
-				10E079E7258A0F990031D40E /* AwakeConfirmationNotificationHandler.swift */,
+				10E079E7258A0F990031D40E /* PostAwakeConfirmationTimeViewBuilder.swift */,
 			);
 			path = Dozy;
 			sourceTree = "<group>";
@@ -501,7 +501,7 @@
 				101581742495F8CA00AA0B37 /* LoginPresenterTests.swift */,
 				1033ABDA252821000045BD64 /* OnboardingPresenterTests.swift */,
 				10D5E09E25317AA700E0C34A /* AwakeConfirmationPresenterTests.swift */,
-				10B89E65258B5E0500ED8D0F /* AwakeConfirmationNotificationHandlerTests.swift */,
+				10B89E65258B5E0500ED8D0F /* PostAwakeConfirmationTimeViewBuilderTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -701,7 +701,7 @@
 				105BDB0A24DC782B005C9CD7 /* RootViewBuilder.swift in Sources */,
 				103C6DDC2588971E00054D0F /* ProfilePresenter.swift in Sources */,
 				1081AE2D249F4E0C00AD6655 /* Keychain.swift in Sources */,
-				10E079E8258A0F990031D40E /* AwakeConfirmationNotificationHandler.swift in Sources */,
+				10E079E8258A0F990031D40E /* PostAwakeConfirmationTimeViewBuilder.swift in Sources */,
 				103264A524C448FE00863603 /* ScheduleViewBuilder.swift in Sources */,
 				104856D724A0EC520072D00F /* PrimaryButton.swift in Sources */,
 				1032649E24C41F8000863603 /* ScheduleView.swift in Sources */,
@@ -769,7 +769,7 @@
 				105A182E24BB5C25003177AA /* JSONLoader.swift in Sources */,
 				1033ABDB252821000045BD64 /* OnboardingPresenterTests.swift in Sources */,
 				104BCC2624AB9C0600C35BDC /* DispatchQueueMock.swift in Sources */,
-				10B89E66258B5E0500ED8D0F /* AwakeConfirmationNotificationHandlerTests.swift in Sources */,
+				10B89E66258B5E0500ED8D0F /* PostAwakeConfirmationTimeViewBuilderTests.swift in Sources */,
 				10BB85EC24BB6F48005D9829 /* MessageFormBuilderTests.swift in Sources */,
 				1025D7BB24E44A2700118CD4 /* Message.swift in Sources */,
 				103C6DEB2588DE7600054D0F /* ProfilePresenterProfileUnfetchedTests.swift in Sources */,

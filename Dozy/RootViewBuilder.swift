@@ -29,7 +29,14 @@ class RootViewBuilder: ViewControllerBuilder {
         }
         
         if let schedule = self.userDefaults.load() {
-            return ScheduleViewBuilder(schedule: schedule, navigationControllable: navigationControllable).buildViewController()
+            let now = Current.now()
+            
+            switch now.compare(schedule.awakeConfirmationTime) {
+            case .orderedSame, .orderedDescending:
+                return PostAwakeConfirmationTimeViewBuilder(navigationControllable: navigationControllable, schedule: schedule, nowDate: now).buildViewController()
+            case .orderedAscending:
+                return ScheduleViewBuilder(schedule: schedule, navigationControllable: navigationControllable).buildViewController()
+            }
         }
         
         return OnboardingViewBuilder(navigationControllable: navigationControllable).buildViewController()
