@@ -66,7 +66,7 @@ struct Slider: View {
                                     }
                                 }()
                                 
-                                if controlWidthOffset == controlWidthOffsetLimit {
+                                if controlWidthOffset == controlWidthOffsetLimit, !self.hasReachedEnd {
                                     self.hasReachedEnd = true
                                     self.generateSuccessFeedback()
                                     self.delegate?.onSliderReachedEnd()

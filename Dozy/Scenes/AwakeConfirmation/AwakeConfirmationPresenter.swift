@@ -17,6 +17,7 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
     private let networkService: NetworkRequesting
     private let keychain: SecureStorable
     private let userDefaults: ScheduleUserDefaults
+    private weak var navigationControllable: NavigationControllable?
     
     private var secondsLeftTimer: Timer?
     
@@ -27,13 +28,15 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
         networkService: NetworkRequesting,
         keychain: SecureStorable,
         userDefaults: ScheduleUserDefaults,
-        savedSchedule: Schedule
+        savedSchedule: Schedule,
+        navigationControllable: NavigationControllable?
     ) {
         self.viewModel = viewModel
         self.networkService = networkService
         self.keychain = keychain
         self.userDefaults = userDefaults
         self.savedSchedule = savedSchedule
+        self.navigationControllable = navigationControllable
         
         setSecondsLeftTimer()
     }
@@ -66,7 +69,7 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
         let accessToken = String(decoding: accessTokenData, as: UTF8.self)
         
         guard let request = NetworkRequest(
-            url: "/slack.com/api/chat.deleteScheduledMessage",
+            url: "https://slack.com/api/chat.deleteScheduledMessage",
             httpMethod: .post,
             parameters: ["channel": savedSchedule.message.channel.id, "scheduled_message_id": scheduledMessageId],
             headers: ["Authorization": "Bearer \(accessToken)"],
@@ -80,14 +83,21 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
                 case .success:
                     var updatedSchedule = self.savedSchedule
                     updatedSchedule.scheduledMessageId = nil
-                    
                     self.userDefaults.save(updatedSchedule)
+                    
+                    self.navigateToSchedule(with: updatedSchedule)
                 case .failure:
                     // TODO: Handle failure
                     break
                 }
             }
         })
+    }
+    
+    private func navigateToSchedule(with schedule: Schedule) {
+        let scheduleViewController = ScheduleViewBuilder(schedule: schedule, navigationControllable: navigationControllable).buildViewController()
+        navigationControllable?.pushViewController(scheduleViewController, animated: true)
+        navigationControllable?.viewControllers = [scheduleViewController]
     }
     
 }

@@ -7,21 +7,35 @@
 //
 
 import Foundation
+import SwiftUI
+import UIKit
 
-struct AwakeConfirmationViewBuilder: ViewBuilder {
+class AwakeConfirmationViewController: UIHostingController<AwakeConfirmationView> {
     
-    private let schedule: Schedule
-    
-    init(schedule: Schedule) {
-        self.schedule = schedule
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    func build() -> AwakeConfirmationView {
-        let secondsLeft = schedule.awakeConfirmationTime.timeIntervalSinceNow
+}
+
+struct AwakeConfirmationViewBuilder: ViewControllerBuilder {
+    
+    private let schedule: Schedule
+    private weak var navigationControllable: NavigationControllable?
+    
+    init(schedule: Schedule, navigationControllable: NavigationControllable?) {
+        self.schedule = schedule
+        self.navigationControllable = navigationControllable
+    }
+    
+    func buildViewController() -> UIViewController {
+        let secondsLeft = schedule.sleepyheadMessagePostTime.timeIntervalSinceNow
         let viewModel = AwakeConfirmationViewModel(countdownActive: true, secondsLeft: Int(secondsLeft))
-        let presenter = AwakeConfirmationPresenter(viewModel: viewModel, networkService: NetworkService(), keychain: Keychain(), userDefaults: ScheduleUserDefaults(), savedSchedule: schedule)
+        let presenter = AwakeConfirmationPresenter(viewModel: viewModel, networkService: NetworkService(), keychain: Keychain(), userDefaults: ScheduleUserDefaults(), savedSchedule: schedule, navigationControllable: navigationControllable)
+        let view = AwakeConfirmationView(viewModel: viewModel, presenter: presenter)
         
-        return AwakeConfirmationView(viewModel: viewModel, presenter: presenter)
+        return AwakeConfirmationViewController(rootView: view)
     }
     
 }

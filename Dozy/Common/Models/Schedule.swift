@@ -34,4 +34,8 @@ extension Schedule {
         return dateFormatter.string(from: awakeConfirmationTime)
     }
     
+    var sleepyheadMessagePostTime: Date {
+        return awakeConfirmationTime.addingTimeInterval(awakeConfirmationDelay)
+    }
+    
 }

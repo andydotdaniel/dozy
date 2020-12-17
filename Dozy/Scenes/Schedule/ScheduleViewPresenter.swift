@@ -9,6 +9,7 @@
 import SwiftUI
 
 private let pushNotificationIdentifier = "dozy_awake_confirmation_alert"
+let awakeConfirmationDelay: TimeInterval = 90
 
 protocol ScheduleViewPresenter: SwitchViewDelegate, MessageFormDelegate, HeaderMainDelegate {
     func onMessageActionButtonTapped()
@@ -214,9 +215,9 @@ class SchedulePresenter: ScheduleViewPresenter {
             return [textBlock].compactMap { return $0 }
         }()
         
-        // Add an additional 30 seconds to awake confirmation time because of the 30 second timer we show
+        // Add additional seconds delay to awake confirmation time because of the timer we show
         // in AwakeConfirmationView while the user confirms they are awake.
-        let postAtTime = schedule.awakeConfirmationTime.addingTimeInterval(30)
+        let postAtTime = schedule.awakeConfirmationTime.addingTimeInterval(awakeConfirmationDelay)
         return [
             "channel": message.channel.id,
             "text": "I overslept!",
@@ -259,6 +260,7 @@ class SchedulePresenter: ScheduleViewPresenter {
         let content = UNMutableNotificationContent()
         content.title = "Hope you're awake sleepyhead!"
         content.body = "Confirm that you're awake before the timer runs out"
+        content.sound = .default
         
         let dateComponents = Calendar.current.dateComponents(
             [.year, .month, .day, .hour, .minute, .second],

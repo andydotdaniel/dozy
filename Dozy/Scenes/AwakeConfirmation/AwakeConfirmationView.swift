@@ -57,7 +57,7 @@ struct AwakeConfirmationView_Previews: PreviewProvider {
         let schedule = Schedule(message: message, awakeConfirmationTime: Date().addingTimeInterval(30), scheduledMessageId: nil)
         
         let viewModel = AwakeConfirmationViewModel(countdownActive: true, secondsLeft: 30)
-        let presenter = AwakeConfirmationPresenter(viewModel: viewModel, networkService: NetworkService(), keychain: Keychain(), userDefaults: ScheduleUserDefaults(), savedSchedule: schedule)
+        let presenter = AwakeConfirmationPresenter(viewModel: viewModel, networkService: NetworkService(), keychain: Keychain(), userDefaults: ScheduleUserDefaults(), savedSchedule: schedule, navigationControllable: nil)
         
         return Group {
             AwakeConfirmationView(viewModel: viewModel, presenter: presenter)

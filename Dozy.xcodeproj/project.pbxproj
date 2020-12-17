@@ -86,6 +86,7 @@
 		10D5E09D2531756C00E0C34A /* AwakeConfirmationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D5E09C2531756C00E0C34A /* AwakeConfirmationPresenter.swift */; };
 		10D5E09F25317AA700E0C34A /* AwakeConfirmationPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D5E09E25317AA700E0C34A /* AwakeConfirmationPresenterTests.swift */; };
 		10D5E0A1253181B800E0C34A /* AwakeConfirmationViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D5E0A0253181B800E0C34A /* AwakeConfirmationViewBuilder.swift */; };
+		10E079E8258A0F990031D40E /* AwakeConfirmationNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E079E7258A0F990031D40E /* AwakeConfirmationNotificationHandler.swift */; };
 		10E57E5E24969C79001B71A4 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E57E5D24969C79001B71A4 /* World.swift */; };
 		10E57E6024969F03001B71A4 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E57E5F24969F03001B71A4 /* LoginPresenter.swift */; };
 		10E57E622496A062001B71A4 /* LoginViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E57E612496A062001B71A4 /* LoginViewBuilder.swift */; };
@@ -191,6 +192,7 @@
 		10D5E09C2531756C00E0C34A /* AwakeConfirmationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwakeConfirmationPresenter.swift; sourceTree = "<group>"; };
 		10D5E09E25317AA700E0C34A /* AwakeConfirmationPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwakeConfirmationPresenterTests.swift; sourceTree = "<group>"; };
 		10D5E0A0253181B800E0C34A /* AwakeConfirmationViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwakeConfirmationViewBuilder.swift; sourceTree = "<group>"; };
+		10E079E7258A0F990031D40E /* AwakeConfirmationNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwakeConfirmationNotificationHandler.swift; sourceTree = "<group>"; };
 		10E57E5D24969C79001B71A4 /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
 		10E57E5F24969F03001B71A4 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		10E57E612496A062001B71A4 /* LoginViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewBuilder.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				1015816B2495F8CA00AA0B37 /* Info.plist */,
 				101581652495F8CA00AA0B37 /* Preview Content */,
 				10E57E632496A086001B71A4 /* ViewBuilder.swift */,
+				10E079E7258A0F990031D40E /* AwakeConfirmationNotificationHandler.swift */,
 			);
 			path = Dozy;
 			sourceTree = "<group>";
@@ -691,6 +694,7 @@
 				105BDB0A24DC782B005C9CD7 /* RootViewBuilder.swift in Sources */,
 				103C6DDC2588971E00054D0F /* ProfilePresenter.swift in Sources */,
 				1081AE2D249F4E0C00AD6655 /* Keychain.swift in Sources */,
+				10E079E8258A0F990031D40E /* AwakeConfirmationNotificationHandler.swift in Sources */,
 				103264A524C448FE00863603 /* ScheduleViewBuilder.swift in Sources */,
 				104856D724A0EC520072D00F /* PrimaryButton.swift in Sources */,
 				1032649E24C41F8000863603 /* ScheduleView.swift in Sources */,
