@@ -34,6 +34,10 @@ class SchedulePresenter: ScheduleViewPresenter {
     
     private weak var navigationControllable: NavigationControllable?
     
+    deinit {
+        print("ScheduleViewPresenter deinit")
+    }
+    
     init(
         schedule: Schedule,
         viewModel: ScheduleViewModel,
@@ -82,6 +86,8 @@ class SchedulePresenter: ScheduleViewPresenter {
         let viewController = AwakeConfirmationViewBuilder(schedule: schedule, navigationControllable: navigationControllable).buildViewController()
         navigationControllable?.pushViewController(viewController, animated: true)
         navigationControllable?.viewControllers = [viewController]
+        
+        NotificationCenter.default.removeObserver(self)
     }
     
     private func enableAwakeConfirmation() {

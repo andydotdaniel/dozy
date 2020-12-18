@@ -39,6 +39,13 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
         self.navigationControllable = navigationControllable
         
         setSecondsLeftTimer()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: SceneNotification.willEnterForeground, object: nil)
+    }
+    
+    @objc private func willEnterForeground() {
+        let secondsLeft = Int(savedSchedule.sleepyheadMessagePostTime.timeIntervalSince(Current.now()))
+        viewModel.secondsLeft = secondsLeft
     }
     
     private func setSecondsLeftTimer() {
