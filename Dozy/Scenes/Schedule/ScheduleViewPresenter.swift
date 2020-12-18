@@ -58,6 +58,27 @@ class SchedulePresenter: ScheduleViewPresenter {
         } else {
             disableAwakeConfirmation()
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: SceneNotification.willEnterForeground, object: nil)
+    }
+    
+    @objc private func willEnterForeground() {
+        let now = Current.now()
+        switch now.compare(schedule.awakeConfirmationTime) {
+            case .orderedDescending, .orderedSame:
+                guard now.compare(schedule.sleepyheadMessagePostTime) == .orderedAscending else {
+                    // TODO: Show "sleepy head message sent" message
+                    return
+                }
+            case .orderedAscending:
+                break
+        }
+    }
+    
+    private func navigateToAwakeConfirmation() {
+        let viewController = AwakeConfirmationViewBuilder(schedule: schedule, navigationControllable: navigationControllable).buildViewController()
+        navigationControllable?.pushViewController(viewController, animated: true)
+        navigationControllable?.viewControllers = [viewController]
     }
     
     private func enableAwakeConfirmation() {
@@ -89,6 +110,7 @@ class SchedulePresenter: ScheduleViewPresenter {
             secondsUntilAwakeConfirmationTime -= 1
         } else {
             awakeConfirmationTimer?.invalidate()
+            navigateToAwakeConfirmation()
         }
     }
     

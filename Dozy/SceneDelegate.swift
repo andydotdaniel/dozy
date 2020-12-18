@@ -9,6 +9,10 @@
 import UIKit
 import SwiftUI
 
+struct SceneNotification {
+    static let willEnterForeground: NSNotification.Name = NSNotification.Name(rawValue: "sceneWillEnterForeground")
+}
+
 protocol NavigationControllable: class {
     var viewControllers: [UIViewController] { get set }
     func pushViewController(_ viewController: UIViewController, animated: Bool)
@@ -67,8 +71,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
-        // Called as the scene transitions from the background to the foreground.
-        // Use this method to undo the changes made on entering the background.
+        NotificationCenter.default.post(name: SceneNotification.willEnterForeground, object: nil)
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
