@@ -102,7 +102,11 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
     }
     
     private func navigateToSchedule(with schedule: Schedule) {
-        let scheduleViewController = ScheduleViewBuilder(schedule: schedule, navigationControllable: navigationControllable).buildViewController()
+        let scheduleViewController = ScheduleViewBuilder(
+            schedule: schedule,
+            navigationControllable: navigationControllable,
+            scheduleUserDefaults: ScheduleUserDefaults()
+        ).buildViewController()
         navigationControllable?.pushViewController(scheduleViewController, animated: true)
         navigationControllable?.viewControllers = [scheduleViewController]
     }

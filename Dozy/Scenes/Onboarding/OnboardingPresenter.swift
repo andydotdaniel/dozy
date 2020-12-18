@@ -34,7 +34,11 @@ class OnboardingPresenter: OnboardingViewPresenter {
         userDefaults.save(schedule)
         viewModel.isShowingMessageForm = false
         
-        let scheduleViewController = ScheduleViewBuilder(schedule: schedule, navigationControllable: navigationControllable).buildViewController()
+        let scheduleViewController = ScheduleViewBuilder(
+            schedule: schedule,
+            navigationControllable: navigationControllable,
+            scheduleUserDefaults: userDefaults
+        ).buildViewController()
         navigationControllable?.pushViewController(scheduleViewController, animated: false)
     }
     

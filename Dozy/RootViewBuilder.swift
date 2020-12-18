@@ -33,9 +33,18 @@ class RootViewBuilder: ViewControllerBuilder {
             
             switch now.compare(schedule.awakeConfirmationTime) {
             case .orderedSame, .orderedDescending:
-                return PostAwakeConfirmationTimeViewBuilder(navigationControllable: navigationControllable, schedule: schedule, nowDate: now).buildViewController()
+                return PostAwakeConfirmationTimeViewBuilder(
+                    navigationControllable: navigationControllable,
+                    schedule: schedule,
+                    scheduleUserDefaults: userDefaults,
+                    nowDate: now
+                ).buildViewController()
             case .orderedAscending:
-                return ScheduleViewBuilder(schedule: schedule, navigationControllable: navigationControllable).buildViewController()
+                return ScheduleViewBuilder(
+                    schedule: schedule,
+                    navigationControllable: navigationControllable,
+                    scheduleUserDefaults: userDefaults
+                ).buildViewController()
             }
         }
         

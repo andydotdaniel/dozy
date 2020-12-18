@@ -23,10 +23,12 @@ struct ScheduleViewBuilder: ViewControllerBuilder {
     
     private let schedule: Schedule
     private weak var navigationControllable: NavigationControllable?
+    private let scheduleUserDefaults: ScheduleUserDefaults
     
-    init(schedule: Schedule, navigationControllable: NavigationControllable?) {
+    init(schedule: Schedule, navigationControllable: NavigationControllable?, scheduleUserDefaults: ScheduleUserDefaults) {
         self.schedule = schedule
         self.navigationControllable = navigationControllable
+        self.scheduleUserDefaults = scheduleUserDefaults
     }
     
     func buildViewController() -> UIViewController {
@@ -34,7 +36,7 @@ struct ScheduleViewBuilder: ViewControllerBuilder {
         let presenter = SchedulePresenter(
             schedule: schedule,
             viewModel: viewModel,
-            userDefaults: ScheduleUserDefaults(),
+            userDefaults: scheduleUserDefaults,
             networkService: NetworkService(),
             keychain: Keychain(),
             navigationControllable: navigationControllable,

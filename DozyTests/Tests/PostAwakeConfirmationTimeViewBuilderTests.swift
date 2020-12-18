@@ -38,7 +38,12 @@ class PostAwakeConfirmationTimeViewBuilderTests: XCTestCase {
             awakeConfirmationTime: Current.now(),
             scheduledMessageId: "SOME_SCHEDULED_MESSAGE_ID"
         )
-        viewBuilder = PostAwakeConfirmationTimeViewBuilder(navigationControllable: NavigationControllableMock(), schedule: schedule, nowDate: Current.now())
+        viewBuilder = PostAwakeConfirmationTimeViewBuilder(
+            navigationControllable: NavigationControllableMock(),
+            schedule: schedule,
+            scheduleUserDefaults: ScheduleUserDefaultsMock(),
+            nowDate: Current.now()
+        )
         XCTAssertTrue(viewBuilder.buildViewController() is AwakeConfirmationViewController)
     }
     
@@ -49,7 +54,12 @@ class PostAwakeConfirmationTimeViewBuilderTests: XCTestCase {
             scheduledMessageId: "SOME_SCHEDULED_MESSAGE_ID"
         )
         
-        viewBuilder = PostAwakeConfirmationTimeViewBuilder(navigationControllable: NavigationControllableMock(), schedule: schedule, nowDate: Current.now())
+        viewBuilder = PostAwakeConfirmationTimeViewBuilder(
+            navigationControllable: NavigationControllableMock(),
+            schedule: schedule,
+            scheduleUserDefaults: ScheduleUserDefaultsMock(),
+            nowDate: Current.now()
+        )
         XCTAssertTrue(viewBuilder.buildViewController() is ScheduleViewController)
     }
 
