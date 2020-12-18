@@ -31,6 +31,8 @@
 		103264A524C448FE00863603 /* ScheduleViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103264A424C448FE00863603 /* ScheduleViewBuilder.swift */; };
 		1033ABDB252821000045BD64 /* OnboardingPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1033ABDA252821000045BD64 /* OnboardingPresenterTests.swift */; };
 		1033ABDD25282A500045BD64 /* TimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1033ABDC25282A500045BD64 /* TimePicker.swift */; };
+		10358EB8258C9091006F3ADC /* TimerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10358EB7258C9091006F3ADC /* TimerMock.swift */; };
+		10358EC2258C98A1006F3ADC /* ActionTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10358EC1258C98A1006F3ADC /* ActionTimer.swift */; };
 		1035D0732495FF00006B22FC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D0722495FF00006B22FC /* LoginView.swift */; };
 		1035D075249604CE006B22FC /* LoginHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D074249604CE006B22FC /* LoginHeaderView.swift */; };
 		1035D078249605D7006B22FC /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1035D077249605D7006B22FC /* Color.swift */; };
@@ -139,6 +141,8 @@
 		103264A424C448FE00863603 /* ScheduleViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewBuilder.swift; sourceTree = "<group>"; };
 		1033ABDA252821000045BD64 /* OnboardingPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenterTests.swift; sourceTree = "<group>"; };
 		1033ABDC25282A500045BD64 /* TimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePicker.swift; sourceTree = "<group>"; };
+		10358EB7258C9091006F3ADC /* TimerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerMock.swift; sourceTree = "<group>"; };
+		10358EC1258C98A1006F3ADC /* ActionTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTimer.swift; sourceTree = "<group>"; };
 		1035D0722495FF00006B22FC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		1035D074249604CE006B22FC /* LoginHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeaderView.swift; sourceTree = "<group>"; };
 		1035D077249605D7006B22FC /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -483,6 +487,7 @@
 		1081AE29249F4C8B00AD6655 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				10358EC1258C98A1006F3ADC /* ActionTimer.swift */,
 				10F4221F2497BCB60078AC3C /* NetworkService.swift */,
 				10F422212497C2050078AC3C /* NetworkRequest.swift */,
 				1081AE25249F387900AD6655 /* WebAuthenticationSession.swift */,
@@ -516,6 +521,7 @@
 				104BCC2524AB9C0600C35BDC /* DispatchQueueMock.swift */,
 				101C332A24E5A65C009BD331 /* UserDefaultsMock.swift */,
 				10CE42C4258095DF00BB00CF /* NavigationControllableMock.swift */,
+				10358EB7258C9091006F3ADC /* TimerMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -736,6 +742,7 @@
 				10D5E09B25297AA400E0C34A /* Time.swift in Sources */,
 				10D5E0A1253181B800E0C34A /* AwakeConfirmationViewBuilder.swift in Sources */,
 				1035D078249605D7006B22FC /* Color.swift in Sources */,
+				10358EC2258C98A1006F3ADC /* ActionTimer.swift in Sources */,
 				104BCC2024AB991200C35BDC /* DispatchQueue.swift in Sources */,
 				105BDB0424D692F0005C9CD7 /* OnboardingViewBuilder.swift in Sources */,
 				1051E4AA24BB184B00566C5B /* ImageButton.swift in Sources */,
@@ -767,6 +774,7 @@
 				10D5E09F25317AA700E0C34A /* AwakeConfirmationPresenterTests.swift in Sources */,
 				101581752495F8CA00AA0B37 /* LoginPresenterTests.swift in Sources */,
 				105A182E24BB5C25003177AA /* JSONLoader.swift in Sources */,
+				10358EB8258C9091006F3ADC /* TimerMock.swift in Sources */,
 				1033ABDB252821000045BD64 /* OnboardingPresenterTests.swift in Sources */,
 				104BCC2624AB9C0600C35BDC /* DispatchQueueMock.swift in Sources */,
 				10B89E66258B5E0500ED8D0F /* PostAwakeConfirmationTimeViewBuilderTests.swift in Sources */,

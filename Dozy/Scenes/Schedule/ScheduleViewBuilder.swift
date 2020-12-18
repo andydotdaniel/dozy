@@ -37,7 +37,8 @@ struct ScheduleViewBuilder: ViewControllerBuilder {
             userDefaults: ScheduleUserDefaults(),
             networkService: NetworkService(),
             keychain: Keychain(),
-            navigationControllable: navigationControllable
+            navigationControllable: navigationControllable,
+            awakeConfirmationTimer: ActionTimer()
         )
         let view = ScheduleView(viewModel: viewModel, presenter: presenter)
         

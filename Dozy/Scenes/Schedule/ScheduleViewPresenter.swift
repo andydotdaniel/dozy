@@ -27,7 +27,7 @@ class SchedulePresenter: ScheduleViewPresenter {
     private var schedule: Schedule
     
     private var secondsUntilAwakeConfirmationTime: Int
-    private var awakeConfirmationTimer: Timer?
+    private let awakeConfirmationTimer: Timeable
     
     private let networkService: NetworkRequesting
     private let keychain: SecureStorable
@@ -40,7 +40,8 @@ class SchedulePresenter: ScheduleViewPresenter {
         userDefaults: ScheduleUserDefaults,
         networkService: NetworkRequesting,
         keychain: SecureStorable,
-        navigationControllable: NavigationControllable?
+        navigationControllable: NavigationControllable?,
+        awakeConfirmationTimer: Timeable
     ) {
         self.viewModel = viewModel
         self.userDefaults = userDefaults
@@ -48,6 +49,7 @@ class SchedulePresenter: ScheduleViewPresenter {
         self.networkService = networkService
         self.keychain = keychain
         self.navigationControllable = navigationControllable
+        self.awakeConfirmationTimer = awakeConfirmationTimer
         
         let now = Current.now()
         self.secondsUntilAwakeConfirmationTime = Int(schedule.awakeConfirmationTime.timeIntervalSince(now))
@@ -70,6 +72,7 @@ class SchedulePresenter: ScheduleViewPresenter {
                     // TODO: Show "sleepy head message sent" message
                     return
                 }
+                navigateToAwakeConfirmation()
             case .orderedAscending:
                 break
         }
@@ -84,32 +87,26 @@ class SchedulePresenter: ScheduleViewPresenter {
     private func enableAwakeConfirmation() {
         setAwakeConfirmationCountdown(from: secondsUntilAwakeConfirmationTime)
         
-        awakeConfirmationTimer = Timer.scheduledTimer(
-            timeInterval: 1,
-            target: self,
-            selector: #selector(updateAwakeConfirmationTimer),
-            userInfo: nil,
-            repeats: true
-        )
+        awakeConfirmationTimer.startTimer(timeInterval: 1, actionBlock: updateAwakeConfirmationTimer)
         
         viewModel.awakeConfirmationCard.preMutableText = "Open the app in "
         viewModel.awakeConfirmationCard.postMutableText = " or your sleepyhead message gets sent."
     }
     
     private func disableAwakeConfirmation() {
-        awakeConfirmationTimer?.invalidate()
+        awakeConfirmationTimer.stopTimer()
         
         viewModel.awakeConfirmationCard.preMutableText = "Awake confirmation timer is currently disabled."
         viewModel.awakeConfirmationCard.mutableText = ""
         viewModel.awakeConfirmationCard.postMutableText = ""
     }
     
-    @objc private func updateAwakeConfirmationTimer() {
+    private func updateAwakeConfirmationTimer() {
         if secondsUntilAwakeConfirmationTime > 0 {
             setAwakeConfirmationCountdown(from: secondsUntilAwakeConfirmationTime)
             secondsUntilAwakeConfirmationTime -= 1
         } else {
-            awakeConfirmationTimer?.invalidate()
+            awakeConfirmationTimer.stopTimer()
             navigateToAwakeConfirmation()
         }
     }
