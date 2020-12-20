@@ -37,6 +37,8 @@ class ScheduleViewModel: ObservableObject {
     @Published var errorToastText: String?
     @Published var errorToastIsShowing: Bool = false
     
+    @Published var isShowingOverlayCard: Bool = false
+    
     init(schedule: Schedule) {
         self.state = schedule.isActive ? .active : .inactive
         self.switchPosition = schedule.isActive ? (.on, false) : (.off, false)

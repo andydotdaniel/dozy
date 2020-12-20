@@ -34,10 +34,6 @@ class SchedulePresenter: ScheduleViewPresenter {
     
     private weak var navigationControllable: NavigationControllable?
     
-    deinit {
-        print("ScheduleViewPresenter deinit")
-    }
-    
     init(
         schedule: Schedule,
         viewModel: ScheduleViewModel,

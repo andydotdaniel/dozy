@@ -27,11 +27,7 @@ struct ScheduleView: View {
                 VStack(spacing: 12) {
                     HeaderMain(height: headerHeight, delegate: presenter)
                     VStack(spacing: 24) {
-                        ContentCard(viewModel: $viewModel.awakeConfirmationCard, buttonAction: {
-                            withAnimation {
-                                self.viewModel.awakeConfirmationCard.isShowingTimePicker = true
-                            }
-                        }, timePickerActions: (cancelButton: self.presenter.onTimePickerCancelButtonTapped, doneButton: self.presenter.onTimePickerDoneButtonTapped))
+                        getContentCard()
                         MessageContentCard(
                             image: viewModel.messageCard.image,
                             bodyText: viewModel.messageCard.bodyText,
@@ -55,6 +51,27 @@ struct ScheduleView: View {
         }.sheet(isPresented: self.$viewModel.isShowingMessageForm, content: {
             self.presenter.navigateToMessageForm()
         })
+    }
+    
+    private func getContentCard() -> AnyView {
+        let contentCard = ContentCard(viewModel: $viewModel.awakeConfirmationCard, buttonAction: {
+            withAnimation {
+                self.viewModel.awakeConfirmationCard.isShowingTimePicker = true
+            }
+        }, timePickerActions: (cancelButton: self.presenter.onTimePickerCancelButtonTapped, doneButton: self.presenter.onTimePickerDoneButtonTapped)
+        )
+        if viewModel.isShowingOverlayCard {
+            return AnyView(contentCard.overlay(
+                OverlayCard(
+                    text: "Your message was sent you sleepyhead.",
+                    dismissAction: {}
+                )
+                .background(Color.white)
+                .cornerRadius(18)
+            ))
+        } else {
+            return AnyView(contentCard)
+        }
     }
 }
 
