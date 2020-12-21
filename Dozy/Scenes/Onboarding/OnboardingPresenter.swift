@@ -36,6 +36,7 @@ class OnboardingPresenter: OnboardingViewPresenter {
         
         let scheduleViewController = ScheduleViewBuilder(
             schedule: schedule,
+            isPostMessageSent: false,
             navigationControllable: navigationControllable,
             scheduleUserDefaults: userDefaults
         ).buildViewController()

@@ -28,6 +28,7 @@ class PostAwakeConfirmationTimeViewBuilder: ViewControllerBuilder {
         case .orderedDescending, .orderedSame:
             return ScheduleViewBuilder(
                 schedule: schedule,
+                isPostMessageSent: true,
                 navigationControllable: navigationControllable,
                 scheduleUserDefaults: scheduleUserDefaults
             ).buildViewController()

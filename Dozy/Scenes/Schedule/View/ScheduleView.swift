@@ -81,7 +81,7 @@ struct ScheduleView_Previews: PreviewProvider {
         let message = Message(image: nil, bodyText: "Some body text", channel: channel)
         let schedule = Schedule(message: message, awakeConfirmationTime: Date(), scheduledMessageId: nil)
         let viewModel = ScheduleViewModel(schedule: schedule)
-        let presenter = SchedulePresenter(schedule: schedule, viewModel: viewModel, userDefaults: ScheduleUserDefaults(), networkService: NetworkService(), keychain: Keychain(), navigationControllable: nil, awakeConfirmationTimer: ActionTimer())
+        let presenter = SchedulePresenter(schedule: schedule, isPostMessageSent: false, viewModel: viewModel, userDefaults: ScheduleUserDefaults(), networkService: NetworkService(), keychain: Keychain(), navigationControllable: nil, awakeConfirmationTimer: ActionTimer())
         return ScheduleView(viewModel: viewModel, presenter: presenter)
             .previewDevice("iPhone 8")
     }

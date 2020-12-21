@@ -36,6 +36,7 @@ class SchedulePresenter: ScheduleViewPresenter {
     
     init(
         schedule: Schedule,
+        isPostMessageSent: Bool,
         viewModel: ScheduleViewModel,
         userDefaults: ScheduleUserDefaults,
         networkService: NetworkRequesting,
@@ -55,7 +56,9 @@ class SchedulePresenter: ScheduleViewPresenter {
         self.secondsUntilAwakeConfirmationTime = Int(schedule.awakeConfirmationTime.timeIntervalSince(now))
         updateAwakeConfirmationTimeToNextDayIfNeeded(from: now)
         
-        if schedule.isActive {
+        if isPostMessageSent {
+            showOverlayCard()
+        } else if schedule.isActive {
             enableAwakeConfirmation()
         } else {
             disableAwakeConfirmation()
@@ -69,13 +72,19 @@ class SchedulePresenter: ScheduleViewPresenter {
         switch now.compare(schedule.awakeConfirmationTime) {
             case .orderedDescending, .orderedSame:
                 guard now.compare(schedule.sleepyheadMessagePostTime) == .orderedAscending else {
-                    // TODO: Show "sleepy head message sent" message
+                    showOverlayCard()
                     return
                 }
                 navigateToAwakeConfirmation()
             case .orderedAscending:
                 break
         }
+    }
+    
+    private func showOverlayCard() {
+        viewModel.isShowingOverlayCard = true
+        saveInactiveSchedule()
+        setInactiveViewState(isSwitchLoading: false)
     }
     
     private func navigateToAwakeConfirmation() {
@@ -168,7 +177,9 @@ class SchedulePresenter: ScheduleViewPresenter {
                 setActiveSchedule()
             }
         case .active:
-            setInactiveSchedule()
+            setInactiveViewState(isSwitchLoading: true)
+            sendDeleteScheduledMessageRequest()
+            deletePushNotification()
         }
     }
     
@@ -183,13 +194,10 @@ class SchedulePresenter: ScheduleViewPresenter {
         createPushNotification()
     }
     
-    private func setInactiveSchedule() {
+    private func setInactiveViewState(isSwitchLoading: Bool) {
         viewModel.state = .inactive
-        viewModel.switchPosition = (.off, true)
+        viewModel.switchPosition = (.off, isSwitchLoading)
         disableAwakeConfirmation()
-        
-        sendDeleteScheduledMessageRequest()
-        deletePushNotification()
     }
     
     private func sendScheduleMessageRequest() {
@@ -267,9 +275,7 @@ class SchedulePresenter: ScheduleViewPresenter {
             Current.dispatchQueue.async {
                 switch result {
                 case .success:
-                    self.schedule.scheduledMessageId = nil
-                    self.userDefaults.save(self.schedule)
-                    
+                    self.saveInactiveSchedule()
                     self.viewModel.switchPosition = (.off, false)
                 case .failure:
                     // TODO: Handle failure
@@ -277,6 +283,11 @@ class SchedulePresenter: ScheduleViewPresenter {
                 }
             }
         })
+    }
+    
+    private func saveInactiveSchedule() {
+        self.schedule.scheduledMessageId = nil
+        self.userDefaults.save(self.schedule)
     }
     
     private func createPushNotification() {

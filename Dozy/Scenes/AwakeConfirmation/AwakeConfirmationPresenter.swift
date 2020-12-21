@@ -63,6 +63,8 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
             viewModel.secondsLeft -= 1
         } else {
             secondsLeftTimer?.invalidate()
+            let updatedSchedule = saveInactiveSchedule()
+            navigateToSchedule(with: updatedSchedule, isPostMessageSent: true)
         }
     }
     
@@ -88,11 +90,8 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
             Current.dispatchQueue.async {
                 switch result {
                 case .success:
-                    var updatedSchedule = self.savedSchedule
-                    updatedSchedule.scheduledMessageId = nil
-                    self.userDefaults.save(updatedSchedule)
-                    
-                    self.navigateToSchedule(with: updatedSchedule)
+                    let updatedSchedule = self.saveInactiveSchedule()
+                    self.navigateToSchedule(with: updatedSchedule, isPostMessageSent: false)
                 case .failure:
                     // TODO: Handle failure
                     break
@@ -101,9 +100,18 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
         })
     }
     
-    private func navigateToSchedule(with schedule: Schedule) {
+    private func saveInactiveSchedule() -> Schedule {
+        var updatedSchedule = self.savedSchedule
+        updatedSchedule.scheduledMessageId = nil
+        self.userDefaults.save(updatedSchedule)
+        
+        return updatedSchedule
+    }
+    
+    private func navigateToSchedule(with schedule: Schedule, isPostMessageSent: Bool) {
         let scheduleViewController = ScheduleViewBuilder(
             schedule: schedule,
+            isPostMessageSent: isPostMessageSent,
             navigationControllable: navigationControllable,
             scheduleUserDefaults: ScheduleUserDefaults()
         ).buildViewController()
