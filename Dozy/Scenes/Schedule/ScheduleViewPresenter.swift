@@ -11,7 +11,7 @@ import SwiftUI
 private let pushNotificationIdentifier = "dozy_awake_confirmation_alert"
 let awakeConfirmationDelay: TimeInterval = 90
 
-protocol ScheduleViewPresenter: SwitchViewDelegate, MessageFormDelegate, HeaderMainDelegate {
+protocol ScheduleViewPresenter: SwitchViewDelegate, MessageFormDelegate, HeaderMainDelegate, OverlayCardDelegate {
     func onMessageActionButtonTapped()
     func navigateToMessageForm() -> MessageFormView
     
@@ -401,4 +401,13 @@ private struct ScheduledMessageResponse: Decodable {
     enum CodingKeys: String, CodingKey {
         case scheduledMessageId = "scheduled_message_id"
     }
+}
+
+// MARK: OverlayCardDelegate
+extension SchedulePresenter {
+    
+    func onOverlayCardDismissButtonTapped() {
+        self.viewModel.isShowingOverlayCard = false
+    }
+    
 }

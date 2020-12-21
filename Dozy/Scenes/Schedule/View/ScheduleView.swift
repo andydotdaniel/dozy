@@ -64,7 +64,7 @@ struct ScheduleView: View {
             return AnyView(contentCard.overlay(
                 OverlayCard(
                     text: "Your message was sent you sleepyhead.",
-                    dismissAction: {}
+                    delegate: self.presenter
                 )
                 .background(Color.white)
                 .cornerRadius(18)

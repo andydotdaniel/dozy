@@ -8,22 +8,29 @@
 
 import SwiftUI
 
+protocol OverlayCardDelegate: class {
+    func onOverlayCardDismissButtonTapped()
+}
+
 struct OverlayCard: View {
     
     let text: String
-    let dismissAction: () -> Void
+    
+    weak var delegate: OverlayCardDelegate?
     
     var body: some View {
         VStack(alignment: .center, spacing: 36) {
             Text(text)
                 .foregroundColor(Color.black)
                 .fontWeight(.bold)
-            Text("Dismiss")
-                .bold()
-                .foregroundColor(Color.primaryBlue)
-                .onTapGesture {
-                    dismissAction()
+            if let delegate = self.delegate {
+                Button(action: delegate.onOverlayCardDismissButtonTapped) {
+                    Text("Dismiss")
+                    .font(.system(size: 18))
+                    .bold()
+                    .foregroundColor(Color.primaryBlue)
                 }
+            }
         }
         .padding(24)
         .background(Color.white)
@@ -33,6 +40,6 @@ struct OverlayCard: View {
 
 struct OverlayCard_Previews: PreviewProvider {
     static var previews: some View {
-        OverlayCard(text: "Your message was sent you sleepyhead", dismissAction: {})
+        OverlayCard(text: "Your message was sent you sleepyhead")
     }
 }
