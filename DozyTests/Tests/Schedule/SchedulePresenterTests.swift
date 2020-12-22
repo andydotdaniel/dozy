@@ -44,7 +44,7 @@ class SchedulePresenterTests: XCTestCase {
         
         timerMock = TimerMock()
         
-        presenter = SchedulePresenter(schedule: schedule, viewModel: viewModel, userDefaults: userDefaultsMock, networkService: networkService, keychain: keychainMock, navigationControllable: navigationControllable, awakeConfirmationTimer: timerMock)
+        presenter = SchedulePresenter(schedule: schedule, isPostMessageSent: false, viewModel: viewModel, userDefaults: userDefaultsMock, networkService: networkService, keychain: keychainMock, navigationControllable: navigationControllable, awakeConfirmationTimer: timerMock)
     }
 
     override func tearDownWithError() throws {

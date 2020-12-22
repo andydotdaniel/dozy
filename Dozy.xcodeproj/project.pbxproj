@@ -73,6 +73,7 @@
 		108B4E0B24C2C925000F1C4B /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B4E0A24C2C925000F1C4B /* SecondaryButton.swift */; };
 		108B4E0F24C2ECA4000F1C4B /* MessageContentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B4E0E24C2ECA4000F1C4B /* MessageContentCard.swift */; };
 		108C0E78258D113F00DBA0A6 /* OverlayCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108C0E77258D113F00DBA0A6 /* OverlayCard.swift */; };
+		108C0E822592016B00DBA0A6 /* SchedulePresenterOverlayCardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108C0E812592016B00DBA0A6 /* SchedulePresenterOverlayCardTests.swift */; };
 		109704C0249675E90012EA76 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109704BF249675E90012EA76 /* Configuration.swift */; };
 		109704C3249692D60012EA76 /* AuthenticationSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109704C2249692D60012EA76 /* AuthenticationSessionView.swift */; };
 		10A21F1E2580F2A500E67FE0 /* HeaderMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A21F1D2580F2A500E67FE0 /* HeaderMain.swift */; };
@@ -184,6 +185,7 @@
 		108B4E0A24C2C925000F1C4B /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
 		108B4E0E24C2ECA4000F1C4B /* MessageContentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentCard.swift; sourceTree = "<group>"; };
 		108C0E77258D113F00DBA0A6 /* OverlayCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayCard.swift; sourceTree = "<group>"; };
+		108C0E812592016B00DBA0A6 /* SchedulePresenterOverlayCardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePresenterOverlayCardTests.swift; sourceTree = "<group>"; };
 		109704BF249675E90012EA76 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		109704C2249692D60012EA76 /* AuthenticationSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSessionView.swift; sourceTree = "<group>"; };
 		10A21F1D2580F2A500E67FE0 /* HeaderMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMain.swift; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 			children = (
 				1025D7C024E44BD900118CD4 /* SchedulePresenterTests.swift */,
 				1023190E24F1603B0005F6A6 /* SchedulePresenterTimerTests.swift */,
+				108C0E812592016B00DBA0A6 /* SchedulePresenterOverlayCardTests.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -784,6 +787,7 @@
 				10B89E66258B5E0500ED8D0F /* PostAwakeConfirmationTimeViewBuilderTests.swift in Sources */,
 				10BB85EC24BB6F48005D9829 /* MessageFormBuilderTests.swift in Sources */,
 				1025D7BB24E44A2700118CD4 /* Message.swift in Sources */,
+				108C0E822592016B00DBA0A6 /* SchedulePresenterOverlayCardTests.swift in Sources */,
 				103C6DEB2588DE7600054D0F /* ProfilePresenterProfileUnfetchedTests.swift in Sources */,
 				1025D7C124E44BD900118CD4 /* SchedulePresenterTests.swift in Sources */,
 				103C6DE02588DB2A00054D0F /* ProfilePresenterProfileFetchedTests.swift in Sources */,
