@@ -30,6 +30,8 @@ class MesssageFormViewModel: ObservableObject {
     @Published var isShowingImagePicker: Bool
     @Published var selectedImage: UIImage?
     
+    @Published var isSaving: Bool
+    
     @Published var isSaveButtonEnabled: Bool
     private var saveButtonEnabledPublisher: AnyPublisher<Bool, Never> {
         Publishers.CombineLatest(isChannelNameEmptyPublisher, isMessageContentValidPublisher)
@@ -77,6 +79,7 @@ class MesssageFormViewModel: ObservableObject {
         self.isShowingImagePicker = false
         self.selectedImage = message?.image.map { UIImage(data: $0) } ?? nil
         
+        self.isSaving = false
         self.isSaveButtonEnabled = false
         
         let keyboardListener = KeyboardListener()
