@@ -73,7 +73,7 @@ struct MessageFormView_Previews: PreviewProvider {
     
     static var previews: some View {
         let viewModel = MesssageFormViewModel(navigationBarTitle: "Add Message", message: nil)
-        let presenter = MessageFormPresenter(viewModel: viewModel, networkService: NetworkService(), delegate: nil, channel: nil)
+        let presenter = MessageFormPresenter(viewModel: viewModel, networkService: NetworkService(), delegate: nil, message: nil)
         return MessageFormView(viewModel: viewModel, presenter: presenter)
     }
 }

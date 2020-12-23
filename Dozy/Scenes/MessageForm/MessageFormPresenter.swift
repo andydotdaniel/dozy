@@ -27,18 +27,21 @@ class MessageFormPresenter: MessageFormViewPresenter {
     private var channelNameTextFieldSubscriber: AnyCancellable?
     private var selectedChannel: Channel?
     
+    private let message: Message?
+    
     init(
         viewModel: MesssageFormViewModel,
         networkService: NetworkRequesting,
         keychain: SecureStorable = Keychain(),
         delegate: MessageFormDelegate?,
-        channel: Channel?
+        message: Message?
     ) {
         self.viewModel = viewModel
         self.networkService = networkService
         self.keychain = keychain
         self.delegate = delegate
-        self.selectedChannel = channel
+        self.selectedChannel = message?.channel
+        self.message = message
         
         guard let accessTokenData = keychain.load(key: "slack_access_token") else { return }
         let accessToken = String(decoding: accessTokenData, as: UTF8.self)
@@ -108,13 +111,33 @@ class MessageFormPresenter: MessageFormViewPresenter {
     func didTapSave() {
         guard let channel = self.selectedChannel else { return }
         
+        let selectedImage = self.viewModel.selectedImage?.pngData()
+        if let selectedImage = selectedImage, selectedImage != message?.image {
+            uploadImage(image: selectedImage)
+        }
+        
         let message = Message(
-            image: self.viewModel.selectedImage?.pngData(),
+            image: selectedImage,
             bodyText: self.viewModel.bodyText,
             channel: channel
         )
         
         delegate?.onMessageSaved(message)
+    }
+    
+    private func uploadImage(image: Data) {
+        guard let accessTokenData = keychain.load(key: "slack_access_token"), let url = URL(string: "https://slack.com/api/files.upload") else { return }
+        let accessToken = String(decoding: accessTokenData, as: UTF8.self)
+        let headers = ["Authorization": "Bearer \(accessToken)"]
+        
+        networkService.performImageUpload(for: image, with: url, headers: headers, completion: { [weak self] (result: Result<FileUploadResponse, NetworkService.RequestError>) -> Void in
+            switch result {
+            case .success:
+                break
+            case .failure:
+                break
+            }
+        })
     }
     
 }
@@ -155,3 +178,21 @@ private struct SlackChannelResponse: Decodable {
     }
 }
 
+private struct FileUploadResponse: Decodable {
+    let url: String
+    
+    enum CodingKeys: String, CodingKey {
+        case file = "file"
+    }
+    
+    enum FileCodingKeys: String, CodingKey {
+        case url = "url_private"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let fileContainer = try container.nestedContainer(keyedBy: FileCodingKeys.self, forKey: .file)
+        
+        url = try fileContainer.decode(String.self, forKey: .url)
+    }
+}
