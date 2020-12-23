@@ -111,7 +111,7 @@ class MessageFormPresenter: MessageFormViewPresenter {
     func didTapSave() {
         guard let channel = self.selectedChannel else { return }
         
-        let selectedImage = self.viewModel.selectedImage?.pngData()
+        let selectedImage = self.viewModel.selectedImage?.jpegData(compressionQuality: 0.35)
         if let selectedImage = selectedImage, selectedImage != message?.image {
             uploadImage(image: selectedImage)
         }

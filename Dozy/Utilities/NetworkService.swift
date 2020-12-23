@@ -160,8 +160,8 @@ struct NetworkService: NetworkRequesting {
         var data = Data()
         let body: [Any] = [
             "--\(boundary)\r\n",
-            "Content-Disposition: form-data; name=\"file\"; filename=\"\(Current.now().timeIntervalSinceReferenceDate).png\"\r\n",
-            "Content-Type: image/png\r\n\r\n",
+            "Content-Disposition: form-data; name=\"file\"; filename=\"\(Current.now().timeIntervalSinceReferenceDate).jpg\"\r\n",
+            "Content-Type: image/jpg\r\n\r\n",
             image,
             "\r\n--\(boundary)--"
         ]
