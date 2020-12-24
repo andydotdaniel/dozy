@@ -123,7 +123,7 @@ class SchedulePresenterTests: XCTestCase {
     
     func testOnSwitchPositionChangedTriggeredForActiveSchedule() throws {
         self.viewModel.state = .inactive
-        self.urlSessionMock.result = try JSONLoader.load(fileName: "ScheduledMessage")
+        self.urlSessionMock.results.append(try JSONLoader.load(fileName: "ScheduledMessage"))
         
         Current.now = { self.schedule.awakeConfirmationTime.addingTimeInterval(-1) }
         self.presenter.onSwitchPositionChangedTriggered()
@@ -136,7 +136,7 @@ class SchedulePresenterTests: XCTestCase {
     
     func testOnSwitchPositionChangedTriggeredForInactiveSchedule() {
         self.viewModel.state = .active
-        self.urlSessionMock.result = .init(data: Data(), urlResponse: nil, error: nil)
+        self.urlSessionMock.results.append(.init(data: Data(), urlResponse: nil, error: nil))
         
         Current.now = { self.schedule.awakeConfirmationTime.addingTimeInterval(-1) }
         self.presenter.onSwitchPositionChangedTriggered()

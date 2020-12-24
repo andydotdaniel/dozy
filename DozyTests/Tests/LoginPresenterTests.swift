@@ -60,7 +60,7 @@ class LoginPresenterTests: XCTestCase {
             ]
         ]
         let data = try JSONSerialization.data(withJSONObject: jsonDictionary, options: .prettyPrinted)
-        urlSessionMock.result = URLSessionMockResult(data: data, urlResponse: nil, error: nil)
+        urlSessionMock.results.append(URLSessionMockResult(data: data, urlResponse: nil, error: nil))
         
         var callbackURLComponents: URLComponents = URLComponents(string: "http://slack.com/some-callback-url")!
         callbackURLComponents.queryItems = [

@@ -27,7 +27,7 @@ class MessageFormPresenterTests: XCTestCase {
         urlSessionMock = URLSessionMock()
         keychainMock = KeychainMock()
         
-        urlSessionMock.result = try JSONLoader.load(fileName: "Channels")
+        urlSessionMock.results.append(try JSONLoader.load(fileName: "Channels"))
         let networkService = NetworkService(urlSession: urlSessionMock)
         
         keychainMock.dataToLoad = Data("SOME_ACCESS_TOKEN".utf8)
@@ -78,13 +78,14 @@ class MessageFormPresenterTests: XCTestCase {
         
         let image = UIImage(named: "LogoGray", in: Bundle.main, with: nil)!
         viewModel.selectedImage = image
-        urlSessionMock.result = try JSONLoader.load(fileName: "FileUpload")
+        urlSessionMock.results.append(try JSONLoader.load(fileName: "FileUpload"))
+        urlSessionMock.results.append(try JSONLoader.load(fileName: "FileSharePublic"))
         
         presenter.didTapSave()
         
         XCTAssertTrue(viewModel.isSaving)
         
-        let expectedMessage = Message(image: image.pngData(), imageUrl: "https://somedomain.com/dramacat.gif", bodyText: nil, channel: channel)
+        let expectedMessage = Message(image: image.pngData(), imageUrl: "https://somedomain.com/dramacat.gif?pub_secret=8004f909b1", bodyText: nil, channel: channel)
         XCTAssertEqual(delegateMock.messageSaved, expectedMessage)
     }
     

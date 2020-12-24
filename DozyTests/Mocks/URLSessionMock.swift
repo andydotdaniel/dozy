@@ -25,7 +25,7 @@ class URLSessionMock: URLSessionable {
         case someError
     }
     
-    var result: URLSessionMockResult?
+    var results: [URLSessionMockResult] = []
     
     func createDataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionalDataTasking {
         handleUrlSessionTask(completionHandler: completionHandler)
@@ -36,11 +36,13 @@ class URLSessionMock: URLSessionable {
     }
     
     private func handleUrlSessionTask(completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionalDataTasking {
-        guard let result = self.result else {
+        guard !results.isEmpty, let result = results.first else {
             preconditionFailure("URL session data task mocked result has not been set")
         }
         
+        results = Array(results.dropFirst())
         completionHandler(result.data, result.urlResponse, result.error)
+        
         return URLSessionDataTaskMock()
     }
     

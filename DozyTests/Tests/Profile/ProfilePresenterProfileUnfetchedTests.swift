@@ -30,7 +30,7 @@ class ProfilePresenterProfileUnfetchedTests: XCTestCase {
         profileUserDefaultsMock = ProfileUserDefaultsMock()
         
         urlSessionMock = URLSessionMock()
-        urlSessionMock.result = result
+        urlSessionMock.results.append(result)
         
         let keychainMock = KeychainMock()
         keychainMock.dataToLoad = Data("SOME_ACCESS_TOKEN".utf8)

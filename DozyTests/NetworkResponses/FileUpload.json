@@ -1,5 +1,6 @@
 {
     "file": {
+        "id" : "SOME_FILE_ID",
         "url_private": "https://somedomain.com/dramacat.gif"
     }
 }

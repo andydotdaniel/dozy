@@ -62,7 +62,7 @@ class AwakeConfirmationPresenterTests: XCTestCase {
         
         let jsonDictionary: [String: Any] = ["ok": true]
         let data = try JSONSerialization.data(withJSONObject: jsonDictionary, options: .prettyPrinted)
-        urlSessionMock.result = URLSessionMockResult(data: data, urlResponse: nil, error: nil)
+        urlSessionMock.results.append(URLSessionMockResult(data: data, urlResponse: nil, error: nil))
         
         presenter.onSliderReachedEnd()
         

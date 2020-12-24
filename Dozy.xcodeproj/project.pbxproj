@@ -57,6 +57,7 @@
 		105A182B24BB5A25003177AA /* Channels.json in Resources */ = {isa = PBXBuildFile; fileRef = 105A182A24BB5A25003177AA /* Channels.json */; };
 		105A182E24BB5C25003177AA /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105A182D24BB5C25003177AA /* JSONLoader.swift */; };
 		105A64F125945D3D001280D5 /* FileUpload.json in Resources */ = {isa = PBXBuildFile; fileRef = 105A64F025945D3D001280D5 /* FileUpload.json */; };
+		105A64F525947976001280D5 /* FileSharePublic.json in Resources */ = {isa = PBXBuildFile; fileRef = 105A64F425947976001280D5 /* FileSharePublic.json */; };
 		105BDB0124D68B72005C9CD7 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105BDB0024D68B72005C9CD7 /* Schedule.swift */; };
 		105BDB0424D692F0005C9CD7 /* OnboardingViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105BDB0324D692F0005C9CD7 /* OnboardingViewBuilder.swift */; };
 		105BDB0624D692FD005C9CD7 /* OnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105BDB0524D692FD005C9CD7 /* OnboardingPresenter.swift */; };
@@ -170,6 +171,7 @@
 		105A182A24BB5A25003177AA /* Channels.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Channels.json; sourceTree = "<group>"; };
 		105A182D24BB5C25003177AA /* JSONLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLoader.swift; sourceTree = "<group>"; };
 		105A64F025945D3D001280D5 /* FileUpload.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FileUpload.json; sourceTree = "<group>"; };
+		105A64F425947976001280D5 /* FileSharePublic.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FileSharePublic.json; sourceTree = "<group>"; };
 		105BDB0024D68B72005C9CD7 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		105BDB0324D692F0005C9CD7 /* OnboardingViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewBuilder.swift; sourceTree = "<group>"; };
 		105BDB0524D692FD005C9CD7 /* OnboardingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenter.swift; sourceTree = "<group>"; };
@@ -447,6 +449,7 @@
 				103C6DEE2588E0DB00054D0F /* Profile.json */,
 				10B89E61258B598300ED8D0F /* ScheduledMessage.json */,
 				105A64F025945D3D001280D5 /* FileUpload.json */,
+				105A64F425947976001280D5 /* FileSharePublic.json */,
 			);
 			path = NetworkResponses;
 			sourceTree = "<group>";
@@ -668,6 +671,7 @@
 			files = (
 				105A64F125945D3D001280D5 /* FileUpload.json in Resources */,
 				105A182B24BB5A25003177AA /* Channels.json in Resources */,
+				105A64F525947976001280D5 /* FileSharePublic.json in Resources */,
 				10B89E62258B598300ED8D0F /* ScheduledMessage.json in Resources */,
 				103C6DEF2588E0DB00054D0F /* Profile.json in Resources */,
 			);
