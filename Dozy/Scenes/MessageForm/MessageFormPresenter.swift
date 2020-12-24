@@ -28,6 +28,7 @@ class MessageFormPresenter: MessageFormViewPresenter {
     private var selectedChannel: Channel?
     
     private let message: Message?
+    private var accessToken: String?
     
     init(
         viewModel: MesssageFormViewModel,
@@ -43,9 +44,11 @@ class MessageFormPresenter: MessageFormViewPresenter {
         self.selectedChannel = message?.channel
         self.message = message
         
-        guard let accessTokenData = keychain.load(key: "slack_access_token") else { return }
-        let accessToken = String(decoding: accessTokenData, as: UTF8.self)
-        fetchChannels(accessToken: accessToken)
+        if let accessTokenData = keychain.load(key: "slack_access_token") {
+            let accessToken = String(decoding: accessTokenData, as: UTF8.self)
+            self.accessToken = accessToken
+            fetchChannels(accessToken: accessToken)
+        }
         
         self.channelNameTextFieldSubscriber = self.viewModel.$channelNameTextFieldText
             .debounce(for: .seconds(0.150), scheduler: DispatchQueue.main)
@@ -128,8 +131,8 @@ class MessageFormPresenter: MessageFormViewPresenter {
             self.viewModel.isSaving = true
             uploadImage(image: compressedImage, completion: { result in
                 switch result {
-                case .success(let response):
-                    completeMessageSaving(image: selectedImage, imageUrl: response.url, channel: channel)
+                case .success(let imageUrl):
+                    completeMessageSaving(image: selectedImage, imageUrl: imageUrl, channel: channel)
                 case .failure:
                     // Handle Failure
                     break
@@ -140,12 +143,48 @@ class MessageFormPresenter: MessageFormViewPresenter {
         }
     }
     
-    private func uploadImage(image: Data, completion: @escaping (Result<FileUploadResponse, NetworkService.RequestError>) -> Void) {
-        guard let accessTokenData = keychain.load(key: "slack_access_token"), let url = URL(string: "https://slack.com/api/files.upload") else { return }
-        let accessToken = String(decoding: accessTokenData, as: UTF8.self)
+    private func uploadImage(image: Data, completion: @escaping (Result<String, NetworkService.RequestError>) -> Void) {
+        guard let accessToken = self.accessToken, let url = URL(string: "https://slack.com/api/files.upload") else { return }
         let headers = ["Authorization": "Bearer \(accessToken)"]
         
-        networkService.performImageUpload(for: image, with: url, headers: headers, completion: completion)
+        networkService.performImageUpload(for: image, with: url, headers: headers, completion: { [weak self] (result: Result<FileUploadResponse, NetworkService.RequestError>) in
+            switch result {
+            case .success(let response):
+                self?.makeImagePublic(imageId: response.id, imageUrl: response.urlPrivate, completion: completion)
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        })
+    }
+    
+    private func makeImagePublic(imageId: String, imageUrl: String, completion: @escaping (Result<String, NetworkService.RequestError>) -> Void) {
+        guard let accessToken = self.accessToken else {
+            completion(.failure(.unknown(message: "Access token not available")))
+            return
+        }
+        let url = "https://slack.com/api/files.sharedPublicURL"
+        let headers = ["Authorization": "Bearer \(accessToken)"]
+        let parameters = ["file": imageId]
+        
+        guard let request = NetworkRequest(url: url, httpMethod: .post, parameters: parameters, headers: headers) else {
+            completion(.failure(.unknown(message: "Unable to create network request")))
+            return
+        }
+        networkService.peformNetworkRequest(request, completion: { (result: Result<ShareFileResponse, NetworkService.RequestError>) in
+            switch result {
+            case .success(let response):
+                let linkSegments = response.permalinkPublic.split(separator: "-")
+                guard let imagePublicSecret = linkSegments.last else {
+                    completion(.failure(.invalidNetworkResponse))
+                    return
+                }
+                
+                let publicDirectImageUrl = imageUrl + "?pub_secret=\(imagePublicSecret)"
+                completion(.success(publicDirectImageUrl))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        })
     }
     
 }
@@ -187,20 +226,42 @@ private struct SlackChannelResponse: Decodable {
 }
 
 private struct FileUploadResponse: Decodable {
-    let url: String
+    let id: String
+    let urlPrivate: String
     
     enum CodingKeys: String, CodingKey {
         case file = "file"
     }
     
     enum FileCodingKeys: String, CodingKey {
-        case url = "url_private"
+        case id
+        case urlPrivate = "url_private"
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let fileContainer = try container.nestedContainer(keyedBy: FileCodingKeys.self, forKey: .file)
         
-        url = try fileContainer.decode(String.self, forKey: .url)
+        id = try fileContainer.decode(String.self, forKey: .id)
+        urlPrivate = try fileContainer.decode(String.self, forKey: .urlPrivate)
+    }
+}
+
+private struct ShareFileResponse: Decodable {
+    let permalinkPublic: String
+    
+    enum CodingKeys: String, CodingKey {
+        case file = "file"
+    }
+    
+    enum FileCodingKeys: String, CodingKey {
+        case permalinkPublic = "permalink_public"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let fileContainer = try container.nestedContainer(keyedBy: FileCodingKeys.self, forKey: .file)
+        
+        permalinkPublic = try fileContainer.decode(String.self, forKey: .permalinkPublic)
     }
 }

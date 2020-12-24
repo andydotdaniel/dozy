@@ -233,17 +233,23 @@ class SchedulePresenter: ScheduleViewPresenter {
             let textBlock: [String: Any]? = message.bodyText.map { bodyText in
                 return [
                     "type": "section",
-                    "fields": [
-                        [
-                            "type": "plain_text",
-                            "emoji": true,
-                            "text": bodyText
-                        ]
+                    "text": [
+                        "type": "plain_text",
+                        "emoji": true,
+                        "text": bodyText
                     ]
                 ]
             }
             
-            return [textBlock].compactMap { return $0 }
+            let imageBlock: [String: Any]? = message.imageUrl.map { imageUrl in
+                return [
+                    "type": "image",
+                    "image_url": imageUrl,
+                    "alt_text": "Sleepyhead Image"
+                ]
+            }
+            
+            return [textBlock, imageBlock].compactMap { return $0 }
         }()
         
         // Add additional seconds delay to awake confirmation time because of the timer we show
