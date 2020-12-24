@@ -10,6 +10,7 @@ import UIKit
 
 struct Message: Codable {
     let image: Data?
+    let imageUrl: String?
     let bodyText: String?
     let channel: Channel
 }

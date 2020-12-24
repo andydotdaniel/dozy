@@ -109,45 +109,43 @@ class MessageFormPresenter: MessageFormViewPresenter {
     }
     
     func didTapSave() {
-        guard let channel = self.selectedChannel else { return }
-        
-        let selectedImage = self.viewModel.selectedImage?.pngData()
-        if let selectedImage = selectedImage, selectedImage != message?.image,
-           let compressedImage = self.viewModel.selectedImage?.jpegData(compressionQuality: 0.35)  {
-            self.viewModel.isSaving = true
-            uploadImage(image: compressedImage)
-        } else {
+        func completeMessageSaving(image: Data?, imageUrl: String?, channel: Channel) {
             let message = Message(
-                image: selectedImage,
+                image: image,
+                imageUrl: imageUrl,
                 bodyText: self.viewModel.bodyText,
                 channel: channel
             )
             
             delegate?.onMessageSaved(message)
         }
+        
+        guard let channel = self.selectedChannel else { return }
+        
+        let selectedImage = self.viewModel.selectedImage?.pngData()
+        if let selectedImage = selectedImage, selectedImage != message?.image,
+           let compressedImage = self.viewModel.selectedImage?.jpegData(compressionQuality: 0.35)  {
+            self.viewModel.isSaving = true
+            uploadImage(image: compressedImage, completion: { result in
+                switch result {
+                case .success(let response):
+                    completeMessageSaving(image: selectedImage, imageUrl: response.url, channel: channel)
+                case .failure:
+                    // Handle Failure
+                    break
+                }
+            })
+        } else {
+            completeMessageSaving(image: selectedImage, imageUrl: message?.imageUrl, channel: channel)
+        }
     }
     
-    private func uploadImage(image: Data) {
+    private func uploadImage(image: Data, completion: @escaping (Result<FileUploadResponse, NetworkService.RequestError>) -> Void) {
         guard let accessTokenData = keychain.load(key: "slack_access_token"), let url = URL(string: "https://slack.com/api/files.upload") else { return }
         let accessToken = String(decoding: accessTokenData, as: UTF8.self)
         let headers = ["Authorization": "Bearer \(accessToken)"]
         
-        networkService.performImageUpload(for: image, with: url, headers: headers, completion: { [weak self] (result: Result<FileUploadResponse, NetworkService.RequestError>) -> Void in
-            guard let self = self, let channel = self.selectedChannel else { return }
-            
-            switch result {
-            case .success:
-                let message = Message(
-                    image: image,
-                    bodyText: self.viewModel.bodyText,
-                    channel: channel
-                )
-                self.delegate?.onMessageSaved(message)
-            case .failure:
-                // TODO: Handle errors
-                break
-            }
-        })
+        networkService.performImageUpload(for: image, with: url, headers: headers, completion: completion)
     }
     
 }

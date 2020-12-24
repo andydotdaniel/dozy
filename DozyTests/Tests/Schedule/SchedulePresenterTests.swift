@@ -29,7 +29,7 @@ class SchedulePresenterTests: XCTestCase {
         Current.now = { now }
         
         let channel = Channel(id: "SOME_CHANNEL_ID", isPublic: true, text: "SOME_CHANNEL_NAME")
-        let message = Message(image: nil, bodyText: "SOME_BODY_TEXT", channel: channel)
+        let message = Message(image: nil, imageUrl: nil, bodyText: "SOME_BODY_TEXT", channel: channel)
         schedule = Schedule(message: message, awakeConfirmationTime: Current.now().addingTimeInterval(5), scheduledMessageId: "SOME_PRESCHEDULED_MESSAGE_ID")
         viewModel = ScheduleViewModel(schedule: schedule)
         
@@ -59,7 +59,7 @@ class SchedulePresenterTests: XCTestCase {
     
     func testOnMessageSaved() throws {
         let channel = Channel(id: "SOME_OTHER_CHANNEL_ID", isPublic: false, text: "SOME_OTHER_CHANNEL_NAME")
-        let message = Message(image: nil, bodyText: "SOME_DIFFERENT_BODY_TEXT", channel: channel)
+        let message = Message(image: nil, imageUrl: nil, bodyText: "SOME_DIFFERENT_BODY_TEXT", channel: channel)
         presenter.onMessageSaved(message)
         
         XCTAssertEqual(self.viewModel.messageCard.bodyText, message.bodyText)

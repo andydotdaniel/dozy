@@ -37,7 +37,7 @@ class MessageFormPresenterTests: XCTestCase {
             networkService: networkService,
             keychain: keychainMock,
             delegate: delegateMock,
-            channel: nil
+            message: nil
         )
         presenter.didTapChannelDropdown()
     }
@@ -68,7 +68,7 @@ class MessageFormPresenterTests: XCTestCase {
         
         presenter.didTapSave()
         
-        let expectedMessage = Message(image: nil, bodyText: bodyText, channel: channel)
+        let expectedMessage = Message(image: nil, imageUrl: nil, bodyText: bodyText, channel: channel)
         XCTAssertEqual(delegateMock.messageSaved, expectedMessage)
     }
 }

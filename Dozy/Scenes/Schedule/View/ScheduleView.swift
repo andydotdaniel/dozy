@@ -78,7 +78,7 @@ struct ScheduleView: View {
 struct ScheduleView_Previews: PreviewProvider {
     static var previews: some View {
         let channel = Channel(id: "SOME_ID", isPublic: true, text: "general")
-        let message = Message(image: nil, bodyText: "Some body text", channel: channel)
+        let message = Message(image: nil, imageUrl: nil, bodyText: "Some body text", channel: channel)
         let schedule = Schedule(message: message, awakeConfirmationTime: Date(), scheduledMessageId: nil)
         let viewModel = ScheduleViewModel(schedule: schedule)
         let presenter = SchedulePresenter(schedule: schedule, isPostMessageSent: false, viewModel: viewModel, userDefaults: ScheduleUserDefaults(), networkService: NetworkService(), keychain: Keychain(), navigationControllable: nil, awakeConfirmationTimer: ActionTimer())
