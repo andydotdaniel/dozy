@@ -120,7 +120,9 @@ class MessageFormPresenter: MessageFormViewPresenter {
                 channel: channel
             )
             
-            delegate?.onMessageSaved(message)
+            Current.dispatchQueue.async {
+                self.delegate?.onMessageSaved(message)
+            }
         }
         
         guard let channel = self.selectedChannel else { return }
