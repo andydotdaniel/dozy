@@ -59,7 +59,7 @@ class MessageFormPresenterTests: XCTestCase {
         XCTAssertEqual(viewModel.channelNameTextFieldText, channel.text, "Selected channel name should be visible in channel text field")
     }
     
-    func testDidTapSave() {
+    func testDidTapSaveWithoutImage() {
         let channel = viewModel.filteredChannelItems.first!
         presenter.didTapChannelItem(id: channel.id)
         
@@ -71,4 +71,21 @@ class MessageFormPresenterTests: XCTestCase {
         let expectedMessage = Message(image: nil, imageUrl: nil, bodyText: bodyText, channel: channel)
         XCTAssertEqual(delegateMock.messageSaved, expectedMessage)
     }
+    
+    func testDidTapSaveWithImage() throws {
+        let channel = viewModel.filteredChannelItems.first!
+        presenter.didTapChannelItem(id: channel.id)
+        
+        let image = UIImage(named: "LogoGray", in: Bundle.main, with: nil)!
+        viewModel.selectedImage = image
+        urlSessionMock.result = try JSONLoader.load(fileName: "FileUpload")
+        
+        presenter.didTapSave()
+        
+        XCTAssertTrue(viewModel.isSaving)
+        
+        let expectedMessage = Message(image: image.pngData(), imageUrl: "https://somedomain.com/dramacat.gif", bodyText: nil, channel: channel)
+        XCTAssertEqual(delegateMock.messageSaved, expectedMessage)
+    }
+    
 }
