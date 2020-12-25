@@ -14,6 +14,9 @@ protocol MessageFormViewPresenter {
     func didTapChannelDropdown()
     func didTapChannelItem(id: String)
     func didTapSave()
+    
+    func onImageUploadConfirmed()
+    func onImageUploadCancelled()
 }
 
 class MessageFormPresenter: MessageFormViewPresenter {
@@ -30,6 +33,8 @@ class MessageFormPresenter: MessageFormViewPresenter {
     private let message: Message?
     private var accessToken: String?
     
+    private var selectedImageData: Data?
+    
     init(
         viewModel: MesssageFormViewModel,
         networkService: NetworkRequesting,
@@ -43,6 +48,7 @@ class MessageFormPresenter: MessageFormViewPresenter {
         self.delegate = delegate
         self.selectedChannel = message?.channel
         self.message = message
+        self.selectedImageData = message?.image
         
         if let accessTokenData = keychain.load(key: "slack_access_token") {
             let accessToken = String(decoding: accessTokenData, as: UTF8.self)
@@ -112,36 +118,26 @@ class MessageFormPresenter: MessageFormViewPresenter {
     }
     
     func didTapSave() {
-        func completeMessageSaving(image: Data?, imageUrl: String?, channel: Channel) {
-            let message = Message(
-                image: image,
-                imageUrl: imageUrl,
-                bodyText: self.viewModel.bodyText,
-                channel: channel
-            )
-            
-            Current.dispatchQueue.async {
-                self.delegate?.onMessageSaved(message)
-            }
-        }
-        
         guard let channel = self.selectedChannel else { return }
         
-        let selectedImage = self.viewModel.selectedImage?.pngData()
-        if let selectedImage = selectedImage, selectedImage != message?.image,
-           let compressedImage = self.viewModel.selectedImage?.jpegData(compressionQuality: 0.35)  {
-            self.viewModel.isSaving = true
-            uploadImage(image: compressedImage, completion: { result in
-                switch result {
-                case .success(let imageUrl):
-                    completeMessageSaving(image: selectedImage, imageUrl: imageUrl, channel: channel)
-                case .failure:
-                    // Handle Failure
-                    break
-                }
-            })
+        self.selectedImageData = self.viewModel.selectedImage?.pngData()
+        if let selectedImage = self.selectedImageData, selectedImage != message?.image {
+            self.viewModel.isShowingImageUploadConfirmation = true
         } else {
-            completeMessageSaving(image: selectedImage, imageUrl: message?.imageUrl, channel: channel)
+            completeMessageSaving(image: self.selectedImageData, imageUrl: message?.imageUrl, channel: channel)
+        }
+    }
+    
+    private func completeMessageSaving(image: Data?, imageUrl: String?, channel: Channel) {
+        let message = Message(
+            image: image,
+            imageUrl: imageUrl,
+            bodyText: self.viewModel.bodyText,
+            channel: channel
+        )
+        
+        Current.dispatchQueue.async {
+            self.delegate?.onMessageSaved(message)
         }
     }
     
@@ -187,6 +183,26 @@ class MessageFormPresenter: MessageFormViewPresenter {
                 completion(.failure(error))
             }
         })
+    }
+    
+    func onImageUploadConfirmed() {
+        guard let channel = self.selectedChannel else { return }
+        if let compressedImage = self.viewModel.selectedImage?.jpegData(compressionQuality: 0.35), let selectedImage = self.selectedImageData {
+            self.viewModel.isSaving = true
+            uploadImage(image: compressedImage, completion: { [weak self] result in
+                switch result {
+                case .success(let imageUrl):
+                    self?.completeMessageSaving(image: selectedImage, imageUrl: imageUrl, channel: channel)
+                case .failure:
+                    // TODO: Handle Failure
+                    break
+                }
+            })
+        }
+    }
+    
+    func onImageUploadCancelled() {
+        self.viewModel.isShowingImageUploadConfirmation = false
     }
     
 }

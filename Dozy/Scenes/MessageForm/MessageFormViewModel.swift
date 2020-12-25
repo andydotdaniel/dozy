@@ -31,6 +31,7 @@ class MesssageFormViewModel: ObservableObject {
     @Published var selectedImage: UIImage?
     
     @Published var isSaving: Bool
+    @Published var isShowingImageUploadConfirmation: Bool
     
     @Published var isSaveButtonEnabled: Bool
     private var saveButtonEnabledPublisher: AnyPublisher<Bool, Never> {
@@ -80,6 +81,7 @@ class MesssageFormViewModel: ObservableObject {
         self.selectedImage = message?.image.map { UIImage(data: $0) } ?? nil
         
         self.isSaving = false
+        self.isShowingImageUploadConfirmation = false
         self.isSaveButtonEnabled = false
         
         let keyboardListener = KeyboardListener()
