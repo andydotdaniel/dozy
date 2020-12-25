@@ -90,7 +90,7 @@ struct MessageFormView: View {
                 
                 return Alert(
                     title: Text("Confirm Image Upload"),
-                    message: Text("The selected image will be uploaded to Slack with public viewing permissions. Do you want to save your message and upload the image?"),
+                    message: Text("The selected image will be uploaded to Slack with public viewing permissions, but it will not be shared. Do you want to save your message and upload the image?"),
                     primaryButton: cancelButton,
                     secondaryButton: confirmButton
                 )
