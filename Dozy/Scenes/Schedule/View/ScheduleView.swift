@@ -55,9 +55,7 @@ struct ScheduleView: View {
     
     private func getContentCard() -> AnyView {
         let contentCard = ContentCard(viewModel: $viewModel.awakeConfirmationCard, buttonAction: {
-            withAnimation {
-                self.viewModel.awakeConfirmationCard.isShowingTimePicker = true
-            }
+            self.presenter.onChangeAwakeConfirmationTimeTapped()
         }, timePickerActions: (cancelButton: self.presenter.onTimePickerCancelButtonTapped, doneButton: self.presenter.onTimePickerDoneButtonTapped)
         )
         if viewModel.isShowingOverlayCard {

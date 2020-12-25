@@ -175,5 +175,20 @@ class SchedulePresenterTests: XCTestCase {
         XCTAssertTrue(navigationControllable?.pushViewControllerCalledWithArgs?.viewController is AwakeConfirmationViewController)
         XCTAssertTrue(timerMock.stopTimerCalled)
     }
+    
+    func testChangeAwakeConfirmationTimeTapWhenDisabled() {
+        viewModel.state = .inactive
+        
+        presenter.onChangeAwakeConfirmationTimeTapped()
+        XCTAssertTrue(viewModel.awakeConfirmationCard.isShowingTimePicker)
+    }
+    
+    func testChangeAwakeConfirmationTimeTapWhenEnabled() {
+        viewModel.state = .active
+        
+        presenter.onChangeAwakeConfirmationTimeTapped()
+        XCTAssertTrue(viewModel.errorToastIsShowing)
+        XCTAssertEqual(viewModel.errorToastText, "Cannot change time when timer is enabled.")
+    }
 
 }

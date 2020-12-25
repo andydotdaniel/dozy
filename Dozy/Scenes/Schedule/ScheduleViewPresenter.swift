@@ -18,6 +18,8 @@ protocol ScheduleViewPresenter: SwitchViewDelegate, MessageFormDelegate, HeaderM
     func onEditAwakeConfirmationTimeButtonTapped()
     func onTimePickerDoneButtonTapped()
     func onTimePickerCancelButtonTapped()
+    
+    func onChangeAwakeConfirmationTimeTapped()
 }
 
 class SchedulePresenter: ScheduleViewPresenter {
@@ -397,6 +399,18 @@ class SchedulePresenter: ScheduleViewPresenter {
     func onProfileIconTapped() {
         let profileViewController = ProfileViewBuilder(navigationControllable: navigationControllable).buildViewController()
         navigationControllable?.pushViewController(profileViewController, animated: true)
+    }
+    
+    func onChangeAwakeConfirmationTimeTapped() {
+        switch self.viewModel.state {
+        case .inactive:
+            withAnimation {
+                self.viewModel.awakeConfirmationCard.isShowingTimePicker = true
+            }
+        case .active:
+            viewModel.errorToastText = "Cannot change time when timer is enabled."
+            viewModel.errorToastIsShowing = true
+        }
     }
     
 }

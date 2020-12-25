@@ -12,22 +12,23 @@ struct SecondaryButton: View {
     
     let titleText: String
     let tapAction: () -> Void
-    let color: Color
+    let backgroundColor: Color
+    let foregroundColor: Color
     
     var body: some View {
-        Button(action: tapAction) {
-            Text(titleText)
-                .font(.system(size: 16))
-                .fontWeight(.semibold)
-                .foregroundColor(Color.black)
-                .opacity(0.35)
-                .truncationMode(.tail)
-        }
+        Text(titleText)
+        .font(.system(size: 16))
+        .fontWeight(.semibold)
+        .foregroundColor(foregroundColor)
+        .truncationMode(.tail)
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
         .frame(maxWidth: .infinity)
-        .background(color)
+        .background(backgroundColor)
         .cornerRadius(24)
+        .onTapGesture {
+            tapAction()
+        }
     }
     
 }
@@ -37,7 +38,8 @@ struct SecondaryButton_Previews: PreviewProvider {
         SecondaryButton(
             titleText: "Change awake confirmation time",
             tapAction: {},
-            color: Color.darkBlue
+            backgroundColor: .white,
+            foregroundColor: .alertRed
         )
     }
 }

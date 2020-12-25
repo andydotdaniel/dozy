@@ -73,8 +73,11 @@ struct ContentCard: View {
             
             if !viewModel.isShowingTimePicker {
                 SecondaryButton(
-                    titleText: viewModel.buttonText, tapAction: buttonAction,
-                    color: viewModel.state == .enabled ? Color.darkBlue : Color.darkRed
+                    titleText: viewModel.buttonText,
+                    tapAction: buttonAction,
+                    backgroundColor: viewModel.state == .enabled ? .darkBlue : .white,
+                    foregroundColor: viewModel.state == .enabled ? Color.black
+                        .opacity(0.35) : .alertRed
                 )
             }
             
