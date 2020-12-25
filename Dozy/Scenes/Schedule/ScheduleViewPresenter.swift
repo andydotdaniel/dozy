@@ -179,9 +179,18 @@ class SchedulePresenter: ScheduleViewPresenter {
                 setActiveSchedule()
             }
         case .active:
-            setInactiveViewState(isSwitchLoading: true)
-            sendDeleteScheduledMessageRequest()
-            deletePushNotification()
+            let minimumLeadTimeInSecondsForSettingInactiveState: TimeInterval = (15 * 60)
+            let minimumLeadTimeForSettingInactiveState = schedule.awakeConfirmationTime.addingTimeInterval(-minimumLeadTimeInSecondsForSettingInactiveState)
+            
+            switch Current.now().compare(minimumLeadTimeForSettingInactiveState) {
+            case .orderedSame, .orderedDescending:
+                viewModel.errorToastText = "Cannot disable when timer is under 15 minutes."
+                viewModel.errorToastIsShowing = true
+            case .orderedAscending:
+                setInactiveViewState(isSwitchLoading: true)
+                sendDeleteScheduledMessageRequest()
+                deletePushNotification()
+            }
         }
     }
     

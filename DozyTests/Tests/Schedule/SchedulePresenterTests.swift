@@ -134,17 +134,29 @@ class SchedulePresenterTests: XCTestCase {
         XCTAssertEqual(self.userDefaultsMock.scheduleSaved?.scheduledMessageId, "SOME_SCHEDULED_MESSAGE_ID")
     }
     
-    func testOnSwitchPositionChangedTriggeredForInactiveSchedule() {
+    func testOnSwitchPositionChangedTriggeredForInactiveScheduleBeforeLeadTime() {
         self.viewModel.state = .active
         self.urlSessionMock.results.append(.init(data: Data(), urlResponse: nil, error: nil))
         
-        Current.now = { self.schedule.awakeConfirmationTime.addingTimeInterval(-1) }
+        let leadTimeInSeconds: TimeInterval = 15 * 60
+        Current.now = { self.schedule.awakeConfirmationTime.addingTimeInterval(-(leadTimeInSeconds + 1)) }
         self.presenter.onSwitchPositionChangedTriggered()
         
         XCTAssertEqual(self.viewModel.state, .inactive)
         XCTAssertEqual(self.viewModel.switchPosition.position, .off)
         XCTAssertEqual(self.viewModel.switchPosition.isLoading, false)
         XCTAssertNil(self.userDefaultsMock.scheduleSaved?.scheduledMessageId)
+    }
+    
+    func testOnSwitchPositionChangedTriggeredForInactiveScheduleAfterLeadTime() {
+        self.viewModel.state = .active
+        
+        Current.now = { self.schedule.awakeConfirmationTime.addingTimeInterval(-1) }
+        self.presenter.onSwitchPositionChangedTriggered()
+        
+        XCTAssertEqual(self.viewModel.state, .active)
+        XCTAssertTrue(self.viewModel.errorToastIsShowing)
+        XCTAssertEqual(self.viewModel.errorToastText, "Cannot disable when timer is under 15 minutes.")
     }
     
     func testWillEnterForegroundNavigatesToAwakeConfirmation() {
