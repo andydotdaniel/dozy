@@ -19,12 +19,12 @@ struct PrimaryButton: View {
             .font(.system(size: 21))
             .bold()
             .foregroundColor(Color.white)
+            .padding(.horizontal, 54)
+            .padding(.vertical, 12)
+            .background(Color.primaryBlue)
+            .cornerRadius(30)
+            .shadow(radius: 5)
         }
-        .padding(.horizontal, 54)
-        .padding(.vertical, 12)
-        .background(Color.primaryBlue)
-        .cornerRadius(30)
-        .shadow(radius: 5)
     }
 }
 

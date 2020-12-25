@@ -17,28 +17,35 @@ struct AlternativeButton: View {
     
     var body: some View {
         Button(action: tapAction) {
-            if !self.isLoading {
-                icon?
-                    .renderingMode(.original)
-                    .frame(width: 30, height: 30)
-                    .scaledToFit()
-                Spacer()
-                    .frame(width: 12)
-                Text(titleText)
-                    .font(.system(size: 21))
-                    .bold()
-                    .foregroundColor(Color.black)
-            } else {
-                Spinner(strokeColor: Color.primaryBlue)
-            }
+            getButtonContent()
+            .frame(maxWidth: .infinity)
+            .padding(.horizontal, self.isLoading ? 24 : 54)
+            .padding(.vertical, 12)
+            .overlay(
+                RoundedRectangle(cornerRadius: 30, style: .continuous)
+                    .stroke(Color.borderGray, lineWidth: 1)
+            )
         }
-        .frame(maxWidth: .infinity)
-        .padding(.horizontal, self.isLoading ? 24 : 54)
-        .padding(.vertical, 12)
-        .overlay(
-            RoundedRectangle(cornerRadius: 30, style: .continuous)
-                .stroke(Color.borderGray, lineWidth: 1)
-        )
+    }
+    
+    private func getButtonContent() -> AnyView {
+        if !self.isLoading {
+            return AnyView (
+                HStack(spacing: 12) {
+                    icon?
+                        .renderingMode(.original)
+                        .frame(width: 30, height: 30)
+                        .scaledToFit()
+                    
+                    Text(titleText)
+                        .font(.system(size: 21))
+                        .bold()
+                        .foregroundColor(Color.black)
+                }
+            )
+        } else {
+            return AnyView(Spinner(strokeColor: Color.primaryBlue))
+        }
     }
 }
 
