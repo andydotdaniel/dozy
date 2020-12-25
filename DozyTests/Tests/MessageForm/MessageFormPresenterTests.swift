@@ -72,21 +72,33 @@ class MessageFormPresenterTests: XCTestCase {
         XCTAssertEqual(delegateMock.messageSaved, expectedMessage)
     }
     
-    func testDidTapSaveWithImage() throws {
+    func testDidTapSaveWithImageAndConfirmedImageUpload() throws {
         let channel = viewModel.filteredChannelItems.first!
         presenter.didTapChannelItem(id: channel.id)
         
         let image = UIImage(named: "LogoGray", in: Bundle.main, with: nil)!
         viewModel.selectedImage = image
+        
+        presenter.didTapSave()
+        
+        XCTAssertTrue(viewModel.isShowingImageUploadConfirmation)
+        
         urlSessionMock.results.append(try JSONLoader.load(fileName: "FileUpload"))
         urlSessionMock.results.append(try JSONLoader.load(fileName: "FileSharePublic"))
         
-        presenter.didTapSave()
+        presenter.onImageUploadConfirmed()
         
         XCTAssertTrue(viewModel.isSaving)
         
         let expectedMessage = Message(image: image.pngData(), imageUrl: "https://somedomain.com/dramacat.gif?pub_secret=8004f909b1", bodyText: nil, channel: channel)
         XCTAssertEqual(delegateMock.messageSaved, expectedMessage)
+    }
+    
+    func testOnImageUploadCancelled() {
+        viewModel.isShowingImageUploadConfirmation = true
+        presenter.onImageUploadCancelled()
+        
+        XCTAssertFalse(viewModel.isShowingImageUploadConfirmation)
     }
     
 }
