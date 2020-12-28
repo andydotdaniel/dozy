@@ -12,12 +12,15 @@ import XCTest
 class AwakeConfirmationPresenterTests: XCTestCase {
 
     var presenter: AwakeConfirmationPresenter!
+    var viewModel: AwakeConfirmationViewModel!
     
     var userDefaultsMock: ScheduleUserDefaultsMock!
     var urlSessionMock: URLSessionMock!
     var keychainMock: KeychainMock!
     
     var navigationControllable: NavigationControllableMock!
+    
+    var schedule: Schedule!
     
     override func setUpWithError() throws {
         Current = .mock
@@ -30,14 +33,14 @@ class AwakeConfirmationPresenterTests: XCTestCase {
         urlSessionMock = URLSessionMock()
         let networkService = NetworkService(urlSession: urlSessionMock)
         
-        let awakeConfirmationViewModel = AwakeConfirmationViewModel(countdownActive: true, secondsLeft: 30)
+        viewModel = AwakeConfirmationViewModel(countdownActive: true, secondsLeft: 30)
         let message = Message(image: nil, imageUrl: nil, bodyText: "SOME_BODY_TEXT", channel: Channel(id: "SOME_ID", isPublic: false, text: "SOME_TEXT"))
-        let schedule = Schedule(message: message, awakeConfirmationTime: Date().addingTimeInterval(30), scheduledMessageId: "SOME_ID")
+        schedule = Schedule(message: message, awakeConfirmationTime: Date().addingTimeInterval(30), scheduledMessageId: "SOME_ID")
         
         navigationControllable = NavigationControllableMock()
         
         presenter = AwakeConfirmationPresenter(
-            viewModel: awakeConfirmationViewModel,
+            viewModel: viewModel,
             networkService: networkService,
             keychain: keychainMock,
             userDefaults: userDefaultsMock,
@@ -71,6 +74,43 @@ class AwakeConfirmationPresenterTests: XCTestCase {
         XCTAssertTrue(navigationControllable?.pushViewControllerCalledWithArgs?.viewController is ScheduleViewController)
         XCTAssertEqual(navigationControllable?.pushViewControllerCalledWithArgs?.animated, true)
         XCTAssertEqual(navigationControllable?.viewControllers.count, 1)
+    }
+    
+    func testWillEnterForegroundWhenSecondsLeftGreaterThanOne() {
+        let updatedTime = self.schedule.sleepyheadMessagePostTime.addingTimeInterval(-30)
+        Current.now = { updatedTime }
+        
+        expectation(
+            forNotification: SceneNotification.willEnterForeground,
+            object: nil,
+            handler: nil
+        )
+
+        NotificationCenter.default.post(name: SceneNotification.willEnterForeground, object: nil)
+        XCTAssertEqual(viewModel.secondsLeft, Int(schedule.sleepyheadMessagePostTime.timeIntervalSince(updatedTime)))
+        
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+    
+    func testWillEnterForegroundWhenSecondsLeftLessThanOne() {
+        let updatedTime = self.schedule.sleepyheadMessagePostTime.addingTimeInterval(1)
+        Current.now = { updatedTime }
+        
+        expectation(
+            forNotification: SceneNotification.willEnterForeground,
+            object: nil,
+            handler: nil
+        )
+
+        NotificationCenter.default.post(name: SceneNotification.willEnterForeground, object: nil)
+        
+        XCTAssertNotNil(userDefaultsMock.scheduleSaved)
+        XCTAssertNil(userDefaultsMock.scheduleSaved?.scheduledMessageId)
+        XCTAssertTrue(navigationControllable?.pushViewControllerCalledWithArgs?.viewController is ScheduleViewController)
+        XCTAssertEqual(navigationControllable?.pushViewControllerCalledWithArgs?.animated, true)
+        XCTAssertEqual(navigationControllable?.viewControllers.count, 1)
+        
+        waitForExpectations(timeout: 5, handler: nil)
     }
 
 }

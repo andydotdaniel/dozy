@@ -45,7 +45,11 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
     
     @objc private func willEnterForeground() {
         let secondsLeft = Int(savedSchedule.sleepyheadMessagePostTime.timeIntervalSince(Current.now()))
-        viewModel.secondsLeft = secondsLeft
+        if secondsLeft >= 1 {
+            viewModel.secondsLeft = secondsLeft
+        } else {
+            endAwakeConfirmationTimer()
+        }
     }
     
     private func setSecondsLeftTimer() {
@@ -62,10 +66,14 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
         if viewModel.secondsLeft >= 1 {
             viewModel.secondsLeft -= 1
         } else {
-            secondsLeftTimer?.invalidate()
-            let updatedSchedule = saveInactiveSchedule()
-            navigateToSchedule(with: updatedSchedule, isPostMessageSent: true)
+            endAwakeConfirmationTimer()
         }
+    }
+    
+    func endAwakeConfirmationTimer() {
+        secondsLeftTimer?.invalidate()
+        let updatedSchedule = saveInactiveSchedule()
+        navigateToSchedule(with: updatedSchedule, isPostMessageSent: true)
     }
     
     func onSliderReachedEnd() {
