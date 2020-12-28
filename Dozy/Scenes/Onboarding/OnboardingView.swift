@@ -42,7 +42,7 @@ struct OnboardingView: View {
                     .multilineTextAlignment(.center)
                     PrimaryButton(titleText: "Create message", tapAction: {
                         self.viewModel.isShowingMessageForm = true
-                    }).sheet(isPresented: self.$viewModel.isShowingMessageForm, content: {
+                    }, color: .primaryBlue).sheet(isPresented: self.$viewModel.isShowingMessageForm, content: {
                         MessageFormViewBuilder(message: nil, delegate: self.presenter).build()
                     })
                 }

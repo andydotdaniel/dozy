@@ -17,6 +17,8 @@ protocol MessageFormViewPresenter {
     
     func onImageUploadConfirmed()
     func onImageUploadCancelled()
+    
+    func onChannelFetchRetryButtonTapped()
 }
 
 class MessageFormPresenter: MessageFormViewPresenter {
@@ -75,10 +77,13 @@ class MessageFormPresenter: MessageFormViewPresenter {
         }
         
         guard let networkRequest = NetworkRequest(url: url, httpMethod: .get, parameters: parameters, contentType: .urlEncodedForm) else { return }
+        self.viewModel.isFetchingChannels = true
+        
         networkService.peformNetworkRequest(networkRequest, completion: { [weak self] (result: Result<SlackChannelResponse, NetworkService.RequestError>) -> Void in
             guard let self = self else { return }
             
             Current.dispatchQueue.async {
+            self.viewModel.isFetchingChannels = false
                 switch result {
                 case .success(let response):
                     self.channelItems = response.channels.map { channel in
@@ -205,6 +210,11 @@ class MessageFormPresenter: MessageFormViewPresenter {
     
     func onImageUploadCancelled() {
         self.viewModel.isShowingImageUploadConfirmation = false
+    }
+    
+    func onChannelFetchRetryButtonTapped() {
+        guard let accessToken = accessToken else { return }
+        fetchChannels(accessToken: accessToken)
     }
     
 }

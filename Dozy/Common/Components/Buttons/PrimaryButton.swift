@@ -12,6 +12,7 @@ struct PrimaryButton: View {
     
     let titleText: String
     let tapAction: () -> Void
+    let color: Color
     
     var body: some View {
         Button(action: tapAction) {
@@ -21,7 +22,7 @@ struct PrimaryButton: View {
             .foregroundColor(Color.white)
             .padding(.horizontal, 54)
             .padding(.vertical, 12)
-            .background(Color.primaryBlue)
+            .background(color)
             .cornerRadius(30)
             .shadow(radius: 5)
         }
@@ -30,6 +31,6 @@ struct PrimaryButton: View {
 
 struct PrimaryButton_Previews: PreviewProvider {
     static var previews: some View {
-        PrimaryButton(titleText: "Some Text", tapAction: {})
+        PrimaryButton(titleText: "Some Text", tapAction: {}, color: .primaryBlue)
     }
 }

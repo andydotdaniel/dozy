@@ -33,14 +33,7 @@ struct MessageFormView: View {
                     Divider()
                         .foregroundColor(Color.borderGray)
                     if viewModel.isShowingChannelDropdown {
-                        List(viewModel.filteredChannelItems) { channelItem in
-                            Button(action: {
-                                self.presenter.didTapChannelItem(id: channelItem.id)
-                            }, label: {
-                                ChannelView(isPublic: channelItem.isPublic, text: channelItem.text)
-                                    .padding(.vertical, 16)
-                            })
-                        }
+                        getDropdownList()
                         .offset(y: -24)
                     } else {
                         VStack(alignment: .leading, spacing: 16) {
@@ -96,6 +89,45 @@ struct MessageFormView: View {
                     primaryButton: cancelButton,
                     secondaryButton: confirmButton
                 )
+            })
+        }
+    }
+    
+    private func getDropdownList() -> AnyView {
+        if viewModel.isFetchingChannels {
+            return AnyView(
+                HStack(alignment: .center, spacing: 12) {
+                    Spinner(strokeColor: .primaryBlue)
+                    Text("Fetching channels...")
+                        .font(.body)
+                }
+                .background(Color.white)
+                .frame(maxHeight: .infinity)
+            )
+        } else if viewModel.filteredChannelItems.isEmpty {
+            return AnyView(
+                VStack(alignment: .center, spacing: 12) {
+                    Text("Oops.")
+                        .font(.system(size: 48))
+                        .foregroundColor(Color.alertRed)
+                        .fontWeight(.bold)
+                    Text("We failed to fetch your channels.")
+                        .font(.body)
+                    PrimaryButton(titleText: "Try again", tapAction: self.presenter.onChannelFetchRetryButtonTapped, color: .alertRed)
+                        .offset(y: 16)
+                }
+                .background(Color.white)
+                .frame(maxHeight: .infinity)
+            )
+        } else {
+            return AnyView(
+                List(viewModel.filteredChannelItems) { channelItem in
+                Button(action: {
+                    self.presenter.didTapChannelItem(id: channelItem.id)
+                }, label: {
+                    ChannelView(isPublic: channelItem.isPublic, text: channelItem.text)
+                        .padding(.vertical, 16)
+                })
             })
         }
     }
