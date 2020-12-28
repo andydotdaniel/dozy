@@ -76,6 +76,14 @@ class AwakeConfirmationPresenterTests: XCTestCase {
         XCTAssertEqual(navigationControllable?.viewControllers.count, 1)
     }
     
+    func testOnSliderReachedEndNetworkFailure() throws {
+        urlSessionMock.results.append(URLSessionMockResult(data: nil, urlResponse: nil, error: URLSessionMock.NetworkError.someError))
+        presenter.onSliderReachedEnd()
+        
+        XCTAssertTrue(viewModel.isShowingError)
+        XCTAssertFalse(viewModel.sliderHasReachedEnd)
+    }
+    
     func testWillEnterForegroundWhenSecondsLeftGreaterThanOne() {
         let updatedTime = self.schedule.sleepyheadMessagePostTime.addingTimeInterval(-30)
         Current.now = { updatedTime }

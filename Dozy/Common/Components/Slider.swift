@@ -16,7 +16,8 @@ protocol SliderDelegate: class {
 struct Slider: View {
     
     @State private var controlWidthOffset: CGFloat = .zero
-    @State private var hasReachedEnd: Bool = false
+    @Binding var hasReachedEnd: Bool
+    
     let titleText: String
     
     weak var delegate: SliderDelegate?
@@ -86,6 +87,11 @@ struct Slider: View {
             alignment: .leading
             )
         }.frame(maxHeight: 44)
+        .onChange(of: hasReachedEnd) { newValue in
+            if newValue == false {
+                self.controlWidthOffset = .zero
+            }
+        }
     }
     
     private func getControlIndicator() -> AnyView? {
@@ -112,6 +118,6 @@ struct Slider: View {
 
 struct Slider_Previews: PreviewProvider {
     static var previews: some View {
-        Slider(titleText: "Slide for awake confirmation.", delegate: nil)
+        Slider(hasReachedEnd: .constant(false), titleText: "Slide for awake confirmation.", delegate: nil)
     }
 }

@@ -101,8 +101,8 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
                     let updatedSchedule = self.saveInactiveSchedule()
                     self.navigateToSchedule(with: updatedSchedule, isPostMessageSent: false)
                 case .failure:
-                    // TODO: Handle failure
-                    break
+                    self.viewModel.isShowingError = true
+                    self.viewModel.sliderHasReachedEnd = false
                 }
             }
         })

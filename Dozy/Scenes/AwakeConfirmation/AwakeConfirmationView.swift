@@ -13,9 +13,14 @@ class AwakeConfirmationViewModel: ObservableObject {
     @Published var countdownActive: Bool
     @Published var secondsLeft: Int
     
+    @Published var isShowingError: Bool
+    @Published var sliderHasReachedEnd: Bool
+    
     init(countdownActive: Bool, secondsLeft: Int) {
         self.countdownActive = countdownActive
         self.secondsLeft = secondsLeft
+        self.isShowingError = false
+        self.sliderHasReachedEnd = false
     }
     
 }
@@ -31,21 +36,25 @@ struct AwakeConfirmationView: View {
     }
     
     var body: some View {
-        VStack() {
-            Spacer()
-            VStack(alignment: .center, spacing: -16) {
-                Text("\(self.viewModel.secondsLeft)")
-                    .bold()
-                    .font(.system(size: 180))
-                Text("Confirm you're awake.")
-                    .bold()
-            }.foregroundColor(self.viewModel.countdownActive ? Color.primaryBlue : Color.borderGray)
-            Spacer()
-            Slider(titleText: "Slide for awake confirmation", delegate: presenter)
-                .offset(y: -24)
+        ZStack(alignment: .bottom) {
+            VStack() {
+                Spacer()
+                VStack(alignment: .center, spacing: -16) {
+                    Text("\(self.viewModel.secondsLeft)")
+                        .bold()
+                        .font(.system(size: 180))
+                    Text("Confirm you're awake.")
+                        .bold()
+                }.foregroundColor(self.viewModel.countdownActive ? Color.primaryBlue : Color.borderGray)
+                Spacer()
+                Slider(hasReachedEnd: $viewModel.sliderHasReachedEnd, titleText: "Slide for awake confirmation", delegate: presenter)
+                    .offset(y: -24)
+            }
+            .padding(.bottom, 16)
+            .padding(.horizontal, 16)
+            Toast.createErrorToast(isShowing: $viewModel.isShowingError)
+                .transition(.move(edge: .bottom))
         }
-        .padding(.bottom, 16)
-        .padding(.horizontal, 16)
     }
     
 }
