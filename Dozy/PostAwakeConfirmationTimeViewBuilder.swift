@@ -33,7 +33,7 @@ class PostAwakeConfirmationTimeViewBuilder: ViewControllerBuilder {
                 scheduleUserDefaults: scheduleUserDefaults
             ).buildViewController()
         case .orderedAscending:
-            return AwakeConfirmationViewBuilder(schedule: schedule, navigationControllable: navigationControllable).buildViewController()
+            return AwakeConfirmationViewBuilder(schedule: schedule, userDefaults: scheduleUserDefaults, navigationControllable: navigationControllable).buildViewController()
         }
     }
     

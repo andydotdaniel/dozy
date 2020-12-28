@@ -121,7 +121,7 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
             schedule: schedule,
             isPostMessageSent: isPostMessageSent,
             navigationControllable: navigationControllable,
-            scheduleUserDefaults: ScheduleUserDefaults()
+            scheduleUserDefaults: userDefaults
         ).buildViewController()
         navigationControllable?.pushViewController(scheduleViewController, animated: true)
         navigationControllable?.viewControllers = [scheduleViewController]

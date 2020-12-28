@@ -22,17 +22,19 @@ class AwakeConfirmationViewController: UIHostingController<AwakeConfirmationView
 struct AwakeConfirmationViewBuilder: ViewControllerBuilder {
     
     private let schedule: Schedule
+    private let userDefaults: ScheduleUserDefaults
     private weak var navigationControllable: NavigationControllable?
     
-    init(schedule: Schedule, navigationControllable: NavigationControllable?) {
+    init(schedule: Schedule, userDefaults: ScheduleUserDefaults, navigationControllable: NavigationControllable?) {
         self.schedule = schedule
+        self.userDefaults = userDefaults
         self.navigationControllable = navigationControllable
     }
     
     func buildViewController() -> UIViewController {
         let secondsLeft = schedule.sleepyheadMessagePostTime.timeIntervalSinceNow
         let viewModel = AwakeConfirmationViewModel(countdownActive: true, secondsLeft: Int(secondsLeft))
-        let presenter = AwakeConfirmationPresenter(viewModel: viewModel, networkService: NetworkService(), keychain: Keychain(), userDefaults: ScheduleUserDefaults(), savedSchedule: schedule, navigationControllable: navigationControllable)
+        let presenter = AwakeConfirmationPresenter(viewModel: viewModel, networkService: NetworkService(), keychain: Keychain(), userDefaults: userDefaults, savedSchedule: schedule, navigationControllable: navigationControllable)
         let view = AwakeConfirmationView(viewModel: viewModel, presenter: presenter)
         
         return AwakeConfirmationViewController(rootView: view)
