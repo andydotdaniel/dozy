@@ -32,6 +32,7 @@ class MesssageFormViewModel: ObservableObject {
     
     @Published var isSaving: Bool
     @Published var isShowingImageUploadConfirmation: Bool
+    @Published var isShowingSaveError: Bool
     
     @Published var isSaveButtonEnabled: Bool
     private var saveButtonEnabledPublisher: AnyPublisher<Bool, Never> {
@@ -83,6 +84,7 @@ class MesssageFormViewModel: ObservableObject {
         self.isSaving = false
         self.isShowingImageUploadConfirmation = false
         self.isSaveButtonEnabled = false
+        self.isShowingSaveError = false
         
         let keyboardListener = KeyboardListener()
         self.keyboardListener = keyboardListener

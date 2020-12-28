@@ -136,9 +136,7 @@ class MessageFormPresenter: MessageFormViewPresenter {
             channel: channel
         )
         
-        Current.dispatchQueue.async {
-            self.delegate?.onMessageSaved(message)
-        }
+        self.delegate?.onMessageSaved(message)
     }
     
     private func uploadImage(image: Data, completion: @escaping (Result<String, NetworkService.RequestError>) -> Void) {
@@ -190,12 +188,16 @@ class MessageFormPresenter: MessageFormViewPresenter {
         if let compressedImage = self.viewModel.selectedImage?.jpegData(compressionQuality: 0.35), let selectedImage = self.selectedImageData {
             self.viewModel.isSaving = true
             uploadImage(image: compressedImage, completion: { [weak self] result in
-                switch result {
-                case .success(let imageUrl):
-                    self?.completeMessageSaving(image: selectedImage, imageUrl: imageUrl, channel: channel)
-                case .failure:
-                    // TODO: Handle Failure
-                    break
+                guard let self = self else { return }
+                
+                Current.dispatchQueue.async {
+                    switch result {
+                    case .success(let imageUrl):
+                        self.completeMessageSaving(image: selectedImage, imageUrl: imageUrl, channel: channel)
+                    case .failure:
+                        self.viewModel.isSaving = false
+                        self.viewModel.isShowingSaveError = true
+                    }
                 }
             })
         }

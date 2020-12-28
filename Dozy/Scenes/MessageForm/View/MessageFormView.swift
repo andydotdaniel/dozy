@@ -15,7 +15,7 @@ struct MessageFormView: View {
     
     var body: some View {
         NavigationView {
-            ZStack {
+            ZStack(alignment: .bottom) {
                 VStack(alignment: .center, spacing: 30) {
                     VStack {
                         TextField("Slack channel or conversation", text: $viewModel.channelNameTextFieldText)
@@ -66,6 +66,8 @@ struct MessageFormView: View {
                         }
                     }
                 }
+                Toast.createErrorToast(text: "Failed to save message. Please try again.", isShowing: $viewModel.isShowingSaveError)
+                    .offset(y: -16)
             }
             .sheet(isPresented: $viewModel.isShowingImagePicker) {
                 if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {

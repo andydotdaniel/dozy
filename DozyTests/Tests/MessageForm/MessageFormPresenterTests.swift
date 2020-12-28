@@ -101,4 +101,23 @@ class MessageFormPresenterTests: XCTestCase {
         XCTAssertFalse(viewModel.isShowingImageUploadConfirmation)
     }
     
+    func testNetworkFailureAfterDidTapSaveWithImageAndConfirmedImageUpload() throws {
+        let channel = viewModel.filteredChannelItems.first!
+        presenter.didTapChannelItem(id: channel.id)
+        
+        let image = UIImage(named: "LogoGray", in: Bundle.main, with: nil)!
+        viewModel.selectedImage = image
+        
+        presenter.didTapSave()
+        
+        XCTAssertTrue(viewModel.isShowingImageUploadConfirmation)
+        
+        urlSessionMock.results.append(.init(data: nil, urlResponse: nil, error: URLSessionMock.NetworkError.someError))
+        
+        presenter.onImageUploadConfirmed()
+        
+        XCTAssertFalse(viewModel.isSaving)
+        XCTAssertTrue(viewModel.isShowingSaveError)
+    }
+    
 }
