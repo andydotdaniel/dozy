@@ -202,5 +202,29 @@ class SchedulePresenterTests: XCTestCase {
         XCTAssertTrue(viewModel.errorToastIsShowing)
         XCTAssertEqual(viewModel.errorToastText, "Cannot change time when timer is enabled.")
     }
+    
+    func testShowErrorWhenSendingScheduledMessageRequest() {
+        self.viewModel.state = .inactive
+        self.urlSessionMock.results.append(.init(data: nil, urlResponse: nil, error: URLSessionMock.NetworkError.someError))
+        
+        self.presenter.onSwitchPositionChangedTriggered()
+            
+        XCTAssertEqual(viewModel.state, .inactive)
+        XCTAssertTrue(viewModel.errorToastIsShowing)
+        XCTAssertEqual(viewModel.errorToastText, "Oops, something happened. Please try again.")
+    }
+    
+    func testShowErrorWhenSendingDeleteScheduledMessageRequest() {
+        self.viewModel.state = .active
+        self.urlSessionMock.results.append(.init(data: nil, urlResponse: nil, error: URLSessionMock.NetworkError.someError))
+        
+        let leadTimeInSeconds: TimeInterval = 15 * 60
+        Current.now = { self.schedule.awakeConfirmationTime.addingTimeInterval(-(leadTimeInSeconds + 1)) }
+        self.presenter.onSwitchPositionChangedTriggered()
+            
+        XCTAssertEqual(viewModel.state, .active)
+        XCTAssertTrue(viewModel.errorToastIsShowing)
+        XCTAssertEqual(viewModel.errorToastText, "Oops, something happened. Please try again.")
+    }
 
 }

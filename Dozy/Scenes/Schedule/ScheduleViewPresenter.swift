@@ -173,8 +173,7 @@ class SchedulePresenter: ScheduleViewPresenter {
         case .inactive:
             switch schedule.awakeConfirmationTime.compare(Current.now()) {
             case .orderedSame, .orderedAscending:
-                viewModel.errorToastText = "Passed date selected. Please change date."
-                viewModel.errorToastIsShowing = true
+                showErrorToast(text: "Passed date selected. Please change date.")
             case .orderedDescending:
                 setActiveSchedule()
             }
@@ -184,8 +183,7 @@ class SchedulePresenter: ScheduleViewPresenter {
             
             switch Current.now().compare(minimumLeadTimeForSettingInactiveState) {
             case .orderedSame, .orderedDescending:
-                viewModel.errorToastText = "Cannot disable when timer is under 15 minutes."
-                viewModel.errorToastIsShowing = true
+                showErrorToast(text: "Cannot disable when timer is under 15 minutes.")
             case .orderedAscending:
                 setInactiveViewState(isSwitchLoading: true)
                 sendDeleteScheduledMessageRequest()
@@ -194,15 +192,23 @@ class SchedulePresenter: ScheduleViewPresenter {
         }
     }
     
+    private func showErrorToast(text: String) {
+        viewModel.errorToastText = text
+        viewModel.errorToastIsShowing = true
+    }
+    
     private func setActiveSchedule() {
+        setActiveViewState(isSwitchLoading: true)
+        sendScheduleMessageRequest()
+        createPushNotification()
+    }
+    
+    private func setActiveViewState(isSwitchLoading: Bool) {
         viewModel.state = .active
-        viewModel.switchPosition = (.on, true)
+        viewModel.switchPosition = (.on, isSwitchLoading)
         
         secondsUntilAwakeConfirmationTime = Int(schedule.awakeConfirmationTime.timeIntervalSince(Current.now()))
         enableAwakeConfirmation()
-        
-        sendScheduleMessageRequest()
-        createPushNotification()
     }
     
     private func setInactiveViewState(isSwitchLoading: Bool) {
@@ -230,8 +236,8 @@ class SchedulePresenter: ScheduleViewPresenter {
                     
                     self.viewModel.switchPosition = (.on, false)
                 case .failure:
-                    // TODO: Handle failure
-                    break
+                    self.setInactiveViewState(isSwitchLoading: false)
+                    self.showErrorToast(text: "Oops, something happened. Please try again.")
                 }
             }
         })
@@ -295,8 +301,8 @@ class SchedulePresenter: ScheduleViewPresenter {
                     self.saveInactiveSchedule()
                     self.viewModel.switchPosition = (.off, false)
                 case .failure:
-                    // TODO: Handle failure
-                    break
+                    self.showErrorToast(text: "Oops, something happened. Please try again.")
+                    self.setActiveViewState(isSwitchLoading: false)
                 }
             }
         })
@@ -417,8 +423,7 @@ class SchedulePresenter: ScheduleViewPresenter {
                 self.viewModel.awakeConfirmationCard.isShowingTimePicker = true
             }
         case .active:
-            viewModel.errorToastText = "Cannot change time when timer is enabled."
-            viewModel.errorToastIsShowing = true
+            showErrorToast(text: "Cannot change time when timer is enabled.")
         }
     }
     
