@@ -9,9 +9,14 @@
 import Foundation
 import Security
 
+enum KeychainError: Error {
+    case invalidKey
+}
+
 protocol SecureStorable {
     func save(key: String, data: Data) -> OSStatus
     func load(key: String) -> Data?
+    func delete(key: String) throws
 }
 
 final class Keychain: SecureStorable {
@@ -45,6 +50,18 @@ final class Keychain: SecureStorable {
 
         guard status == noErr else { return nil }
         return dataResultReference as? Data
+    }
+    
+    func delete(key: String) throws {
+        guard let data = load(key: key) else { throw KeychainError.invalidKey }
+        
+        let query: [CFString: Any] = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: key,
+            kSecValueData: data
+        ]
+        
+        SecItemDelete(query as CFDictionary)
     }
     
 }

@@ -18,6 +18,7 @@ class ProfilePresenterProfileFetchedTests: XCTestCase {
     
     private var profileUserDefaultsMock: ProfileUserDefaultsMock!
     private var scheduleUserDefaultsMock: ScheduleUserDefaultsMock!
+    private var keychainMock: KeychainMock!
     
     override func setUpWithError() throws {
         viewModel = ProfileViewModel()
@@ -29,12 +30,14 @@ class ProfilePresenterProfileFetchedTests: XCTestCase {
         profileUserDefaultsMock = ProfileUserDefaultsMock()
         profileUserDefaultsMock.profileSaved = Profile(name: "SOME_NAME", email: "SOME_EMAIL")
         
+        keychainMock = KeychainMock()
+        
         presenter = ProfilePresenter(
             profileUserDefaults: profileUserDefaultsMock,
             scheduleUserDefaults: scheduleUserDefaultsMock,
             viewModel: viewModel,
             networkService: NetworkService(urlSession: urlSessionMock),
-            keychain: KeychainMock(),
+            keychain: keychainMock,
             navigationControllable: navigationControllable
         )
     }
@@ -62,6 +65,7 @@ class ProfilePresenterProfileFetchedTests: XCTestCase {
         
         XCTAssertTrue(self.profileUserDefaultsMock.deleteCalled)
         XCTAssertTrue(self.scheduleUserDefaultsMock.deleteCalled)
+        XCTAssertEqual(self.keychainMock.deleteKey, Keychain.Keys.slackAccessToken)
         
         XCTAssertEqual(self.navigationControllable.pushViewControllerCalledWithArgs?.animated, true)
         XCTAssertTrue(self.navigationControllable.pushViewControllerCalledWithArgs?.viewController is LoginViewController)

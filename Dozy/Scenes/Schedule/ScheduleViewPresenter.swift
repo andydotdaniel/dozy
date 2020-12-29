@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-private let pushNotificationIdentifier = "dozy_awake_confirmation_alert"
+let pushNotificationIdentifier = "dozy_awake_confirmation_alert"
 let awakeConfirmationDelay: TimeInterval = 90
 
 protocol ScheduleViewPresenter: SwitchViewDelegate, MessageFormDelegate, HeaderMainDelegate, OverlayCardDelegate {

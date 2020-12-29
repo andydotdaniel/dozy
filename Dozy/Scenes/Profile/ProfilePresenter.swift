@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UserNotifications
 
 protocol ProfileViewPresenter {
     func onLogoutButtonTapped()
@@ -94,6 +95,10 @@ class ProfilePresenter: ProfileViewPresenter {
             userDefaults.forEach { $0.delete() }
         }
         
+        func clearAccessToken() {
+            try? keychain.delete(key: Keychain.Keys.slackAccessToken)
+        }
+        
         func navigateToLogin() {
             guard let navigationControllable = self.navigationControllable else { return }
             
@@ -104,6 +109,7 @@ class ProfilePresenter: ProfileViewPresenter {
         
         self.viewModel?.isShowingLogoutAlert = false
         
+        clearAccessToken()
         clearUserDefaults()
         navigateToLogin()
     }

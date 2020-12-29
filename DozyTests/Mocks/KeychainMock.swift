@@ -25,4 +25,9 @@ class KeychainMock: SecureStorable {
         return dataToLoad
     }
     
+    var deleteKey: String?
+    func delete(key: String) throws {
+        deleteKey = key
+    }
+    
 }
