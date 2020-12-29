@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SwiftUI
+import UserNotifications
 
 class ScheduleViewController: UIHostingController<ScheduleView> {
     
@@ -43,7 +44,8 @@ struct ScheduleViewBuilder: ViewControllerBuilder {
             networkService: NetworkService(),
             keychain: Keychain(),
             navigationControllable: navigationControllable,
-            awakeConfirmationTimer: ActionTimer()
+            awakeConfirmationTimer: ActionTimer(),
+            userNotificationCenter: UNUserNotificationCenter.current()
         )
         let view = ScheduleView(viewModel: viewModel, presenter: presenter)
         

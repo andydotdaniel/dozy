@@ -33,6 +33,7 @@ class SchedulePresenter: ScheduleViewPresenter {
     
     private let networkService: NetworkRequesting
     private let keychain: SecureStorable
+    private let userNotificationCenter: UserNotificationCenter
     
     private weak var navigationControllable: NavigationControllable?
     
@@ -44,7 +45,8 @@ class SchedulePresenter: ScheduleViewPresenter {
         networkService: NetworkRequesting,
         keychain: SecureStorable,
         navigationControllable: NavigationControllable?,
-        awakeConfirmationTimer: Timeable
+        awakeConfirmationTimer: Timeable,
+        userNotificationCenter: UserNotificationCenter
     ) {
         self.viewModel = viewModel
         self.userDefaults = userDefaults
@@ -53,6 +55,7 @@ class SchedulePresenter: ScheduleViewPresenter {
         self.keychain = keychain
         self.navigationControllable = navigationControllable
         self.awakeConfirmationTimer = awakeConfirmationTimer
+        self.userNotificationCenter = userNotificationCenter
         
         let now = Current.now()
         self.secondsUntilAwakeConfirmationTime = Int(schedule.awakeConfirmationTime.timeIntervalSince(now))
@@ -326,15 +329,11 @@ class SchedulePresenter: ScheduleViewPresenter {
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
         let request = UNNotificationRequest(identifier: pushNotificationIdentifier, content: content, trigger: trigger)
         
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
-            if error != nil {
-                // TODO: Handle errors
-            }
-        })
+        userNotificationCenter.add(request: request, completion: nil)
     }
     
     private func deletePushNotification() {
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [pushNotificationIdentifier])
+        userNotificationCenter.removePendingNotificationRequests(withIdentifiers: [pushNotificationIdentifier])
     }
     
     func onMessageActionButtonTapped() {

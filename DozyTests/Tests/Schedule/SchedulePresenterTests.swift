@@ -18,6 +18,7 @@ class SchedulePresenterTests: XCTestCase {
     var userDefaultsMock: ScheduleUserDefaultsMock!
     var urlSessionMock: URLSessionMock!
     var keychainMock: KeychainMock!
+    var userNotificationCenterMock: UserNotificationCenterMock!
     
     var navigationControllable: NavigationControllableMock!
     
@@ -44,7 +45,19 @@ class SchedulePresenterTests: XCTestCase {
         
         timerMock = TimerMock()
         
-        presenter = SchedulePresenter(schedule: schedule, isPostMessageSent: false, viewModel: viewModel, userDefaults: userDefaultsMock, networkService: networkService, keychain: keychainMock, navigationControllable: navigationControllable, awakeConfirmationTimer: timerMock)
+        userNotificationCenterMock = UserNotificationCenterMock()
+        
+        presenter = SchedulePresenter(
+            schedule: schedule,
+            isPostMessageSent: false,
+            viewModel: viewModel,
+            userDefaults: userDefaultsMock,
+            networkService: networkService,
+            keychain: keychainMock,
+            navigationControllable: navigationControllable,
+            awakeConfirmationTimer: timerMock,
+            userNotificationCenter: userNotificationCenterMock
+        )
     }
 
     override func tearDownWithError() throws {
@@ -132,6 +145,7 @@ class SchedulePresenterTests: XCTestCase {
         XCTAssertEqual(self.viewModel.switchPosition.position, .on)
         XCTAssertEqual(self.viewModel.switchPosition.isLoading, false)
         XCTAssertEqual(self.userDefaultsMock.scheduleSaved?.scheduledMessageId, "SOME_SCHEDULED_MESSAGE_ID")
+        XCTAssertEqual(self.userNotificationCenterMock.requestIdentifierAdded, pushNotificationIdentifier)
     }
     
     func testOnSwitchPositionChangedTriggeredForInactiveScheduleBeforeLeadTime() {
@@ -146,6 +160,7 @@ class SchedulePresenterTests: XCTestCase {
         XCTAssertEqual(self.viewModel.switchPosition.position, .off)
         XCTAssertEqual(self.viewModel.switchPosition.isLoading, false)
         XCTAssertNil(self.userDefaultsMock.scheduleSaved?.scheduledMessageId)
+        XCTAssertEqual(self.userNotificationCenterMock.identifiersRemoved, [pushNotificationIdentifier])
     }
     
     func testOnSwitchPositionChangedTriggeredForInactiveScheduleAfterLeadTime() {

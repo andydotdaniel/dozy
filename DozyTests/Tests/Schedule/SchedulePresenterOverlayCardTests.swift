@@ -32,7 +32,7 @@ class SchedulePresenterOverlayCardTests: XCTestCase {
         let networkService = NetworkService(urlSession: urlSessionMock)
         let keychainMock = KeychainMock()
         
-        presenter = SchedulePresenter(schedule: schedule, isPostMessageSent: isPostMessageSent, viewModel: viewModel, userDefaults: userDefaultsMock, networkService: networkService, keychain: keychainMock, navigationControllable: NavigationControllableMock(), awakeConfirmationTimer: TimerMock())
+        presenter = SchedulePresenter(schedule: schedule, isPostMessageSent: isPostMessageSent, viewModel: viewModel, userDefaults: userDefaultsMock, networkService: networkService, keychain: keychainMock, navigationControllable: NavigationControllableMock(), awakeConfirmationTimer: TimerMock(), userNotificationCenter: UserNotificationCenterMock())
     }
     
     func testShowOverlayCardOnInit() {

@@ -99,6 +99,8 @@
 		10E57E6024969F03001B71A4 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E57E5F24969F03001B71A4 /* LoginPresenter.swift */; };
 		10E57E622496A062001B71A4 /* LoginViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E57E612496A062001B71A4 /* LoginViewBuilder.swift */; };
 		10E57E642496A086001B71A4 /* ViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E57E632496A086001B71A4 /* ViewBuilder.swift */; };
+		10EE4EAB259B79500063C1AC /* UNUserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EE4EAA259B79500063C1AC /* UNUserNotificationCenter.swift */; };
+		10EE4EB1259B7B470063C1AC /* UserNotificationCenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EE4EB0259B7B470063C1AC /* UserNotificationCenterMock.swift */; };
 		10F422202497BCB60078AC3C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F4221F2497BCB60078AC3C /* NetworkService.swift */; };
 		10F422222497C2050078AC3C /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F422212497C2050078AC3C /* NetworkRequest.swift */; };
 		10F422242497E9B20078AC3C /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F422232497E9B20078AC3C /* Spinner.swift */; };
@@ -213,6 +215,8 @@
 		10E57E5F24969F03001B71A4 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		10E57E612496A062001B71A4 /* LoginViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewBuilder.swift; sourceTree = "<group>"; };
 		10E57E632496A086001B71A4 /* ViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBuilder.swift; sourceTree = "<group>"; };
+		10EE4EAA259B79500063C1AC /* UNUserNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNUserNotificationCenter.swift; sourceTree = "<group>"; };
+		10EE4EB0259B7B470063C1AC /* UserNotificationCenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationCenterMock.swift; sourceTree = "<group>"; };
 		10F4221F2497BCB60078AC3C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		10F422212497C2050078AC3C /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		10F422232497E9B20078AC3C /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
@@ -356,6 +360,7 @@
 				104856D824A142F80072D00F /* UIDevice.swift */,
 				104BCC1F24AB991200C35BDC /* DispatchQueue.swift */,
 				10C4D43224D544E200CC1123 /* UserDefaults.swift */,
+				10EE4EAA259B79500063C1AC /* UNUserNotificationCenter.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -533,6 +538,7 @@
 				101C332A24E5A65C009BD331 /* UserDefaultsMock.swift */,
 				10CE42C4258095DF00BB00CF /* NavigationControllableMock.swift */,
 				10358EB7258C9091006F3ADC /* TimerMock.swift */,
+				10EE4EB0259B7B470063C1AC /* UserNotificationCenterMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -740,6 +746,7 @@
 				1081AE26249F387900AD6655 /* WebAuthenticationSession.swift in Sources */,
 				10A21F2F2581133200E67FE0 /* ProfileView.swift in Sources */,
 				10F42226249930CC0078AC3C /* LoginViewModel.swift in Sources */,
+				10EE4EAB259B79500063C1AC /* UNUserNotificationCenter.swift in Sources */,
 				10E57E642496A086001B71A4 /* ViewBuilder.swift in Sources */,
 				104BCC2824ABA05300C35BDC /* MessageFormView.swift in Sources */,
 				10E57E622496A062001B71A4 /* LoginViewBuilder.swift in Sources */,
@@ -796,6 +803,7 @@
 				10BB85EC24BB6F48005D9829 /* MessageFormBuilderTests.swift in Sources */,
 				1025D7BB24E44A2700118CD4 /* Message.swift in Sources */,
 				108C0E822592016B00DBA0A6 /* SchedulePresenterOverlayCardTests.swift in Sources */,
+				10EE4EB1259B7B470063C1AC /* UserNotificationCenterMock.swift in Sources */,
 				103C6DEB2588DE7600054D0F /* ProfilePresenterProfileUnfetchedTests.swift in Sources */,
 				1025D7C124E44BD900118CD4 /* SchedulePresenterTests.swift in Sources */,
 				103C6DE02588DB2A00054D0F /* ProfilePresenterProfileFetchedTests.swift in Sources */,
