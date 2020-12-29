@@ -15,7 +15,9 @@ class ProfileViewModel: ObservableObject {
     
     @Published var buttonIsLoading: Bool = false
     @Published var isShowingError: Bool = false
-    @Published var isShowingLogoutAlert: Bool = false
+    
+    @Published var isShowingAlert: Bool = false
+    var shouldShowLogoutAlert: Bool = false
     
 }
 
@@ -49,13 +51,17 @@ struct ProfileView: View {
         }
         .multilineTextAlignment(.center)
         .padding(.horizontal, 16)
-        .alert(isPresented: $viewModel.isShowingLogoutAlert, content: {
+        .alert(isPresented: $viewModel.isShowingAlert, content: { getAlert() })
+    }
+    
+    private func getAlert() -> Alert {
+        if viewModel.shouldShowLogoutAlert {
             let confirmButton: Alert.Button = .default(Text("Yes"), action: {
                 self.presenter.onLogoutConfirmed()
             })
             
             let cancelButton: Alert.Button = .default(Text("No"), action: {
-                self.presenter.onLogoutCancelled()
+                self.presenter.onDismissAlertTapped()
             })
             
             return Alert(
@@ -64,7 +70,17 @@ struct ProfileView: View {
                 primaryButton: cancelButton,
                 secondaryButton: confirmButton
             )
-        })
+        } else {
+            let okButton: Alert.Button = .default(Text("Ok"), action: {
+                self.presenter.onDismissAlertTapped()
+            })
+            
+            return Alert(
+                title: Text("Cannot Logout With Active Timer"),
+                message: Text("You have an active awake confirmation timer running. Please turn it off before logging out."),
+                dismissButton: okButton
+            )
+        }
     }
     
     private func getProfileDetailsView(title: String, subtitle: String) -> AnyView {
@@ -110,9 +126,9 @@ struct ProfileView: View {
 struct ProfileView_Previews: PreviewProvider {
     
     private class PreviewProfileViewPresenter: ProfileViewPresenter {
-        func onLogoutCancelled() {}
-        func onLogoutConfirmed() {}
         func onLogoutButtonTapped() {}
+        func onDismissAlertTapped() {}
+        func onLogoutConfirmed() {}
     }
     
     static var previews: some View {

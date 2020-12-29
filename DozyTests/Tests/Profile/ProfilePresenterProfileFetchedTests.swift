@@ -27,6 +27,10 @@ class ProfilePresenterProfileFetchedTests: XCTestCase {
         navigationControllable = NavigationControllableMock()
         
         scheduleUserDefaultsMock = ScheduleUserDefaultsMock()
+        let channel = Channel(id: "SOME_CHANNEL_ID", isPublic: false, text: "SOME_TEXT")
+        let message = Message(image: nil, imageUrl: nil, bodyText: "SOME_TEXT", channel: channel)
+        scheduleUserDefaultsMock.scheduleSaved = Schedule(message: message, awakeConfirmationTime: Current.now().addingTimeInterval(180), scheduledMessageId: nil)
+        
         profileUserDefaultsMock = ProfileUserDefaultsMock()
         profileUserDefaultsMock.profileSaved = Profile(name: "SOME_NAME", email: "SOME_EMAIL")
         
@@ -55,9 +59,19 @@ class ProfilePresenterProfileFetchedTests: XCTestCase {
         XCTAssertEqual(viewModel.emailText, profileUserDefaultsMock.profileSaved!.email)
     }
 
-    func testOnLogoutButtonTapped() {
+    func testOnLogoutButtonTappedWithActiveSchedule() {
+        scheduleUserDefaultsMock.scheduleSaved?.scheduledMessageId = "SOME_SCHEDULED_MESSAGE_ID"
         self.presenter.onLogoutButtonTapped()
-        XCTAssertTrue(self.viewModel.isShowingLogoutAlert)
+        
+        XCTAssertFalse(self.viewModel.shouldShowLogoutAlert)
+        XCTAssertTrue(self.viewModel.isShowingAlert)
+    }
+    
+    func testOnLogoutButtonTappedWithoutActiveSchedule() {
+        self.presenter.onLogoutButtonTapped()
+        
+        XCTAssertTrue(self.viewModel.shouldShowLogoutAlert)
+        XCTAssertTrue(self.viewModel.isShowingAlert)
     }
     
     func testOnLogoutConfirmed() {
@@ -74,8 +88,8 @@ class ProfilePresenterProfileFetchedTests: XCTestCase {
     }
     
     func testOnLogoutCancelled() {
-        self.presenter.onLogoutCancelled()
-        XCTAssertFalse(self.viewModel.isShowingLogoutAlert)
+        self.presenter.onDismissAlertTapped()
+        XCTAssertFalse(self.viewModel.isShowingAlert)
     }
 
 }

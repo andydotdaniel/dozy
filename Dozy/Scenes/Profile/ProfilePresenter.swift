@@ -11,7 +11,7 @@ import UserNotifications
 
 protocol ProfileViewPresenter {
     func onLogoutButtonTapped()
-    func onLogoutCancelled()
+    func onDismissAlertTapped()
     func onLogoutConfirmed()
 }
 
@@ -82,11 +82,17 @@ class ProfilePresenter: ProfileViewPresenter {
     }
     
     func onLogoutButtonTapped() {
-        self.viewModel?.isShowingLogoutAlert = true
+        if let schedule = scheduleUserDefaults.load(), schedule.isActive {
+            self.viewModel?.shouldShowLogoutAlert = false
+        } else {
+            self.viewModel?.shouldShowLogoutAlert = true
+        }
+        
+        self.viewModel?.isShowingAlert = true
     }
     
-    func onLogoutCancelled() {
-        self.viewModel?.isShowingLogoutAlert = false
+    func onDismissAlertTapped() {
+        self.viewModel?.isShowingAlert = false
     }
     
     func onLogoutConfirmed() {
@@ -107,7 +113,7 @@ class ProfilePresenter: ProfileViewPresenter {
             navigationControllable.viewControllers.removeSubrange(0..<navigationControllable.viewControllers.count - 1)
         }
         
-        self.viewModel?.isShowingLogoutAlert = false
+        self.viewModel?.isShowingAlert = false
         
         clearAccessToken()
         clearUserDefaults()
