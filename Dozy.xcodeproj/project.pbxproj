@@ -85,6 +85,7 @@
 		10A55EC224B110480099EDAD /* MessageFormViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A55EC124B110480099EDAD /* MessageFormViewBuilder.swift */; };
 		10AC9D9C24ACF40C00A3791C /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC9D9B24ACF40C00A3791C /* MultilineTextField.swift */; };
 		10AC9D9E24ACF96800A3791C /* ImagePickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC9D9D24ACF96800A3791C /* ImagePickerButton.swift */; };
+		10B78784259C82FA007684D9 /* ChannelsNoCursor.json in Resources */ = {isa = PBXBuildFile; fileRef = 10B78783259C82FA007684D9 /* ChannelsNoCursor.json */; };
 		10B89E62258B598300ED8D0F /* ScheduledMessage.json in Resources */ = {isa = PBXBuildFile; fileRef = 10B89E61258B598300ED8D0F /* ScheduledMessage.json */; };
 		10B89E66258B5E0500ED8D0F /* PostAwakeConfirmationTimeViewBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B89E65258B5E0500ED8D0F /* PostAwakeConfirmationTimeViewBuilderTests.swift */; };
 		10BB85EC24BB6F48005D9829 /* MessageFormBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB85EB24BB6F48005D9829 /* MessageFormBuilderTests.swift */; };
@@ -201,6 +202,7 @@
 		10A55EC124B110480099EDAD /* MessageFormViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormViewBuilder.swift; sourceTree = "<group>"; };
 		10AC9D9B24ACF40C00A3791C /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 		10AC9D9D24ACF96800A3791C /* ImagePickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerButton.swift; sourceTree = "<group>"; };
+		10B78783259C82FA007684D9 /* ChannelsNoCursor.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ChannelsNoCursor.json; sourceTree = "<group>"; };
 		10B89E61258B598300ED8D0F /* ScheduledMessage.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ScheduledMessage.json; sourceTree = "<group>"; };
 		10B89E65258B5E0500ED8D0F /* PostAwakeConfirmationTimeViewBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAwakeConfirmationTimeViewBuilderTests.swift; sourceTree = "<group>"; };
 		10BB85EB24BB6F48005D9829 /* MessageFormBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormBuilderTests.swift; sourceTree = "<group>"; };
@@ -450,7 +452,7 @@
 		105A182924BB5A02003177AA /* NetworkResponses */ = {
 			isa = PBXGroup;
 			children = (
-				105A182A24BB5A25003177AA /* Channels.json */,
+				10B78787259C8300007684D9 /* Channels */,
 				103C6DEE2588E0DB00054D0F /* Profile.json */,
 				10B89E61258B598300ED8D0F /* ScheduledMessage.json */,
 				105A64F025945D3D001280D5 /* FileUpload.json */,
@@ -561,6 +563,15 @@
 				103C6DDB2588971E00054D0F /* ProfilePresenter.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		10B78787259C8300007684D9 /* Channels */ = {
+			isa = PBXGroup;
+			children = (
+				105A182A24BB5A25003177AA /* Channels.json */,
+				10B78783259C82FA007684D9 /* ChannelsNoCursor.json */,
+			);
+			path = Channels;
 			sourceTree = "<group>";
 		};
 		10BB85ED24BB6F4C005D9829 /* MessageForm */ = {
@@ -679,6 +690,7 @@
 				105A182B24BB5A25003177AA /* Channels.json in Resources */,
 				105A64F525947976001280D5 /* FileSharePublic.json in Resources */,
 				10B89E62258B598300ED8D0F /* ScheduledMessage.json in Resources */,
+				10B78784259C82FA007684D9 /* ChannelsNoCursor.json in Resources */,
 				103C6DEF2588E0DB00054D0F /* Profile.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -20,17 +20,18 @@ class MessageFormPresenterTests: XCTestCase {
     
     override func setUpWithError() throws {
         Current = .mock
-        setupPresenter(channelFetchResult: try JSONLoader.load(fileName: "Channels"))
+        let channelFetchResults = [try JSONLoader.load(fileName: "Channels"), try JSONLoader.load(fileName: "ChannelsNoCursor")]
+        setupPresenter(channelFetchResults: channelFetchResults)
     }
     
-    private final func setupPresenter(channelFetchResult: URLSessionMockResult) {
+    private final func setupPresenter(channelFetchResults: [URLSessionMockResult]) {
         viewModel = MesssageFormViewModel(navigationBarTitle: "Some navigation title", message: nil)
         delegateMock = MessageFormDelegateMock()
         
         urlSessionMock = URLSessionMock()
         keychainMock = KeychainMock()
         
-        urlSessionMock.results.append(channelFetchResult)
+        urlSessionMock.results.append(contentsOf: channelFetchResults)
         let networkService = NetworkService(urlSession: urlSessionMock)
         
         keychainMock.dataToLoad = Data("SOME_ACCESS_TOKEN".utf8)
@@ -60,12 +61,12 @@ class MessageFormPresenterTests: XCTestCase {
     }
     
     func testChannelsFetchedFailed() {
-        setupPresenter(channelFetchResult: .init(data: nil, urlResponse: nil, error: URLSessionMock.NetworkError.someError))
+        setupPresenter(channelFetchResults: [.init(data: nil, urlResponse: nil, error: URLSessionMock.NetworkError.someError)])
         XCTAssertEqual(viewModel.filteredChannelItems.count, 0, "Channels fetching failed")
     }
     
     func testRetryChannelFetch() throws {
-        urlSessionMock.results.append(try JSONLoader.load(fileName: "Channels"))
+        urlSessionMock.results.append(try JSONLoader.load(fileName: "ChannelsNoCursor"))
         presenter.onChannelFetchRetryButtonTapped()
         
         XCTAssertEqual(viewModel.filteredChannelItems.count, 3, "Channels have been fetched and are displayed")

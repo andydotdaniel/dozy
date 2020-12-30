@@ -64,7 +64,7 @@ class MessageFormPresenter: MessageFormViewPresenter {
     }
     
     private func fetchChannels(accessToken: String, cursor: String? = nil) {
-        let url = "https://slack.com/api/conversations.list"
+        let url = "https://slack.com/api/users.conversations"
         var parameters: [String: Any] = [
             "token": accessToken,
             "exclude_archived": true,
@@ -83,15 +83,21 @@ class MessageFormPresenter: MessageFormViewPresenter {
             guard let self = self else { return }
             
             Current.dispatchQueue.async {
-            self.viewModel.isFetchingChannels = false
                 switch result {
                 case .success(let response):
-                    self.channelItems = response.channels.map { channel in
+                    let fetchedChannelItems: [Channel] = response.channels.map { channel in
                         let isPublic = channel.isChannel && !channel.isGroup
                         return Channel(id: channel.id, isPublic: isPublic, text: channel.name)
                     }
+                    self.channelItems.append(contentsOf: fetchedChannelItems)
+                    
+                    if let nextCursor = response.nextCursor {
+                        self.fetchChannels(accessToken: accessToken, cursor: nextCursor)
+                    } else {
+                        self.viewModel.isFetchingChannels = false
+                    }
                 case .failure:
-                    break
+                    self.viewModel.isFetchingChannels = false
                 }
             }
         })
@@ -235,7 +241,7 @@ private struct SlackChannel: Decodable {
 
 private struct SlackChannelResponse: Decodable {
     let channels: [SlackChannel]
-    let nextCursor: String
+    let nextCursor: String?
     
     enum CodingKeys: String, CodingKey {
         case channels
@@ -251,7 +257,11 @@ private struct SlackChannelResponse: Decodable {
         channels = try container.decode([SlackChannel].self, forKey: .channels)
         
         let responseMetadataContainer = try container.nestedContainer(keyedBy: ResponseMetadataCodingKeys.self, forKey: .responseMetadata)
-        nextCursor = try responseMetadataContainer.decode(String.self, forKey: .nextCursor)
+        if let nextCursor = try? responseMetadataContainer.decode(String.self, forKey: .nextCursor), nextCursor.count > 0 {
+            self.nextCursor = nextCursor
+        } else {
+            self.nextCursor = nil
+        }
     }
 }
 

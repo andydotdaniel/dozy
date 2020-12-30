@@ -1,0 +1,41 @@
+{
+    "ok": true,
+    "channels": [
+        {
+            "id": "C961BG0T2",
+            "name": "some-secret-project",
+            "is_channel": false,
+            "is_group": true,
+            "is_im": false,
+            "created": 1949252289,
+            "creator": "U061F7AUR",
+            "is_archived": false,
+            "is_general": false,
+            "unlinked": 0,
+            "name_normalized": "random",
+            "is_shared": false,
+            "is_ext_shared": false,
+            "is_org_shared": false,
+            "pending_shared": [],
+            "is_pending_ext_shared": false,
+            "is_member": true,
+            "is_private": false,
+            "is_mpim": false,
+            "topic": {
+                "value": "Some super secret stuff",
+                "creator": "",
+                "last_set": 0
+            },
+            "purpose": {
+                "value": "A place for to talk about this super secret project.",
+                "creator": "",
+                "last_set": 0
+            },
+            "previous_names": [],
+            "num_members": 9
+        }
+    ],
+    "response_metadata": {
+        "next_cursor": ""
+    }
+}
