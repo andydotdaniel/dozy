@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		100A02E9259D0B9400B03E5E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 100A02E8259D0B9400B03E5E /* GoogleService-Info.plist */; };
 		1015815E2495F8C600AA0B37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1015815D2495F8C600AA0B37 /* AppDelegate.swift */; };
 		101581602495F8C600AA0B37 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1015815F2495F8C600AA0B37 /* SceneDelegate.swift */; };
 		101581642495F8CA00AA0B37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 101581632495F8CA00AA0B37 /* Assets.xcassets */; };
@@ -108,6 +109,8 @@
 		10F422242497E9B20078AC3C /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F422232497E9B20078AC3C /* Spinner.swift */; };
 		10F42226249930CC0078AC3C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F42225249930CC0078AC3C /* LoginViewModel.swift */; };
 		10F4222A249946970078AC3C /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F42229249946960078AC3C /* Toast.swift */; };
+		70407D34F4A96CB03C5F5878 /* Pods_Dozy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0765982015435C7C3C0D6A1A /* Pods_Dozy.framework */; };
+		CD5283FD436FED4B77885CE3 /* Pods_DozyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AA6CE650070EA424C97DF4D /* Pods_DozyTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +124,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0765982015435C7C3C0D6A1A /* Pods_Dozy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dozy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		100A02E8259D0B9400B03E5E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1015815A2495F8C600AA0B37 /* Dozy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dozy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1015815D2495F8C600AA0B37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1015815F2495F8C600AA0B37 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -226,6 +231,11 @@
 		10F422232497E9B20078AC3C /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		10F42225249930CC0078AC3C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		10F42229249946960078AC3C /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		1E25985DF5195097A3440391 /* Pods-DozyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DozyTests.release.xcconfig"; path = "Target Support Files/Pods-DozyTests/Pods-DozyTests.release.xcconfig"; sourceTree = "<group>"; };
+		5B9271CFBF83D8CEA01A6CC7 /* Pods-Dozy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dozy.debug.xcconfig"; path = "Target Support Files/Pods-Dozy/Pods-Dozy.debug.xcconfig"; sourceTree = "<group>"; };
+		7AA6CE650070EA424C97DF4D /* Pods_DozyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DozyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE0DE6070DFCD84DC0D37A86 /* Pods-Dozy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dozy.release.xcconfig"; path = "Target Support Files/Pods-Dozy/Pods-Dozy.release.xcconfig"; sourceTree = "<group>"; };
+		B81E60FAC3D8D5BB7C0963BF /* Pods-DozyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DozyTests.debug.xcconfig"; path = "Target Support Files/Pods-DozyTests/Pods-DozyTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +243,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70407D34F4A96CB03C5F5878 /* Pods_Dozy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,6 +251,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD5283FD436FED4B77885CE3 /* Pods_DozyTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +264,9 @@
 				1015815C2495F8C600AA0B37 /* Dozy */,
 				101581732495F8CA00AA0B37 /* DozyTests */,
 				1015815B2495F8C600AA0B37 /* Products */,
+				A2F711F555C1B467CC9AC3CA /* Pods */,
+				65D9A70BE37B8E4052F9CA0B /* Frameworks */,
+				100A02E8259D0B9400B03E5E /* GoogleService-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -605,6 +620,26 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		65D9A70BE37B8E4052F9CA0B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0765982015435C7C3C0D6A1A /* Pods_Dozy.framework */,
+				7AA6CE650070EA424C97DF4D /* Pods_DozyTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A2F711F555C1B467CC9AC3CA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5B9271CFBF83D8CEA01A6CC7 /* Pods-Dozy.debug.xcconfig */,
+				AE0DE6070DFCD84DC0D37A86 /* Pods-Dozy.release.xcconfig */,
+				B81E60FAC3D8D5BB7C0963BF /* Pods-DozyTests.debug.xcconfig */,
+				1E25985DF5195097A3440391 /* Pods-DozyTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -612,10 +647,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 101581792495F8CA00AA0B37 /* Build configuration list for PBXNativeTarget "Dozy" */;
 			buildPhases = (
+				AFAB59C86D539E702AD37138 /* [CP] Check Pods Manifest.lock */,
 				101581562495F8C600AA0B37 /* Sources */,
 				101581572495F8C600AA0B37 /* Frameworks */,
 				101581582495F8C600AA0B37 /* Resources */,
 				109704C1249679460012EA76 /* Copy Configuration */,
+				46C6000966F7491941E504A0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -630,6 +667,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1015817C2495F8CA00AA0B37 /* Build configuration list for PBXNativeTarget "DozyTests" */;
 			buildPhases = (
+				8886FE123A99FD84B6F335C7 /* [CP] Check Pods Manifest.lock */,
 				1015816C2495F8CA00AA0B37 /* Sources */,
 				1015816D2495F8CA00AA0B37 /* Frameworks */,
 				1015816E2495F8CA00AA0B37 /* Resources */,
@@ -688,6 +726,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1015816A2495F8CA00AA0B37 /* LaunchScreen.storyboard in Resources */,
+				100A02E9259D0B9400B03E5E /* GoogleService-Info.plist in Resources */,
 				101581672495F8CA00AA0B37 /* Preview Assets.xcassets in Resources */,
 				101581642495F8CA00AA0B37 /* Assets.xcassets in Resources */,
 			);
@@ -726,6 +765,67 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "BUILD_DIR=\"${BUILT_PRODUCTS_DIR}/${FULL_PRODUCT_NAME}\"\ncp -R \"${SRCROOT}/Dozy/Configuration.plist\" ${BUILD_DIR}\n";
+		};
+		46C6000966F7491941E504A0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Dozy/Pods-Dozy-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Dozy/Pods-Dozy-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Dozy/Pods-Dozy-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8886FE123A99FD84B6F335C7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DozyTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AFAB59C86D539E702AD37138 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Dozy-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -976,6 +1076,7 @@
 		};
 		1015817A2495F8CA00AA0B37 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B9271CFBF83D8CEA01A6CC7 /* Pods-Dozy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -997,6 +1098,7 @@
 		};
 		1015817B2495F8CA00AA0B37 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE0DE6070DFCD84DC0D37A86 /* Pods-Dozy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -1018,6 +1120,7 @@
 		};
 		1015817D2495F8CA00AA0B37 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B81E60FAC3D8D5BB7C0963BF /* Pods-DozyTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1040,6 +1143,7 @@
 		};
 		1015817E2495F8CA00AA0B37 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E25985DF5195097A3440391 /* Pods-DozyTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

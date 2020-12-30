@@ -11,7 +11,6 @@ import Foundation
 protocol NetworkRequesting {
     func peformNetworkRequest<T: Decodable>(_ request: NetworkRequest, completion: @escaping (Result<T, NetworkService.RequestError>) -> Void)
     func peformNetworkRequest(_ request: NetworkRequest, completion: @escaping (Result<Void, NetworkService.RequestError>) -> Void)
-    func performImageUpload<T: Decodable>(for image: Data, with url: URL, headers: [String: String], completion: @escaping (Result<T, NetworkService.RequestError>) -> Void)
 }
 
 struct NetworkService: NetworkRequesting {
@@ -145,46 +144,6 @@ struct NetworkService: NetworkRequesting {
             }
             
             completion(.success(data))
-        }).resume()
-    }
-    
-    func performImageUpload<T: Decodable>(for image: Data, with url: URL, headers: [String: String], completion: @escaping (Result<T, NetworkService.RequestError>) -> Void) {
-        let boundary = UUID().uuidString
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = "POST"
-        urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        headers.forEach { header in
-            urlRequest.setValue(header.value, forHTTPHeaderField: header.key)
-        }
-        
-        var data = Data()
-        let body: [Any] = [
-            "--\(boundary)\r\n",
-            "Content-Disposition: form-data; name=\"file\"; filename=\"\(Current.now().timeIntervalSinceReferenceDate).jpg\"\r\n",
-            "Content-Type: image/jpg\r\n\r\n",
-            image,
-            "\r\n--\(boundary)--"
-        ]
-        body.forEach { entry in
-            if let entry = entry as? String, let entryData = entry.data(using: .utf8) {
-                data.append(entryData)
-            } else if let entry = entry as? Data {
-                data.append(entry)
-            }
-        }
-        
-        urlSession.createUploadTask(with: urlRequest, from: data, completionHandler: { data, _, error in
-            if let error = error {
-                completion(.failure(.unknown(message: error.localizedDescription)))
-                return
-            }
-            
-            guard let data = data else {
-                completion(.failure(.invalidNetworkResponse))
-                return
-            }
-            
-            self.decodeResult(result: .success(data), completion: completion)
         }).resume()
     }
     

@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 import SwiftUI
+import FirebaseStorage
 
 protocol MessageFormViewPresenter {
     func didTapChannelDropdown()
@@ -151,47 +152,25 @@ class MessageFormPresenter: MessageFormViewPresenter {
     }
     
     private func uploadImage(image: Data, completion: @escaping (Result<String, NetworkService.RequestError>) -> Void) {
-        guard let accessToken = self.accessToken, let url = URL(string: "https://slack.com/api/files.upload") else { return }
-        let headers = ["Authorization": "Bearer \(accessToken)"]
+        let storage = Storage.storage()
+        let storageReference = storage.reference(withPath: "/images/\(Current.now().timeIntervalSinceReferenceDate).jpg")
         
-        networkService.performImageUpload(for: image, with: url, headers: headers, completion: { [weak self] (result: Result<FileUploadResponse, NetworkService.RequestError>) in
-            switch result {
-            case .success(let response):
-                self?.makeImagePublic(imageId: response.id, imageUrl: response.urlPrivate, completion: completion)
-            case .failure(let error):
-                completion(.failure(error))
+        let metadata = StorageMetadata(dictionary: ["contentType": "image/jpeg"])
+        storageReference.putData(image, metadata: metadata) { metadata, error in
+            guard metadata != nil, error == nil else {
+                completion(.failure(.unknown(message: "Failed to upload image")))
+                return
             }
-        })
-    }
-    
-    private func makeImagePublic(imageId: String, imageUrl: String, completion: @escaping (Result<String, NetworkService.RequestError>) -> Void) {
-        guard let accessToken = self.accessToken else {
-            completion(.failure(.unknown(message: "Access token not available")))
-            return
-        }
-        let url = "https://slack.com/api/files.sharedPublicURL"
-        let headers = ["Authorization": "Bearer \(accessToken)"]
-        let parameters = ["file": imageId]
-        
-        guard let request = NetworkRequest(url: url, httpMethod: .post, parameters: parameters, headers: headers) else {
-            completion(.failure(.unknown(message: "Unable to create network request")))
-            return
-        }
-        networkService.peformNetworkRequest(request, completion: { (result: Result<ShareFileResponse, NetworkService.RequestError>) in
-            switch result {
-            case .success(let response):
-                let linkSegments = response.permalinkPublic.split(separator: "-")
-                guard let imagePublicSecret = linkSegments.last else {
+            
+            storageReference.downloadURL(completion: { url, error in
+                guard let url = url, error == nil else {
                     completion(.failure(.invalidNetworkResponse))
                     return
                 }
                 
-                let publicDirectImageUrl = imageUrl + "?pub_secret=\(imagePublicSecret)"
-                completion(.success(publicDirectImageUrl))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        })
+                completion(.success(url.absoluteString))
+            })
+        }
     }
     
     func onImageUploadConfirmed() {

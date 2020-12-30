@@ -10,3 +10,9 @@ xcuserdata/
 **/fastlane/screenshots
 **/fastlane/test_output
 **/fastlane/README.md
+
+# CocoaPods
+Pods
+
+#Firebase
+GoogleService-Info.plist
