@@ -16,9 +16,16 @@ struct SceneNotification {
 protocol NavigationControllable: class {
     var viewControllers: [UIViewController] { get set }
     func pushViewController(_ viewController: UIViewController, animated: Bool)
+    func present(viewController: UIViewController, animated: Bool, completion: (() -> Void)?)
 }
 
-extension UINavigationController: NavigationControllable {}
+extension UINavigationController: NavigationControllable {
+    
+    func present(viewController: UIViewController, animated: Bool, completion: (() -> Void)?) {
+        present(viewController, animated: animated, completion: completion)
+    }
+    
+}
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 

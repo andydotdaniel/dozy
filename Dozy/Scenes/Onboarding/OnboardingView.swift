@@ -12,13 +12,7 @@ import SwiftUI
 
 struct OnboardingView: View {
     
-    @ObservedObject var viewModel: OnboardingViewModel
-    var presenter: OnboardingViewPresenter
-    
-    init(viewModel: OnboardingViewModel, presenter: OnboardingViewPresenter) {
-        self.viewModel = viewModel
-        self.presenter = presenter
-    }
+    let presenter: OnboardingViewPresenter
     
     var body: some View {
         NavigationView {
@@ -41,10 +35,8 @@ struct OnboardingView: View {
                     .padding(.horizontal, 16)
                     .multilineTextAlignment(.center)
                     PrimaryButton(titleText: "Create message", tapAction: {
-                        self.viewModel.isShowingMessageForm = true
-                    }, color: .primaryBlue).sheet(isPresented: self.$viewModel.isShowingMessageForm, content: {
-                        MessageFormViewBuilder(message: nil, delegate: self.presenter).build()
-                    })
+                        self.presenter.didTapCreateMessageButton()
+                    }, color: .primaryBlue)
                 }
                 Spacer()
             }

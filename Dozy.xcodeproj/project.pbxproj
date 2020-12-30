@@ -61,7 +61,6 @@
 		105BDB0124D68B72005C9CD7 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105BDB0024D68B72005C9CD7 /* Schedule.swift */; };
 		105BDB0424D692F0005C9CD7 /* OnboardingViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105BDB0324D692F0005C9CD7 /* OnboardingViewBuilder.swift */; };
 		105BDB0624D692FD005C9CD7 /* OnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105BDB0524D692FD005C9CD7 /* OnboardingPresenter.swift */; };
-		105BDB0824D6DF8B005C9CD7 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105BDB0724D6DF8B005C9CD7 /* OnboardingViewModel.swift */; };
 		105BDB0A24DC782B005C9CD7 /* RootViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105BDB0924DC782A005C9CD7 /* RootViewBuilder.swift */; };
 		106C5A7724C4528E00B8BA9C /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106C5A7624C4528E00B8BA9C /* Channel.swift */; };
 		106C5A7924C453F600B8BA9C /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106C5A7824C453F600B8BA9C /* Message.swift */; };
@@ -86,6 +85,8 @@
 		10AC9D9C24ACF40C00A3791C /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC9D9B24ACF40C00A3791C /* MultilineTextField.swift */; };
 		10AC9D9E24ACF96800A3791C /* ImagePickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC9D9D24ACF96800A3791C /* ImagePickerButton.swift */; };
 		10B78784259C82FA007684D9 /* ChannelsNoCursor.json in Resources */ = {isa = PBXBuildFile; fileRef = 10B78783259C82FA007684D9 /* ChannelsNoCursor.json */; };
+		10B7878F259C9F83007684D9 /* OnboardingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B7878E259C9F83007684D9 /* OnboardingRouter.swift */; };
+		10B7879C259CA454007684D9 /* OnboardingRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B7879B259CA454007684D9 /* OnboardingRouterTests.swift */; };
 		10B89E62258B598300ED8D0F /* ScheduledMessage.json in Resources */ = {isa = PBXBuildFile; fileRef = 10B89E61258B598300ED8D0F /* ScheduledMessage.json */; };
 		10B89E66258B5E0500ED8D0F /* PostAwakeConfirmationTimeViewBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B89E65258B5E0500ED8D0F /* PostAwakeConfirmationTimeViewBuilderTests.swift */; };
 		10BB85EC24BB6F48005D9829 /* MessageFormBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB85EB24BB6F48005D9829 /* MessageFormBuilderTests.swift */; };
@@ -178,7 +179,6 @@
 		105BDB0024D68B72005C9CD7 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		105BDB0324D692F0005C9CD7 /* OnboardingViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewBuilder.swift; sourceTree = "<group>"; };
 		105BDB0524D692FD005C9CD7 /* OnboardingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenter.swift; sourceTree = "<group>"; };
-		105BDB0724D6DF8B005C9CD7 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		105BDB0924DC782A005C9CD7 /* RootViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewBuilder.swift; sourceTree = "<group>"; };
 		106C5A7624C4528E00B8BA9C /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		106C5A7824C453F600B8BA9C /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -203,6 +203,8 @@
 		10AC9D9B24ACF40C00A3791C /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 		10AC9D9D24ACF96800A3791C /* ImagePickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerButton.swift; sourceTree = "<group>"; };
 		10B78783259C82FA007684D9 /* ChannelsNoCursor.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ChannelsNoCursor.json; sourceTree = "<group>"; };
+		10B7878E259C9F83007684D9 /* OnboardingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRouter.swift; sourceTree = "<group>"; };
+		10B7879B259CA454007684D9 /* OnboardingRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRouterTests.swift; sourceTree = "<group>"; };
 		10B89E61258B598300ED8D0F /* ScheduledMessage.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ScheduledMessage.json; sourceTree = "<group>"; };
 		10B89E65258B5E0500ED8D0F /* PostAwakeConfirmationTimeViewBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAwakeConfirmationTimeViewBuilderTests.swift; sourceTree = "<group>"; };
 		10BB85EB24BB6F48005D9829 /* MessageFormBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormBuilderTests.swift; sourceTree = "<group>"; };
@@ -476,7 +478,7 @@
 				1081AE3024A0E84C00AD6655 /* OnboardingView.swift */,
 				105BDB0324D692F0005C9CD7 /* OnboardingViewBuilder.swift */,
 				105BDB0524D692FD005C9CD7 /* OnboardingPresenter.swift */,
-				105BDB0724D6DF8B005C9CD7 /* OnboardingViewModel.swift */,
+				10B7878E259C9F83007684D9 /* OnboardingRouter.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -522,7 +524,7 @@
 				10BB85ED24BB6F4C005D9829 /* MessageForm */,
 				103C6DE52588DB9900054D0F /* Profile */,
 				101581742495F8CA00AA0B37 /* LoginPresenterTests.swift */,
-				1033ABDA252821000045BD64 /* OnboardingPresenterTests.swift */,
+				10B78792259CA422007684D9 /* Onboarding */,
 				10D5E09E25317AA700E0C34A /* AwakeConfirmationPresenterTests.swift */,
 				10B89E65258B5E0500ED8D0F /* PostAwakeConfirmationTimeViewBuilderTests.swift */,
 			);
@@ -572,6 +574,15 @@
 				10B78783259C82FA007684D9 /* ChannelsNoCursor.json */,
 			);
 			path = Channels;
+			sourceTree = "<group>";
+		};
+		10B78792259CA422007684D9 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				1033ABDA252821000045BD64 /* OnboardingPresenterTests.swift */,
+				10B7879B259CA454007684D9 /* OnboardingRouterTests.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		10BB85ED24BB6F4C005D9829 /* MessageForm */ = {
@@ -730,10 +741,10 @@
 				103264A124C4488C00863603 /* ScheduleViewModel.swift in Sources */,
 				1051E4A824BAF9B300566C5B /* ImagePickerView.swift in Sources */,
 				10A21F372581183100E67FE0 /* ProfileViewBuilder.swift in Sources */,
-				105BDB0824D6DF8B005C9CD7 /* OnboardingViewModel.swift in Sources */,
 				108C0E78258D113F00DBA0A6 /* OverlayCard.swift in Sources */,
 				1035D075249604CE006B22FC /* LoginHeaderView.swift in Sources */,
 				102102AB249F2F0F00084C91 /* URLSession.swift in Sources */,
+				10B7878F259C9F83007684D9 /* OnboardingRouter.swift in Sources */,
 				10F422222497C2050078AC3C /* NetworkRequest.swift in Sources */,
 				10F4222A249946970078AC3C /* Toast.swift in Sources */,
 				10AC9D9C24ACF40C00A3791C /* MultilineTextField.swift in Sources */,
@@ -815,6 +826,7 @@
 				10BB85EC24BB6F48005D9829 /* MessageFormBuilderTests.swift in Sources */,
 				1025D7BB24E44A2700118CD4 /* Message.swift in Sources */,
 				108C0E822592016B00DBA0A6 /* SchedulePresenterOverlayCardTests.swift in Sources */,
+				10B7879C259CA454007684D9 /* OnboardingRouterTests.swift in Sources */,
 				10EE4EB1259B7B470063C1AC /* UserNotificationCenterMock.swift in Sources */,
 				103C6DEB2588DE7600054D0F /* ProfilePresenterProfileUnfetchedTests.swift in Sources */,
 				1025D7C124E44BD900118CD4 /* SchedulePresenterTests.swift in Sources */,

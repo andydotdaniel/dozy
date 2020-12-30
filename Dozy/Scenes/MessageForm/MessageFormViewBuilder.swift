@@ -7,12 +7,13 @@
 //
 
 import Foundation
+import SwiftUI
 
 protocol MessageFormDelegate: class {
     func onMessageSaved(_ message: Message)
 }
 
-struct MessageFormViewBuilder: ViewBuilder {
+struct MessageFormViewBuilder: ViewBuilder, ViewControllerBuilder {
     
     private let message: Message?
     private weak var delegate: MessageFormDelegate?
@@ -29,6 +30,11 @@ struct MessageFormViewBuilder: ViewBuilder {
         let view = MessageFormView(viewModel: viewModel, presenter: presenter)
         
         return view
+    }
+    
+    func buildViewController() -> UIViewController {
+        let view = build()
+        return UIHostingController(rootView: view)
     }
     
 }

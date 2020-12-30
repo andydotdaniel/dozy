@@ -27,10 +27,12 @@ struct OnboardingViewBuilder: ViewControllerBuilder, ViewBuilder {
     }
     
     func build() -> OnboardingView {
-        let viewModel = OnboardingViewModel()
-        let presenter = OnboardingPresenter(viewModel: viewModel, navigationControllable: navigationControllable)
+        let presenter = OnboardingPresenter(userDefaults: ScheduleUserDefaults())
+        let messageFormViewBuilder = MessageFormViewBuilder(message: nil, delegate: presenter)
+        let router = OnboardingViewRouter(navigationControllable: navigationControllable, messageFormViewBuilder: messageFormViewBuilder)
+        presenter.router = router
         
-        return OnboardingView(viewModel: viewModel, presenter: presenter)
+        return OnboardingView(presenter: presenter)
     }
     
     func buildViewController() -> UIViewController {

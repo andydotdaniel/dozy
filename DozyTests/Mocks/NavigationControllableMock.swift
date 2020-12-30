@@ -19,4 +19,10 @@ class NavigationControllableMock: NavigationControllable {
         viewControllers.append(viewController)
     }
     
+    var presentCalledWithArgs: (viewController: UIViewController, animated: Bool)?
+    func present(viewController: UIViewController, animated: Bool, completion: (() -> Void)?) {
+        presentCalledWithArgs = (viewController, animated)
+        completion?()
+    }
+    
 }

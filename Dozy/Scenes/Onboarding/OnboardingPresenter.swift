@@ -9,38 +9,30 @@
 import Foundation
 import UIKit
 
-protocol OnboardingViewPresenter: MessageFormDelegate {}
+protocol OnboardingViewPresenter: MessageFormDelegate {
+    func didTapCreateMessageButton()
+}
 
 class OnboardingPresenter: OnboardingViewPresenter {
     
-    private var viewModel: OnboardingViewModel
     private let userDefaults: ScheduleUserDefaults
+    var router: OnboardingRouter?
     
-    private weak var navigationControllable: NavigationControllable?
-    
-    init(
-        viewModel: OnboardingViewModel,
-        userDefaults: ScheduleUserDefaults = ScheduleUserDefaults(),
-        navigationControllable: NavigationControllable?
-    ) {
-        self.viewModel = viewModel
+    init(userDefaults: ScheduleUserDefaults) {
         self.userDefaults = userDefaults
-        self.navigationControllable = navigationControllable
     }
     
     func onMessageSaved(_ message: Message) {
         let oneDay: TimeInterval = 60 * 60 * 24
-        let schedule = Schedule(message: message, awakeConfirmationTime: Date().addingTimeInterval(oneDay), scheduledMessageId: nil)
+        let schedule = Schedule(message: message, awakeConfirmationTime: Current.now().addingTimeInterval(oneDay), scheduledMessageId: nil)
         userDefaults.save(schedule)
-        viewModel.isShowingMessageForm = false
-        
-        let scheduleViewController = ScheduleViewBuilder(
-            schedule: schedule,
-            isPostMessageSent: false,
-            navigationControllable: navigationControllable,
-            scheduleUserDefaults: userDefaults
-        ).buildViewController()
-        navigationControllable?.pushViewController(scheduleViewController, animated: false)
+        router?.dismissMessageForm(completion: {
+            self.router?.navigateToSchedule(schedule: schedule, userDefaults: self.userDefaults)
+        })
+    }
+    
+    func didTapCreateMessageButton() {
+        router?.presentMessageForm()
     }
     
 }
