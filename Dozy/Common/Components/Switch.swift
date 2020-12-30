@@ -51,6 +51,7 @@ struct Switch: View {
                     .bold()
                     .foregroundColor(switchState.position == .on ? .white : .secondaryGray)
                     .onTapGesture {
+                        guard switchState.position == .off else { return }
                         self.delegate?.onSwitchPositionChangedTriggered()
                     }
             )
@@ -66,6 +67,7 @@ struct Switch: View {
                     .bold()
                     .foregroundColor(switchState.position == .off ? .white : .secondaryGray)
                     .onTapGesture {
+                        guard switchState.position == .on else { return }
                         self.delegate?.onSwitchPositionChangedTriggered()
                     }
             )
