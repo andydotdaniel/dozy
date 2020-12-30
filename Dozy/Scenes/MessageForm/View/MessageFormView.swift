@@ -135,9 +135,20 @@ struct MessageFormView: View {
 
 struct MessageFormView_Previews: PreviewProvider {
     
+    private class StorageReferencingPreview: StorageReferencing {
+        func uploadData(_ data: Data, metadata: [String: Any]?, completion: ((Error?) -> Void)?) {}
+        func downloadURL(completion: @escaping (URL?, Error?) -> Void) {}
+    }
+    
+    private class StorageablePreview: Storageable {
+        func reference(with pathString: String) -> StorageReferencing {
+            return StorageReferencingPreview()
+        }
+    }
+    
     static var previews: some View {
         let viewModel = MesssageFormViewModel(navigationBarTitle: "Add Message", message: nil)
-        let presenter = MessageFormPresenter(viewModel: viewModel, networkService: NetworkService(), delegate: nil, message: nil)
+        let presenter = MessageFormPresenter(viewModel: viewModel, networkService: NetworkService(), dataStorageble: StorageablePreview(), delegate: nil, message: nil)
         return MessageFormView(viewModel: viewModel, presenter: presenter)
     }
 }

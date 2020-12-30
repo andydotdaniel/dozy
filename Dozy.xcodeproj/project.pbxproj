@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		100A02E9259D0B9400B03E5E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 100A02E8259D0B9400B03E5E /* GoogleService-Info.plist */; };
+		100A02F3259D225000B03E5E /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A02F2259D225000B03E5E /* Storage.swift */; };
+		100A02F7259D284E00B03E5E /* StorageableMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100A02F6259D284E00B03E5E /* StorageableMock.swift */; };
 		1015815E2495F8C600AA0B37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1015815D2495F8C600AA0B37 /* AppDelegate.swift */; };
 		101581602495F8C600AA0B37 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1015815F2495F8C600AA0B37 /* SceneDelegate.swift */; };
 		101581642495F8CA00AA0B37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 101581632495F8CA00AA0B37 /* Assets.xcassets */; };
@@ -57,8 +59,6 @@
 		105A182724BB575D003177AA /* MessageFormPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105A182624BB575D003177AA /* MessageFormPresenterTests.swift */; };
 		105A182B24BB5A25003177AA /* Channels.json in Resources */ = {isa = PBXBuildFile; fileRef = 105A182A24BB5A25003177AA /* Channels.json */; };
 		105A182E24BB5C25003177AA /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105A182D24BB5C25003177AA /* JSONLoader.swift */; };
-		105A64F125945D3D001280D5 /* FileUpload.json in Resources */ = {isa = PBXBuildFile; fileRef = 105A64F025945D3D001280D5 /* FileUpload.json */; };
-		105A64F525947976001280D5 /* FileSharePublic.json in Resources */ = {isa = PBXBuildFile; fileRef = 105A64F425947976001280D5 /* FileSharePublic.json */; };
 		105BDB0124D68B72005C9CD7 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105BDB0024D68B72005C9CD7 /* Schedule.swift */; };
 		105BDB0424D692F0005C9CD7 /* OnboardingViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105BDB0324D692F0005C9CD7 /* OnboardingViewBuilder.swift */; };
 		105BDB0624D692FD005C9CD7 /* OnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105BDB0524D692FD005C9CD7 /* OnboardingPresenter.swift */; };
@@ -126,6 +126,8 @@
 /* Begin PBXFileReference section */
 		0765982015435C7C3C0D6A1A /* Pods_Dozy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dozy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		100A02E8259D0B9400B03E5E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		100A02F2259D225000B03E5E /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		100A02F6259D284E00B03E5E /* StorageableMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageableMock.swift; sourceTree = "<group>"; };
 		1015815A2495F8C600AA0B37 /* Dozy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dozy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1015815D2495F8C600AA0B37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1015815F2495F8C600AA0B37 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -179,8 +181,6 @@
 		105A182624BB575D003177AA /* MessageFormPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormPresenterTests.swift; sourceTree = "<group>"; };
 		105A182A24BB5A25003177AA /* Channels.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Channels.json; sourceTree = "<group>"; };
 		105A182D24BB5C25003177AA /* JSONLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLoader.swift; sourceTree = "<group>"; };
-		105A64F025945D3D001280D5 /* FileUpload.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FileUpload.json; sourceTree = "<group>"; };
-		105A64F425947976001280D5 /* FileSharePublic.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FileSharePublic.json; sourceTree = "<group>"; };
 		105BDB0024D68B72005C9CD7 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		105BDB0324D692F0005C9CD7 /* OnboardingViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewBuilder.swift; sourceTree = "<group>"; };
 		105BDB0524D692FD005C9CD7 /* OnboardingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPresenter.swift; sourceTree = "<group>"; };
@@ -380,6 +380,7 @@
 				104BCC1F24AB991200C35BDC /* DispatchQueue.swift */,
 				10C4D43224D544E200CC1123 /* UserDefaults.swift */,
 				10EE4EAA259B79500063C1AC /* UNUserNotificationCenter.swift */,
+				100A02F2259D225000B03E5E /* Storage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -472,8 +473,6 @@
 				10B78787259C8300007684D9 /* Channels */,
 				103C6DEE2588E0DB00054D0F /* Profile.json */,
 				10B89E61258B598300ED8D0F /* ScheduledMessage.json */,
-				105A64F025945D3D001280D5 /* FileUpload.json */,
-				105A64F425947976001280D5 /* FileSharePublic.json */,
 			);
 			path = NetworkResponses;
 			sourceTree = "<group>";
@@ -558,6 +557,7 @@
 				10CE42C4258095DF00BB00CF /* NavigationControllableMock.swift */,
 				10358EB7258C9091006F3ADC /* TimerMock.swift */,
 				10EE4EB0259B7B470063C1AC /* UserNotificationCenterMock.swift */,
+				100A02F6259D284E00B03E5E /* StorageableMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -736,9 +736,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				105A64F125945D3D001280D5 /* FileUpload.json in Resources */,
 				105A182B24BB5A25003177AA /* Channels.json in Resources */,
-				105A64F525947976001280D5 /* FileSharePublic.json in Resources */,
 				10B89E62258B598300ED8D0F /* ScheduledMessage.json in Resources */,
 				10B78784259C82FA007684D9 /* ChannelsNoCursor.json in Resources */,
 				103C6DEF2588E0DB00054D0F /* Profile.json in Resources */,
@@ -857,6 +855,7 @@
 				1032649E24C41F8000863603 /* ScheduleView.swift in Sources */,
 				101581602495F8C600AA0B37 /* SceneDelegate.swift in Sources */,
 				105BDB0624D692FD005C9CD7 /* OnboardingPresenter.swift in Sources */,
+				100A02F3259D225000B03E5E /* Storage.swift in Sources */,
 				10A21F1E2580F2A500E67FE0 /* HeaderMain.swift in Sources */,
 				109704C0249675E90012EA76 /* Configuration.swift in Sources */,
 				103264A324C448EB00863603 /* ScheduleViewPresenter.swift in Sources */,
@@ -913,6 +912,7 @@
 				10CE42C5258095DF00BB00CF /* NavigationControllableMock.swift in Sources */,
 				1025D7BD24E44A8A00118CD4 /* Channel.swift in Sources */,
 				1081AE28249F44CB00AD6655 /* WebAuthenticationSessionMock.swift in Sources */,
+				100A02F7259D284E00B03E5E /* StorageableMock.swift in Sources */,
 				101C332D24E5A726009BD331 /* Schedule.swift in Sources */,
 				105A182724BB575D003177AA /* MessageFormPresenterTests.swift in Sources */,
 				1023190F24F1603B0005F6A6 /* SchedulePresenterTimerTests.swift in Sources */,

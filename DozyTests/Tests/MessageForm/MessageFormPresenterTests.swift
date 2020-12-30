@@ -17,9 +17,13 @@ class MessageFormPresenterTests: XCTestCase {
     
     var urlSessionMock: URLSessionMock!
     var keychainMock: KeychainMock!
+    var storageableMock: StorageableMock!
     
     override func setUpWithError() throws {
         Current = .mock
+        let now = Date()
+        Current.now = { now }
+        
         let channelFetchResults = [try JSONLoader.load(fileName: "Channels"), try JSONLoader.load(fileName: "ChannelsNoCursor")]
         setupPresenter(channelFetchResults: channelFetchResults)
     }
@@ -36,10 +40,13 @@ class MessageFormPresenterTests: XCTestCase {
         
         keychainMock.dataToLoad = Data("SOME_ACCESS_TOKEN".utf8)
         
+        storageableMock = StorageableMock()
+        
         presenter = MessageFormPresenter(
             viewModel: viewModel,
             networkService: networkService,
             keychain: keychainMock,
+            dataStorageble: storageableMock,
             delegate: delegateMock,
             message: nil
         )
@@ -103,14 +110,16 @@ class MessageFormPresenterTests: XCTestCase {
         
         XCTAssertTrue(viewModel.isShowingImageUploadConfirmation)
         
-        urlSessionMock.results.append(try JSONLoader.load(fileName: "FileUpload"))
-        urlSessionMock.results.append(try JSONLoader.load(fileName: "FileSharePublic"))
-        
         presenter.onImageUploadConfirmed()
         
         XCTAssertTrue(viewModel.isSaving)
         
-        let expectedMessage = Message(image: image.pngData(), imageUrl: "https://somedomain.com/dramacat.gif?pub_secret=8004f909b1", bodyText: nil, channel: channel)
+        let expectedMessage = Message(
+            image: image.pngData(),
+            imageUrl: storageableMock.referenceMock.downloadURLString,
+            bodyText: nil,
+            channel: channel
+        )
         XCTAssertEqual(delegateMock.messageSaved, expectedMessage)
     }
     
@@ -132,10 +141,11 @@ class MessageFormPresenterTests: XCTestCase {
         
         XCTAssertTrue(viewModel.isShowingImageUploadConfirmation)
         
-        urlSessionMock.results.append(.init(data: nil, urlResponse: nil, error: URLSessionMock.NetworkError.someError))
+        storageableMock.referenceMock.error = StorageReferencingMock.StorageReferenceError.someError
         
         presenter.onImageUploadConfirmed()
         
+        XCTAssertEqual(storageableMock.pathStringCalled, "/images/\(Current.now().timeIntervalSinceReferenceDate).jpg")
         XCTAssertFalse(viewModel.isSaving)
         XCTAssertTrue(viewModel.isShowingSaveError)
     }

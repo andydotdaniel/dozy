@@ -9,7 +9,6 @@
 import Foundation
 import Combine
 import SwiftUI
-import FirebaseStorage
 
 protocol MessageFormViewPresenter {
     func didTapChannelDropdown()
@@ -27,6 +26,7 @@ class MessageFormPresenter: MessageFormViewPresenter {
     @ObservedObject private var viewModel: MesssageFormViewModel
     private let networkService: NetworkRequesting
     private let keychain: SecureStorable
+    private let dataStorageble: Storageable
     private weak var delegate: MessageFormDelegate?
     
     private var channelItems: [Channel] = []
@@ -42,12 +42,14 @@ class MessageFormPresenter: MessageFormViewPresenter {
         viewModel: MesssageFormViewModel,
         networkService: NetworkRequesting,
         keychain: SecureStorable = Keychain(),
+        dataStorageble: Storageable,
         delegate: MessageFormDelegate?,
         message: Message?
     ) {
         self.viewModel = viewModel
         self.networkService = networkService
         self.keychain = keychain
+        self.dataStorageble = dataStorageble
         self.delegate = delegate
         self.selectedChannel = message?.channel
         self.message = message
@@ -152,12 +154,11 @@ class MessageFormPresenter: MessageFormViewPresenter {
     }
     
     private func uploadImage(image: Data, completion: @escaping (Result<String, NetworkService.RequestError>) -> Void) {
-        let storage = Storage.storage()
-        let storageReference = storage.reference(withPath: "/images/\(Current.now().timeIntervalSinceReferenceDate).jpg")
+        let storageReference = dataStorageble.reference(with: "/images/\(Current.now().timeIntervalSinceReferenceDate).jpg")
         
-        let metadata = StorageMetadata(dictionary: ["contentType": "image/jpeg"])
-        storageReference.putData(image, metadata: metadata) { metadata, error in
-            guard metadata != nil, error == nil else {
+        let metadata = ["contentType": "image/jpeg"]
+        storageReference.uploadData(image, metadata: metadata) { error in
+            guard error == nil else {
                 completion(.failure(.unknown(message: "Failed to upload image")))
                 return
             }

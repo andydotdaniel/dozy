@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import FirebaseStorage
 
 protocol MessageFormDelegate: class {
     func onMessageSaved(_ message: Message)
@@ -26,7 +27,13 @@ struct MessageFormViewBuilder: ViewBuilder, ViewControllerBuilder {
     func build() -> MessageFormView {
         let navigationBarTitle = message != nil ? "Edit message" : "Add message"
         let viewModel = MesssageFormViewModel(navigationBarTitle: navigationBarTitle, message: message)
-        let presenter = MessageFormPresenter(viewModel: viewModel, networkService: NetworkService(), delegate: delegate, message: message)
+        let presenter = MessageFormPresenter(
+            viewModel: viewModel,
+            networkService: NetworkService(),
+            dataStorageble: Storage.storage(),
+            delegate: delegate,
+            message: message
+        )
         let view = MessageFormView(viewModel: viewModel, presenter: presenter)
         
         return view
