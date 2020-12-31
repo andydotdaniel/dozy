@@ -101,6 +101,7 @@ class MessageFormPresenter: MessageFormViewPresenter {
                     }
                 case .failure:
                     self.viewModel.isFetchingChannels = false
+                    self.viewModel.isShowingChannelFetchError = true
                 }
             }
         })
@@ -200,6 +201,7 @@ class MessageFormPresenter: MessageFormViewPresenter {
     
     func onChannelFetchRetryButtonTapped() {
         guard let accessToken = accessToken else { return }
+        self.viewModel.isShowingChannelFetchError = false
         fetchChannels(accessToken: accessToken)
     }
     

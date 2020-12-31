@@ -104,7 +104,7 @@ struct MessageFormView: View {
                 .background(Color.white)
                 .frame(maxHeight: .infinity)
             )
-        } else if viewModel.filteredChannelItems.isEmpty {
+        } else if viewModel.isShowingChannelFetchError {
             return AnyView(
                 VStack(alignment: .center, spacing: 12) {
                     Text("Oops.")
@@ -115,6 +115,20 @@ struct MessageFormView: View {
                         .font(.body)
                     PrimaryButton(titleText: "Try again", tapAction: self.presenter.onChannelFetchRetryButtonTapped, color: .alertRed)
                         .offset(y: 16)
+                }
+                .background(Color.white)
+                .frame(maxHeight: .infinity)
+            )
+        } else if viewModel.filteredChannelItems.isEmpty {
+            return AnyView(
+                VStack(alignment: .center, spacing: 12) {
+                    Text("Channels not found.")
+                        .font(.system(size: 32))
+                        .foregroundColor(Color.primaryBlue)
+                        .fontWeight(.bold)
+                        .multilineTextAlignment(.center)
+                    Text("We could not find any channels for you.")
+                        .font(.body)
                 }
                 .background(Color.white)
                 .frame(maxHeight: .infinity)

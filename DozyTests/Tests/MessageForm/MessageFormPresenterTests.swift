@@ -73,9 +73,12 @@ class MessageFormPresenterTests: XCTestCase {
     }
     
     func testRetryChannelFetch() throws {
+        viewModel.isShowingChannelFetchError = true
+        
         urlSessionMock.results.append(try JSONLoader.load(fileName: "ChannelsNoCursor"))
         presenter.onChannelFetchRetryButtonTapped()
         
+        XCTAssertFalse(viewModel.isShowingChannelFetchError)
         XCTAssertEqual(viewModel.filteredChannelItems.count, 3, "Channels have been fetched and are displayed")
     }
     
