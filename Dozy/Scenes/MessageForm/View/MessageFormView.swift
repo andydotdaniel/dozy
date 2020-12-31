@@ -34,7 +34,7 @@ struct MessageFormView: View {
                         .foregroundColor(Color.borderGray)
                     if viewModel.isShowingChannelDropdown {
                         getDropdownList()
-                        .offset(y: -24)
+                            .offset(y: -24)
                     } else {
                         VStack(alignment: .leading, spacing: 16) {
                             MultilineTextField(placeholderText: "Compose message", text: $viewModel.bodyText)
@@ -48,6 +48,7 @@ struct MessageFormView: View {
                         .offset(y: -12)
                     }
                 }
+                
                 if viewModel.isSaving {
                     ZStack {
                         Color.white
@@ -136,13 +137,16 @@ struct MessageFormView: View {
         } else {
             return AnyView(
                 List(viewModel.filteredChannelItems) { channelItem in
-                Button(action: {
-                    self.presenter.didTapChannelItem(id: channelItem.id)
-                }, label: {
-                    ChannelView(isPublic: channelItem.isPublic, text: channelItem.text)
-                        .padding(.vertical, 16)
-                })
-            })
+                    Button(action: {
+                        self.presenter.didTapChannelItem(id: channelItem.id)
+                    }, label: {
+                        ChannelView(isPublic: channelItem.isPublic, text: channelItem.text)
+                            .padding(.vertical, 16)
+                            .listRowInsets(EdgeInsets())
+                    })
+                }
+                .listStyle(PlainListStyle())
+            )
         }
     }
 }
