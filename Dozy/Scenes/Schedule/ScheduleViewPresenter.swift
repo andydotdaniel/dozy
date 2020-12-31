@@ -228,7 +228,7 @@ class SchedulePresenter: ScheduleViewPresenter {
         let requestBody = generateMessageRequestBody()
         
         guard let request = NetworkRequest(url: "https://slack.com/api/chat.scheduleMessage", httpMethod: .post, parameters: requestBody, headers: headers, contentType: .json) else { preconditionFailure("Invalid url") }
-        self.networkService.peformNetworkRequest(request, completion: { [weak self] (result: Result<ScheduledMessageResponse, NetworkService.RequestError>) -> Void in
+        self.networkService.performNetworkRequest(request, completion: { [weak self] (result: Result<ScheduledMessageResponse, NetworkService.RequestError>) -> Void in
             guard let self = self else { return }
             
             Current.dispatchQueue.async {
@@ -295,7 +295,7 @@ class SchedulePresenter: ScheduleViewPresenter {
         ]
         
         guard let request = NetworkRequest(url: "https://slack.com/api/chat.deleteScheduledMessage", httpMethod: .post, parameters: parameters, headers: headers, contentType: .json) else { preconditionFailure("Invalid url") }
-        self.networkService.peformNetworkRequest(request, completion: { [weak self] result in
+        self.networkService.performNetworkRequest(request, completion: { [weak self] result in
             guard let self = self else { return }
             
             Current.dispatchQueue.async {

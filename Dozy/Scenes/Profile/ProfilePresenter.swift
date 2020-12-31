@@ -61,7 +61,7 @@ class ProfilePresenter: ProfileViewPresenter {
         
         let url = "https://slack.com/api/users.profile.get"
         guard let networkRequest = NetworkRequest(url: url, httpMethod: .get, headers: headers, contentType: .urlEncodedForm) else { return }
-        networkService.peformNetworkRequest(networkRequest, completion: { [weak self] (result: Result<UserProfileRespone, NetworkService.RequestError>) -> Void  in
+        networkService.performNetworkRequest(networkRequest, completion: { [weak self] (result: Result<UserProfileRespone, NetworkService.RequestError>) -> Void  in
             guard let self = self else { return }
             
             Current.dispatchQueue.async {

@@ -92,7 +92,7 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
             headers: ["Authorization": "Bearer \(accessToken)"],
             contentType: .json
         ) else { preconditionFailure("Invalid url") }
-        networkService.peformNetworkRequest(request, completion: { [weak self] result in
+        networkService.performNetworkRequest(request, completion: { [weak self] result in
             guard let self = self else { return }
             
             Current.dispatchQueue.async {

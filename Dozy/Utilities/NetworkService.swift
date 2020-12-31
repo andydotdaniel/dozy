@@ -9,8 +9,8 @@
 import Foundation
 
 protocol NetworkRequesting {
-    func peformNetworkRequest<T: Decodable>(_ request: NetworkRequest, completion: @escaping (Result<T, NetworkService.RequestError>) -> Void)
-    func peformNetworkRequest(_ request: NetworkRequest, completion: @escaping (Result<Void, NetworkService.RequestError>) -> Void)
+    func performNetworkRequest<T: Decodable>(_ request: NetworkRequest, completion: @escaping (Result<T, NetworkService.RequestError>) -> Void)
+    func performNetworkRequest(_ request: NetworkRequest, completion: @escaping (Result<Void, NetworkService.RequestError>) -> Void)
 }
 
 struct NetworkService: NetworkRequesting {
@@ -27,7 +27,7 @@ struct NetworkService: NetworkRequesting {
         self.urlSession = urlSession
     }
     
-    func peformNetworkRequest<T: Decodable>(_ request: NetworkRequest, completion: @escaping (Result<T, NetworkService.RequestError>) -> Void) {
+    func performNetworkRequest<T: Decodable>(_ request: NetworkRequest, completion: @escaping (Result<T, NetworkService.RequestError>) -> Void) {
         switch request.httpMethod {
         case .post:
             postRequest(request) { self.decodeResult(result: $0, completion: completion) }
@@ -36,7 +36,7 @@ struct NetworkService: NetworkRequesting {
         }
     }
     
-    func peformNetworkRequest(_ request: NetworkRequest, completion: @escaping (Result<Void, NetworkService.RequestError>) -> Void) {
+    func performNetworkRequest(_ request: NetworkRequest, completion: @escaping (Result<Void, NetworkService.RequestError>) -> Void) {
         switch request.httpMethod {
         case .post:
             postRequest(request) { self.decodeResult(result: $0, completion: completion) }

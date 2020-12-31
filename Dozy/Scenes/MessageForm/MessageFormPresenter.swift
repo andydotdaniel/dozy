@@ -82,7 +82,7 @@ class MessageFormPresenter: MessageFormViewPresenter {
         guard let networkRequest = NetworkRequest(url: url, httpMethod: .get, parameters: parameters, contentType: .urlEncodedForm) else { return }
         self.viewModel.isFetchingChannels = true
         
-        networkService.peformNetworkRequest(networkRequest, completion: { [weak self] (result: Result<SlackChannelResponse, NetworkService.RequestError>) -> Void in
+        networkService.performNetworkRequest(networkRequest, completion: { [weak self] (result: Result<SlackChannelResponse, NetworkService.RequestError>) -> Void in
             guard let self = self else { return }
             
             Current.dispatchQueue.async {
