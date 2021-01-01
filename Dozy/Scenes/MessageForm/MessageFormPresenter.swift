@@ -170,6 +170,11 @@ class MessageFormPresenter: MessageFormViewPresenter {
     }
     
     func onImageUploadConfirmed() {
+        func showSaveError() {
+            self.viewModel.isSaving = false
+            self.viewModel.isShowingSaveError = true
+        }
+        
         guard let channel = self.selectedChannel else { return }
         if let compressedImage = self.viewModel.selectedImage?.jpegData(compressionQuality: 0.35) {
             self.viewModel.isSaving = true
@@ -179,9 +184,11 @@ class MessageFormPresenter: MessageFormViewPresenter {
                 Current.dispatchQueue.async {
                     switch result {
                     case .success(let image):
-                        if let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-                            let filename = documentsDirectory.appendingPathComponent(image.name)
-                            try? image.data.write(to: filename)
+                        do {
+                            try self.writeImage(image)
+                            try self.deleteOldImageIfNeeded()
+                        } catch {
+                            showSaveError()
                         }
                         
                         let message = Message(
@@ -192,11 +199,26 @@ class MessageFormPresenter: MessageFormViewPresenter {
                         )
                         self.delegate?.onMessageSaved(message)
                     case .failure:
-                        self.viewModel.isSaving = false
-                        self.viewModel.isShowingSaveError = true
+                        showSaveError()
                     }
                 }
             })
+        }
+    }
+    
+    private func writeImage(_ image: MessageImage) throws {
+        if let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let fileUrl = documentsDirectory.appendingPathComponent(image.name)
+            try image.data.write(to: fileUrl)
+        }
+    }
+    
+    private func deleteOldImageIfNeeded() throws {
+        guard let messageImageName = self.message?.imageName else { return }
+        
+        if let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let fileUrl = documentsDirectory.appendingPathComponent(messageImageName)
+            try FileManager.default.removeItem(atPath: fileUrl.path)
         }
     }
     
