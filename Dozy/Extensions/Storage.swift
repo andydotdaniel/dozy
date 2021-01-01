@@ -8,12 +8,12 @@
 
 import FirebaseStorage
 
-protocol StorageReferencing {
+protocol RemoteStorageReferencing {
     func uploadData(_ data: Data, metadata: [String: Any]?, completion: ((Error?) -> Void)?)
     func downloadURL(completion: @escaping (URL?, Error?) -> Void)
 }
 
-extension StorageReference: StorageReferencing {
+extension StorageReference: RemoteStorageReferencing {
     
     func uploadData(_ data: Data, metadata: [String: Any]?, completion: ((Error?) -> Void)?) {
         let metadata: StorageMetadata? = metadata.map { StorageMetadata(dictionary: $0) } ?? nil
@@ -24,12 +24,12 @@ extension StorageReference: StorageReferencing {
     
 }
 
-protocol Storageable {
-    func reference(with pathString: String) -> StorageReferencing
+protocol RemoteStorageable {
+    func reference(with pathString: String) -> RemoteStorageReferencing
 }
 
-extension Storage: Storageable {
-    func reference(with pathString: String) -> StorageReferencing {
+extension Storage: RemoteStorageable {
+    func reference(with pathString: String) -> RemoteStorageReferencing {
         self.reference(withPath: pathString)
     }
 }

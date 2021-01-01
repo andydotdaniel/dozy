@@ -17,7 +17,7 @@ class MessageFormPresenterTests: XCTestCase {
     
     var urlSessionMock: URLSessionMock!
     var keychainMock: KeychainMock!
-    var storageableMock: StorageableMock!
+    var remoteStorageableMock: RemoteStorageableMock!
     var fileManagerMock: FileManagerMock!
     
     override func setUpWithError() throws {
@@ -41,14 +41,14 @@ class MessageFormPresenterTests: XCTestCase {
         
         keychainMock.dataToLoad = Data("SOME_ACCESS_TOKEN".utf8)
         
-        storageableMock = StorageableMock()
+        remoteStorageableMock = RemoteStorageableMock()
         fileManagerMock = FileManagerMock()
         
         presenter = MessageFormPresenter(
             viewModel: viewModel,
             networkService: networkService,
             keychain: keychainMock,
-            dataStorageble: storageableMock,
+            dataStorageble: remoteStorageableMock,
             fileManager: fileManagerMock,
             delegate: delegateMock,
             message: nil
@@ -126,7 +126,7 @@ class MessageFormPresenterTests: XCTestCase {
         
         let expectedMessage = Message(
             imageName: imageFileName,
-            imageUrl: storageableMock.referenceMock.downloadURLString,
+            imageUrl: remoteStorageableMock.referenceMock.downloadURLString,
             bodyText: nil,
             channel: channel
         )
@@ -151,11 +151,11 @@ class MessageFormPresenterTests: XCTestCase {
         
         XCTAssertTrue(viewModel.isShowingImageUploadConfirmation)
         
-        storageableMock.referenceMock.error = StorageReferencingMock.StorageReferenceError.someError
+        remoteStorageableMock.referenceMock.error = RemoteStorageReferencingMock.StorageReferenceError.someError
         
         presenter.onImageUploadConfirmed()
         
-        XCTAssertEqual(storageableMock.pathStringCalled, "/images/\(Current.now().timeIntervalSinceReferenceDate).jpg")
+        XCTAssertEqual(remoteStorageableMock.pathStringCalled, "/images/\(Current.now().timeIntervalSinceReferenceDate).jpg")
         XCTAssertFalse(viewModel.isSaving)
         XCTAssertTrue(viewModel.isShowingSaveError)
     }
@@ -189,14 +189,14 @@ class MessageFormPresenterRemoveOldImageTests: XCTestCase {
         urlSessionMock.results.append(contentsOf: channelFetchResults)
         let networkService = NetworkService(urlSession: urlSessionMock)
         
-        let storageableMock = StorageableMock()
+        let remoteStorageableMock = RemoteStorageableMock()
         fileManagerMock = FileManagerMock()
         
         presenter = MessageFormPresenter(
             viewModel: viewModel,
             networkService: networkService,
             keychain: keychainMock,
-            dataStorageble: storageableMock,
+            dataStorageble: remoteStorageableMock,
             fileManager: fileManagerMock,
             delegate: delegateMock,
             message: message

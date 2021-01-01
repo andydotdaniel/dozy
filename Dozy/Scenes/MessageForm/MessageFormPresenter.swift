@@ -26,7 +26,7 @@ class MessageFormPresenter: MessageFormViewPresenter {
     @ObservedObject private var viewModel: MesssageFormViewModel
     private let networkService: NetworkRequesting
     private let keychain: SecureStorable
-    private let dataStorageble: Storageable
+    private let dataStorageble: RemoteStorageable
     private let fileManager: FileManaging
     private weak var delegate: MessageFormDelegate?
     
@@ -41,7 +41,7 @@ class MessageFormPresenter: MessageFormViewPresenter {
         viewModel: MesssageFormViewModel,
         networkService: NetworkRequesting,
         keychain: SecureStorable = Keychain(),
-        dataStorageble: Storageable,
+        dataStorageble: RemoteStorageable,
         fileManager: FileManaging,
         delegate: MessageFormDelegate?,
         message: Message?

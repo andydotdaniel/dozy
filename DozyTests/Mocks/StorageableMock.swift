@@ -1,5 +1,5 @@
 //
-//  StorageableMock.swift
+//  RemoteStorageableMock.swift
 //  DozyTests
 //
 //  Created by Andrew Daniel on 12/31/20.
@@ -9,7 +9,7 @@
 import Foundation
 @testable import Dozy
 
-class StorageReferencingMock: StorageReferencing {
+class RemoteStorageReferencingMock: RemoteStorageReferencing {
     
     enum StorageReferenceError: Error {
         case someError
@@ -28,11 +28,11 @@ class StorageReferencingMock: StorageReferencing {
     
 }
 
-class StorageableMock: Storageable {
+class RemoteStorageableMock: RemoteStorageable {
     
-    let referenceMock: StorageReferencingMock = StorageReferencingMock()
+    let referenceMock: RemoteStorageReferencingMock = RemoteStorageReferencingMock()
     var pathStringCalled: String?
-    func reference(with pathString: String) -> StorageReferencing {
+    func reference(with pathString: String) -> RemoteStorageReferencing {
         pathStringCalled = pathString
         return referenceMock
     }
