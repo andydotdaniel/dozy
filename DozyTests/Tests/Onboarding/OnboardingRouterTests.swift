@@ -37,7 +37,7 @@ class OnboardingRouterTests: XCTestCase {
     
     func testNavigateToSchedule() {
         let channel = Channel(id: "SOME_CHANNEL_ID", isPublic: true, text: "SOME_TEXT")
-        let message = Message(image: nil, imageUrl: nil, bodyText: "SOME_BODY_TEXT", channel: channel)
+        let message = Message(imageName: nil, imageUrl: nil, bodyText: "SOME_BODY_TEXT", channel: channel)
         let schedule = Schedule(message: message, awakeConfirmationTime: Current.now(), scheduledMessageId: nil)
         router.navigateToSchedule(schedule: schedule, userDefaults: ScheduleUserDefaultsMock())
         
@@ -56,7 +56,7 @@ class OnboardingRouterPresentTests: XCTestCase {
         navigationControllableMock = NavigationControllableMock()
         
         let channel = Channel(id: "SOME_CHANNEL_ID", isPublic: true, text: "SOME_TEXT")
-        let message = Message(image: nil, imageUrl: nil, bodyText: "SOME_BODY_TEXT", channel: channel)
+        let message = Message(imageName: nil, imageUrl: nil, bodyText: "SOME_BODY_TEXT", channel: channel)
         
         router = OnboardingViewRouter(
             navigationControllable: navigationControllableMock,

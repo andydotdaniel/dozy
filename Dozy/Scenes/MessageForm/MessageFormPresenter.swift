@@ -27,6 +27,7 @@ class MessageFormPresenter: MessageFormViewPresenter {
     private let networkService: NetworkRequesting
     private let keychain: SecureStorable
     private let dataStorageble: Storageable
+    private let fileManager: FileManaging
     private weak var delegate: MessageFormDelegate?
     
     private var channelItems: [Channel] = []
@@ -41,6 +42,7 @@ class MessageFormPresenter: MessageFormViewPresenter {
         networkService: NetworkRequesting,
         keychain: SecureStorable = Keychain(),
         dataStorageble: Storageable,
+        fileManager: FileManaging,
         delegate: MessageFormDelegate?,
         message: Message?
     ) {
@@ -48,6 +50,7 @@ class MessageFormPresenter: MessageFormViewPresenter {
         self.networkService = networkService
         self.keychain = keychain
         self.dataStorageble = dataStorageble
+        self.fileManager = fileManager
         self.delegate = delegate
         self.selectedChannel = message?.channel
         self.message = message
@@ -207,19 +210,23 @@ class MessageFormPresenter: MessageFormViewPresenter {
     }
     
     private func writeImage(_ image: MessageImage) throws {
-        if let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            let fileUrl = documentsDirectory.appendingPathComponent(image.name)
-            try image.data.write(to: fileUrl)
+        guard let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else { throw FileWriteError.documentsDirectoryUnavailable }
+        
+        let fileUrl = documentsDirectory.appendingPathComponent(image.name)
+        if !fileManager.createFile(atPath: fileUrl.path, contents: image.data, attributes: nil) {
+            throw FileWriteError.unknownError
         }
     }
     
     private func deleteOldImageIfNeeded() throws {
-        guard let messageImageName = self.message?.imageName else { return }
+        guard let messageImageName = self.message?.imageName,
+              let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first
+              else { return }
         
-        if let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            let fileUrl = documentsDirectory.appendingPathComponent(messageImageName)
-            try FileManager.default.removeItem(atPath: fileUrl.path)
-        }
+        let fileUrl = documentsDirectory.appendingPathComponent(messageImageName)
+        
+        guard fileManager.fileExists(atPath: fileUrl.path) else { return }
+        try fileManager.removeItem(atPath: fileUrl.path)
     }
     
     func onImageUploadCancelled() {
@@ -319,4 +326,9 @@ private struct ShareFileResponse: Decodable {
         
         permalinkPublic = try fileContainer.decode(String.self, forKey: .permalinkPublic)
     }
+}
+
+private enum FileWriteError: Error {
+    case unknownError
+    case documentsDirectoryUnavailable
 }

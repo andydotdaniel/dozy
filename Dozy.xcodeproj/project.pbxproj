@@ -45,6 +45,8 @@
 		103C6DE02588DB2A00054D0F /* ProfilePresenterProfileFetchedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103C6DDF2588DB2A00054D0F /* ProfilePresenterProfileFetchedTests.swift */; };
 		103C6DEB2588DE7600054D0F /* ProfilePresenterProfileUnfetchedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103C6DEA2588DE7600054D0F /* ProfilePresenterProfileUnfetchedTests.swift */; };
 		103C6DEF2588E0DB00054D0F /* Profile.json in Resources */ = {isa = PBXBuildFile; fileRef = 103C6DEE2588E0DB00054D0F /* Profile.json */; };
+		1046EF9C259ED9750012105F /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1046EF9B259ED9750012105F /* FileManager.swift */; };
+		1046EFA0259EDDF20012105F /* FileManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1046EF9F259EDDF20012105F /* FileManagerMock.swift */; };
 		104856D724A0EC520072D00F /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104856D624A0EC520072D00F /* PrimaryButton.swift */; };
 		104856D924A142F80072D00F /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104856D824A142F80072D00F /* UIDevice.swift */; };
 		104BCC2024AB991200C35BDC /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BCC1F24AB991200C35BDC /* DispatchQueue.swift */; };
@@ -167,6 +169,8 @@
 		103C6DDF2588DB2A00054D0F /* ProfilePresenterProfileFetchedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenterProfileFetchedTests.swift; sourceTree = "<group>"; };
 		103C6DEA2588DE7600054D0F /* ProfilePresenterProfileUnfetchedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenterProfileUnfetchedTests.swift; sourceTree = "<group>"; };
 		103C6DEE2588E0DB00054D0F /* Profile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Profile.json; sourceTree = "<group>"; };
+		1046EF9B259ED9750012105F /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		1046EF9F259EDDF20012105F /* FileManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerMock.swift; sourceTree = "<group>"; };
 		104856D624A0EC520072D00F /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		104856D824A142F80072D00F /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		104BCC1F24AB991200C35BDC /* DispatchQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
@@ -381,6 +385,7 @@
 				10C4D43224D544E200CC1123 /* UserDefaults.swift */,
 				10EE4EAA259B79500063C1AC /* UNUserNotificationCenter.swift */,
 				100A02F2259D225000B03E5E /* Storage.swift */,
+				1046EF9B259ED9750012105F /* FileManager.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -558,6 +563,7 @@
 				10358EB7258C9091006F3ADC /* TimerMock.swift */,
 				10EE4EB0259B7B470063C1AC /* UserNotificationCenterMock.swift */,
 				100A02F6259D284E00B03E5E /* StorageableMock.swift */,
+				1046EF9F259EDDF20012105F /* FileManagerMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -864,6 +870,7 @@
 				109704C3249692D60012EA76 /* AuthenticationSessionView.swift in Sources */,
 				10AC9D9E24ACF96800A3791C /* ImagePickerButton.swift in Sources */,
 				106C5A7724C4528E00B8BA9C /* Channel.swift in Sources */,
+				1046EF9C259ED9750012105F /* FileManager.swift in Sources */,
 				10E57E5E24969C79001B71A4 /* World.swift in Sources */,
 				1081AE26249F387900AD6655 /* WebAuthenticationSession.swift in Sources */,
 				10A21F2F2581133200E67FE0 /* ProfileView.swift in Sources */,
@@ -918,6 +925,7 @@
 				1023190F24F1603B0005F6A6 /* SchedulePresenterTimerTests.swift in Sources */,
 				10D5E09F25317AA700E0C34A /* AwakeConfirmationPresenterTests.swift in Sources */,
 				101581752495F8CA00AA0B37 /* LoginPresenterTests.swift in Sources */,
+				1046EFA0259EDDF20012105F /* FileManagerMock.swift in Sources */,
 				105A182E24BB5C25003177AA /* JSONLoader.swift in Sources */,
 				10358EB8258C9091006F3ADC /* TimerMock.swift in Sources */,
 				1033ABDB252821000045BD64 /* OnboardingPresenterTests.swift in Sources */,

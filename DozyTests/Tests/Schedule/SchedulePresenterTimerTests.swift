@@ -16,7 +16,7 @@ class SchedulePresenterTimerTests: XCTestCase {
     
     private func setupPresenter(timerActive: Bool) {
         let channel = Channel(id: "SOME_CHANNEL_ID", isPublic: true, text: "SOME_CHANNEL_NAME")
-        let message = Message(image: nil, imageUrl: nil, bodyText: "SOME_BODY_TEXT", channel: channel)
+        let message = Message(imageName: nil, imageUrl: nil, bodyText: "SOME_BODY_TEXT", channel: channel)
         let scheduledMessageId = timerActive ? "SOME_MESSAGE_ID" : nil
         let schedule = Schedule(message: message, awakeConfirmationTime: Date(), scheduledMessageId: scheduledMessageId)
         viewModel = ScheduleViewModel(schedule: schedule)

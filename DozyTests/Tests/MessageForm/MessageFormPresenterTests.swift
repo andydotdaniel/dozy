@@ -18,6 +18,7 @@ class MessageFormPresenterTests: XCTestCase {
     var urlSessionMock: URLSessionMock!
     var keychainMock: KeychainMock!
     var storageableMock: StorageableMock!
+    var fileManagerMock: FileManagerMock!
     
     override func setUpWithError() throws {
         Current = .mock
@@ -41,12 +42,14 @@ class MessageFormPresenterTests: XCTestCase {
         keychainMock.dataToLoad = Data("SOME_ACCESS_TOKEN".utf8)
         
         storageableMock = StorageableMock()
+        fileManagerMock = FileManagerMock()
         
         presenter = MessageFormPresenter(
             viewModel: viewModel,
             networkService: networkService,
             keychain: keychainMock,
             dataStorageble: storageableMock,
+            fileManager: fileManagerMock,
             delegate: delegateMock,
             message: nil
         )
@@ -98,7 +101,7 @@ class MessageFormPresenterTests: XCTestCase {
         
         presenter.didTapSave()
         
-        let expectedMessage = Message(image: nil, imageUrl: nil, bodyText: bodyText, channel: channel)
+        let expectedMessage = Message(imageName: nil, imageUrl: nil, bodyText: bodyText, channel: channel)
         XCTAssertEqual(delegateMock.messageSaved, expectedMessage)
     }
     
@@ -116,9 +119,13 @@ class MessageFormPresenterTests: XCTestCase {
         presenter.onImageUploadConfirmed()
         
         XCTAssertTrue(viewModel.isSaving)
+    
+        let imageFileName = "\(Current.now().timeIntervalSinceReferenceDate).jpg"
+        let expectedFileCreatedAtPath = fileManagerMock.documentsDirectoryURL.absoluteString + "/\(imageFileName)"
+        XCTAssertEqual(fileManagerMock.fileCreatedAtPath, expectedFileCreatedAtPath)
         
         let expectedMessage = Message(
-            image: image.pngData(),
+            imageName: imageFileName,
             imageUrl: storageableMock.referenceMock.downloadURLString,
             bodyText: nil,
             channel: channel
@@ -151,6 +158,68 @@ class MessageFormPresenterTests: XCTestCase {
         XCTAssertEqual(storageableMock.pathStringCalled, "/images/\(Current.now().timeIntervalSinceReferenceDate).jpg")
         XCTAssertFalse(viewModel.isSaving)
         XCTAssertTrue(viewModel.isShowingSaveError)
+    }
+    
+}
+
+class MessageFormPresenterRemoveOldImageTests: XCTestCase {
+
+    private var presenter: MessageFormPresenter!
+    private var viewModel: MesssageFormViewModel!
+    private var fileManagerMock: FileManagerMock!
+    
+    private var message: Message {
+        let channel = Channel(id: "SOME_CHANNEL_NAME", isPublic: true, text: "SOME_TEXT")
+        return Message(imageName: "image.jpg", imageUrl: "https://some.com/image.jpg", bodyText: "SOME_BODY_TEXT", channel: channel)
+    }
+    
+    override func setUpWithError() throws {
+        Current = .mock
+        let now = Date()
+        Current.now = { now }
+        
+        viewModel = MesssageFormViewModel(navigationBarTitle: "Some navigation title", message: nil)
+        let delegateMock = MessageFormDelegateMock()
+                
+        let keychainMock = KeychainMock()
+        keychainMock.dataToLoad = Data("SOME_ACCESS_TOKEN".utf8)
+        
+        let urlSessionMock = URLSessionMock()
+        let channelFetchResults = [try JSONLoader.load(fileName: "Channels"), try JSONLoader.load(fileName: "ChannelsNoCursor")]
+        urlSessionMock.results.append(contentsOf: channelFetchResults)
+        let networkService = NetworkService(urlSession: urlSessionMock)
+        
+        let storageableMock = StorageableMock()
+        fileManagerMock = FileManagerMock()
+        
+        presenter = MessageFormPresenter(
+            viewModel: viewModel,
+            networkService: networkService,
+            keychain: keychainMock,
+            dataStorageble: storageableMock,
+            fileManager: fileManagerMock,
+            delegate: delegateMock,
+            message: message
+        )
+    }
+    
+    func testRemoveOldMessageImageOnNewImageSave() {
+        presenter.didTapChannelDropdown()
+        let channel = viewModel.filteredChannelItems.first!
+        presenter.didTapChannelItem(id: channel.id)
+        
+        let image = UIImage(named: "LogoGray", in: Bundle.main, with: nil)!
+        viewModel.selectedImage = image
+        
+        presenter.didTapSave()
+        presenter.onImageUploadConfirmed()
+        
+        let expectedItemRemovedAtPath = fileManagerMock.documentsDirectoryURL.absoluteString + "/\(message.imageName!)"
+        XCTAssertEqual(fileManagerMock.itemRemovedAtPath, expectedItemRemovedAtPath)
+        
+        let newImageFileName = "\(Current.now().timeIntervalSinceReferenceDate).jpg"
+        let expectedFileCreatedAtPath = fileManagerMock.documentsDirectoryURL.absoluteString + "/\(newImageFileName)"
+        XCTAssertEqual(fileManagerMock.fileCreatedAtPath, expectedFileCreatedAtPath)
     }
     
 }

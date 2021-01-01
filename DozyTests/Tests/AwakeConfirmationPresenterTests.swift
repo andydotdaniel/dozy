@@ -34,7 +34,7 @@ class AwakeConfirmationPresenterTests: XCTestCase {
         let networkService = NetworkService(urlSession: urlSessionMock)
         
         viewModel = AwakeConfirmationViewModel(countdownActive: true, secondsLeft: 30)
-        let message = Message(image: nil, imageUrl: nil, bodyText: "SOME_BODY_TEXT", channel: Channel(id: "SOME_ID", isPublic: false, text: "SOME_TEXT"))
+        let message = Message(imageName: nil, imageUrl: nil, bodyText: "SOME_BODY_TEXT", channel: Channel(id: "SOME_ID", isPublic: false, text: "SOME_TEXT"))
         schedule = Schedule(message: message, awakeConfirmationTime: Date().addingTimeInterval(30), scheduledMessageId: "SOME_ID")
         
         navigationControllable = NavigationControllableMock()
@@ -56,7 +56,7 @@ class AwakeConfirmationPresenterTests: XCTestCase {
 
     func testOnSliderReachedEnd() throws {
         let channel = Channel(id: "SOME_CHANNEL_ID", isPublic: true, text: "SOME_TEXT")
-        let message = Message(image: nil, imageUrl: nil, bodyText: "SOME_MESSAGE_TEXT", channel: channel)
+        let message = Message(imageName: nil, imageUrl: nil, bodyText: "SOME_MESSAGE_TEXT", channel: channel)
         userDefaultsMock.scheduleSaved = Schedule(
             message: message,
             awakeConfirmationTime: Date(),

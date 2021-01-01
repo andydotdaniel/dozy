@@ -54,16 +54,9 @@ class ScheduleViewModel: ObservableObject {
             timePickerDate: Calendar.current.date(byAdding: .minute, value: 30, to: Date())!
         )
         
-        let messageImage: UIImage? = {
-            if let imageName = schedule.message.imageName, let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-                return UIImage(contentsOfFile: documentsDirectory.appendingPathComponent(imageName).path)
-            }
-            
-            return nil
-        }()
         let channel = schedule.message.channel
         self.messageCard = MessageCardViewModel(
-            image: messageImage,
+            image: schedule.message.uiImage,
             bodyText: schedule.message.bodyText,
             channel: (isPublic: channel.isPublic, text: channel.text),
             actionButtonTitle: "Edit"

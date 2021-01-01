@@ -31,6 +31,7 @@ struct MessageFormViewBuilder: ViewBuilder, ViewControllerBuilder {
             viewModel: viewModel,
             networkService: NetworkService(),
             dataStorageble: Storage.storage(),
+            fileManager: FileManager.default,
             delegate: delegate,
             message: message
         )

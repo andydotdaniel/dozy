@@ -21,7 +21,7 @@ class MessageFormBuilderTests: XCTestCase {
     
     func testEditMessageBuilder() throws {
         let channel = Channel(id: "SOME_CHANNEL_ID", isPublic: true, text: "NAME_OF_CHANNEL")
-        let message = Message(image: nil, imageUrl: nil, bodyText: "SOME_BODY_TEXT", channel: channel)
+        let message = Message(imageName: nil, imageUrl: nil, bodyText: "SOME_BODY_TEXT", channel: channel)
         
         let builder = MessageFormViewBuilder(message: message, delegate: delegateMock)
         let view = builder.build()

@@ -14,7 +14,7 @@ class PostAwakeConfirmationTimeViewBuilderTests: XCTestCase {
     private var viewBuilder: PostAwakeConfirmationTimeViewBuilder!
     
     private var message: Message {
-        Message(image: nil, imageUrl: nil, bodyText: "SOME_BODY_TEXT", channel: channel)
+        Message(imageName: nil, imageUrl: nil, bodyText: "SOME_BODY_TEXT", channel: channel)
     }
     
     private var channel: Channel {

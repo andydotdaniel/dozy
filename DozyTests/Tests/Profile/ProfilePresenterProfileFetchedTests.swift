@@ -28,7 +28,7 @@ class ProfilePresenterProfileFetchedTests: XCTestCase {
         
         scheduleUserDefaultsMock = ScheduleUserDefaultsMock()
         let channel = Channel(id: "SOME_CHANNEL_ID", isPublic: false, text: "SOME_TEXT")
-        let message = Message(image: nil, imageUrl: nil, bodyText: "SOME_TEXT", channel: channel)
+        let message = Message(imageName: nil, imageUrl: nil, bodyText: "SOME_TEXT", channel: channel)
         scheduleUserDefaultsMock.scheduleSaved = Schedule(message: message, awakeConfirmationTime: Current.now().addingTimeInterval(180), scheduledMessageId: nil)
         
         profileUserDefaultsMock = ProfileUserDefaultsMock()

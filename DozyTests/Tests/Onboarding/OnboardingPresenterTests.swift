@@ -35,7 +35,7 @@ class OnboardingPresenterTests: XCTestCase {
 
     func testOnMessageSaved() {
         let channel = Channel(id: "SOME_ID", isPublic: false, text: "SOME_TEXT")
-        let message = Message(image: nil, imageUrl: nil, bodyText: "SOME_BODY_TEXT", channel: channel)
+        let message = Message(imageName: nil, imageUrl: nil, bodyText: "SOME_BODY_TEXT", channel: channel)
         presenter.onMessageSaved(message)
         
         XCTAssertEqual(userDefaultsMock.scheduleSaved?.message, message)

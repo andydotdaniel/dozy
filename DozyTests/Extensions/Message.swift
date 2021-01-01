@@ -13,7 +13,7 @@ extension Message: Equatable {
     
     public static func == (lhs: Message, rhs: Message) -> Bool {
         return lhs.bodyText == rhs.bodyText &&
-            lhs.image == rhs.image &&
+            lhs.imageName == rhs.imageName &&
             lhs.imageUrl == rhs.imageUrl &&
             lhs.channel == rhs.channel
     }
