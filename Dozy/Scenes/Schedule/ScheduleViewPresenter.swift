@@ -355,9 +355,8 @@ class SchedulePresenter: ScheduleViewPresenter {
     }
     
     private func updateMessageCard(with message: Message) {
-        let image = message.image.map { UIImage(data: $0) } ?? nil
         self.viewModel.messageCard = ScheduleViewModel.MessageCardViewModel(
-            image: image,
+            image: message.uiImage,
             bodyText: message.bodyText,
             channel: (isPublic: message.channel.isPublic, text: message.channel.text),
             actionButtonTitle: self.viewModel.messageCard.actionButtonTitle

@@ -36,8 +36,6 @@ class MessageFormPresenter: MessageFormViewPresenter {
     private let message: Message?
     private var accessToken: String?
     
-    private var selectedImageData: Data?
-    
     init(
         viewModel: MesssageFormViewModel,
         networkService: NetworkRequesting,
@@ -53,7 +51,6 @@ class MessageFormPresenter: MessageFormViewPresenter {
         self.delegate = delegate
         self.selectedChannel = message?.channel
         self.message = message
-        self.selectedImageData = message?.image
         
         if let accessTokenData = keychain.load(key: "slack_access_token") {
             let accessToken = String(decoding: accessTokenData, as: UTF8.self)
@@ -135,27 +132,23 @@ class MessageFormPresenter: MessageFormViewPresenter {
     func didTapSave() {
         guard let channel = self.selectedChannel else { return }
         
-        self.selectedImageData = self.viewModel.selectedImage?.pngData()
-        if let selectedImage = self.selectedImageData, selectedImage != message?.image {
+        let selectedImageData = self.viewModel.selectedImage?.pngData()
+        if let selectedImage = selectedImageData, selectedImage != message?.uiImage?.pngData() {
             self.viewModel.isShowingImageUploadConfirmation = true
         } else {
-            completeMessageSaving(image: self.selectedImageData, imageUrl: message?.imageUrl, channel: channel)
+            let message = Message(
+                imageName: self.message?.imageName,
+                imageUrl: self.message?.imageUrl,
+                bodyText: self.viewModel.bodyText,
+                channel: channel
+            )
+            self.delegate?.onMessageSaved(message)
         }
     }
     
-    private func completeMessageSaving(image: Data?, imageUrl: String?, channel: Channel) {
-        let message = Message(
-            image: image,
-            imageUrl: imageUrl,
-            bodyText: self.viewModel.bodyText,
-            channel: channel
-        )
-        
-        self.delegate?.onMessageSaved(message)
-    }
-    
-    private func uploadImage(image: Data, completion: @escaping (Result<String, NetworkService.RequestError>) -> Void) {
-        let storageReference = dataStorageble.reference(with: "/images/\(Current.now().timeIntervalSinceReferenceDate).jpg")
+    private func uploadImage(image: Data, completion: @escaping (Result<MessageImage, NetworkService.RequestError>) -> Void) {
+        let fileName = "\(Current.now().timeIntervalSinceReferenceDate).jpg"
+        let storageReference = dataStorageble.reference(with: "/images/\(fileName)")
         
         let metadata = ["contentType": "image/jpeg"]
         storageReference.uploadData(image, metadata: metadata) { error in
@@ -170,22 +163,34 @@ class MessageFormPresenter: MessageFormViewPresenter {
                     return
                 }
                 
-                completion(.success(url.absoluteString))
+                let messageImage = MessageImage(name: fileName, url: url.absoluteString, data: image)
+                completion(.success(messageImage))
             })
         }
     }
     
     func onImageUploadConfirmed() {
         guard let channel = self.selectedChannel else { return }
-        if let compressedImage = self.viewModel.selectedImage?.jpegData(compressionQuality: 0.35), let selectedImage = self.selectedImageData {
+        if let compressedImage = self.viewModel.selectedImage?.jpegData(compressionQuality: 0.35) {
             self.viewModel.isSaving = true
             uploadImage(image: compressedImage, completion: { [weak self] result in
                 guard let self = self else { return }
                 
                 Current.dispatchQueue.async {
                     switch result {
-                    case .success(let imageUrl):
-                        self.completeMessageSaving(image: selectedImage, imageUrl: imageUrl, channel: channel)
+                    case .success(let image):
+                        if let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                            let filename = documentsDirectory.appendingPathComponent(image.name)
+                            try? image.data.write(to: filename)
+                        }
+                        
+                        let message = Message(
+                            imageName: image.name,
+                            imageUrl: image.url,
+                            bodyText: self.viewModel.bodyText,
+                            channel: channel
+                        )
+                        self.delegate?.onMessageSaved(message)
                     case .failure:
                         self.viewModel.isSaving = false
                         self.viewModel.isShowingSaveError = true
@@ -205,6 +210,12 @@ class MessageFormPresenter: MessageFormViewPresenter {
         fetchChannels(accessToken: accessToken)
     }
     
+}
+
+private struct MessageImage {
+    let name: String
+    let url: String
+    let data: Data
 }
 
 private struct SlackChannel: Decodable {

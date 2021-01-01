@@ -81,7 +81,7 @@ class MesssageFormViewModel: ObservableObject {
         self.filteredChannelItems = []
         
         self.isShowingImagePicker = false
-        self.selectedImage = message?.image.map { UIImage(data: $0) } ?? nil
+        self.selectedImage = message?.uiImage
         
         self.isSaving = false
         self.isShowingImageUploadConfirmation = false

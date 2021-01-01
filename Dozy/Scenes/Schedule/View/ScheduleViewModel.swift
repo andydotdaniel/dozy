@@ -54,7 +54,13 @@ class ScheduleViewModel: ObservableObject {
             timePickerDate: Calendar.current.date(byAdding: .minute, value: 30, to: Date())!
         )
         
-        let messageImage = schedule.message.image.map { UIImage(data: $0) } ?? nil
+        let messageImage: UIImage? = {
+            if let imageName = schedule.message.imageName, let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                return UIImage(contentsOfFile: documentsDirectory.appendingPathComponent(imageName).path)
+            }
+            
+            return nil
+        }()
         let channel = schedule.message.channel
         self.messageCard = MessageCardViewModel(
             image: messageImage,

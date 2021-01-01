@@ -9,8 +9,18 @@
 import UIKit
 
 struct Message: Codable {
-    let image: Data?
+    let imageName: String?
     let imageUrl: String?
     let bodyText: String?
     let channel: Channel
+}
+
+extension Message {
+    var uiImage: UIImage? {
+        if let imageName = self.imageName, let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            return UIImage(contentsOfFile: documentsDirectory.appendingPathComponent(imageName).path)
+        } else {
+            return nil
+        }
+    }
 }
