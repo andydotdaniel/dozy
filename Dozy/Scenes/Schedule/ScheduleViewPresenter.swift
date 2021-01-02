@@ -73,6 +73,8 @@ class SchedulePresenter: ScheduleViewPresenter {
     }
     
     @objc private func willEnterForeground() {
+        guard schedule.isActive else { return }
+        
         let now = Current.now()
         switch now.compare(schedule.awakeConfirmationTime) {
             case .orderedDescending, .orderedSame:

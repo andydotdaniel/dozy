@@ -24,17 +24,23 @@ class PostAwakeConfirmationTimeViewBuilder: ViewControllerBuilder {
     }
     
     func buildViewController() -> UIViewController {
+        guard schedule.isActive else { return getScheduleViewController(isPostMessageSent: false) }
+        
         switch now.compare(schedule.sleepyheadMessagePostTime) {
         case .orderedDescending, .orderedSame:
-            return ScheduleViewBuilder(
-                schedule: schedule,
-                isPostMessageSent: true,
-                navigationControllable: navigationControllable,
-                scheduleUserDefaults: scheduleUserDefaults
-            ).buildViewController()
+            return getScheduleViewController(isPostMessageSent: true)
         case .orderedAscending:
             return AwakeConfirmationViewBuilder(schedule: schedule, userDefaults: scheduleUserDefaults, navigationControllable: navigationControllable).buildViewController()
         }
+    }
+    
+    private func getScheduleViewController(isPostMessageSent: Bool) -> UIViewController {
+        return ScheduleViewBuilder(
+            schedule: schedule,
+            isPostMessageSent: isPostMessageSent,
+            navigationControllable: navigationControllable,
+            scheduleUserDefaults: scheduleUserDefaults
+        ).buildViewController()
     }
     
 }

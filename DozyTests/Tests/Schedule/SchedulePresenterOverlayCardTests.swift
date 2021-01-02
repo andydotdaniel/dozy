@@ -20,10 +20,10 @@ class SchedulePresenterOverlayCardTests: XCTestCase {
         presenter = nil
     }
     
-    private func setupPresenter(isPostMessageSent: Bool) {
+    private func setupPresenter(isPostMessageSent: Bool, isScheduleActive: Bool) {
         let channel = Channel(id: "SOME_CHANNEL_ID", isPublic: true, text: "SOME_CHANNEL_NAME")
         let message = Message(imageName: nil, imageUrl: nil, bodyText: "SOME_BODY_TEXT", channel: channel)
-        schedule = Schedule(message: message, awakeConfirmationTime: Current.now(), scheduledMessageId: "SOME_MESSAGE_ID")
+        schedule = Schedule(message: message, awakeConfirmationTime: Current.now(), scheduledMessageId: isScheduleActive ? "SOME_MESSAGE_ID": nil)
         viewModel = ScheduleViewModel(schedule: schedule)
         
         let userDefaultsMock = ScheduleUserDefaultsMock()
@@ -36,18 +36,18 @@ class SchedulePresenterOverlayCardTests: XCTestCase {
     }
     
     func testShowOverlayCardOnInit() {
-        setupPresenter(isPostMessageSent: true)
+        setupPresenter(isPostMessageSent: true, isScheduleActive: true)
         XCTAssertTrue(viewModel.isShowingOverlayCard)
     }
     
     func testDismissOverlayCardButtonTap() {
-        setupPresenter(isPostMessageSent: true)
+        setupPresenter(isPostMessageSent: true, isScheduleActive: true)
         presenter.onOverlayCardDismissButtonTapped()
         XCTAssertFalse(viewModel.isShowingOverlayCard)
     }
     
     func testShowOverlayCardWhenEnterForeground() {
-        setupPresenter(isPostMessageSent: false)
+        setupPresenter(isPostMessageSent: false, isScheduleActive: true)
         
         Current.now = { self.schedule.sleepyheadMessagePostTime.addingTimeInterval(1) }
         
@@ -59,6 +59,23 @@ class SchedulePresenterOverlayCardTests: XCTestCase {
         NotificationCenter.default.post(name: SceneNotification.willEnterForeground, object: nil)
         
         XCTAssertTrue(viewModel.isShowingOverlayCard)
+        
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+    
+    func testDoNothingWhenEnterForegroundForInactiveSchedule() {
+        setupPresenter(isPostMessageSent: false, isScheduleActive: false)
+        
+        Current.now = { self.schedule.sleepyheadMessagePostTime.addingTimeInterval(1) }
+        
+        expectation(
+            forNotification: SceneNotification.willEnterForeground,
+            object: nil,
+            handler: nil
+        )
+        NotificationCenter.default.post(name: SceneNotification.willEnterForeground, object: nil)
+        
+        XCTAssertFalse(viewModel.isShowingOverlayCard)
         
         waitForExpectations(timeout: 5, handler: nil)
     }
