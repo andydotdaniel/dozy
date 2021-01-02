@@ -10,6 +10,7 @@ import SwiftUI
 
 extension Color {
     
+    static let crayonYellow = Color(red: 255/255, green: 215/255, blue: 47/255)
     static let primaryBlue = Color(red: 47/255, green: 155/255, blue: 255/255)
     static let darkBlue = Color(red: 33/255, green: 134/255, blue: 227/255)
     

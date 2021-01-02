@@ -21,7 +21,7 @@ struct LoginView: View {
                         .zIndex(9)
                         .offset(y: UIDevice.current.screenType == .large ? 150 : 100)
                     Ellipse()
-                        .foregroundColor(Color.primaryBlue)
+                        .foregroundColor(Color.crayonYellow)
                         .scaleEffect(3, anchor: .bottom)
                         .zIndex(1)
                         .offset(y: -40)

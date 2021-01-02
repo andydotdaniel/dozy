@@ -21,6 +21,7 @@ struct LoginHeaderView: View {
                     .bold()
                     .fixedSize(horizontal: false, vertical: true)
                 Text("Get that boost to get out of bed by having people notified on Slack when you oversleep.")
+                    .bold()
                     .fixedSize(horizontal: false, vertical: true)
             }
             .multilineTextAlignment(.center)
@@ -29,7 +30,7 @@ struct LoginHeaderView: View {
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
         .edgesIgnoringSafeArea(.all)
-        .background(Color.primaryBlue)
+        .background(Color.crayonYellow)
     }
 }
 
