@@ -82,7 +82,8 @@ class SchedulePresenter: ScheduleViewPresenter {
                 }
                 navigateToAwakeConfirmation()
             case .orderedAscending:
-                break
+                let now = Current.now()
+                self.secondsUntilAwakeConfirmationTime = Int(schedule.awakeConfirmationTime.timeIntervalSince(now))
         }
     }
     
@@ -101,7 +102,7 @@ class SchedulePresenter: ScheduleViewPresenter {
     }
     
     private func enableAwakeConfirmation() {
-        setAwakeConfirmationCountdown(from: secondsUntilAwakeConfirmationTime)
+        setAwakeConfirmationCountdown()
         
         awakeConfirmationTimer.startTimer(timeInterval: 1, actionBlock: updateAwakeConfirmationTimer)
         
@@ -119,7 +120,7 @@ class SchedulePresenter: ScheduleViewPresenter {
     
     private func updateAwakeConfirmationTimer() {
         if secondsUntilAwakeConfirmationTime > 0 {
-            setAwakeConfirmationCountdown(from: secondsUntilAwakeConfirmationTime)
+            setAwakeConfirmationCountdown()
             secondsUntilAwakeConfirmationTime -= 1
         } else {
             awakeConfirmationTimer.stopTimer()
@@ -127,7 +128,7 @@ class SchedulePresenter: ScheduleViewPresenter {
         }
     }
     
-    private func setAwakeConfirmationCountdown(from seconds: Int) {
+    private func setAwakeConfirmationCountdown() {
         func secondsToHoursMinutesSeconds (seconds : Int) -> (hours: Int, minutes: Int, seconds: Int) {
             return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
         }

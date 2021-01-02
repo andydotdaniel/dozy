@@ -190,6 +190,34 @@ class SchedulePresenterTests: XCTestCase {
         waitForExpectations(timeout: 5, handler: nil)
     }
     
+    func testWillEnterForegroundUpdatesTimerText() {
+        func secondsToHoursMinutesSeconds (seconds : Int) -> (hours: Int, minutes: Int, seconds: Int) {
+            return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
+        }
+        
+        Current.now = { self.schedule.awakeConfirmationTime.addingTimeInterval(-60) }
+        
+        expectation(
+            forNotification: SceneNotification.willEnterForeground,
+            object: nil,
+            handler: nil
+        )
+
+        NotificationCenter.default.post(name: SceneNotification.willEnterForeground, object: nil)
+        
+        timerMock.actionBlock?()
+        
+        let time = secondsToHoursMinutesSeconds(seconds: Int(self.schedule.awakeConfirmationTime.timeIntervalSince(Current.now())))
+        let hoursString = time.hours < 10 ? "0\(time.hours)" : "\(time.hours)"
+        let minutesString = time.minutes < 10 ? "0\(time.minutes)" : "\(time.minutes)"
+        let secondsString = time.seconds < 10 ? "0\(time.seconds)" : "\(time.seconds)"
+        
+        let expectedTimerText = "\(hoursString):\(minutesString):\(secondsString)"
+        XCTAssertEqual(viewModel.awakeConfirmationCard.mutableText, expectedTimerText)
+        
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+    
     func testAwakeConfirmationTimerReachedEndNavigatesToAwakeConfirmationTimer() {
         let secondsToAwakeConfirmation: Int = Int(schedule.awakeConfirmationTime.timeIntervalSince(Current.now()))
         
