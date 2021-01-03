@@ -41,7 +41,8 @@ struct MessageFormView: View {
                             ImagePickerButton(selectedImage: $viewModel.selectedImage)
                                 .animation(.easeOut)
                                 .onTapGesture {
-                                   self.viewModel.isShowingImagePicker.toggle()
+                                    self.viewModel.isShowingImagePicker.toggle()
+                                    self.hideKeyboard()
                                 }
                         }
                         .padding(.horizontal, 24)
