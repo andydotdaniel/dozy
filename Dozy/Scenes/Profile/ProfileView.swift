@@ -44,7 +44,6 @@ struct ProfileView: View {
             AlternativeButton(
                 titleText: "Logout",
                 tapAction: { self.presenter.onLogoutButtonTapped() },
-                icon: nil,
                 isLoading: $viewModel.buttonIsLoading
             )
             .frame(maxWidth: .infinity)

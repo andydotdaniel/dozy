@@ -11,7 +11,6 @@ import SwiftUI
 struct AlternativeButton: View {
     let titleText: String
     let tapAction: () -> Void
-    let icon: Image?
     
     @Binding var isLoading: Bool
     
@@ -31,17 +30,10 @@ struct AlternativeButton: View {
     private func getButtonContent() -> AnyView {
         if !self.isLoading {
             return AnyView (
-                HStack(spacing: 12) {
-                    icon?
-                        .renderingMode(.original)
-                        .frame(width: 30, height: 30)
-                        .scaledToFit()
-                    
-                    Text(titleText)
-                        .font(.system(size: 21))
-                        .bold()
-                        .foregroundColor(Color.black)
-                }
+                Text(titleText)
+                    .font(.system(size: 21))
+                    .bold()
+                    .foregroundColor(Color.black)
             )
         } else {
             return AnyView(Spinner(strokeColor: Color.primaryBlue))
@@ -52,7 +44,7 @@ struct AlternativeButton: View {
 struct AlternativeButton_Previews: PreviewProvider {
     
     static var previews: some View {
-        AlternativeButton(titleText: "Some Text", tapAction: { }, icon: Image("SlackLogo"), isLoading: .constant(false))
+        AlternativeButton(titleText: "Some Text", tapAction: { }, isLoading: .constant(false))
     }
     
 }

@@ -111,6 +111,7 @@
 		10F42226249930CC0078AC3C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F42225249930CC0078AC3C /* LoginViewModel.swift */; };
 		10F4222A249946970078AC3C /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F42229249946960078AC3C /* Toast.swift */; };
 		10F7D38D25A1C4B300ED56AB /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F7D38C25A1C4B300ED56AB /* View.swift */; };
+		10F7D3A625A1DD1900ED56AB /* AddToSlackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F7D3A525A1DD1900ED56AB /* AddToSlackButton.swift */; };
 		70407D34F4A96CB03C5F5878 /* Pods_Dozy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0765982015435C7C3C0D6A1A /* Pods_Dozy.framework */; };
 		CD5283FD436FED4B77885CE3 /* Pods_DozyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AA6CE650070EA424C97DF4D /* Pods_DozyTests.framework */; };
 /* End PBXBuildFile section */
@@ -235,6 +236,7 @@
 		10F42225249930CC0078AC3C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		10F42229249946960078AC3C /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		10F7D38C25A1C4B300ED56AB /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		10F7D3A525A1DD1900ED56AB /* AddToSlackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToSlackButton.swift; sourceTree = "<group>"; };
 		1E25985DF5195097A3440391 /* Pods-DozyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DozyTests.release.xcconfig"; path = "Target Support Files/Pods-DozyTests/Pods-DozyTests.release.xcconfig"; sourceTree = "<group>"; };
 		5B9271CFBF83D8CEA01A6CC7 /* Pods-Dozy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dozy.debug.xcconfig"; path = "Target Support Files/Pods-Dozy/Pods-Dozy.debug.xcconfig"; sourceTree = "<group>"; };
 		7AA6CE650070EA424C97DF4D /* Pods_DozyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DozyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -399,6 +401,7 @@
 				10AC9D9D24ACF96800A3791C /* ImagePickerButton.swift */,
 				1051E4A924BB184B00566C5B /* ImageButton.swift */,
 				108B4E0A24C2C925000F1C4B /* SecondaryButton.swift */,
+				10F7D3A525A1DD1900ED56AB /* AddToSlackButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -893,6 +896,7 @@
 				10D5E09B25297AA400E0C34A /* Time.swift in Sources */,
 				10D5E0A1253181B800E0C34A /* AwakeConfirmationViewBuilder.swift in Sources */,
 				1035D078249605D7006B22FC /* Color.swift in Sources */,
+				10F7D3A625A1DD1900ED56AB /* AddToSlackButton.swift in Sources */,
 				10358EC2258C98A1006F3ADC /* ActionTimer.swift in Sources */,
 				104BCC2024AB991200C35BDC /* DispatchQueue.swift in Sources */,
 				105BDB0424D692F0005C9CD7 /* OnboardingViewBuilder.swift in Sources */,

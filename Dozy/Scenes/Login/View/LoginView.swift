@@ -26,12 +26,10 @@ struct LoginView: View {
                         .zIndex(1)
                         .offset(y: -40)
                 }
-                AlternativeButton(
-                    titleText: "Sign in with Slack",
+                AddToSlackButton(
                     tapAction: {
                         self.presenter.didTapLoginButton()
                     },
-                    icon: Image("SlackLogo"),
                     isLoading: self.$viewModel.isFetchingAccessToken
                 )
                 .offset(y: -24)
