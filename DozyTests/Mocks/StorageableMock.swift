@@ -26,14 +26,20 @@ class RemoteStorageReferencingMock: RemoteStorageReferencing {
         completion(URL(string: downloadURLString), error)
     }
     
+    var deleteCalled: Bool = false
+    func delete(completion: ((Error?) -> Void)?) {
+        deleteCalled = true
+        completion?(nil)
+    }
+    
 }
 
 class RemoteStorageableMock: RemoteStorageable {
     
     let referenceMock: RemoteStorageReferencingMock = RemoteStorageReferencingMock()
-    var pathStringCalled: String?
+    var pathStringsCalled: [String] = []
     func reference(with pathString: String) -> RemoteStorageReferencing {
-        pathStringCalled = pathString
+        pathStringsCalled.append(pathString)
         return referenceMock
     }
     

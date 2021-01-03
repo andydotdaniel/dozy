@@ -155,7 +155,7 @@ class MessageFormPresenterTests: XCTestCase {
         
         presenter.onImageUploadConfirmed()
         
-        XCTAssertEqual(remoteStorageableMock.pathStringCalled, "/images/\(Current.now().timeIntervalSinceReferenceDate).jpg")
+        XCTAssertEqual(remoteStorageableMock.pathStringsCalled.first, "/images/\(Current.now().timeIntervalSinceReferenceDate).jpg")
         XCTAssertFalse(viewModel.isSaving)
         XCTAssertTrue(viewModel.isShowingSaveError)
     }
@@ -167,6 +167,7 @@ class MessageFormPresenterRemoveOldImageTests: XCTestCase {
     private var presenter: MessageFormPresenter!
     private var viewModel: MesssageFormViewModel!
     private var fileManagerMock: FileManagerMock!
+    private var remoteStorageableMock: RemoteStorageableMock!
     
     private var message: Message {
         let channel = Channel(id: "SOME_CHANNEL_NAME", isPublic: true, text: "SOME_TEXT")
@@ -189,7 +190,7 @@ class MessageFormPresenterRemoveOldImageTests: XCTestCase {
         urlSessionMock.results.append(contentsOf: channelFetchResults)
         let networkService = NetworkService(urlSession: urlSessionMock)
         
-        let remoteStorageableMock = RemoteStorageableMock()
+        remoteStorageableMock = RemoteStorageableMock()
         fileManagerMock = FileManagerMock()
         
         presenter = MessageFormPresenter(
@@ -220,6 +221,10 @@ class MessageFormPresenterRemoveOldImageTests: XCTestCase {
         let newImageFileName = "\(Current.now().timeIntervalSinceReferenceDate).jpg"
         let expectedFileCreatedAtPath = fileManagerMock.documentsDirectoryURL.absoluteString + "/\(newImageFileName)"
         XCTAssertEqual(fileManagerMock.fileCreatedAtPath, expectedFileCreatedAtPath)
+        
+        XCTAssertEqual(remoteStorageableMock.pathStringsCalled.first, "/images/\(newImageFileName)")
+        XCTAssertEqual(remoteStorageableMock.pathStringsCalled.last, "/images/\(message.imageName!)")
+        XCTAssertTrue(remoteStorageableMock.referenceMock.deleteCalled)
     }
     
 }
