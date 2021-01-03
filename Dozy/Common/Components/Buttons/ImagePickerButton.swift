@@ -24,6 +24,17 @@ struct ImagePickerButton: View {
                 .font(.subheadline)
                 .fontWeight(.semibold)
                 .foregroundColor(Color.placeholderGray)
+            Spacer()
+            
+            if selectedImage != nil {
+                Button(action: {
+                    selectedImage = nil
+                }, label: {
+                    Image("IconCrossRounded")
+                        .frame(width: 24, height: 24)
+                        .fixedSize()
+                })
+            }
         }
     }
     

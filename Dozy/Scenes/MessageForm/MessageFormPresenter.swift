@@ -138,6 +138,24 @@ class MessageFormPresenter: MessageFormViewPresenter {
         let selectedImageData = self.viewModel.selectedImage?.pngData()
         if let selectedImage = selectedImageData, selectedImage != message?.uiImage?.pngData() {
             self.viewModel.isShowingImageUploadConfirmation = true
+        } else if let messageImageName = message?.imageName {
+            self.viewModel.isSaving = true
+            
+            let message = Message(
+                imageName: nil,
+                imageUrl: nil,
+                bodyText: self.viewModel.bodyText,
+                channel: channel
+            )
+            
+            do {
+                try deleteOldImage(messageImageName: messageImageName, completion: { [weak self] in
+                    guard let self = self else { return }
+                    self.delegate?.onMessageSaved(message)
+                })
+            } catch {
+                self.delegate?.onMessageSaved(message)
+            }
         } else {
             let message = Message(
                 imageName: self.message?.imageName,

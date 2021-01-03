@@ -168,6 +168,7 @@ class MessageFormPresenterRemoveOldImageTests: XCTestCase {
     private var viewModel: MesssageFormViewModel!
     private var fileManagerMock: FileManagerMock!
     private var remoteStorageableMock: RemoteStorageableMock!
+    private var delegateMock: MessageFormDelegateMock!
     
     private var message: Message {
         let channel = Channel(id: "SOME_CHANNEL_NAME", isPublic: true, text: "SOME_TEXT")
@@ -180,7 +181,7 @@ class MessageFormPresenterRemoveOldImageTests: XCTestCase {
         Current.now = { now }
         
         viewModel = MesssageFormViewModel(navigationBarTitle: "Some navigation title", message: nil)
-        let delegateMock = MessageFormDelegateMock()
+        delegateMock = MessageFormDelegateMock()
                 
         let keychainMock = KeychainMock()
         keychainMock.dataToLoad = Data("SOME_ACCESS_TOKEN".utf8)
@@ -225,6 +226,25 @@ class MessageFormPresenterRemoveOldImageTests: XCTestCase {
         XCTAssertEqual(remoteStorageableMock.pathStringsCalled.first, "/images/\(newImageFileName)")
         XCTAssertEqual(remoteStorageableMock.pathStringsCalled.last, "/images/\(message.imageName!)")
         XCTAssertTrue(remoteStorageableMock.referenceMock.deleteCalled)
+    }
+    
+    func testRemoveOldMessageImageOnImageSaveWithoutNewImage() {
+        presenter.didTapChannelDropdown()
+        let channel = viewModel.filteredChannelItems.first!
+        presenter.didTapChannelItem(id: channel.id)
+        
+        viewModel.selectedImage = nil
+        
+        presenter.didTapSave()
+        
+        let expectedItemRemovedAtPath = fileManagerMock.documentsDirectoryURL.absoluteString + "/\(message.imageName!)"
+        XCTAssertEqual(fileManagerMock.itemRemovedAtPath, expectedItemRemovedAtPath)
+        
+        XCTAssertEqual(remoteStorageableMock.pathStringsCalled.first, "/images/\(message.imageName!)")
+        XCTAssertTrue(remoteStorageableMock.referenceMock.deleteCalled)
+        
+        let expectedMessageSaved = Message(imageName: nil, imageUrl: nil, bodyText: viewModel.bodyText, channel: channel)
+        XCTAssertEqual(delegateMock.messageSaved, expectedMessageSaved)
     }
     
 }
