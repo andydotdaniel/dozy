@@ -53,7 +53,6 @@
 		104BCC2424AB9BD500C35BDC /* WorldMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BCC2324AB9BD500C35BDC /* WorldMock.swift */; };
 		104BCC2624AB9C0600C35BDC /* DispatchQueueMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BCC2524AB9C0600C35BDC /* DispatchQueueMock.swift */; };
 		104BCC2824ABA05300C35BDC /* MessageFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BCC2724ABA05300C35BDC /* MessageFormView.swift */; };
-		104BE36F24B0834B00E02AAD /* KeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BE36E24B0834B00E02AAD /* KeyboardListener.swift */; };
 		104BE37224B0F04400E02AAD /* MessageFormPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BE37124B0F04400E02AAD /* MessageFormPresenter.swift */; };
 		104BE37524B0F26A00E02AAD /* ChannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BE37424B0F26A00E02AAD /* ChannelView.swift */; };
 		1051E4A824BAF9B300566C5B /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1051E4A724BAF9B300566C5B /* ImagePickerView.swift */; };
@@ -177,7 +176,6 @@
 		104BCC2324AB9BD500C35BDC /* WorldMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMock.swift; sourceTree = "<group>"; };
 		104BCC2524AB9C0600C35BDC /* DispatchQueueMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueMock.swift; sourceTree = "<group>"; };
 		104BCC2724ABA05300C35BDC /* MessageFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormView.swift; sourceTree = "<group>"; };
-		104BE36E24B0834B00E02AAD /* KeyboardListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardListener.swift; sourceTree = "<group>"; };
 		104BE37124B0F04400E02AAD /* MessageFormPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFormPresenter.swift; sourceTree = "<group>"; };
 		104BE37424B0F26A00E02AAD /* ChannelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelView.swift; sourceTree = "<group>"; };
 		1051E4A724BAF9B300566C5B /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
@@ -531,7 +529,6 @@
 				10F422212497C2050078AC3C /* NetworkRequest.swift */,
 				1081AE25249F387900AD6655 /* WebAuthenticationSession.swift */,
 				1081AE2C249F4E0C00AD6655 /* Keychain.swift */,
-				104BE36E24B0834B00E02AAD /* KeyboardListener.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -883,7 +880,6 @@
 				10E57E6024969F03001B71A4 /* LoginPresenter.swift in Sources */,
 				108B4E0B24C2C925000F1C4B /* SecondaryButton.swift in Sources */,
 				1023191224F21C380005F6A6 /* AwakeConfirmationView.swift in Sources */,
-				104BE36F24B0834B00E02AAD /* KeyboardListener.swift in Sources */,
 				10F422202497BCB60078AC3C /* NetworkService.swift in Sources */,
 				1081AE3124A0E84C00AD6655 /* OnboardingView.swift in Sources */,
 				1023191424F2238D0005F6A6 /* Slider.swift in Sources */,

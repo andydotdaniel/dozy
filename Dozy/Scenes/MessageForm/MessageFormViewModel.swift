@@ -64,8 +64,6 @@ class MesssageFormViewModel: ObservableObject {
     
     private var cancellableSet = Set<AnyCancellable>()
     
-    private var keyboardListener: KeyboardListener
-    
     init(navigationBarTitle: String, message: Message?) {
         self.navigationBarTitle = navigationBarTitle
         self.channelNameTextFieldText = message?.channel.text ?? ""
@@ -89,9 +87,6 @@ class MesssageFormViewModel: ObservableObject {
         self.isShowingSaveError = false
         self.isFetchingChannels = false
         self.isShowingChannelFetchError = false
-        
-        let keyboardListener = KeyboardListener()
-        self.keyboardListener = keyboardListener
         
         self.saveButtonEnabledPublisher
             .receive(on: DispatchQueue.main)
