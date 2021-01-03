@@ -14,6 +14,7 @@ protocol MessageFormViewPresenter {
     func didTapChannelDropdown()
     func didTapChannelItem(id: String)
     func didTapSave()
+    func didTapCancel()
     
     func onImageUploadConfirmed()
     func onImageUploadCancelled()
@@ -165,6 +166,10 @@ class MessageFormPresenter: MessageFormViewPresenter {
             )
             self.delegate?.onMessageSaved(message)
         }
+    }
+    
+    func didTapCancel() {
+        self.delegate?.onMessageFormCancelled()
     }
     
     private func uploadImage(image: Data, completion: @escaping (Result<MessageImage, NetworkService.RequestError>) -> Void) {

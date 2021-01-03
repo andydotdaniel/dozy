@@ -11,7 +11,7 @@ import UIKit
 
 protocol OnboardingRouter {
     func presentMessageForm()
-    func dismissMessageForm(completion: @escaping (() -> Void))
+    func dismissMessageForm(completion: (() -> Void)?)
     
     func navigateToSchedule(schedule: Schedule, userDefaults: ScheduleUserDefaults)
 }
@@ -34,7 +34,7 @@ class OnboardingViewRouter: OnboardingRouter {
         self.messageFormViewController = messageFormViewController
     }
     
-    func dismissMessageForm(completion: @escaping (() -> Void)) {
+    func dismissMessageForm(completion: (() -> Void)?) {
         messageFormViewController?.dismiss(animated: true, completion: completion)
     }
     

@@ -31,6 +31,10 @@ class OnboardingPresenter: OnboardingViewPresenter {
         })
     }
     
+    func onMessageFormCancelled() {
+        router?.dismissMessageForm(completion: nil)
+    }
+    
     func didTapCreateMessageButton() {
         router?.presentMessageForm()
     }

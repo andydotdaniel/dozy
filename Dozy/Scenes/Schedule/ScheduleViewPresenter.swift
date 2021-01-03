@@ -357,6 +357,10 @@ class SchedulePresenter: ScheduleViewPresenter {
         self.viewModel.isShowingMessageForm = false
     }
     
+    func onMessageFormCancelled() {
+        self.viewModel.isShowingMessageForm = false
+    }
+    
     private func updateMessageCard(with message: Message) {
         self.viewModel.messageCard = ScheduleViewModel.MessageCardViewModel(
             image: message.uiImage,

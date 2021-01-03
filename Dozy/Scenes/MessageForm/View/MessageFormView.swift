@@ -71,7 +71,9 @@ struct MessageFormView: View {
             .padding(.top, 30)
             .navigationBarTitle(Text(viewModel.navigationBarTitle), displayMode: .inline)
             .navigationBarItems(
-                trailing: Button("Save") {
+                leading: Button("Cancel") {
+                    self.presenter.didTapCancel()
+                }, trailing: Button("Save") {
                     self.presenter.didTapSave()
                 }.disabled(!viewModel.isSaveButtonEnabled)
             )

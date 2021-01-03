@@ -12,6 +12,7 @@ import FirebaseStorage
 
 protocol MessageFormDelegate: class {
     func onMessageSaved(_ message: Message)
+    func onMessageFormCancelled()
 }
 
 struct MessageFormViewBuilder: ViewBuilder, ViewControllerBuilder {
