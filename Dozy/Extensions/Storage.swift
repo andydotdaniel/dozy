@@ -11,6 +11,7 @@ import FirebaseStorage
 protocol RemoteStorageReferencing {
     func uploadData(_ data: Data, metadata: [String: Any]?, completion: ((Error?) -> Void)?)
     func downloadURL(completion: @escaping (URL?, Error?) -> Void)
+    func delete(completion: ((Error?) -> Void)?)
 }
 
 extension StorageReference: RemoteStorageReferencing {

@@ -189,18 +189,25 @@ class MessageFormPresenter: MessageFormViewPresenter {
                     case .success(let image):
                         do {
                             try self.writeImage(image)
-                            try self.deleteOldImageIfNeeded()
+                            
+                            let message = Message(
+                                imageName: image.name,
+                                imageUrl: image.url,
+                                bodyText: self.viewModel.bodyText,
+                                channel: channel
+                            )
+                            
+                            guard let oldMessageImageName = self.message?.imageName else {
+                                self.delegate?.onMessageSaved(message)
+                                return
+                            }
+                            
+                            try self.deleteOldImage(messageImageName: oldMessageImageName, completion: { [weak self] in
+                                self?.delegate?.onMessageSaved(message)
+                            })
                         } catch {
                             showSaveError()
                         }
-                        
-                        let message = Message(
-                            imageName: image.name,
-                            imageUrl: image.url,
-                            bodyText: self.viewModel.bodyText,
-                            channel: channel
-                        )
-                        self.delegate?.onMessageSaved(message)
                     case .failure:
                         showSaveError()
                     }
@@ -218,15 +225,23 @@ class MessageFormPresenter: MessageFormViewPresenter {
         }
     }
     
-    private func deleteOldImageIfNeeded() throws {
-        guard let messageImageName = self.message?.imageName,
-              let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first
-              else { return }
+    private func deleteOldImage(messageImageName: String, completion: @escaping () -> Void) throws {
+        func deleteLocalImage(with imageName: String) throws {
+            guard let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+            let fileUrl = documentsDirectory.appendingPathComponent(messageImageName)
+            
+            guard fileManager.fileExists(atPath: fileUrl.path) else { return }
+            try fileManager.removeItem(atPath: fileUrl.path)
+        }
         
-        let fileUrl = documentsDirectory.appendingPathComponent(messageImageName)
+        func deleteRemoteImage(with imageName: String, completion: @escaping () -> Void) {
+            let storageReference = dataStorageble.reference(with: "/images/\(imageName)")
+            storageReference.delete() { _ in completion() }
+        }
         
-        guard fileManager.fileExists(atPath: fileUrl.path) else { return }
-        try fileManager.removeItem(atPath: fileUrl.path)
+        guard let messageImageName = self.message?.imageName else { return }
+        try deleteLocalImage(with: messageImageName)
+        deleteRemoteImage(with: messageImageName, completion: completion)
     }
     
     func onImageUploadCancelled() {
