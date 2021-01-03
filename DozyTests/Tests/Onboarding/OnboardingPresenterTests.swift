@@ -46,6 +46,11 @@ class OnboardingPresenterTests: XCTestCase {
         XCTAssertEqual(routerMock.navigateToScheduleCalledWithArgs?.schedule, userDefaultsMock.scheduleSaved)
         XCTAssertTrue(routerMock.navigateToScheduleCalledWithArgs?.userDefaults === userDefaultsMock)
     }
+    
+    func testOnMessageCancelled() {
+        presenter.onMessageFormCancelled()
+        XCTAssertTrue(routerMock.dismissMessageFormCalled)
+    }
 
 }
 
@@ -57,9 +62,9 @@ private class OnboardingRouterMock: OnboardingRouter {
     }
     
     var dismissMessageFormCalled: Bool = false
-    func dismissMessageForm(completion: @escaping (() -> Void)) {
+    func dismissMessageForm(completion: (() -> Void)?) {
         dismissMessageFormCalled = true
-        completion()
+        completion?()
     }
     
     var navigateToScheduleCalledWithArgs: (schedule: Schedule, userDefaults: ScheduleUserDefaults)?

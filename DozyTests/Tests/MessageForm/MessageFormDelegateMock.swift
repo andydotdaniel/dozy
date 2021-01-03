@@ -16,4 +16,9 @@ class MessageFormDelegateMock: MessageFormDelegate {
         self.messageSaved = message
     }
     
+    var onMessageFormCancelledCalled: Bool = false
+    func onMessageFormCancelled() {
+        self.onMessageFormCancelledCalled = true
+    }
+    
 }

@@ -268,5 +268,12 @@ class SchedulePresenterTests: XCTestCase {
         XCTAssertTrue(viewModel.errorToastIsShowing)
         XCTAssertEqual(viewModel.errorToastText, "Oops, something happened. Please try again.")
     }
+    
+    func testOnMessageFormCancelled() {
+        self.viewModel.isShowingMessageForm = true
+        
+        presenter.onMessageFormCancelled()
+        XCTAssertFalse(self.viewModel.isShowingMessageForm)
+    }
 
 }

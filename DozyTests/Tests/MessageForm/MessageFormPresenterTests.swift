@@ -160,6 +160,11 @@ class MessageFormPresenterTests: XCTestCase {
         XCTAssertTrue(viewModel.isShowingSaveError)
     }
     
+    func testDidTapCancel() {
+        presenter.didTapCancel()
+        XCTAssertTrue(delegateMock.onMessageFormCancelledCalled)
+    }
+    
 }
 
 class MessageFormPresenterRemoveOldImageTests: XCTestCase {
