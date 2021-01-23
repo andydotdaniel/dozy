@@ -17,6 +17,7 @@ class AwakeConfirmationPresenterTests: XCTestCase {
     var userDefaultsMock: ScheduleUserDefaultsMock!
     var urlSessionMock: URLSessionMock!
     var keychainMock: KeychainMock!
+    var timerMock: TimerMock!
     
     var navigationControllable: NavigationControllableMock!
     
@@ -39,19 +40,26 @@ class AwakeConfirmationPresenterTests: XCTestCase {
         
         navigationControllable = NavigationControllableMock()
         
+        timerMock = TimerMock()
+        
         presenter = AwakeConfirmationPresenter(
             viewModel: viewModel,
             networkService: networkService,
             keychain: keychainMock,
             userDefaults: userDefaultsMock,
             savedSchedule: schedule,
-            navigationControllable: navigationControllable
+            navigationControllable: navigationControllable,
+            secondsLeftTimer: timerMock
         )
     }
 
     override func tearDownWithError() throws {
         presenter = nil
         Current = World()
+    }
+    
+    func testStartTimer() {
+        XCTAssertNotNil(timerMock.actionBlock)
     }
 
     func testOnSliderReachedEnd() throws {
@@ -71,6 +79,7 @@ class AwakeConfirmationPresenterTests: XCTestCase {
         
         XCTAssertNotNil(userDefaultsMock.scheduleSaved)
         XCTAssertNil(userDefaultsMock.scheduleSaved?.scheduledMessageId)
+        XCTAssertTrue(timerMock.stopTimerCalled)
         XCTAssertTrue(navigationControllable?.pushViewControllerCalledWithArgs?.viewController is ScheduleViewController)
         XCTAssertEqual(navigationControllable?.pushViewControllerCalledWithArgs?.animated, true)
         XCTAssertEqual(navigationControllable?.viewControllers.count, 1)
@@ -114,6 +123,7 @@ class AwakeConfirmationPresenterTests: XCTestCase {
         
         XCTAssertNotNil(userDefaultsMock.scheduleSaved)
         XCTAssertNil(userDefaultsMock.scheduleSaved?.scheduledMessageId)
+        XCTAssertTrue(timerMock.stopTimerCalled)
         XCTAssertTrue(navigationControllable?.pushViewControllerCalledWithArgs?.viewController is ScheduleViewController)
         XCTAssertEqual(navigationControllable?.pushViewControllerCalledWithArgs?.animated, true)
         XCTAssertEqual(navigationControllable?.viewControllers.count, 1)

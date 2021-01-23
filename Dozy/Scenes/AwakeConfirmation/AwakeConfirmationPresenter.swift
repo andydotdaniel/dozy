@@ -19,7 +19,7 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
     private let userDefaults: ScheduleUserDefaults
     private weak var navigationControllable: NavigationControllable?
     
-    private var secondsLeftTimer: Timer?
+    private let secondsLeftTimer: Timeable
     
     private let savedSchedule: Schedule
     
@@ -29,7 +29,8 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
         keychain: SecureStorable,
         userDefaults: ScheduleUserDefaults,
         savedSchedule: Schedule,
-        navigationControllable: NavigationControllable?
+        navigationControllable: NavigationControllable?,
+        secondsLeftTimer: Timeable
     ) {
         self.viewModel = viewModel
         self.networkService = networkService
@@ -37,8 +38,9 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
         self.userDefaults = userDefaults
         self.savedSchedule = savedSchedule
         self.navigationControllable = navigationControllable
+        self.secondsLeftTimer = secondsLeftTimer
         
-        setSecondsLeftTimer()
+        secondsLeftTimer.startTimer(timeInterval: 1, actionBlock: updateSecondsLeftTimer)
         
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: SceneNotification.willEnterForeground, object: nil)
     }
@@ -48,32 +50,22 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
         if secondsLeft >= 1 {
             viewModel.secondsLeft = secondsLeft
         } else {
-            endAwakeConfirmationTimer()
+            endAwakeConfirmationTimer(isPostMessageSent: true)
         }
-    }
-    
-    private func setSecondsLeftTimer() {
-        secondsLeftTimer = Timer.scheduledTimer(
-            timeInterval: 1,
-            target: self,
-            selector: #selector(updateSecondsLeftTimer),
-            userInfo: nil,
-            repeats: true
-        )
     }
     
     @objc private func updateSecondsLeftTimer() {
         if viewModel.secondsLeft >= 1 {
             viewModel.secondsLeft -= 1
         } else {
-            endAwakeConfirmationTimer()
+            endAwakeConfirmationTimer(isPostMessageSent: true)
         }
     }
     
-    func endAwakeConfirmationTimer() {
-        secondsLeftTimer?.invalidate()
+    func endAwakeConfirmationTimer(isPostMessageSent: Bool) {
+        secondsLeftTimer.stopTimer()
         let updatedSchedule = saveInactiveSchedule()
-        navigateToSchedule(with: updatedSchedule, isPostMessageSent: true)
+        navigateToSchedule(with: updatedSchedule, isPostMessageSent: isPostMessageSent)
     }
     
     func onSliderReachedEnd() {
@@ -98,8 +90,7 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
             Current.dispatchQueue.async {
                 switch result {
                 case .success:
-                    let updatedSchedule = self.saveInactiveSchedule()
-                    self.navigateToSchedule(with: updatedSchedule, isPostMessageSent: false)
+                    self.endAwakeConfirmationTimer(isPostMessageSent: false)
                 case .failure:
                     self.viewModel.isShowingError = true
                     self.viewModel.sliderHasReachedEnd = false
