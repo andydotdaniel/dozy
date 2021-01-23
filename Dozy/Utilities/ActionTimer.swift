@@ -15,7 +15,7 @@ protocol Timeable {
 
 class ActionTimer: Timeable {
     
-    private var timer: Timer?
+    private weak var timer: Timer?
     private var actionBlock: (() -> Void)?
     
     func startTimer(timeInterval: TimeInterval, actionBlock: @escaping () -> Void) {
@@ -32,6 +32,7 @@ class ActionTimer: Timeable {
     
     func stopTimer() {
         timer?.invalidate()
+        actionBlock = nil
     }
     
     @objc private func onTimerUpdated() {
