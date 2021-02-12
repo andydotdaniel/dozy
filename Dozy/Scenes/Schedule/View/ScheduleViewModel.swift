@@ -38,6 +38,7 @@ class ScheduleViewModel: ObservableObject {
     @Published var errorToastIsShowing: Bool = false
     
     @Published var isShowingOverlayCard: Bool = false
+    var overlayCardText: String?
     
     init(schedule: Schedule) {
         self.state = schedule.isActive ? .active : .inactive

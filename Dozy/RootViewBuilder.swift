@@ -42,7 +42,7 @@ class RootViewBuilder: ViewControllerBuilder {
             case .orderedAscending:
                 return ScheduleViewBuilder(
                     schedule: schedule,
-                    isPostMessageSent: false,
+                    isPostMessageSent: .notSent,
                     navigationControllable: navigationControllable,
                     scheduleUserDefaults: userDefaults
                 ).buildViewController()

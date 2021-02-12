@@ -32,7 +32,7 @@ struct AwakeConfirmationViewBuilder: ViewControllerBuilder {
     }
     
     func buildViewController() -> UIViewController {
-        let secondsLeft = schedule.sleepyheadMessagePostTime.timeIntervalSinceNow
+        let secondsLeft = schedule.delayedAwakeConfirmationTime.timeIntervalSinceNow
         let viewModel = AwakeConfirmationViewModel(countdownActive: true, secondsLeft: Int(secondsLeft))
         let presenter = AwakeConfirmationPresenter(viewModel: viewModel, networkService: NetworkService(), keychain: Keychain(), userDefaults: userDefaults, savedSchedule: schedule, navigationControllable: navigationControllable, secondsLeftTimer: ActionTimer())
         let view = AwakeConfirmationView(viewModel: viewModel, presenter: presenter)

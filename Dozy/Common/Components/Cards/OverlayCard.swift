@@ -23,6 +23,7 @@ struct OverlayCard: View {
             Text(text)
                 .foregroundColor(Color.black)
                 .fontWeight(.bold)
+                .multilineTextAlignment(.center)
             if let delegate = self.delegate {
                 Button(action: delegate.onOverlayCardDismissButtonTapped) {
                     Text("Dismiss")

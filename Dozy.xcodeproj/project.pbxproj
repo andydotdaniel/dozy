@@ -18,6 +18,7 @@
 		101581752495F8CA00AA0B37 /* LoginPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101581742495F8CA00AA0B37 /* LoginPresenterTests.swift */; };
 		101C332B24E5A65C009BD331 /* UserDefaultsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101C332A24E5A65C009BD331 /* UserDefaultsMock.swift */; };
 		101C332D24E5A726009BD331 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101C332C24E5A726009BD331 /* Schedule.swift */; };
+		101FA2C725D628A20044DEF6 /* ScheduledMessageStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101FA2C625D628A20044DEF6 /* ScheduledMessageStatus.swift */; };
 		102102A9249F2EF700084C91 /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102102A8249F2EF700084C91 /* URLSessionMock.swift */; };
 		102102AB249F2F0F00084C91 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102102AA249F2F0F00084C91 /* URLSession.swift */; };
 		1023190F24F1603B0005F6A6 /* SchedulePresenterTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1023190E24F1603B0005F6A6 /* SchedulePresenterTimerTests.swift */; };
@@ -142,6 +143,7 @@
 		101581762495F8CA00AA0B37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		101C332A24E5A65C009BD331 /* UserDefaultsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsMock.swift; sourceTree = "<group>"; };
 		101C332C24E5A726009BD331 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		101FA2C625D628A20044DEF6 /* ScheduledMessageStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledMessageStatus.swift; sourceTree = "<group>"; };
 		102102A8249F2EF700084C91 /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
 		102102AA249F2F0F00084C91 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
 		1023190E24F1603B0005F6A6 /* SchedulePresenterTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePresenterTimerTests.swift; sourceTree = "<group>"; };
@@ -508,6 +510,7 @@
 			children = (
 				106C5A7524C4525300B8BA9C /* Models */,
 				10381138249667EB00DC5CEC /* Components */,
+				101FA2C625D628A20044DEF6 /* ScheduledMessageStatus.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -847,6 +850,7 @@
 				10A21F372581183100E67FE0 /* ProfileViewBuilder.swift in Sources */,
 				108C0E78258D113F00DBA0A6 /* OverlayCard.swift in Sources */,
 				1035D075249604CE006B22FC /* LoginHeaderView.swift in Sources */,
+				101FA2C725D628A20044DEF6 /* ScheduledMessageStatus.swift in Sources */,
 				102102AB249F2F0F00084C91 /* URLSession.swift in Sources */,
 				10B7878F259C9F83007684D9 /* OnboardingRouter.swift in Sources */,
 				10F422222497C2050078AC3C /* NetworkRequest.swift in Sources */,

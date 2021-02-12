@@ -41,7 +41,7 @@ class OnboardingViewRouter: OnboardingRouter {
     func navigateToSchedule(schedule: Schedule, userDefaults: ScheduleUserDefaults) {
         let scheduleViewController = ScheduleViewBuilder(
             schedule: schedule,
-            isPostMessageSent: false,
+            isPostMessageSent: .notSent,
             navigationControllable: self.navigationControllable,
             scheduleUserDefaults: userDefaults
         ).buildViewController()

@@ -20,7 +20,7 @@ class SchedulePresenterOverlayCardTests: XCTestCase {
         presenter = nil
     }
     
-    private func setupPresenter(isPostMessageSent: Bool, isScheduleActive: Bool) {
+    private func setupPresenter(isPostMessageSent: ScheduledMessageStatus, isScheduleActive: Bool) {
         let channel = Channel(id: "SOME_CHANNEL_ID", isPublic: true, text: "SOME_CHANNEL_NAME")
         let message = Message(imageName: nil, imageUrl: nil, bodyText: "SOME_BODY_TEXT", channel: channel)
         schedule = Schedule(message: message, awakeConfirmationTime: Current.now(), scheduledMessageId: isScheduleActive ? "SOME_MESSAGE_ID": nil)
@@ -36,20 +36,20 @@ class SchedulePresenterOverlayCardTests: XCTestCase {
     }
     
     func testShowOverlayCardOnInit() {
-        setupPresenter(isPostMessageSent: true, isScheduleActive: true)
+        setupPresenter(isPostMessageSent: .sent, isScheduleActive: true)
         XCTAssertTrue(viewModel.isShowingOverlayCard)
     }
     
     func testDismissOverlayCardButtonTap() {
-        setupPresenter(isPostMessageSent: true, isScheduleActive: true)
+        setupPresenter(isPostMessageSent: .confirmed, isScheduleActive: true)
         presenter.onOverlayCardDismissButtonTapped()
         XCTAssertFalse(viewModel.isShowingOverlayCard)
     }
     
     func testShowOverlayCardWhenEnterForeground() {
-        setupPresenter(isPostMessageSent: false, isScheduleActive: true)
+        setupPresenter(isPostMessageSent: .confirmed, isScheduleActive: true)
         
-        Current.now = { self.schedule.sleepyheadMessagePostTime.addingTimeInterval(1) }
+        Current.now = { self.schedule.delayedAwakeConfirmationTime.addingTimeInterval(1) }
         
         expectation(
             forNotification: SceneNotification.willEnterForeground,
@@ -64,9 +64,9 @@ class SchedulePresenterOverlayCardTests: XCTestCase {
     }
     
     func testDoNothingWhenEnterForegroundForInactiveSchedule() {
-        setupPresenter(isPostMessageSent: false, isScheduleActive: false)
+        setupPresenter(isPostMessageSent: .notSent, isScheduleActive: false)
         
-        Current.now = { self.schedule.sleepyheadMessagePostTime.addingTimeInterval(1) }
+        Current.now = { self.schedule.delayedAwakeConfirmationTime.addingTimeInterval(1) }
         
         expectation(
             forNotification: SceneNotification.willEnterForeground,

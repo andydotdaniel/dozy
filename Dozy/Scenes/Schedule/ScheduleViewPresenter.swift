@@ -9,7 +9,6 @@
 import SwiftUI
 
 let pushNotificationIdentifier = "dozy_awake_confirmation_alert"
-let awakeConfirmationDelay: TimeInterval = 90
 
 protocol ScheduleViewPresenter: SwitchViewDelegate, MessageFormDelegate, HeaderMainDelegate, OverlayCardDelegate {
     func onMessageActionButtonTapped()
@@ -39,7 +38,7 @@ class SchedulePresenter: ScheduleViewPresenter {
     
     init(
         schedule: Schedule,
-        isPostMessageSent: Bool,
+        isPostMessageSent: ScheduledMessageStatus,
         viewModel: ScheduleViewModel,
         userDefaults: ScheduleUserDefaults,
         networkService: NetworkRequesting,
@@ -61,35 +60,59 @@ class SchedulePresenter: ScheduleViewPresenter {
         self.secondsUntilAwakeConfirmationTime = Int(schedule.awakeConfirmationTime.timeIntervalSince(now))
         updateAwakeConfirmationTimeToNextDayIfNeeded(from: now)
         
-        if isPostMessageSent {
-            showOverlayCard()
-        } else if schedule.isActive {
-            enableAwakeConfirmation()
-        } else {
-            disableAwakeConfirmation()
+        switch isPostMessageSent {
+        case .sent, .confirmed:
+            showOverlayCard(status: isPostMessageSent)
+        case .notSent:
+            if schedule.isActive {
+                enableAwakeConfirmation()
+            } else {
+                disableAwakeConfirmation()
+            }
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: SceneNotification.willEnterForeground, object: nil)
     }
     
     @objc private func willEnterForeground() {
+        func comparePostAwakeConfirmationTimes(from date: Date) {
+            switch date.compare(schedule.sleepyheadMessagePostTime) {
+            case .orderedDescending, .orderedSame:
+                showOverlayCard(status: .sent)
+            case .orderedAscending:
+                guard now.compare(schedule.delayedAwakeConfirmationTime) == .orderedAscending else {
+                    showOverlayCard(status: .confirmed)
+                    return
+                }
+                navigateToAwakeConfirmation()
+            }
+        }
+        
         guard schedule.isActive else { return }
         
         let now = Current.now()
         switch now.compare(schedule.awakeConfirmationTime) {
             case .orderedDescending, .orderedSame:
-                guard now.compare(schedule.sleepyheadMessagePostTime) == .orderedAscending else {
-                    showOverlayCard()
-                    return
-                }
-                navigateToAwakeConfirmation()
+                comparePostAwakeConfirmationTimes(from: now)
             case .orderedAscending:
                 let now = Current.now()
                 self.secondsUntilAwakeConfirmationTime = Int(schedule.awakeConfirmationTime.timeIntervalSince(now))
         }
     }
     
-    private func showOverlayCard() {
+    private func showOverlayCard(status: ScheduledMessageStatus) {
+        let overlayCardText: String = {
+            switch status {
+            case .sent:
+                return "Your message was sent you sleepyhead."
+            case .confirmed:
+                return "Your message will be sent in 1 minute you sleepyhead."
+            case .notSent:
+                preconditionFailure("Should not show overlay card if scheduled message is not sent")
+            }
+        }()
+        
+        viewModel.overlayCardText = overlayCardText
         viewModel.isShowingOverlayCard = true
         saveInactiveSchedule()
         setInactiveViewState(isSwitchLoading: false)
@@ -275,9 +298,7 @@ class SchedulePresenter: ScheduleViewPresenter {
             return [textBlock, imageBlock].compactMap { return $0 }
         }()
         
-        // Add additional seconds delay to awake confirmation time because of the timer we show
-        // in AwakeConfirmationView while the user confirms they are awake.
-        let postAtTime = schedule.awakeConfirmationTime.addingTimeInterval(awakeConfirmationDelay)
+        let postAtTime = schedule.sleepyheadMessagePostTime
         return [
             "channel": message.channel.id,
             "text": "I overslept!",

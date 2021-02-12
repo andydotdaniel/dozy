@@ -46,11 +46,17 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
     }
     
     @objc private func willEnterForeground() {
-        let secondsLeft = Int(savedSchedule.sleepyheadMessagePostTime.timeIntervalSince(Current.now()))
+        let now = Current.now()
+        let secondsLeft = Int(savedSchedule.delayedAwakeConfirmationTime.timeIntervalSince(now))
         if secondsLeft >= 1 {
             viewModel.secondsLeft = secondsLeft
         } else {
-            endAwakeConfirmationTimer(isPostMessageSent: true)
+            switch now.compare(savedSchedule.sleepyheadMessagePostTime) {
+            case .orderedDescending, .orderedSame:
+                endAwakeConfirmationTimer(isPostMessageSent: .sent)
+            case .orderedAscending:
+                endAwakeConfirmationTimer(isPostMessageSent: .confirmed)
+            }
         }
     }
     
@@ -58,11 +64,11 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
         if viewModel.secondsLeft >= 1 {
             viewModel.secondsLeft -= 1
         } else {
-            endAwakeConfirmationTimer(isPostMessageSent: true)
+            endAwakeConfirmationTimer(isPostMessageSent: .confirmed)
         }
     }
     
-    func endAwakeConfirmationTimer(isPostMessageSent: Bool) {
+    func endAwakeConfirmationTimer(isPostMessageSent: ScheduledMessageStatus) {
         secondsLeftTimer.stopTimer()
         let updatedSchedule = saveInactiveSchedule()
         navigateToSchedule(with: updatedSchedule, isPostMessageSent: isPostMessageSent)
@@ -90,7 +96,7 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
             Current.dispatchQueue.async {
                 switch result {
                 case .success:
-                    self.endAwakeConfirmationTimer(isPostMessageSent: false)
+                    self.endAwakeConfirmationTimer(isPostMessageSent: .notSent)
                 case .failure:
                     self.viewModel.isShowingError = true
                     self.viewModel.sliderHasReachedEnd = false
@@ -107,7 +113,7 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
         return updatedSchedule
     }
     
-    private func navigateToSchedule(with schedule: Schedule, isPostMessageSent: Bool) {
+    private func navigateToSchedule(with schedule: Schedule, isPostMessageSent: ScheduledMessageStatus) {
         let scheduleViewController = ScheduleViewBuilder(
             schedule: schedule,
             isPostMessageSent: isPostMessageSent,

@@ -27,7 +27,7 @@ class SchedulePresenterTimerTests: XCTestCase {
         let networkService = NetworkService(urlSession: urlSessionMock)
         let keychainMock = KeychainMock()
         
-        presenter = SchedulePresenter(schedule: schedule, isPostMessageSent: false, viewModel: viewModel, userDefaults: userDefaultsMock, networkService: networkService, keychain: keychainMock, navigationControllable: NavigationControllableMock(), awakeConfirmationTimer: TimerMock(), userNotificationCenter: UserNotificationCenterMock())
+        presenter = SchedulePresenter(schedule: schedule, isPostMessageSent: .notSent, viewModel: viewModel, userDefaults: userDefaultsMock, networkService: networkService, keychain: keychainMock, navigationControllable: NavigationControllableMock(), awakeConfirmationTimer: TimerMock(), userNotificationCenter: UserNotificationCenterMock())
     }
     
     func testAwakeConfirmationCardTextWhenTimerEnabled() throws {

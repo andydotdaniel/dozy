@@ -58,10 +58,10 @@ struct ScheduleView: View {
             self.presenter.onChangeAwakeConfirmationTimeTapped()
         }, timePickerActions: (cancelButton: self.presenter.onTimePickerCancelButtonTapped, doneButton: self.presenter.onTimePickerDoneButtonTapped)
         )
-        if viewModel.isShowingOverlayCard {
+        if viewModel.isShowingOverlayCard, let overlayCardText = viewModel.overlayCardText {
             return AnyView(contentCard.overlay(
                 OverlayCard(
-                    text: "Your message was sent you sleepyhead.",
+                    text: overlayCardText,
                     delegate: self.presenter
                 )
                 .background(Color.white)
@@ -79,7 +79,7 @@ struct ScheduleView_Previews: PreviewProvider {
         let message = Message(imageName: nil, imageUrl: nil, bodyText: "Some body text", channel: channel)
         let schedule = Schedule(message: message, awakeConfirmationTime: Date(), scheduledMessageId: nil)
         let viewModel = ScheduleViewModel(schedule: schedule)
-        let presenter = SchedulePresenter(schedule: schedule, isPostMessageSent: false, viewModel: viewModel, userDefaults: ScheduleUserDefaults(), networkService: NetworkService(), keychain: Keychain(), navigationControllable: nil, awakeConfirmationTimer: ActionTimer(), userNotificationCenter: UNUserNotificationCenter.current())
+        let presenter = SchedulePresenter(schedule: schedule, isPostMessageSent: .notSent, viewModel: viewModel, userDefaults: ScheduleUserDefaults(), networkService: NetworkService(), keychain: Keychain(), navigationControllable: nil, awakeConfirmationTimer: ActionTimer(), userNotificationCenter: UNUserNotificationCenter.current())
         return ScheduleView(viewModel: viewModel, presenter: presenter)
             .previewDevice("iPhone 8")
     }

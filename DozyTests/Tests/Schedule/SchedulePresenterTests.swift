@@ -49,7 +49,7 @@ class SchedulePresenterTests: XCTestCase {
         
         presenter = SchedulePresenter(
             schedule: schedule,
-            isPostMessageSent: false,
+            isPostMessageSent: .notSent,
             viewModel: viewModel,
             userDefaults: userDefaultsMock,
             networkService: networkService,

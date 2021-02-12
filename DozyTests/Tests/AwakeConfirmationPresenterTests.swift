@@ -94,7 +94,7 @@ class AwakeConfirmationPresenterTests: XCTestCase {
     }
     
     func testWillEnterForegroundWhenSecondsLeftGreaterThanOne() {
-        let updatedTime = self.schedule.sleepyheadMessagePostTime.addingTimeInterval(-30)
+        let updatedTime = self.schedule.delayedAwakeConfirmationTime.addingTimeInterval(-30)
         Current.now = { updatedTime }
         
         expectation(
@@ -104,13 +104,13 @@ class AwakeConfirmationPresenterTests: XCTestCase {
         )
 
         NotificationCenter.default.post(name: SceneNotification.willEnterForeground, object: nil)
-        XCTAssertEqual(viewModel.secondsLeft, Int(schedule.sleepyheadMessagePostTime.timeIntervalSince(updatedTime)))
+        XCTAssertEqual(viewModel.secondsLeft, Int(schedule.delayedAwakeConfirmationTime.timeIntervalSince(updatedTime)))
         
         waitForExpectations(timeout: 5, handler: nil)
     }
     
     func testWillEnterForegroundWhenSecondsLeftLessThanOne() {
-        let updatedTime = self.schedule.sleepyheadMessagePostTime.addingTimeInterval(1)
+        let updatedTime = self.schedule.delayedAwakeConfirmationTime.addingTimeInterval(1)
         Current.now = { updatedTime }
         
         expectation(

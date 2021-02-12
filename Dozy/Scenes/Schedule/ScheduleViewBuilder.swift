@@ -25,9 +25,14 @@ struct ScheduleViewBuilder: ViewControllerBuilder {
     private let schedule: Schedule
     private weak var navigationControllable: NavigationControllable?
     private let scheduleUserDefaults: ScheduleUserDefaults
-    private let isPostMessageSent: Bool
+    private let isPostMessageSent: ScheduledMessageStatus
     
-    init(schedule: Schedule, isPostMessageSent: Bool, navigationControllable: NavigationControllable?, scheduleUserDefaults: ScheduleUserDefaults) {
+    init(
+        schedule: Schedule,
+        isPostMessageSent: ScheduledMessageStatus,
+        navigationControllable: NavigationControllable?,
+        scheduleUserDefaults: ScheduleUserDefaults
+    ) {
         self.schedule = schedule
         self.isPostMessageSent = isPostMessageSent
         self.navigationControllable = navigationControllable
