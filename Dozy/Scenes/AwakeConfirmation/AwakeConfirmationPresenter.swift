@@ -17,7 +17,7 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
     private let networkService: NetworkRequesting
     private let keychain: SecureStorable
     private let userDefaults: ScheduleUserDefaults
-    private weak var navigationControllable: NavigationControllable?
+    private let router: AwakeConfirmationRouter
     
     private let secondsLeftTimer: Timeable
     
@@ -29,7 +29,7 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
         keychain: SecureStorable,
         userDefaults: ScheduleUserDefaults,
         savedSchedule: Schedule,
-        navigationControllable: NavigationControllable?,
+        router: AwakeConfirmationRouter,
         secondsLeftTimer: Timeable
     ) {
         self.viewModel = viewModel
@@ -37,7 +37,7 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
         self.keychain = keychain
         self.userDefaults = userDefaults
         self.savedSchedule = savedSchedule
-        self.navigationControllable = navigationControllable
+        self.router = router
         self.secondsLeftTimer = secondsLeftTimer
         
         secondsLeftTimer.startTimer(timeInterval: 1, actionBlock: updateSecondsLeftTimer)
@@ -71,7 +71,7 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
     func endAwakeConfirmationTimer(isPostMessageSent: ScheduledMessageStatus) {
         secondsLeftTimer.stopTimer()
         let updatedSchedule = saveInactiveSchedule()
-        navigateToSchedule(with: updatedSchedule, isPostMessageSent: isPostMessageSent)
+        router.navigateToSchedule(with: updatedSchedule, isPostMessageSent: isPostMessageSent)
     }
     
     func onSliderReachedEnd() {
@@ -111,17 +111,6 @@ class AwakeConfirmationPresenter: AwakeConfirmationViewPresenter {
         self.userDefaults.save(updatedSchedule)
         
         return updatedSchedule
-    }
-    
-    private func navigateToSchedule(with schedule: Schedule, isPostMessageSent: ScheduledMessageStatus) {
-        let scheduleViewController = ScheduleViewBuilder(
-            schedule: schedule,
-            isPostMessageSent: isPostMessageSent,
-            navigationControllable: navigationControllable,
-            scheduleUserDefaults: userDefaults
-        ).buildViewController()
-        navigationControllable?.pushViewController(scheduleViewController, animated: true)
-        navigationControllable?.viewControllers = [scheduleViewController]
     }
     
 }

@@ -19,7 +19,7 @@ class AwakeConfirmationPresenterTests: XCTestCase {
     var keychainMock: KeychainMock!
     var timerMock: TimerMock!
     
-    var navigationControllable: NavigationControllableMock!
+    var routerMock: AwakeConfirmationRouterMock!
     
     var schedule: Schedule!
     
@@ -38,7 +38,7 @@ class AwakeConfirmationPresenterTests: XCTestCase {
         let message = Message(imageName: nil, imageUrl: nil, bodyText: "SOME_BODY_TEXT", channel: Channel(id: "SOME_ID", isPublic: false, text: "SOME_TEXT"))
         schedule = Schedule(message: message, awakeConfirmationTime: Date().addingTimeInterval(30), scheduledMessageId: "SOME_ID")
         
-        navigationControllable = NavigationControllableMock()
+        routerMock = AwakeConfirmationRouterMock()
         
         timerMock = TimerMock()
         
@@ -48,7 +48,7 @@ class AwakeConfirmationPresenterTests: XCTestCase {
             keychain: keychainMock,
             userDefaults: userDefaultsMock,
             savedSchedule: schedule,
-            navigationControllable: navigationControllable,
+            router: routerMock,
             secondsLeftTimer: timerMock
         )
     }
@@ -80,9 +80,8 @@ class AwakeConfirmationPresenterTests: XCTestCase {
         XCTAssertNotNil(userDefaultsMock.scheduleSaved)
         XCTAssertNil(userDefaultsMock.scheduleSaved?.scheduledMessageId)
         XCTAssertTrue(timerMock.stopTimerCalled)
-        XCTAssertTrue(navigationControllable?.pushViewControllerCalledWithArgs?.viewController is ScheduleViewController)
-        XCTAssertEqual(navigationControllable?.pushViewControllerCalledWithArgs?.animated, true)
-        XCTAssertEqual(navigationControllable?.viewControllers.count, 1)
+        XCTAssertEqual(routerMock.navigateToScheduleCalledWithArgs?.schedule, userDefaultsMock.scheduleSaved)
+        XCTAssertEqual(routerMock.navigateToScheduleCalledWithArgs?.isPostMessageSent, .notSent)
     }
     
     func testOnSliderReachedEndNetworkFailure() throws {
@@ -124,11 +123,40 @@ class AwakeConfirmationPresenterTests: XCTestCase {
         XCTAssertNotNil(userDefaultsMock.scheduleSaved)
         XCTAssertNil(userDefaultsMock.scheduleSaved?.scheduledMessageId)
         XCTAssertTrue(timerMock.stopTimerCalled)
-        XCTAssertTrue(navigationControllable?.pushViewControllerCalledWithArgs?.viewController is ScheduleViewController)
-        XCTAssertEqual(navigationControllable?.pushViewControllerCalledWithArgs?.animated, true)
-        XCTAssertEqual(navigationControllable?.viewControllers.count, 1)
+        XCTAssertEqual(routerMock.navigateToScheduleCalledWithArgs?.schedule, userDefaultsMock.scheduleSaved)
+        XCTAssertEqual(routerMock.navigateToScheduleCalledWithArgs?.isPostMessageSent, .confirmed)
+        
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+    
+    func testWillEnterForegroundWhenAfterSleepyheadMessagePostTime() {
+        let updatedTime = self.schedule.sleepyheadMessagePostTime.addingTimeInterval(1)
+        Current.now = { updatedTime }
+        
+        expectation(
+            forNotification: SceneNotification.willEnterForeground,
+            object: nil,
+            handler: nil
+        )
+
+        NotificationCenter.default.post(name: SceneNotification.willEnterForeground, object: nil)
+        
+        XCTAssertNotNil(userDefaultsMock.scheduleSaved)
+        XCTAssertNil(userDefaultsMock.scheduleSaved?.scheduledMessageId)
+        XCTAssertTrue(timerMock.stopTimerCalled)
+        XCTAssertEqual(routerMock.navigateToScheduleCalledWithArgs?.schedule, userDefaultsMock.scheduleSaved)
+        XCTAssertEqual(routerMock.navigateToScheduleCalledWithArgs?.isPostMessageSent, .sent)
         
         waitForExpectations(timeout: 5, handler: nil)
     }
 
+}
+
+class AwakeConfirmationRouterMock: AwakeConfirmationRouter {
+    
+    var navigateToScheduleCalledWithArgs: (schedule: Schedule, isPostMessageSent: ScheduledMessageStatus)?
+    func navigateToSchedule(with schedule: Schedule, isPostMessageSent: ScheduledMessageStatus) {
+        navigateToScheduleCalledWithArgs = (schedule, isPostMessageSent)
+    }
+    
 }
